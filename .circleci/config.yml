@@ -47,14 +47,14 @@ jobs:
       # run tests!
       # - run: yarn test
 
-  # test:
-  #   docker:
-  #     - image: $DOCKER_ADD/js-base-image:latest
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Test
-  #         command: npm test
+  test:
+    docker:
+      - image: $DOCKER_ADD/js-base-image:latest
+    steps:
+      - checkout
+      - run:
+          name: Test
+          command: npm test
   #     - run:
   #         name: Generate code coverage
   #         command: './node_modules/.bin/nyc report --reporter=text-lcov'

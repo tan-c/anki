@@ -18,8 +18,8 @@
   "scripts": {
     "start:dev": "cp ../../app.dev.js ./ ; nodemon -w app.dev.js app.dev.js --exec babel-node",
     "build": "rm -rf dist; cp -r ../../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
-    "test": "jest --changedSince=master || true",
-    "test:watch": "jest -o --watch"
+    "test": "npx jest --changedSince=master || true",
+    "test:watch": "npx jest -o --watch"
   },
   "dependencies": {
     "babel-cli": "6.26.0"
@@ -32,7 +32,7 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged; cp ../../.circleci/config.yml .circleci/config.yml; git add .",
-      "pre-push": "snyk test --severity-threshold=high"
+      "pre-push": "snyk test --severity-threqshold=high"
     }
   },
   "lint-staged": {

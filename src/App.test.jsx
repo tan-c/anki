@@ -13,6 +13,9 @@ function setup() {
   const props = {
     NoteActions: {},
     UiActions: {},
+    isAnkiOn: false,
+    isNotesOn: false,
+    isAnkiModalOn: false,
   };
 
   return shallow(<App {...props} />);

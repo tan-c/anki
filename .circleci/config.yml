@@ -4,12 +4,16 @@ general:
     only:
       - master # list of branches to build
 
-  working_directory: ~/repo # Needed to build docker as you use .
-
 jobs:
-  preparation:
+  init:
+    # working_directory: ~/repo
+
     docker:
-      - image: circleci/node:8.11
+      - image: $DOCKER_ADD/js-base-image:latest
+        # auth:
+          # username: mydockerhub-user
+          # password: $DOCKERHUB_PASSWORD
+      # - image: circleci/node:8.11
       # - image: circleci/python:3.7
 
       # Specify service dependencies here if necessary
@@ -17,29 +21,55 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    steps:
-      - checkout
+    # working_directory: ~/repo # Needed to build docker as you use .
+    # Default is /root/project
 
+    steps:
       # Download and cache dependencies
+      - checkout
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      # - run: yarn install
+      # - run: pwd
+      # - run: ls -al
+      - run: npm ci --production # Have to run it again as the image does not seem to have node_module when used as a base image..
+
+      - run: npx snyk test --severity-threshold=high
 
       - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
       # - run: yarn test
 
+  # test:
+    # docker:
+    #   - image: circleci/node:4.8.2-jessie
+    #   - image: mongo:3.4.4-jessie
+    # steps:
+    #   - checkout
+    #   - run:
+    #       name: Test
+    #       command: npm test
+    #   - run:
+    #       name: Generate code coverage
+    #       command: './node_modules/.bin/nyc report --reporter=text-lcov'
+    #   - store_artifacts:
+    #       path: test-results.xml
+    #       prefix: tests
+    #   - store_artifacts:
+    #       path: coverage
+    #       prefix: coverage
+
   push-deploy:
     docker:
       - image: circleci/python:3.7
+
 
     steps:
       - checkout
@@ -54,8 +84,7 @@ jobs:
 
       - run:
           name: docker login
-          command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)" # Exec output of command
-            # docker login -u $DOCKER_USER -p $DOCKER_PASSWORD $DOCKER_ADD
+          command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
 
       - run:
           name: Building the image and push to ecr
@@ -77,6 +106,8 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - preparation
-      - push-deploy
+      - init
+      - push-deploy:
+          requires:
+            - init
       # - deploy

@@ -1,0 +1,19 @@
+$footer-height: 120px;
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: $footer-height;
+  background-color: black;
+  z-index: 10;
+  line-height: $footer-height/4;
+  font-size: 14px;
+  overflow: auto;
+
+  input::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+}
+

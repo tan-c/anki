@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AnkiRow Unit Tests  renders correctly 1`] = `
+<div
+  className="flex-container-row typical-setup bg-orange"
+  data-role="anki-row"
+>
+  <span
+    className="width-30 color-white text-center bg-orange bg-blue"
+  >
+    /
+  </span>
+  <span
+    className="flex-1 margin-left-5"
+  />
+  <i
+    className="fa fa-close fa-fw font-14"
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  />
+  <i
+    className="fa fa-fw fa-edit font-14"
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  />
+</div>
+`;

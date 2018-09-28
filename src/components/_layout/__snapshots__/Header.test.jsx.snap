@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Unit Tests when normally set up renders correctly 1`] = `
+<header
+  className="flex-container-row false"
+  data-role="header"
+>
+  <span
+    className="flex-1 height-50 border-right"
+  />
+  <span
+    className="height-50 padding-horizontal-10 line-height-25 text-right"
+  >
+    <span
+      className="height-25"
+    >
+      欢迎回来, 
+    </span>
+    <br />
+    <span
+      className="height-25 font-12"
+    />
+  </span>
+  <img
+    alt="pic"
+    className="profile-image"
+    src=""
+  />
+  <div
+    className="border-left"
+    id="currentTime"
+  >
+    00:00
+  </div>
+  <div
+    className="border-left width-60 font-36 bg-blue"
+    id="more-icon"
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  >
+    AN
+  </div>
+</header>
+`;

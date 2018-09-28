@@ -1,0 +1,37 @@
+coverage/*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+
+.DS_Store
+
+# redis
+dump.rdb
+
+# storybook
+stories-static/
+
+dist/
+.vscode/
+
+
+# Sensitive data
+app.dev.js
+
+
+
+# For building webpacks
+common.webpack.js
+prod.build.js
+prod.webpack.js
+dev.webpack.js

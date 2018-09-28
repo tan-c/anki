@@ -1,0 +1,17 @@
+version:            "3.2"
+
+services:
+  anki-service:
+    container_name: "anki"
+    restart:        always
+
+    # volumes:
+    #   - ./:/apiapp
+    #   - /apiapp/node_modules
+    build:          .
+    image:          "anki"
+    ports:
+      - "8090:80"
+      - "9145:9145"
+    # networks:
+    #   - backend

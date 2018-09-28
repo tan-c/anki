@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Unit Tests when normally set up renders correctly 1`] = `
+<ErrorBoundary>
+  <div
+    data-role="app"
+  >
+    <div
+      id="version"
+    >
+      Undefined
+    </div>
+    <React.Fragment>
+      <withRouter(Connect(LoginPage))
+        authLock={
+          Auth0Lock {
+            "_events": Object {
+              "authenticated": [Function],
+              "newListener": [Function],
+            },
+            "_eventsCount": 2,
+            "_maxListeners": undefined,
+            "domain": null,
+            "engine": Classic {},
+            "id": 1,
+            "validEvents": Array [
+              "show",
+              "hide",
+              "unrecoverable_error",
+              "authenticated",
+              "authorization_error",
+              "hash_parsed",
+              "signin ready",
+              "signup ready",
+              "socialOrPhoneNumber ready",
+              "socialOrEmail ready",
+              "vcode ready",
+              "forgot_password ready",
+              "forgot_password submit",
+              "signin submit",
+              "signup submit",
+              "signup error",
+              "socialOrPhoneNumber submit",
+              "socialOrEmail submit",
+              "vcode submit",
+              "federated login",
+            ],
+          }
+        }
+      />
+    </React.Fragment>
+  </div>
+</ErrorBoundary>
+`;

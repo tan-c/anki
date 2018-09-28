@@ -32,7 +32,7 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged; cp ../../.circleci/config.yml .circleci/config.yml; git add .",
-      "pre-push": "snyk test --severity-threqshold=high"
+      "pre-push": "snyk test --severity-threshold=high"
     }
   },
   "lint-staged": {

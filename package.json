@@ -16,12 +16,15 @@
   "url": "https://github.com/tan-c/anki-monorepo/issues",
   "email": "tanchen2014@gmail.com",
   "scripts": {
+    "test": "npx jest --config ../../utility-test/jest.config.js packages/anki/",
+    "test:ci": "npm test --ci --testResultsProcessor='jest-junit' --coverage",
+    "test:recent": "npx jest --changedSince=master || true ../../jest.confing.js",
+    "test:update": "npm test -- -u",
+    "test:watch": "npx jest -o --watch",
     "start:dev": "cp ../../app.dev.js ./ ; nodemon -w app.dev.js app.dev.js --exec babel-node",
     "build": "rm -rf dist; cp -r ../../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
     "copy:circleci": "cp ../../.circleci/config.yml .circleci/config.yml; git add .",
-    "push:copy:circleci": "npm run copy:circleci; git commit -m 'chore: updated circleci'; git pom",
-    "test": "npx jest --changedSince=master || true",
-    "test:watch": "npx jest -o --watch"
+    "push:copy:circleci": "npm run copy:circleci; git commit -m 'chore: updated circleci'; git pom"
   },
   "dependencies": {
     "babel-cli": "6.26.0"

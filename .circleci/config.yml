@@ -48,23 +48,22 @@ jobs:
       # - run: yarn test
 
   # test:
-    # docker:
-    #   - image: circleci/node:4.8.2-jessie
-    #   - image: mongo:3.4.4-jessie
-    # steps:
-    #   - checkout
-    #   - run:
-    #       name: Test
-    #       command: npm test
-    #   - run:
-    #       name: Generate code coverage
-    #       command: './node_modules/.bin/nyc report --reporter=text-lcov'
-    #   - store_artifacts:
-    #       path: test-results.xml
-    #       prefix: tests
-    #   - store_artifacts:
-    #       path: coverage
-    #       prefix: coverage
+  #   docker:
+  #     - image: $DOCKER_ADD/js-base-image:latest
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Test
+  #         command: npm test
+  #     - run:
+  #         name: Generate code coverage
+  #         command: './node_modules/.bin/nyc report --reporter=text-lcov'
+  #     - store_artifacts:
+  #         path: test-results.xml
+  #         prefix: tests
+  #     - store_artifacts:
+  #         path: coverage
+  #         prefix: coverage
 
   push-deploy:
     docker:
@@ -107,7 +106,10 @@ workflows:
   build-deploy:
     jobs:
       - init
-      - push-deploy:
+      - test:
           requires:
             - init
+      - push-deploy:
+          requires:
+            - test
       # - deploy

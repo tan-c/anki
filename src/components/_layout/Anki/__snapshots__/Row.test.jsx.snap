@@ -6,13 +6,18 @@ exports[`AnkiRow Unit Tests  renders correctly 1`] = `
   data-role="anki-row"
 >
   <span
-    className="width-30 color-white text-center bg-orange bg-blue"
+    className="width-30 color-white text-center bg-green"
   >
     /
   </span>
   <span
     className="flex-1 margin-left-5"
   />
+  <span
+    className="width-20 bg-orange text-center text-white"
+  >
+    0
+  </span>
   <i
     className="fa fa-close fa-fw font-14"
     onClick={[Function]}

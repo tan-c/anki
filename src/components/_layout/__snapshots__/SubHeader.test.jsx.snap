@@ -6,18 +6,33 @@ exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
   data-role="subheader"
   id="subheader"
 >
+  <Connect(Select)
+    className="width-80 bg-red"
+    onChangeEvent={[Function]}
+    options={Immutable.Map {}}
+    value=""
+  />
+  <div
+    className="width-60 height-lineheight-30 text-center bg-green"
+    role="menuitem"
+    tabIndex="-1"
+  >
+    0
+    /
+    0
+  </div>
   <div
     className="flex-3 text-left"
     id="subheader-links"
   />
   <i
-    className="line-height-30 width-20 fa fa-fw fa-graduation-cap color-blue"
+    className="line-height-30 width-20 fa fa-fw fa-graduation-cap false"
     onClick={[Function]}
     role="button"
     tabIndex="-1"
   />
   <i
-    className="line-height-30 width-20 fa fa-fw fa-list-alt color-blue"
+    className="line-height-30 width-20 fa fa-fw fa-list-alt false"
     onClick={[Function]}
     role="button"
     tabIndex="-1"
@@ -34,5 +49,13 @@ exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
     role="button"
     tabIndex="-1"
   />
+  <span
+    className="false"
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  >
+    0 Tasks
+  </span>
 </div>
 `;

@@ -4,29 +4,12 @@ exports[`AnkiList Unit Tests  renders correctly 1`] = `
 <div
   className="anki-list padding-horizontal-5 border-left-black"
   data-role="anki-list"
+  style={
+    Object {
+      "overflow": "auto",
+    }
+  }
 >
-  <div
-    className="flex-container-row typical-setup"
-  >
-    <div
-      className="text-center flex-1 false"
-      onClick={[Function]}
-      role="menuitem"
-      tabIndex="-1"
-    >
-      Unsorted 
-      0
-    </div>
-    <div
-      className="text-center flex-1 false"
-      onClick={[Function]}
-      role="menuitem"
-      tabIndex="-1"
-    >
-      Revision 
-      0
-    </div>
-  </div>
   <div>
     <textarea
       className="width-100p height-60"

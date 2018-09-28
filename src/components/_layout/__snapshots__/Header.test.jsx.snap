@@ -8,24 +8,6 @@ exports[`Header Unit Tests when normally set up renders correctly 1`] = `
   <span
     className="flex-1 height-50 border-right"
   />
-  <span
-    className="height-50 padding-horizontal-10 line-height-25 text-right"
-  >
-    <span
-      className="height-25"
-    >
-      欢迎回来, 
-    </span>
-    <br />
-    <span
-      className="height-25 font-12"
-    />
-  </span>
-  <img
-    alt="pic"
-    className="profile-image"
-    src=""
-  />
   <div
     className="border-left"
     id="currentTime"

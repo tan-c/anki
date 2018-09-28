@@ -5,13 +5,14 @@ import toJson from 'enzyme-to-json';
 
 // import { Map } from 'immutable';
 
-import { IntelNotePage } from './Page';
+import { AnkiPage } from './Page';
 
 function setup() {
   const props = {
+    AnkiActions: { }
   };
 
-  return shallow(<IntelNotePage {...props} />);
+  return shallow(<AnkiPage {...props} />);
 }
 
 describe('IntelNotePage Unit Tests', () => {

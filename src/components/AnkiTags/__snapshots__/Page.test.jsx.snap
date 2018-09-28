@@ -38,6 +38,7 @@ exports[`AnkiTagsPage Unit Tests when normally set up renders correctly 1`] = `
           onChange={[Function]}
         >
           <option
+            key=""
             value=""
           >
             Select Notebook

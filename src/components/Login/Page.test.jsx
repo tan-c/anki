@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import expect from 'expect';
 import toJson from 'enzyme-to-json';
 
-import { Map } from 'immutable';
+// import { Map } from 'immutable';
 
 import { LoginPage } from './Page';
 
@@ -12,8 +12,9 @@ function setup() {
     pageName: '',
     location: {},
     loggedIn: () => {},
-    auth: {
-      isAuthenticated: () => false,
+    isAuthenticated: false,
+    authLock: {
+      show: () => { }
     },
     UserActions: {},
     UiActions: {},

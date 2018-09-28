@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPage Unit Tests  renders correctly 1`] = `
+<div
+  className="flex-container flex-center-item undefined"
+  data-role="login-page"
+  id="loginPage"
+>
+  <div
+    className="animated tada"
+    id="title"
+  >
+    Anki
+  </div>
+  <div
+    className="spacing"
+  />
+</div>
+`;

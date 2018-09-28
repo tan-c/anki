@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IntelNotePage Unit Tests  renders correctly 1`] = `
+<div
+  className="undefined"
+  data-role="modal-anki"
+  id="modal-anki"
+>
+  <div
+    id="anki-box"
+  >
+    <div
+      className="border-bottom-black flex-container-row"
+      id="anki-question"
+    >
+      <span
+        className="flex-1 padding-horizontal-10"
+        style={
+          Object {
+            "overflow": "auto",
+          }
+        }
+      >
+        <span
+          className="height-lineheight-30 font-18"
+        />
+      </span>
+    </div>
+    <div
+      className="flex-component-center"
+      id="anki-answer"
+    >
+      <div
+        className="flex-horizontal-center"
+        id="anki-answer-buttons"
+      >
+        <button
+          className="btn-large"
+          onClick={[Function]}
+          type="button"
+        >
+          SHOW ANSWER
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

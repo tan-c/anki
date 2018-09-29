@@ -52,6 +52,9 @@ jobs:
       - image: $DOCKER_ADD/js-base-image:latest
     steps:
       - checkout
+      - run: pwd
+      - run: ls -al /
+      - run: ls -al ./
       - run:
           name: Run test and save coverage result
           command: npm test
@@ -65,15 +68,14 @@ jobs:
   #         path: coverage
   #         prefix: coverage
       - store_test_results:
-          path: ./artifacts/
+          path: ./coverage/
       - store_artifacts:
-          path: ./artifacts/
-      - run: ls -al ./artifacts/
+          path: ./coverage/
+      - run: ls -al ./coverage/
 
   push-deploy:
     docker:
       - image: circleci/python:3.7
-
 
     steps:
       - checkout
@@ -110,11 +112,11 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - init
-      - test:
-          requires:
-            - init
-      - push-deploy:
-          requires:
-            - test
+      # - init
+      - test
+      #     requires:
+      #       - init
+      # - push-deploy:
+      #     requires:
+      #       - test
       # - deploy

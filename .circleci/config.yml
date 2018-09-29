@@ -48,6 +48,7 @@ jobs:
       # - run: yarn test
 
   test:
+    # working_directory: /js-base-image # default is Default is /root/project
     docker:
       - image: $DOCKER_ADD/js-base-image:latest
     steps:

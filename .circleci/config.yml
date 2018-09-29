@@ -53,7 +53,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Test
+          name: Run test and save coverage result
           command: npm test
   #     - run:
   #         name: Generate code coverage
@@ -64,6 +64,10 @@ jobs:
   #     - store_artifacts:
   #         path: coverage
   #         prefix: coverage
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
 
   push-deploy:
     docker:

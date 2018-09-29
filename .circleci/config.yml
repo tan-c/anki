@@ -57,7 +57,7 @@ jobs:
       - run: ls -al ./
       - run:
           name: Run test and save coverage result
-          command: npm test
+          command: npm run test:ci
   #     - run:
   #         name: Generate code coverage
   #         command: './node_modules/.bin/nyc report --reporter=text-lcov'

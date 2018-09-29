@@ -65,9 +65,10 @@ jobs:
   #         path: coverage
   #         prefix: coverage
       - store_test_results:
-          path: ~/junit
+          path: ./artifacts/
       - store_artifacts:
-          path: ~/junit
+          path: ./artifacts/
+      - run: ls -al ./artifacts/
 
   push-deploy:
     docker:

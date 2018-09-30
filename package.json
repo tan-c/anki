@@ -37,8 +37,7 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged; npm run copy:circleci",
-      "pre-push": "npm run test:recent; snyk test --severity-threshold=high",
-      "post-push": "truffleHog --regex --entropy=False https://github.com/tan-c/anki"
+      "pre-push": "npm run test:recent; snyk test --severity-threshold=high"
     }
   },
   "lint-staged": {
@@ -48,6 +47,7 @@
         "git add"
       ]
     },
+    "check-secret": "truffleHog",
     "ignore": [
       "**/vendor/*.min.js"
     ]

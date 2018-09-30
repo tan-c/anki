@@ -75,15 +75,15 @@ jobs:
           command: |
             # download test reporter as a static binary
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
+            chmod +x /project/root/cc-test-reporter
       - run:
           name: Run test and save coverage result
           command: |
             # notify Code Climate of a pending test report using `before-build`
-            ./cc-test-reporter before-build
+            /project/root/cc-test-reporter before-build
             cd /js-base-image/packages/anki && npm run test:ci
             # upload test report to Code Climate using `after-build`
-            ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
+            /project/root/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
   #     - run:
   #         name: Generate code coverage
   #         command: './node_modules/.bin/nyc report --reporter=text-lcov'

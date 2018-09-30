@@ -16,7 +16,7 @@
   "url": "https://github.com/tan-c/anki-monorepo/issues",
   "email": "tanchen2014@gmail.com",
   "scripts": {
-    "test": "BABEL_ENV=test npx jest --config ../../utility-test/jest.config.js packages/anki/",
+    "test": "BABEL_ENV=test npx jest --config ../../utility-test/jest.config.js packages/project/",
     "test:ci": "npm test --ci",
     "test:recent": "npx jest --changedSince=master || true ../../jest.confing.js",
     "test:update": "npm test -u",

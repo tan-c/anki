@@ -73,9 +73,9 @@ jobs:
           command: |
             mkdir -p /js-base-image/packages/project
             cp -r . /js-base-image/packages/project/
-      # - run: pwd
+      - run: pwd
       - run:
-          name: Setup Code Climate test-reporter
+          name: Download code climate test-reporter
           command: |
             # download test reporter as a static binary
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > /root/project/cc-test-reporter

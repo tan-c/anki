@@ -55,10 +55,6 @@ jobs:
       - checkout
       - run: mkdir -p /js-base-image/packages/anki
       - run: cp -r . /js-base-image/packages/anki/
-      - run: pwd
-      - run: ls -al /
-      - run: ls -al ./
-      - run: ls -al /js-base-image/packages/anki
       - run:
           name: Run test and save coverage result
           command: cd /js-base-image/packages/anki && npm run test:ci
@@ -71,11 +67,12 @@ jobs:
   #     - store_artifacts:
   #         path: coverage
   #         prefix: coverage
+      - run: ls -al /js-base-image/
       - store_test_results:
-          path: ./coverage/
+          path: /js-base-image/coverage/
       - store_artifacts:
-          path: ./coverage/
-      - run: ls -al ./coverage/
+          path: /js-base-image//coverage/
+      - run: ls -al /js-base-image//coverage/
 
   push-deploy:
     docker:

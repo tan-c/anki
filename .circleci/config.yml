@@ -135,11 +135,10 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      # - init
-      - test
-      #     requires:
-      #       - init
-      # - push-deploy
-      #     requires:
-      #       - test
-      # - deploy
+      - init
+      - test:
+        requires:
+          - init
+      - push-deploy:
+          requires:
+            - test

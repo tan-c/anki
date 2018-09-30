@@ -17,7 +17,7 @@
   "email": "tanchen2014@gmail.com",
   "scripts": {
     "test": "BABEL_ENV=test npx jest --config ../../utility-test/jest.config.js packages/anki/",
-    "test:ci": "BABEL_ENV=test npx jest --config /js-base-image/utility-test/jest.config.js ./ --ci",
+    "test:ci": "BABEL_ENV=test npx jest --config /js-base-image/utility-test/jest.config.js ../../root/project/ --ci",
     "test:recent": "npx jest --changedSince=master || true ../../jest.confing.js",
     "test:update": "npm test -u",
     "test:watch": "npm test --watch",

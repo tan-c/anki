@@ -17,7 +17,7 @@ general:
 #         POSTGRES_USER: loot_user
 #         POSTGRES_DB: loot_test
 #         POSTGRES_PASSWORD: ""
-##### use <<: *defaults under job to use default
+#### use <<: *defaults under job to use default
 
 jobs:
   init:
@@ -83,7 +83,7 @@ jobs:
             ./cc-test-reporter before-build
             cd /js-base-image/packages/anki && npm run test:ci
             # upload test report to Code Climate using `after-build`
-            ./cc-test-reporter after-build --coverage-input-type icov --exit-code $?
+            ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
   #     - run:
   #         name: Generate code coverage
   #         command: './node_modules/.bin/nyc report --reporter=text-lcov'
@@ -143,7 +143,7 @@ workflows:
       - test
       #     requires:
       #       - init
-      # - push-deploy:
+      # - push-deploy
       #     requires:
       #       - test
       # - deploy

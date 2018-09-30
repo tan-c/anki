@@ -4,6 +4,21 @@ general:
     only:
       - master # list of branches to build
 
+# defaults: &defaults
+#   working_directory: ~/repo
+#   docker:
+#     - image: circleci/ruby:2.4.2-jessie-node-browsers
+#       environment:
+#         PGHOST: 127.0.0.1
+#         PGUSER: loot_user
+#         RAILS_ENV: test
+#     - image: circleci/postgres:9.5-alpine
+#       environment:
+#         POSTGRES_USER: loot_user
+#         POSTGRES_DB: loot_test
+#         POSTGRES_PASSWORD: ""
+##### use <<: *defaults under job to use default
+
 jobs:
   init:
     # working_directory: ~/repo
@@ -56,8 +71,19 @@ jobs:
       - run: mkdir -p /js-base-image/packages/anki
       - run: cp -r . /js-base-image/packages/anki/
       - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            # download test reporter as a static binary
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
           name: Run test and save coverage result
-          command: cd /js-base-image/packages/anki && npm run test:ci
+          command: |
+            # notify Code Climate of a pending test report using `before-build`
+            ./cc-test-reporter before-build
+            cd /js-base-image/packages/anki && npm run test:ci
+            # upload test report to Code Climate using `after-build`
+            ./cc-test-reporter after-build --coverage-input-type icov --exit-code $?
   #     - run:
   #         name: Generate code coverage
   #         command: './node_modules/.bin/nyc report --reporter=text-lcov'
@@ -72,7 +98,7 @@ jobs:
           path: /js-base-image/coverage/
       - store_artifacts:
           path: /js-base-image//coverage/
-      - run: ls -al /js-base-image//coverage/
+      - run: ls -al /js-base-image/coverage/
 
   push-deploy:
     docker:

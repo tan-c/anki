@@ -53,6 +53,9 @@ jobs:
       - image: $DOCKER_ADD/js-base-image:latest
     steps:
       - checkout
+      - run: mkdir -p /js-base-image/packages/anki
+      - run: cp . /js-base-image/packages/anki/
+      - run: cd /js-base-image/packages/anki
       - run: pwd
       - run: ls -al /
       - run: ls -al ./

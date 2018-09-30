@@ -55,13 +55,13 @@ jobs:
       - checkout
       - run: mkdir -p /js-base-image/packages/anki
       - run: cp -r . /js-base-image/packages/anki/
-      - run: cd /js-base-image/packages/anki
       - run: pwd
       - run: ls -al /
       - run: ls -al ./
+      - run: ls -al /js-base-image/packages/anki
       - run:
           name: Run test and save coverage result
-          command: npm run test:ci
+          command: cd /js-base-image/packages/anki && npm run test:ci
   #     - run:
   #         name: Generate code coverage
   #         command: './node_modules/.bin/nyc report --reporter=text-lcov'

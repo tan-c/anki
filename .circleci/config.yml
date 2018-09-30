@@ -137,8 +137,8 @@ workflows:
     jobs:
       - init
       - test:
-        requires:
-          - init
+          requires:
+            - init
       - push-deploy:
           requires:
             - test

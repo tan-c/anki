@@ -47,7 +47,9 @@
         "git add"
       ]
     },
-    "check-secret": "truffleHog",
+    "check-secret": {
+      "*": ["truffleHog"]
+    },
     "ignore": [
       "**/vendor/*.min.js"
     ]

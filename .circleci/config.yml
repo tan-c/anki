@@ -70,6 +70,7 @@ jobs:
       - checkout
       - run: mkdir -p /js-base-image/packages/anki
       - run: cp -r . /js-base-image/packages/anki/
+      - run: pwd
       - run:
           name: Setup Code Climate test-reporter
           command: |

@@ -68,9 +68,12 @@ jobs:
       - image: $DOCKER_ADD/js-base-image:latest
     steps:
       - checkout
-      - run: mkdir -p /js-base-image/packages/anki
-      - run: cp -r . /js-base-image/packages/anki/
-      - run: pwd
+      - run:
+          name: Copy anki dir under js-base-image for testing
+          command: |
+            mkdir -p /js-base-image/packages/anki
+            cp -r . /js-base-image/packages/anki/
+      # - run: pwd
       - run:
           name: Setup Code Climate test-reporter
           command: |
@@ -86,21 +89,12 @@ jobs:
             cd /js-base-image/packages/anki && npm run test:ci
             # upload test report to Code Climate using `after-build`
             cd /js-base-image/ && /root/project/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
-  #     - run:
-  #         name: Generate code coverage
-  #         command: './node_modules/.bin/nyc report --reporter=text-lcov'
-  #     - store_artifacts:
-  #         path: test-results.xml
-  #         prefix: tests
-  #     - store_artifacts:
-  #         path: coverage
-  #         prefix: coverage
-      - run: ls -al /js-base-image/
+      # - run: ls -al /js-base-image/
       - store_test_results:
           path: /js-base-image/coverage/
       - store_artifacts:
-          path: /js-base-image//coverage/
-      - run: ls -al /js-base-image/coverage/
+          path: /js-base-image/coverage/
+      # - run: ls -al /js-base-image/coverage/
 
   push-deploy:
     docker:

@@ -22,7 +22,7 @@
     "test:watch": "npm test --watch",
     "test:e2e": "testcafe 'chrome:headless --no-sandbox' ./test-e2e/",
     "start:dev": "cp ../../app.dev.js ./ ; nodemon -w app.dev.js app.dev.js --exec babel-node",
-    "start:test:ci": "cp ../../app.dev.js ./ ; babel-node app.dev.js",
+    "start:test:ci": "cp ../../app.dev.js ./ ; babel-node app.dev.js &",
     "build": "rm -rf dist; cp -r ../../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
     "precommit:check:sensitive": "cp ../../.githound.yml ./ && git hound sniff HEAD"
   },

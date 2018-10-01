@@ -84,7 +84,7 @@ jobs:
             /root/project/cc-test-reporter before-build
             cd /js-base-image/packages/project && npm run test:ci
             # upload test report to Code Climate using `after-build`
-            if [ -z "$PUSH_ONLY" ]; then
+            if [ -z "$NOT_DEPLOY_COV_REPORT" ]; then
               cd /js-base-image/ && /root/project/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
             fi
       # - run: ls -al /js-base-image/
@@ -107,7 +107,7 @@ jobs:
           docker_layer_caching: true
       - run: pwd
       - run: cd /js-base-image/packages/project && npm ci --production # for babel-node
-      - run: cd /js-base-image/packages/project && npm i express -g && npm run start:test:ci # Untill the base image is rebuilt with express in the base image
+      - run: cd /js-base-image/packages/project && npm run start:test:ci # Untill the base image is rebuilt with express in the base image
       - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 
   push-deploy:
@@ -141,7 +141,7 @@ jobs:
           name: Logging into ec2 and update the k8s
           command: |
             # environment var wont work because it is in an embedded script
-            if [ -z "$PUSH_ONLY" ]; then # Not set is -z, set is -n
+            if [ -z "$NOT_DEPLOY_K8S" ]; then # Not set is -z, set is -n
               ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "kubectl delete -f k8s/frontend/'${REPO_NAME}'.yml && kubectl create -f k8s/frontend/'${REPO_NAME}'.yml" # If get long, get a file
             fi
 
@@ -149,11 +149,11 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - test:e2e
-      # - init
-      # - test:
-      #     requires:
-      #       - init
-      # - push-deploy:
-      #     requires:
-      #       - test
+      # - test:e2e
+      - init
+      - test:
+          requires:
+            - init
+      - push-deploy:
+          requires:
+            - test

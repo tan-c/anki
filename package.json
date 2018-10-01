@@ -30,7 +30,6 @@
     "babel-cli": "6.26.0"
   },
   "devDependencies": {
-    "husky": "1.0.0-rc.6",
     "lint-staged": "7.1.0"
   },
   "husky": {

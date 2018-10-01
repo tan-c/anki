@@ -128,7 +128,7 @@ jobs:
           command: |
             # environment var wont work because it is in an embedded script
             if [ -z "$PUSH_ONLY" ]; then # Not set is -z, set is -n
-              ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST 'kubectl delete -f k8s/frontend/$REPO_NAME.yml && kubectl create -f k8s/frontend/$REPO_NAME.yml' # If get long, get a file
+              ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST 'kubectl delete -f k8s/frontend/\$REPO_NAME.yml && kubectl create -f k8s/frontend/\$REPO_NAME.yml' # If get long, get a file
             fi
 
 workflows:

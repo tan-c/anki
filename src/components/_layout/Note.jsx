@@ -45,7 +45,7 @@ export class Note extends React.Component {
       const { inputValue } = this.state;
 
       this.props.UserActions.update(currentUser.set(field, inputValue)).then((_) => {
-        toastr.success(`${field} Field Updated successfully`);
+        // toastr.success(`${field} Field Updated successfully`);
         this.setState({
           updating: false
         });

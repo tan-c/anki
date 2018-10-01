@@ -73,7 +73,6 @@ jobs:
           command: |
             mkdir -p /js-base-image/packages/project
             cp -r . /js-base-image/packages/project/
-      - run: pwd
       - run:
           name: Download code climate test-reporter
           command: |

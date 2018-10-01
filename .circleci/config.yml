@@ -96,6 +96,14 @@ jobs:
           path: /js-base-image/coverage/
       # - run: ls -al /js-base-image/coverage/
 
+  # test:e2e:
+  #   docker:
+  #     - image: testcafe/testcafe
+  #   steps:
+  #     - checkout
+  #     - # start the server
+  #     - # Get testcafe to access the local post
+
   push-deploy:
     docker:
       - image: circleci/python:3.7
@@ -112,7 +120,7 @@ jobs:
           docker_layer_caching: true
 
       - run:
-          name: docker login
+          name: Docker login
           command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
 
       - run:

@@ -96,13 +96,19 @@ jobs:
           path: /js-base-image/coverage/
       # - run: ls -al /js-base-image/coverage/
 
-  # test:e2e:
-  #   docker:
-  #     - image: testcafe/testcafe
-  #   steps:
-  #     - checkout
-  #     - # start the server
-  #     - # Get testcafe to access the local post
+  test:e2e:
+    docker:
+      - image: testcafe/testcafe
+    steps:
+      - checkout
+      # - # start the server
+      # - # Get testcafe to access the local post
+      # Building Docker Image, Login and Push
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: pwd
+      - run: npm run start:dev
+      - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 
   push-deploy:
     docker:
@@ -143,10 +149,11 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - init
-      - test:
-          requires:
-            - init
-      - push-deploy:
-          requires:
-            - test
+      - test:e2e
+      # - init
+      # - test:
+      #     requires:
+      #       - init
+      # - push-deploy:
+      #     requires:
+      #       - test

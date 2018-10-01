@@ -106,7 +106,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: pwd
-      - run: cd /js-base-image/packages/project && npm run start:dev
+      - run: cd /js-base-image/packages/project && npm run start:test:ci
       - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 
   push-deploy:

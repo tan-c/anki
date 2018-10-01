@@ -27,7 +27,8 @@
     "precommit:check:sensitive": "cp ../../.githound.yml ./ && git hound sniff HEAD"
   },
   "dependencies": {
-    "babel-cli": "6.26.0"
+    "babel-cli": "6.26.0",
+    "express": "4.16.3"
   },
   "devDependencies": {
     "husky": "1.0.0-rc.6",

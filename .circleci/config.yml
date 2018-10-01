@@ -96,6 +96,7 @@ jobs:
 
   test:e2e:
     docker:
+      - image: $DOCKER_ADD/js-base-image:latest
       - image: testcafe/testcafe
     steps:
       - checkout

@@ -10,7 +10,7 @@ yarn-error.log*
 node_modules/
 jspm_packages/
 
-
+.githound.yml
 .DS_Store
 
 # redis

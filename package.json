@@ -19,12 +19,11 @@
     "test": "BABEL_ENV=test npx jest --config ../../utility-test/jest.config.js packages/project/",
     "test:ci": "npm test --ci",
     "test:recent": "npx jest --changedSince=master || true ../../jest.confing.js",
-    "test:update": "npm test -u",
     "test:watch": "npm test --watch",
     "start:dev": "cp ../../app.dev.js ./ ; nodemon -w app.dev.js app.dev.js --exec babel-node",
     "build": "rm -rf dist; cp -r ../../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
-    "copy:circleci": "cp ../../.circleci/config.yml .circleci/config.yml; git add .",
-    "push:copy:circleci": "npm run copy:circleci; git commit -m 'chore: updated circleci'; git pom"
+    "precommit:check:sensitive": "cp ../../.githound.yml ./ && git hound sniff HEAD",
+    "copy:circleci": "cp ../../.circleci/config.yml .circleci/config.yml; git add ."
   },
   "dependencies": {
     "babel-cli": "6.26.0"
@@ -36,7 +35,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "truffleHog .;lint-staged; npm run copy:circleci",
+      "pre-commit": "npm run precommit:check:sensitive; lint-staged; npm run copy:circleci",
       "pre-push": "npm run test:recent; snyk test --severity-threshold=high"
     }
   },

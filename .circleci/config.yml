@@ -3,6 +3,7 @@ general:
   branches:
     only:
       - master # list of branches to build
+      - wip
 
 # defaults: &defaults
 #   working_directory: ~/repo # /root/project
@@ -103,11 +104,12 @@ jobs:
       - run:
           name: Copy project dir under js-base-image for testing
           command: mkdir -p /js-base-image/packages/project && cp -r . /js-base-image/packages/project/
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: pwd
       - run: cd /js-base-image/packages/project && npm ci --production # for babel-node
       - run: cd /js-base-image/packages/project && npm run start:test:ci # Untill the base image is rebuilt with express in the base image
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
       - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 
   push-deploy:

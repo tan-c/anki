@@ -107,12 +107,12 @@ jobs:
       - run: cd /js-base-image/packages/project && npm ci --production # for babel-node
       - run: cd /js-base-image/packages/project && npm run start:test:ci # Untill the base image is rebuilt with express in the base image
 
-      - setup_remote_docker:
-          docker_layer_caching: true
-
       # - run: curl localhost:8090
       - run: pwd
       - run: ls -al
+
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 

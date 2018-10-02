@@ -109,8 +109,7 @@ jobs:
 
       # - run: curl localhost:8090
       - run: pwd
-      - run: ls -al
-
+      - run: ls -al /root/project/test-e2e
 
       - setup_remote_docker:
           docker_layer_caching: true

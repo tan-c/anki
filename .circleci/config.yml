@@ -110,7 +110,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
-      - run: curl localhost:8090
+      # - run: curl localhost:8090
       - run: pwd
       - run: ls -al
 

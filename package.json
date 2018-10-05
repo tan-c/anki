@@ -21,14 +21,14 @@
     "test:recent": "npx jest --changedSince=master || true ../../jest.confing.js",
     "test:watch": "npm test --watch",
     "test:e2e": "testcafe 'chrome:headless --no-sandbox' ./test-e2e/",
+    "test:e2e:docker": "docker run --network ps-bridge -v /Users/tanchen/Desktop/monorepo-js/packages/anki/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
     "start:dev": "cp ../../app.dev.js ./ ; nodemon -w app.dev.js app.dev.js --exec babel-node",
     "start:test:ci": "cp ../../app.dev.js ./ ; babel-node app.dev.js &",
     "build": "rm -rf dist; cp -r ../../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
     "precommit:check:sensitive": "cp ../../.githound.yml ./ && git hound sniff HEAD"
   },
   "dependencies": {
-    "babel-cli": "6.26.0",
-    "express": "4.16.3"
+    "babel-cli": "6.26.0"
   },
   "devDependencies": {
     "husky": "1.0.0-rc.6",
@@ -37,7 +37,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged; cp ../../.circleci/config.yml .circleci/config.yml; git add .",
+      "pre-commit": "lint-staged; cp ../../.circleci/config.yml .circleci/config.yml; precommit:check:sensitive; git add .",
       "pre-push": "npm run test:recent; snyk test --severity-threshold=high"
     }
   },

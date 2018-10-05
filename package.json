@@ -37,7 +37,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged; cp ../../.circleci/config.yml .circleci/config.yml; precommit:check:sensitive; git add .",
+      "pre-commit": "lint-staged; cp ../../.circleci/config.yml .circleci/config.yml; npm run precommit:check:sensitive; git add .",
       "pre-push": "npm run test:recent; snyk test --severity-threshold=high"
     }
   },

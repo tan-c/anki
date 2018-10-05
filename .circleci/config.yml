@@ -112,13 +112,6 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
 
-      - run:
-          name: build and run docker image
-          command: |
-            docker build -t $REPO_NAME .
-            docker network create -d bridge --subnet 10.0.0.1/24 docker-bridge
-            docker run --network ps-bridge --ip 10.0.0.10 $REPO_NAME # Fixed at 10.0.0.10
-            cd /js-base-image/packages/project && npm run test:e2e:docker
 
       - run:
           name: Install Docker client
@@ -128,6 +121,14 @@ jobs:
             curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
+
+      - run:
+          name: build and run docker image
+          command: |
+            docker build -t $REPO_NAME .
+            docker network create -d bridge --subnet 10.0.0.1/24 docker-bridge
+            docker run --network ps-bridge --ip 10.0.0.10 $REPO_NAME # Fixed at 10.0.0.10
+            cd /js-base-image/packages/project && npm run test:e2e:docker
 
       - run: docker system info
       - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests

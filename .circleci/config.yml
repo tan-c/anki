@@ -21,6 +21,25 @@ general:
 #### use <<: *defaults under job to use default
 
 jobs:
+  prep:
+    docker:
+      - image: circleci/python:3.7
+
+    steps:
+      - checkout
+
+      # You should be able to cache this too..
+      - run: sudo apt-get install python-dev
+      - run: sudo pip install awscli
+
+      # Building Docker Image, Login and Push
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run:
+          name: Docker login
+          command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
+
   init:
     # working_directory: ~/repo
 
@@ -122,13 +141,6 @@ jobs:
             mv /tmp/docker/* /usr/bin
 
       - run:
-          name: Docker login
-          command: |
-            sudo apt-get install python-dev
-            sudo pip install awscli
-            eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
-
-      - run:
           name: build and run docker image
           command: |
             docker build -t $REPO_NAME .
@@ -178,7 +190,10 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - test:e2e
+      - prep
+      - test:e2e:
+          requires:
+            - prep
       # - init
       # - test:
       #     requires:

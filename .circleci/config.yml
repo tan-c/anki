@@ -120,10 +120,10 @@ jobs:
       # - image: testcafe/testcafe
     steps:
       - checkout
-      - run:
-          name: Copy project dir under js-base-image for testing
-          command: mkdir -p /js-base-image/packages/project && cp -r . /js-base-image/packages/project/
-      - run: cd /js-base-image/packages/project && npm ci --production # for babel-node
+      # - run:
+      #     name: Copy project dir under js-base-image for testing
+      #     command: mkdir -p /js-base-image/packages/project && cp -r . /js-base-image/packages/project/
+      # - run: cd /js-base-image/packages/project && npm ci --production # for babel-node
 
       # - run: pwd
       # - run: ls -al /root/project/test-e2e

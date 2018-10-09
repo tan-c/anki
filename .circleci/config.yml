@@ -118,7 +118,10 @@ jobs:
 
       - run: docker network list
       - run: docker network inspect docker-bridge
-      - run:  npm run test:e2e:docker:ci
+      - run: pwd
+      - run: ls -al .
+      - run: ls -al /root/project/test-e2e
+      - run: npm run test:e2e:docker:ci
       # - run: docker system info
       # - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 

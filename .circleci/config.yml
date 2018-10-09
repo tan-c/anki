@@ -122,7 +122,14 @@ jobs:
       - run: ls -al .
       - run: ls -al /root/project/test-e2e
       # - run: npm run test:e2e:docker:ci
-      - run: docker run --network docker-bridge -v /root/project/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests
+
+      # -v wont work for remote docker, use cp instead => https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
+      # create a dummy container which will hold a volume with config
+      - run: docker create -v /tests --name test-e2e-vol alpine:3.4 /bin/true
+      # copy a config file into this volume
+      - run: docker cp /root/project/test-e2e test-e2e-vol:/tests
+      # start an application container using this volume
+      - run: docker run --network docker-bridge --volumes-from test-e2e-vol testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 
   push-deploy:
     docker:

@@ -18,9 +18,9 @@ services:
       - "9145:9145"
     # networks:
     #   - backend
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.10
+    # networks:
+    #   app_net:
+    #     ipv4_address: 172.16.238.10
 
 # networks:
 #   ps-bridge:
@@ -30,17 +30,17 @@ services:
 #       driver: default
 #       config:
 #       - subnet: 10.0.0.0/24
-networks:
-  app_net:
-    driver: bridge
-    enable_ipv6: true
-    ipam:
-      driver: default
-      config:
-      -
-        subnet: 172.16.238.0/24
-      -
-        subnet: 2001:3984:3989::/64
+# networks:
+#   app_net:
+#     driver: bridge
+#     enable_ipv6: true
+#     ipam:
+#       driver: default
+#       config:
+#       -
+#         subnet: 172.16.238.0/24
+#       -
+#         subnet: 2001:3984:3989::/64
 
 # networks:
 #   ps-bridge:

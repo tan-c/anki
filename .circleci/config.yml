@@ -103,7 +103,7 @@ jobs:
           command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
 
       - run:
-          name: build  docker image
+          name: build docker image
           command: |
             docker build -t $REPO_NAME .
 
@@ -121,9 +121,10 @@ jobs:
       - run: pwd
       - run: ls -al .
       - run: ls -al /root/project/test-e2e
-      - run: npm run test:e2e:docker:ci
+      # - run: npm run test:e2e:docker:ci
       # - run: docker system info
       # - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
+      - run: docker run --network docker-bridge -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 
   push-deploy:
     docker:

@@ -22,7 +22,7 @@
     "test:watch": "npm test --watch",
     "test:e2e": "testcafe 'chrome:headless --no-sandbox' ./test-e2e/",
     "test:e2e:docker:local": "docker run --network ps-bridge -v /Users/tanchen/Desktop/monorepo-js/packages/anki/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
-    "test:e2e:docker:ci": "docker run --network ps-bridge -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
+    "test:e2e:docker:ci": "docker run --network docker-bridge -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
     "start:dev": "cp ../../app.dev.js ./ ; nodemon -w app.dev.js app.dev.js --exec babel-node",
     "start:test:ci": "cp ../../app.dev.js ./ ; babel-node app.dev.js &",
     "build": "rm -rf dist; cp -r ../../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",

@@ -147,11 +147,11 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      # - test:e2e
-      - init
-      - test:
-          requires:
-            - init
-      - push-deploy:
-          requires:
-            - test
+      - test:e2e
+      # - init
+      # - test:
+      #     requires:
+      #       - init
+      # - push-deploy:
+      #     requires:
+      #       - test

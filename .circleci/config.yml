@@ -21,66 +21,25 @@ general:
 #### use <<: *defaults under job to use default
 
 jobs:
-  prep:
-    docker:
-      - image: circleci/python:3.7
-
-    steps:
-      - checkout
-
-      # You should be able to cache this too..
-      - run: sudo apt-get install python-dev
-      - run: sudo pip install awscli
-
-      # Building Docker Image, Login and Push
-      - setup_remote_docker:
-          docker_layer_caching: true
-
-      - run:
-          name: Docker login
-          command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
-
   init:
     # working_directory: ~/repo
-
     docker:
       - image: $DOCKER_ADD/js-base-image:latest
-        # auth:
-          # username: mydockerhub-user
-          # password: $DOCKERHUB_PASSWORD
-      # - image: circleci/node:8.11
-      # - image: circleci/python:3.7
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    # working_directory: ~/repo # Needed to build docker as you use .
-    # Default is /root/project
+    # working_directory: ~/repo # Needed to build docker as you use . # Default is /root/project
 
     steps:
-      # Download and cache dependencies
       - checkout
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      # - run: pwd
-      # - run: ls -al
+            - v1-dependencies-  # fallback to using the latest cache if no exact match is found
       - run: npm ci --production # Have to run it again as the image does not seem to have node_module when used as a base image..
-
       - run: npx snyk test --severity-threshold=high
-
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - node_modules
-
-      # run tests!
-      # - run: yarn test
 
   test:
     # working_directory: /js-base-image # default is Default is /root/project
@@ -107,7 +66,6 @@ jobs:
             if [ -z "$NOT_DEPLOY_COV_REPORT" ]; then
               cd /js-base-image/ && /root/project/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
             fi
-      # - run: ls -al /js-base-image/
       - store_test_results:
           path: /js-base-image/coverage/
       - store_artifacts:
@@ -146,10 +104,10 @@ jobs:
             docker build -t $REPO_NAME .
             docker network create -d bridge --subnet 10.0.0.1/24 docker-bridge
             docker run --network ps-bridge --ip 10.0.0.10 $REPO_NAME # Fixed at 10.0.0.10
-            cd /js-base-image/packages/project && npm run test:e2e:docker
+            cd /js-base-image/packages/project && npm run test:e2e:docker:ci
 
-      - run: docker system info
-      - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
+      # - run: docker system info
+      # - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 
   push-deploy:
     docker:
@@ -157,18 +115,13 @@ jobs:
 
     steps:
       - checkout
-
-      # You should be able to cache this too..
-      # - run: sudo apt-get install python-dev
-      # - run: sudo pip install awscli
-
-      # Building Docker Image, Login and Push
       - setup_remote_docker:
           docker_layer_caching: true
-
-      # - run:
-      #     name: Docker login
-      #     command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
+      - run: sudo apt-get install python-dev
+      - run: sudo pip install awscli
+      - run:
+          name: Docker login
+          command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
 
       - run:
           name: Building the image and push to ecr
@@ -190,14 +143,13 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - prep
-      - test:e2e:
+      # - test:e2e:
+      #     requires:
+      #       - prep
+      - init
+      - test:
           requires:
-            - prep
-      # - init
-      # - test:
-      #     requires:
-      #       - init
-      # - push-deploy:
-      #     requires:
-      #       - test
+            - init
+      - push-deploy:
+          requires:
+            - test

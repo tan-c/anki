@@ -122,9 +122,7 @@ jobs:
       - run: ls -al .
       - run: ls -al /root/project/test-e2e
       # - run: npm run test:e2e:docker:ci
-      # - run: docker system info
-      # - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
-      - run: docker run --network docker-bridge -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
+      - run: docker run --network docker-bridge -v /root/project/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 
   push-deploy:
     docker:

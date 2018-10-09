@@ -118,9 +118,6 @@ jobs:
 
       - run: docker network list
       - run: docker network inspect docker-bridge
-      - run: pwd
-      - run: ls -al .
-      - run: ls -al /root/project/test-e2e
       # - run: npm run test:e2e:docker:ci
 
       # -v wont work for remote docker, use cp instead => https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
@@ -129,7 +126,7 @@ jobs:
       # copy a config file into this volume
       - run: docker cp /root/project/test-e2e test-e2e-vol:/tests
       # start an application container using this volume
-      - run: docker run --network docker-bridge --volumes-from test-e2e-vol testcafe/testcafe 'chromium:headless --no-sandbox' /tests
+      - run: docker run --network docker-bridge --volumes-from test-e2e-vol testcafe/testcafe 'chromium:headless --no-sandbox' /tests # -r xunit:/tmp/test-results/res.xml if you want to save the artifact
 
   push-deploy:
     docker:
@@ -165,11 +162,13 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - test:e2e
-      # - init
-      # - test:
-      #     requires:
-      #       - init
-      # - push-deploy:
-      #     requires:
-      #       - test
+      - init
+      - test:
+          requires:
+            - init
+      - test:e2e:
+          requires:
+            - test
+      - push-deploy:
+          requires:
+            - test

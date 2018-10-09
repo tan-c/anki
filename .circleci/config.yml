@@ -107,7 +107,7 @@ jobs:
           command: |
             docker build -t $REPO_NAME .
             docker network create -d bridge --subnet 10.0.0.1/24 docker-bridge
-            docker run --network ps-bridge --ip 10.0.0.10 $REPO_NAME # Fixed at 10.0.0.10
+            docker run --network docker-bridge --ip 10.0.0.10 $REPO_NAME # Fixed at 10.0.0.10
             cd /js-base-image/packages/project && npm run test:e2e:docker:ci
 
       # - run: docker system info

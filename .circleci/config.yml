@@ -143,13 +143,13 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      # - test:e2e:
+      - test:e2e:
+          requires:
+            - prep
+      # - init
+      # - test:
       #     requires:
-      #       - prep
-      - init
-      - test:
-          requires:
-            - init
-      - push-deploy:
-          requires:
-            - test
+      #       - init
+      # - push-deploy:
+      #     requires:
+      #       - test

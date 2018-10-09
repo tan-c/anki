@@ -103,13 +103,20 @@ jobs:
           command: eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
 
       - run:
-          name: build and run docker image
+          name: build  docker image
           command: |
             docker build -t $REPO_NAME .
-            docker network create -d bridge --subnet 10.0.0.1/24 docker-bridge
-            docker run --network docker-bridge --ip 10.0.0.10 $REPO_NAME # Fixed at 10.0.0.10
-            cd /js-base-image/packages/project && npm run test:e2e:docker:ci
 
+      - run:
+          name: create network
+          command: docker network create -d bridge --subnet 10.0.0.1/24 docker-bridge
+
+      - run:
+          name: start service in bg
+          command: docker run --network docker-bridge --ip 10.0.0.10 $REPO_NAME # Fixed at 10.0.0.10
+          background: true
+
+      - run:  cd /js-base-image/packages/project && npm run test:e2e:docker:ci
       # - run: docker system info
       # - run: docker run -v /root/project/test-e2e:/tests -it testcafe/testcafe 'chromium:headless --no-sandbox' /tests
 

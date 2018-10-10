@@ -9,10 +9,9 @@ import {
 } from 'react-router-dom';
 
 import { currentUserSelector } from 'utility-redux/common/user';
-import { UiActions } from 'utility-redux/common/ui';
+// import { UiActions } from 'utility-redux/common/ui';
 import './anki.scss';
 
-import Auth0Lock from 'auth0-lock';
 import toastr from 'toastr';
 
 import LoginPageConnected from 'utility-react-component/Page/LoginPage';
@@ -119,7 +118,7 @@ App.propTypes = {
   isAnkiModalOn: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
 
-  UiActions: PropTypes.object.isRequired
+  // UiActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -134,7 +133,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    UiActions: bindActionCreators(UiActions, dispatch)
+    // UiActions: bindActionCreators(UiActions, dispatch)
   };
 }
 

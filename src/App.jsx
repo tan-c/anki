@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
+import { Menu, Container } from 'semantic-ui-react';
+
 import {
   Switch, Route, Redirect, withRouter
 } from 'react-router-dom';
@@ -12,19 +14,19 @@ import { currentUserSelector } from 'utility-redux/common/user';
 // import { UiActions } from 'utility-redux/common/ui';
 import './anki.scss';
 
-import toastr from 'toastr';
+// import toastr from 'toastr';
 
 import LoginPageConnected from 'utility-react-component/Page/LoginPage';
 
 import HeaderConnected from './components/_layout/Header';
-import FooterConnected from './components/_layout/Footer';
+// import FooterConnected from './components/_layout/Footer';
 
 import SubHeaderConnected from './components/_layout/SubHeader';
-import SettingsConnected from './components/_layout/Settings';
-import AnkiListConnected from './components/_layout/Anki/List';
-import NoteConnected from './components/_layout/Note';
+// import SettingsConnected from './components/_layout/Settings';
+import AnkiListConnected from './components/AnkiNew/List';
+import NoteConnected from './components/_layout/UserNote';
 
-import AnkiPageConnected from './components/Anki/Page';
+import AnkiPageConnected from './components/AnkiLearn/Page';
 // import AnkiTagsPageConnected from './components/AnkiTags/Page';
 
 import EyeModal from './components/_layout/Modal/Eye';
@@ -61,47 +63,41 @@ export class App extends React.Component {
               : 'Undefined'}
           </div>
 
-          {currentUser.size === 0 && (
-            <React.Fragment>
-              <LoginPageConnected />
-            </React.Fragment>
-          )}
+          {currentUser.size === 0
+            ? <LoginPageConnected />
+            : (
+              <React.Fragment>
+                <HeaderConnected />
+                <SubHeaderConnected />
+                {/* <FooterConnected /> */}
+                {/* <SettingsConnected /> */}
 
-          {currentUser.size > 0 && (
-            <React.Fragment>
-              <HeaderConnected />
-              <SubHeaderConnected />
-              <FooterConnected />
-              <SettingsConnected />
+                {eyeSaving && <EyeModal />}
 
-              {eyeSaving && <EyeModal />}
-
-              <main className="flex-container" style={{ height: 'calc(100vh - 50px - 30px - 120px)' }}>
                 {/* <div className="flex-container-row bg-orange-light" style={{ height: 160 }}>
                   <NoteConnected field="notesDailyPlan" />
                 </div> */}
 
-                <div className="flex-1 flex-container-row">
-                  {isAnkiModalOn && (
-                    <div className="width-100p bg-blue">
-                      <Switch data-role="main-intelnote">
-                        <Route exact path="/" component={AnkiPageConnected} />
-                        {/* <Route path="/ankiTags" component={AnkiTagsPageConnected} /> */}
-                        <Redirect from="/*" to="/" />
-                      </Switch>
-                    </div>
-                  )}
+                {isAnkiModalOn && (
+                  <div className="width-100p bg-blue">
+                    <Switch data-role="main-intelnote">
+                      <Route exact path="/" component={AnkiPageConnected} />
+                      {/* <Route path="/ankiTags" component={AnkiTagsPageConnected} /> */}
+                      <Redirect from="/*" to="/" />
+                    </Switch>
+                  </div>
+                )}
 
-                  {(isAnkiOn || isNotesOn) && (
-                    <React.Fragment>
-                      {isAnkiOn && <AnkiListConnected />}
-                      {isNotesOn && <NoteConnected field="notes" />}
-                    </React.Fragment>
-                  )}
-                </div>
-              </main>
-            </React.Fragment>
-          )}
+                {(isAnkiOn || isNotesOn) && (
+                  <React.Fragment>
+                    {isAnkiOn && <AnkiListConnected />}
+                    {isNotesOn && <NoteConnected field="notes" />}
+                  </React.Fragment>
+                )}
+
+              </React.Fragment>
+            )
+          }
         </div>
       </ErrorBoundary>
     );

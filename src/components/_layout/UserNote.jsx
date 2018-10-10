@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
+import { Form, TextArea } from 'semantic-ui-react';
 
 import { UserActions, currentUserSelector } from 'utility-redux/common/user';
 
-require('./Note.scss');
+require('./UserNote.scss');
 
 export class Note extends React.Component {
   // constructor(props, context) {
@@ -67,9 +68,9 @@ export class Note extends React.Component {
     const { inputValue, updating } = this.state;
 
     return (
-      <div className="note-textarea padding-horizontal-5 border-left-black">
+      <Form style={{ height: '100vh' }}>
         <div
-          className="height-lineheight-20" style={{
+          style={{
             backgroundColor: 'red',
             color: 'white',
             position: 'absolute',
@@ -81,18 +82,18 @@ export class Note extends React.Component {
           {`Size: ${currentUser.has(field) ? currentUser.get(field).length : 0}`}
         </div>
 
-        <textarea
+        <TextArea
           type="text"
+          autoHeight
           name={field}
-          rows={2}
           disabled={updating}
-          className={`flex-1 ${updating ? 'bg-blue' : ''}`}
+          className={`${updating ? 'bg-blue' : ''}`}
           ref={(ref) => { this.ref = ref; }}
           value={inputValue}
           onChange={this.onChange}
           onKeyDown={event => this.onKeyDown(event)}
         />
-      </div>
+      </Form>
     );
   }
 }

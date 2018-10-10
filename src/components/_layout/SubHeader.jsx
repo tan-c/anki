@@ -6,6 +6,10 @@ import { withRouter } from 'react-router-dom';
 // import toastr from 'toastr';
 import SelectConnected from 'utility-react-component/Form/Select';
 
+import {
+  Menu, Icon
+} from 'semantic-ui-react';
+
 import { UiActions } from 'utility-redux/common/ui';
 import { AnkiTagActions } from 'utility-redux/anki/ankiTag';
 import { todayTasksSelector } from 'utility-redux/hourblock/task';
@@ -39,7 +43,11 @@ export class SubHeader extends React.Component {
     } = this.props;
 
     return (
-      <div data-role="subheader" id="subheader" className={`flex-container-row ${window.isMobile && 'mobile'}`}>
+      <Menu
+        data-role="subheader"
+        id="subheader"
+        className={`${window.isMobile && 'mobile'}`}
+      >
         {/* <div
           role="menuitem"
           tabIndex="-1"
@@ -47,75 +55,85 @@ export class SubHeader extends React.Component {
         >
           {filteredAnkis.size}
         </div> */}
+        <Menu.Item name="selectAnkiTagId">
+          <SelectConnected
+            onChangeEvent={
+              e => this.props.UiActions.updateIn(['selectedAnkiTagId'], e.target.value)
+            }
+            options={ankiTags}
+            className={`width-80 ${!selectedAnkiTagId.length && 'bg-red'}`}
+            value={selectedAnkiTagId}
+          />
+        </Menu.Item>
 
-        <SelectConnected
-          onChangeEvent={
-            e => this.props.UiActions.updateIn(['selectedAnkiTagId'], e.target.value)
-          }
-          options={ankiTags}
-          className={`width-80 ${!selectedAnkiTagId.length && 'bg-red'}`}
-          value={selectedAnkiTagId}
-        />
-        <div
-          role="menuitem"
-          tabIndex="-1"
-          className="width-60 height-lineheight-30 text-center bg-green"
-        >
-          {filteredAnkis.size}
-          {'/'}
-          {revisionAnkisTotal}
-        </div>
+        <Menu.Item name="ankisCount">
+          <div
+            role="menuitem"
+            tabIndex="-1"
+            className="width-60 height-lineheight-30 text-center bg-green"
+          >
+            {filteredAnkis.size}
+            {'/'}
+            {revisionAnkisTotal}
+          </div>
+        </Menu.Item>
 
-        <div id="subheader-links" className="flex-3 text-left" />
+        <Menu.Menu position="right" fitted="vertically">
+          <Menu.Item name="isAnkiModalOn">
+            <Icon
+              name="graduation cap"
+              color={`${isAnkiModalOn ? 'blue' : 'black'}`}
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['common', 'isAnkiModalOn'], !isAnkiModalOn);
+              }}
+            />
+          </Menu.Item>
 
-        <i
-          role="button"
-          tabIndex="-1"
-          className={`line-height-30 width-20 fa fa-fw fa-graduation-cap ${isAnkiModalOn && 'color-blue'}`}
-          onClick={(_) => {
-            this.props.UiActions.updateIn(['common', 'isAnkiModalOn'], !isAnkiModalOn);
-          }}
-        />
+          <Menu.Item name="isAnkiOn">
+            <Icon
+              name="list"
+              color={`${isAnkiOn ? 'blue' : 'black'}`}
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['common', 'isAnkiOn'], !isAnkiOn);
+              }}
+            />
+          </Menu.Item>
 
-        <i
-          role="button"
-          tabIndex="-1"
-          className={`line-height-30 width-20 fa fa-fw fa-list-alt ${isAnkiOn && 'color-blue'}`}
-          onClick={(_) => {
-            this.props.UiActions.updateIn(['common', 'isAnkiOn'], !isAnkiOn);
-          }}
-        />
+          <Menu.Item name="isNotesOn">
+            <Icon
+              name="sticky note outline"
+              color={`${isNotesOn ? 'blue' : 'black'}`}
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['common', 'isNotesOn'], !isNotesOn);
+              }}
+            />
+          </Menu.Item>
 
-        <i
-          role="button"
-          tabIndex="-1"
-          className={`line-height-30 width-20 fa fa-fw fa-sticky-note ${isNotesOn && 'color-blue'}`}
-          onClick={(_) => {
-            this.props.UiActions.updateIn(['common', 'isNotesOn'], !isNotesOn);
-          }}
-        />
+          <Menu.Item name="isSettingOn">
+            <Icon
+              name="cog"
+              color={`${isSettingOn ? 'blue' : 'black'}`}
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
+              }}
+            />
+          </Menu.Item>
 
-        <i
-          role="button"
-          tabIndex="-1"
-          className={`line-height-30 width-20 fa fa-fw fa-cog ${isSettingOn && 'color-blue'}`}
-          onClick={(_) => {
-            this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
-          }}
-        />
-
-        <span
-          role="button"
-          tabIndex="-1"
-          className={`${isTasksOn && 'bg-blue'}`}
-          onClick={(_) => {
-            this.props.UiActions.updateIn(['common', 'isTasksOn'], !isTasksOn);
-          }}
-        >
-          {`${todayTasks.count()} Tasks`}
-        </span>
+          <Menu.Item>
+            <span
+              role="button"
+              tabIndex="-1"
+              className={`${isTasksOn && 'bg-blue'}`}
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['common', 'isTasksOn'], !isTasksOn);
+              }}
+            >
+              {`${todayTasks.count()} Tasks`}
+            </span>
+          </Menu.Item>
+        </Menu.Menu>
         {/* <Button size="mini">Mini</Button> */}
-      </div>
+      </Menu>
     );
   }
 }

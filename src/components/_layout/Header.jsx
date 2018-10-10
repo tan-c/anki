@@ -6,6 +6,8 @@ import moment from 'moment';
 import { Map } from 'immutable';
 import toastr from 'toastr';
 
+import { Menu, Container, Button } from 'semantic-ui-react';
+
 // import { UiActions } from 'utility-redux/common/ui';
 import { currentUserSelector } from 'utility-redux/common/user';
 
@@ -52,13 +54,14 @@ export class Header extends React.Component {
     const { currentTime, showEyeTimeoutBliking } = this.state;
 
     return (
-      <header
+      <Menu
+        fixed="top"
+        // inverted
         data-role="header"
-        className={`flex-container-row ${showEyeTimeoutBliking && 'bg-orange'}`}
+        className={`${showEyeTimeoutBliking && 'bg-orange'}`}
       >
-        <span className="flex-1 height-50 border-right" />
-
-        {/* {!window.isMobile && (
+        <Container>
+          {/* {!window.isMobile && (
           <span className="height-50 padding-horizontal-10 line-height-25 text-right">
             <span className="height-25">
               {'欢迎回来,'}
@@ -71,7 +74,7 @@ export class Header extends React.Component {
           </span>
         )} */}
 
-        {/* {!window.isMobile && (
+          {/* {!window.isMobile && (
           <img
             alt="pic"
             className="profile-image"
@@ -83,20 +86,23 @@ export class Header extends React.Component {
           />
         )} */}
 
-        <div id="currentTime" className="border-left">
-          {currentTime.format('HH:mm')}
-        </div>
+          <Menu.Item
+            position="right"
+            name="currentTime"
+          >
+            {currentTime.format('HH:mm')}
+          </Menu.Item>
 
-        <div
-          id="more-icon"
-          className="border-left width-60 font-36 bg-blue"
-          role="button"
-          tabIndex="-1"
-          onClick={_ => this.logout()}
-        >
-          AN
-        </div>
-      </header>
+          <Menu.Menu position="right">
+            <Button
+              color="blue"
+              onClick={_ => this.logout()}
+            >
+              AN
+            </Button>
+          </Menu.Menu>
+        </Container>
+      </Menu>
     );
   }
 }

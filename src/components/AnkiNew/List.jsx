@@ -50,7 +50,11 @@ export class AnkiList extends React.Component {
     } = this.props;
 
     return (
-      <div data-role="anki-list" className="anki-list padding-horizontal-5 border-left-black" style={{ overflow: 'auto' }}>
+      <div
+        data-role="anki-list"
+        className="anki-list padding-horizontal-5 border-left-black"
+        style={{ overflow: 'auto' }}
+      >
         {/* <div className="flex-container-row typical-setup"> */}
         {/* </div> */}
 

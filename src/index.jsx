@@ -50,7 +50,4 @@ if (module.hot) {
 
 if (process.env.NODE_ENV !== 'development') {
   registerServiceWorker();
-  // Raven.config(
-  //   'https://3f5c1305a62e4e3eb4484e024102a3a1@sentry.io/302779'
-  // ).install();
 }

@@ -8,6 +8,7 @@ import keydown from 'react-keydown';
 // import toastr from 'toastr';
 // import Highlight from 'react-highlight'; // FIXME: removed as it introduced an older version of react
 import { Map, fromJS } from 'immutable';
+import { Card, Icon } from 'semantic-ui-react';
 
 import {
   AnkiActions,
@@ -15,7 +16,7 @@ import {
   revisionAnkisTotalSelector
 } from 'utility-redux/anki/anki';
 
-require('./anki-modal.scss');
+// require('./anki-modal.scss');
 
 export class AnkiPage extends React.Component {
   constructor(props, context) {
@@ -125,104 +126,103 @@ export class AnkiPage extends React.Component {
     createdElapsedDays = parseInt(createdElapsedDaysUnparsed, 10) + 1;
 
     return (
-      <div
-        id="modal-anki"
+      <Card
+        fluid
+        // id="modal-anki"
         className={`${window.isMobile && 'mobile'}`}
         data-role="modal-anki"
       >
-        <div id="anki-box">
-          <div
-            className="border-bottom-black flex-container-row"
-            id="anki-question"
+        <div
+          className="border-bottom-black flex-container-row"
+          id="anki-question"
+        >
+          <span
+            className="flex-1 padding-horizontal-10"
+            style={{ overflow: 'auto' }}
           >
-            <span
-              className="flex-1 padding-horizontal-10"
-              style={{ overflow: 'auto' }}
-            >
-              <span className="height-lineheight-30 font-18">
-                {currentAnki.get('question')}
-              </span>
+            <span className="height-lineheight-30 font-18">
+              {currentAnki.get('question')}
             </span>
-          </div>
+          </span>
+        </div>
 
-          {currentAnki.size > 0 && (
-            <div id="anki-answer-thumbnail">
-              <span className="pull-right bg-green label">
-                {revisionAnkisTotal}
-              </span>
+        {currentAnki.size > 0 && (
+          <div id="anki-answer-thumbnail">
+            <span className="pull-right bg-green label">
+              {revisionAnkisTotal}
+            </span>
 
-              {!window.isMobile && (
-                <React.Fragment>
-                  <span className="pull-right bg-green label">
-                    {'Created: '}
-                    {createdElapsedDays}
-                    {'d Ago'}
-                  </span>
-
-                  <span className="pull-right bg-green label">
-                    {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
-                      'revision',
-                      'round'
-                    ])}/${currentAnki.getIn(['revision', 'passing'])}`}
-                  </span>
-                </React.Fragment>
-              )}
-
-              {currentAnki.has('tags') && currentAnki.get('tags').map((tag, index) => (
-                <span
-                  className="pull-right bg-orange label"
-                  key={tag.get('_id')}
-                >
-                  {tag.get('name')}
+            {!window.isMobile && (
+              <React.Fragment>
+                <span className="pull-right bg-green label">
+                  {'Created: '}
+                  {createdElapsedDays}
+                  {'d Ago'}
                 </span>
-              ))}
+
+                <span className="pull-right bg-green label">
+                  {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
+                    'revision',
+                    'round'
+                  ])}/${currentAnki.getIn(['revision', 'passing'])}`}
+                </span>
+              </React.Fragment>
+            )}
+
+            {currentAnki.has('tags') && currentAnki.get('tags').map((tag, index) => (
+              <span
+                className="pull-right bg-orange label"
+                key={tag.get('_id')}
+              >
+                {tag.get('name')}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div id="anki-answer" className="flex-component-center">
+          {showAnswer && (
+            <div
+              id="anki-answer-content"
+              className="margin-top-30 margin-bottom-50  padding-horizontal-20 font-18"
+            >
+              {currentAnki.get('answer')}
             </div>
           )}
 
-          <div id="anki-answer" className="flex-component-center">
-            {showAnswer && (
-              <div
-                id="anki-answer-content"
-                className="margin-top-30 margin-bottom-50  padding-horizontal-20 font-18"
+          <div className="flex-horizontal-center" id="anki-answer-buttons">
+            {!showAnswer && (
+              <button
+                type="button"
+                className="btn-large"
+                onClick={this.toggleAnswer}
               >
-                {currentAnki.get('answer')}
-              </div>
+                  SHOW ANSWER
+              </button>
             )}
 
-            <div className="flex-horizontal-center" id="anki-answer-buttons">
-              {!showAnswer && (
+            {showAnswer && (
+              <React.Fragment>
                 <button
                   type="button"
                   className="btn-large"
-                  onClick={this.toggleAnswer}
+                  onClick={event => this.updateAnki(event, 1)}
                 >
-                  SHOW ANSWER
-                </button>
-              )}
-
-              {showAnswer && (
-                <React.Fragment>
-                  <button
-                    type="button"
-                    className="btn-large"
-                    onClick={event => this.updateAnki(event, 1)}
-                  >
                     PASS
-                  </button>
+                </button>
 
-                  <button
-                    type="button"
-                    className="btn-large bg-green"
-                    onClick={evnet => this.updateAnki(event, 2)}
-                  >
+                <button
+                  type="button"
+                  className="btn-large bg-green"
+                  onClick={evnet => this.updateAnki(event, 2)}
+                >
                     GOOD
-                  </button>
-                </React.Fragment>
-              )}
-            </div>
+                </button>
+              </React.Fragment>
+            )}
           </div>
         </div>
-      </div>
+      </Card>
     );
   }
 }

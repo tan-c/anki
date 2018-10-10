@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 // import toastr from 'toastr';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
+import { Form, TextArea, Segment } from 'semantic-ui-react';
 
 import TextareaControlledConnected from 'utility-react-component/Form/TextareaControlled';
 import {
@@ -60,7 +61,7 @@ export class AnkiList extends React.Component {
 
         {activeAnki.size > 0
           && (
-            <div>
+            <Form>
               <TextareaControlledConnected
                 inputName="question"
                 record={activeAnki}
@@ -80,41 +81,47 @@ export class AnkiList extends React.Component {
                 textareaRow={4}
                 callback={(_) => { this.props.UiActions.updateIn(['activeAnkiId'], ''); }}
               />
-            </div>
+            </Form>
           )
         }
 
         {activeAnki.size === 0
           && (
-            <div>
-              <textarea
-                className="width-100p height-60"
-                rows="2"
-                type="text"
-                name="question"
-                ref={(ref) => { this.questionInput = ref; }}
-                placeholder={activeAnki.size ? activeAnki.get('question') : ''}
-              />
-              <textarea
-                className="width-100p height-100"
-                rows="4"
-                type="text"
-                name="answer"
-                ref={(ref) => { this.answerInput = ref; }}
-                placeholder={activeAnki.size ? activeAnki.get('answer') : ''}
-                onKeyDown={this.onKeyDownSaveAnki}
-              />
-            </div>
+            <Form>
+              <Form.Group>
+                <TextArea
+                  className="width-100p height-60"
+                  rows="2"
+                  type="text"
+                  name="question"
+                  ref={(ref) => { this.questionInput = ref; }}
+                  placeholder={activeAnki.size ? activeAnki.get('question') : ''}
+                />
+
+              </Form.Group>
+              <Form.Group>
+                <TextArea
+                  className="width-100p height-100"
+                  rows="4"
+                  type="text"
+                  name="answer"
+                  ref={(ref) => { this.answerInput = ref; }}
+                  placeholder={activeAnki.size ? activeAnki.get('answer') : ''}
+                  onKeyDown={this.onKeyDownSaveAnki}
+                />
+              </Form.Group>
+            </Form>
           )
         }
 
-        {ankisSorted.valueSeq().map(anki => (
-          <AnkiRowConnected
-            anki={anki}
-            key={anki.get('_id')}
-          />
-        ))
-        }
+        <Segment.Group>
+          {ankisSorted.valueSeq().map(anki => (
+            <AnkiRowConnected
+              anki={anki}
+              key={anki.get('_id')}
+            />
+          ))}
+        </Segment.Group>
       </div>
     );
   }

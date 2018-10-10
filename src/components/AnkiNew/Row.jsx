@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Map } from 'immutable';
+import { Segment } from 'semantic-ui-react';
 
 import { AnkiActions, activeAnkiSelector } from 'utility-redux/anki/anki';
 import { UiActions } from 'utility-redux/common/ui';
@@ -13,18 +14,24 @@ export class AnkiRow extends React.Component {
     const { anki, activeAnki } = this.props;
 
     return (
-      <div
+      <Segment
         data-role="anki-row"
+        // inverted
+        // color="red"
         className={`flex-container-row typical-setup ${
           activeAnki.get('_id') === anki.get('_id')
             ? 'bg-orange'
             : 'border-black-20'
         }`}
       >
-        <span className="width-30 color-white text-center bg-green">
+        <span style={{
+          width: 30
+        }}
+        >
           {anki.getIn(['revision', 'round'])}
           {'/'}
           {anki.getIn(['revision', 'passing'])}
+          {' - '}
         </span>
 
         <span className="flex-1 margin-left-5">{anki.get('question')}</span>
@@ -46,7 +53,7 @@ export class AnkiRow extends React.Component {
           onClick={_ => this.props.UiActions.updateIn(['activeAnkiId'], anki.get('_id'))
           }
         />
-      </div>
+      </Segment>
     );
   }
 }

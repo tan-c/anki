@@ -106,14 +106,12 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
-  // authLock: PropTypes.object.isRequired,
   currentUserImageSrc: PropTypes.string.isRequired,
   currentUser: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    // authLock: ownProps.authLock,
     currentUser: currentUserSelector(state),
     currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc'])
   };

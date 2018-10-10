@@ -15,7 +15,7 @@ import './anki.scss';
 import Auth0Lock from 'auth0-lock';
 import toastr from 'toastr';
 
-import LoginPageConnected from './components/Login/Page';
+import LoginPageConnected from 'utility-react-component/Page/LoginPage';
 
 import HeaderConnected from './components/_layout/Header';
 import FooterConnected from './components/_layout/Footer';
@@ -35,31 +35,6 @@ import ErrorBoundary from './ErrorBoundary';
 
 window.isMobile = Math.min(document.documentElement.clientWidth, screen.width) <= 450; // P9 is 424
 
-const authLock = new Auth0Lock(
-  'wO9bN0Wa4DB2G12OJM05lO581BPIiSsP',
-  'wankee.auth0.com',
-  {
-    container: 'auth-box', // This will replace the content, else it would be modal
-    // configurationBaseUrl: 'https://cdn.auth0.com',
-    // overrides: {
-    //   __tenant: AUTH0_CUSTOM_DOMAIN,
-    //   __token_issuer: AUTH0_DOMAIN,
-    // },
-    auth: {
-      redirect: false, // using pop up mode
-      // redirectUri:
-      //   window.location.href.indexOf('localhost') > -1
-      //     ? 'http://localhost:8090'
-      //     : 'https://wankee.tanchen.me',
-      audience: 'https://wankee.tanchen.me/login-api',
-      responseType: 'token', // No need id token
-      params: {
-        scope: 'openid profile admin:intelnote' // This will ask all the permissions that the user has
-      }
-    }
-  }
-);
-
 export class App extends React.Component {
   constructor(props) {
     super(props);
@@ -67,22 +42,6 @@ export class App extends React.Component {
     // Prevent default bounce effect
     document.addEventListener('touchmove', (event) => {
       event.preventDefault();
-    });
-
-    authLock.on('authenticated', (authResult) => {
-      if (authResult && authResult.accessToken) {
-        const expiresAt = JSON.stringify(
-          authResult.expiresIn * 1000 + new Date().getTime()
-        );
-        localStorage.setItem('access_token', authResult.accessToken);
-        localStorage.setItem('expires_at', expiresAt);
-        toastr.info('Localstorage set');
-        this.props.UiActions.updateIn(['common', 'isAuthenticated'], true);
-
-        // Re-subscribe the user
-        // toastr.info('Re-subscribing user after login');
-        // subscribeUser(true);
-      }
     });
   }
 
@@ -105,13 +64,13 @@ export class App extends React.Component {
 
           {currentUser.size === 0 && (
             <React.Fragment>
-              <LoginPageConnected authLock={authLock} />
+              <LoginPageConnected />
             </React.Fragment>
           )}
 
           {currentUser.size > 0 && (
             <React.Fragment>
-              <HeaderConnected authLock={authLock} />
+              <HeaderConnected />
               <SubHeaderConnected />
               <FooterConnected />
               <SettingsConnected />

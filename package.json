@@ -17,6 +17,7 @@
   "email": "tanchen2014@gmail.com",
   "scripts": {
     "test": "BABEL_ENV=test npx jest --config ../../utility-test/jest.config.js packages/project/",
+    "test:local": "BABEL_ENV=test npx jest --config ../../utility-test/jest.config.js packages/anki/",
     "test:ci": "npm test --ci",
     "test:recent": "npx jest --changedSince=master || true ../../jest.confing.js",
     "test:watch": "npm test --watch",
@@ -38,7 +39,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged; cp ../../.circleci/config.yml .circleci/config.yml; npm run precommit:check:sensitive; git add .",
+      "pre-commit": "lint-staged; cp ../../.circleci/config-frontend.yml .circleci/config.yml; npm run precommit:check:sensitive; git add .",
       "pre-push": "npm run test:recent; snyk test --severity-threshold=high"
     }
   },

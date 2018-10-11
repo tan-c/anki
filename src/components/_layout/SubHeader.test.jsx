@@ -28,7 +28,7 @@ describe('SubHeader Unit Tests', () => {
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
       expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("div[data-role='subheader']")).toHaveLength(1);
+      expect(wrapper.find("Menu[data-role='subheader']")).toHaveLength(1);
     });
   });
 });

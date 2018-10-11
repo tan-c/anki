@@ -10,22 +10,31 @@ exports[`AnkiList Unit Tests  renders correctly 1`] = `
     }
   }
 >
-  <div>
-    <textarea
-      className="width-100p height-60"
-      name="question"
-      placeholder=""
-      rows="2"
-      type="text"
-    />
-    <textarea
-      className="width-100p height-100"
-      name="answer"
-      onKeyDown={[Function]}
-      placeholder=""
-      rows="4"
-      type="text"
-    />
-  </div>
+  <Form
+    as="form"
+  >
+    <FormGroup>
+      <TextArea
+        as="textarea"
+        className="width-100p height-60"
+        name="question"
+        placeholder=""
+        rows="2"
+        type="text"
+      />
+    </FormGroup>
+    <FormGroup>
+      <TextArea
+        as="textarea"
+        className="width-100p height-100"
+        name="answer"
+        onKeyDown={[Function]}
+        placeholder=""
+        rows="4"
+        type="text"
+      />
+    </FormGroup>
+  </Form>
+  <SegmentGroup />
 </div>
 `;

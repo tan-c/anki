@@ -49,7 +49,7 @@ export class Header extends React.Component {
   };
 
   render() {
-    const { currentUser, currentUserImageSrc } = this.props;
+    const { currentUser } = this.props;
 
     const { currentTime, showEyeTimeoutBliking } = this.state;
 
@@ -112,14 +112,12 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
-  currentUserImageSrc: PropTypes.string.isRequired,
   currentUser: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     currentUser: currentUserSelector(state),
-    currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc'])
   };
 }
 

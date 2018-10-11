@@ -1,61 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
-<div
-  className="flex-container-row undefined"
+<Menu
+  className="undefined"
   data-role="subheader"
   id="subheader"
 >
-  <Connect(Select)
-    className="width-80 bg-red"
-    onChangeEvent={[Function]}
-    options={Immutable.Map {}}
-    value=""
-  />
-  <div
-    className="width-60 height-lineheight-30 text-center bg-green"
-    role="menuitem"
-    tabIndex="-1"
+  <MenuItem
+    name="selectAnkiTagId"
   >
-    0
-    /
-    0
-  </div>
-  <div
-    className="flex-3 text-left"
-    id="subheader-links"
-  />
-  <i
-    className="line-height-30 width-20 fa fa-fw fa-graduation-cap false"
-    onClick={[Function]}
-    role="button"
-    tabIndex="-1"
-  />
-  <i
-    className="line-height-30 width-20 fa fa-fw fa-list-alt false"
-    onClick={[Function]}
-    role="button"
-    tabIndex="-1"
-  />
-  <i
-    className="line-height-30 width-20 fa fa-fw fa-sticky-note color-blue"
-    onClick={[Function]}
-    role="button"
-    tabIndex="-1"
-  />
-  <i
-    className="line-height-30 width-20 fa fa-fw fa-cog false"
-    onClick={[Function]}
-    role="button"
-    tabIndex="-1"
-  />
-  <span
-    className="false"
-    onClick={[Function]}
-    role="button"
-    tabIndex="-1"
+    <Connect(Select)
+      className="width-80 bg-red"
+      onChangeEvent={[Function]}
+      options={Immutable.Map {}}
+      value=""
+    />
+  </MenuItem>
+  <MenuItem
+    name="ankisCount"
   >
-    0 Tasks
-  </span>
-</div>
+    <div
+      className="width-60 height-lineheight-30 text-center bg-green"
+      role="menuitem"
+      tabIndex="-1"
+    >
+      0
+      /
+      0
+    </div>
+  </MenuItem>
+  <MenuMenu
+    fitted="vertically"
+    position="right"
+  >
+    <MenuItem
+      name="isAnkiModalOn"
+    >
+      <Icon
+        as="i"
+        color="black"
+        name="graduation cap"
+        onClick={[Function]}
+      />
+    </MenuItem>
+    <MenuItem
+      name="isAnkiOn"
+    >
+      <Icon
+        as="i"
+        color="black"
+        name="list"
+        onClick={[Function]}
+      />
+    </MenuItem>
+    <MenuItem
+      name="isNotesOn"
+    >
+      <Icon
+        as="i"
+        color="blue"
+        name="sticky note outline"
+        onClick={[Function]}
+      />
+    </MenuItem>
+    <MenuItem
+      name="isSettingOn"
+    >
+      <Icon
+        as="i"
+        color="black"
+        name="cog"
+        onClick={[Function]}
+      />
+    </MenuItem>
+    <MenuItem>
+      <span
+        className="false"
+        onClick={[Function]}
+        role="button"
+        tabIndex="-1"
+      >
+        0 Tasks
+      </span>
+    </MenuItem>
+  </MenuMenu>
+</Menu>
 `;

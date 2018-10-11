@@ -1,27 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header Unit Tests when normally set up renders correctly 1`] = `
-<header
-  className="flex-container-row false"
+<Menu
+  className="false"
   data-role="header"
+  fixed="top"
 >
-  <span
-    className="flex-1 height-50 border-right"
-  />
-  <div
-    className="border-left"
-    id="currentTime"
-  >
-    00:00
-  </div>
-  <div
-    className="border-left width-60 font-36 bg-blue"
-    id="more-icon"
-    onClick={[Function]}
-    role="button"
-    tabIndex="-1"
-  >
-    AN
-  </div>
-</header>
+  <Container>
+    <MenuItem
+      name="currentTime"
+      position="right"
+    >
+      00:00
+    </MenuItem>
+    <MenuMenu
+      position="right"
+    >
+      <Button
+        as="button"
+        color="blue"
+        onClick={[Function]}
+        role="button"
+      >
+        AN
+      </Button>
+    </MenuMenu>
+  </Container>
+</Menu>
 `;

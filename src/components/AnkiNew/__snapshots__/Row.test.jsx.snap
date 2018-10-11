@@ -1,14 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AnkiRow Unit Tests  renders correctly 1`] = `
-<div
+<Segment
   className="flex-container-row typical-setup bg-orange"
   data-role="anki-row"
 >
   <span
-    className="width-30 color-white text-center bg-green"
+    style={
+      Object {
+        "width": 30,
+      }
+    }
   >
     /
+     - 
   </span>
   <span
     className="flex-1 margin-left-5"
@@ -30,5 +35,5 @@ exports[`AnkiRow Unit Tests  renders correctly 1`] = `
     role="button"
     tabIndex="-1"
   />
-</div>
+</Segment>
 `;

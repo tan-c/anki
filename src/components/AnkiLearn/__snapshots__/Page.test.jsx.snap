@@ -1,48 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IntelNotePage Unit Tests  renders correctly 1`] = `
-<div
+<Card
   className="undefined"
   data-role="modal-anki"
-  id="modal-anki"
+  fluid={true}
+  style={
+    Object {
+      "minHeight": 300,
+    }
+  }
 >
-  <div
-    id="anki-box"
+  <Container>
+    <Grid>
+      <GridColumn
+        floated="left"
+        width={5}
+      />
+      <GridColumn
+        floated="right"
+        textAlign="right"
+        width={5}
+      />
+    </Grid>
+  </Container>
+  <Header
+    as="h3"
+    textAlign="center"
+  />
+  <Divider />
+  <Container
+    textAlign="center"
   >
-    <div
-      className="border-bottom-black flex-container-row"
-      id="anki-question"
+    <Button
+      as="button"
+      onClick={[Function]}
+      primary={true}
+      role="button"
     >
-      <span
-        className="flex-1 padding-horizontal-10"
-        style={
-          Object {
-            "overflow": "auto",
-          }
-        }
-      >
-        <span
-          className="height-lineheight-30 font-18"
-        />
-      </span>
-    </div>
-    <div
-      className="flex-component-center"
-      id="anki-answer"
-    >
-      <div
-        className="flex-horizontal-center"
-        id="anki-answer-buttons"
-      >
-        <button
-          className="btn-large"
-          onClick={[Function]}
-          type="button"
-        >
-          SHOW ANSWER
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+      SHOW ANSWER
+    </Button>
+  </Container>
+</Card>
 `;

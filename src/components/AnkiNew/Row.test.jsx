@@ -22,7 +22,7 @@ describe('AnkiRow Unit Tests', () => {
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
       expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("div[data-role='anki-row']")).toHaveLength(1);
+      expect(wrapper.find("Segment[data-role='anki-row']")).toHaveLength(1);
     });
   });
 });

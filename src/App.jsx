@@ -63,7 +63,7 @@ export class App extends React.Component {
               : 'Undefined'}
           </div>
 
-          {!currentUser.has('_id')
+          {!currentUser.has('_id') || currentUser.get('_id') === null
             ? <LoginPageConnected />
             : (
               <React.Fragment>

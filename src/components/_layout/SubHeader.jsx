@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import SelectConnected from 'utility-react-component/Form/Select';
 
 import {
-  Menu, Icon
+  Menu, Icon, Button
 } from 'semantic-ui-react';
 
 import { UiActions } from 'utility-redux/common/ui';
@@ -55,7 +55,7 @@ export class SubHeader extends React.Component {
         >
           {filteredAnkis.size}
         </div> */}
-        <Menu.Item name="selectAnkiTagId">
+        <Menu.Item name="icons">
           <SelectConnected
             onChangeEvent={
               e => this.props.UiActions.updateIn(['selectedAnkiTagId'], e.target.value)
@@ -79,44 +79,48 @@ export class SubHeader extends React.Component {
         </Menu.Item>
 
         <Menu.Menu position="right" fitted="vertically">
-          <Menu.Item name="isAnkiModalOn">
-            <Icon
-              name="graduation cap"
-              color={`${isAnkiModalOn ? 'blue' : 'black'}`}
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['common', 'isAnkiModalOn'], !isAnkiModalOn);
-              }}
-            />
-          </Menu.Item>
+          <Menu.Item name="iconButtons">
+            <Button.Group>
+              <Button icon>
+                <Icon
+                  name="graduation cap"
+                  color={`${isAnkiModalOn ? 'blue' : 'black'}`}
+                  onClick={(_) => {
+                    this.props.UiActions.updateIn(['common', 'isAnkiModalOn'], !isAnkiModalOn);
+                  }}
+                />
+              </Button>
 
-          <Menu.Item name="isAnkiOn">
-            <Icon
-              name="list"
-              color={`${isAnkiOn ? 'blue' : 'black'}`}
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['common', 'isAnkiOn'], !isAnkiOn);
-              }}
-            />
-          </Menu.Item>
+              <Button icon>
+                <Icon
+                  name="list"
+                  color={`${isAnkiOn ? 'blue' : 'black'}`}
+                  onClick={(_) => {
+                    this.props.UiActions.updateIn(['common', 'isAnkiOn'], !isAnkiOn);
+                  }}
+                />
+              </Button>
 
-          <Menu.Item name="isNotesOn">
-            <Icon
-              name="sticky note outline"
-              color={`${isNotesOn ? 'blue' : 'black'}`}
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['common', 'isNotesOn'], !isNotesOn);
-              }}
-            />
-          </Menu.Item>
+              <Button icon>
+                <Icon
+                  name="sticky note outline"
+                  color={`${isNotesOn ? 'blue' : 'black'}`}
+                  onClick={(_) => {
+                    this.props.UiActions.updateIn(['common', 'isNotesOn'], !isNotesOn);
+                  }}
+                />
+              </Button>
 
-          <Menu.Item name="isSettingOn">
-            <Icon
-              name="cog"
-              color={`${isSettingOn ? 'blue' : 'black'}`}
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
-              }}
-            />
+              <Button icon>
+                <Icon
+                  name="cog"
+                  color={`${isSettingOn ? 'blue' : 'black'}`}
+                  onClick={(_) => {
+                    this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
+                  }}
+                />
+              </Button>
+            </Button.Group>
           </Menu.Item>
 
           <Menu.Item>

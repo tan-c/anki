@@ -7,7 +7,7 @@ exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
   id="subheader"
 >
   <MenuItem
-    name="selectAnkiTagId"
+    name="icons"
   >
     <Connect(Select)
       className="width-80 bg-red"
@@ -34,44 +34,58 @@ exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
     position="right"
   >
     <MenuItem
-      name="isAnkiModalOn"
+      name="iconButtons"
     >
-      <Icon
-        as="i"
-        color="black"
-        name="graduation cap"
-        onClick={[Function]}
-      />
-    </MenuItem>
-    <MenuItem
-      name="isAnkiOn"
-    >
-      <Icon
-        as="i"
-        color="black"
-        name="list"
-        onClick={[Function]}
-      />
-    </MenuItem>
-    <MenuItem
-      name="isNotesOn"
-    >
-      <Icon
-        as="i"
-        color="blue"
-        name="sticky note outline"
-        onClick={[Function]}
-      />
-    </MenuItem>
-    <MenuItem
-      name="isSettingOn"
-    >
-      <Icon
-        as="i"
-        color="black"
-        name="cog"
-        onClick={[Function]}
-      />
+      <ButtonGroup>
+        <Button
+          as="button"
+          icon={true}
+          role="button"
+        >
+          <Icon
+            as="i"
+            color="black"
+            name="graduation cap"
+            onClick={[Function]}
+          />
+        </Button>
+        <Button
+          as="button"
+          icon={true}
+          role="button"
+        >
+          <Icon
+            as="i"
+            color="black"
+            name="list"
+            onClick={[Function]}
+          />
+        </Button>
+        <Button
+          as="button"
+          icon={true}
+          role="button"
+        >
+          <Icon
+            as="i"
+            color="blue"
+            name="sticky note outline"
+            onClick={[Function]}
+          />
+        </Button>
+        <Button
+          as="button"
+          icon={true}
+          role="button"
+        >
+          <Icon
+            as="i"
+            color="black"
+            name="cog"
+            onClick={[Function]}
+          />
+        </Button>
+      </ButtonGroup>
     </MenuItem>
     <MenuItem>
       <span

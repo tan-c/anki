@@ -10,7 +10,9 @@ exports[`App Unit Tests when normally set up renders correctly 1`] = `
     >
       Undefined
     </div>
-    <Connect(LoginPage) />
+    <Connect(LoginPage)
+      pageName="Anki"
+    />
   </div>
 </ErrorBoundary>
 `;

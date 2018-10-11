@@ -7,7 +7,7 @@ exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
   id="subheader"
 >
   <MenuItem
-    name="icons"
+    name="ankisCount"
   >
     <Connect(Select)
       className="width-80 bg-red"
@@ -15,10 +15,6 @@ exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
       options={Immutable.Map {}}
       value=""
     />
-  </MenuItem>
-  <MenuItem
-    name="ankisCount"
-  >
     <div
       className="width-60 height-lineheight-30 text-center bg-green"
       role="menuitem"
@@ -86,16 +82,6 @@ exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
           />
         </Button>
       </ButtonGroup>
-    </MenuItem>
-    <MenuItem>
-      <span
-        className="false"
-        onClick={[Function]}
-        role="button"
-        tabIndex="-1"
-      >
-        0 Tasks
-      </span>
     </MenuItem>
   </MenuMenu>
 </Menu>

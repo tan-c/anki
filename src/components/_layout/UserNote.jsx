@@ -85,11 +85,11 @@ export class Note extends React.Component {
         <TextArea
           type="text"
           style={{
-            minHeight: 300
+            minHeight: 300,
+            background: updating ? 'teal' : 'white',
           }}
           name={field}
           disabled={updating}
-          className={`${updating ? 'bg-blue' : ''}`}
           ref={(ref) => { this.ref = ref; }}
           value={inputValue}
           onChange={this.onChange}

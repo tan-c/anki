@@ -6,5 +6,5 @@ const url = process.env.NODE_ENV === 'production' ? 'http://10.0.0.10' : 'http:/
 
 fixture('HomePage').page(url); // docker.for.mac.localhost works on local mac when accessing from docker, --network=host is not needed
 test('Test Anki title page', async (t) => {
-  await t.expect(Selector('h2').innerText).eql('Log In');
+  await t.expect(Selector('h2').innerText).eql('Log In To Anki');
 });

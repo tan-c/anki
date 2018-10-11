@@ -64,7 +64,7 @@ export class App extends React.Component {
           </div>
 
           {!currentUser.has('_id') || currentUser.get('_id') === null
-            ? <LoginPageConnected />
+            ? <LoginPageConnected pageName="Anki" />
             : (
               <React.Fragment>
                 <HeaderConnected />

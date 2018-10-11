@@ -35,8 +35,8 @@ export class AnkiList extends React.Component {
       }
 
       this.props.AnkiActions.create(ankiInfo).then((res) => {
-        this.questionInput.value = '';
-        this.answerInput.value = '';
+        this.questionInput.ref.value = '';
+        this.answerInput.ref.value = '';
       });
     }
   }

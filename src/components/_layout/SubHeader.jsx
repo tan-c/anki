@@ -55,7 +55,7 @@ export class SubHeader extends React.Component {
         >
           {filteredAnkis.size}
         </div> */}
-        <Menu.Item name="icons">
+        <Menu.Item name="ankisCount">
           <SelectConnected
             onChangeEvent={
               e => this.props.UiActions.updateIn(['selectedAnkiTagId'], e.target.value)
@@ -64,9 +64,7 @@ export class SubHeader extends React.Component {
             className={`width-80 ${!selectedAnkiTagId.length && 'bg-red'}`}
             value={selectedAnkiTagId}
           />
-        </Menu.Item>
 
-        <Menu.Item name="ankisCount">
           <div
             role="menuitem"
             tabIndex="-1"
@@ -123,7 +121,7 @@ export class SubHeader extends React.Component {
             </Button.Group>
           </Menu.Item>
 
-          <Menu.Item>
+          {/* <Menu.Item>
             <span
               role="button"
               tabIndex="-1"
@@ -134,7 +132,7 @@ export class SubHeader extends React.Component {
             >
               {`${todayTasks.count()} Tasks`}
             </span>
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu.Menu>
         {/* <Button size="mini">Mini</Button> */}
       </Menu>

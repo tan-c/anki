@@ -126,7 +126,7 @@ jobs:
             # copy a config file into this volume
             docker cp /root/project/test-e2e test-e2e-vol:/tests
             # start an application container using this volume
-            docker run --network docker-bridge --volumes-from test-e2e-vol testcafe/testcafe 'chromium:headless --no-sandbox' /tests # -r xunit:/tmp/test-results/res.xml if you want to save the artifact
+            docker run -e "NODE_ENV=production" --network docker-bridge --volumes-from test-e2e-vol testcafe/testcafe 'chromium:headless --no-sandbox' /tests # -r xunit:/tmp/test-results/res.xml if you want to save the artifact
 
   push-deploy:
     docker:

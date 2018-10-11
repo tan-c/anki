@@ -84,7 +84,9 @@ export class Note extends React.Component {
 
         <TextArea
           type="text"
-          autoHeight
+          style={{
+            minHeight: 300
+          }}
           name={field}
           disabled={updating}
           className={`${updating ? 'bg-blue' : ''}`}

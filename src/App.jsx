@@ -79,13 +79,11 @@ export class App extends React.Component {
                 </div> */}
 
                 {isAnkiModalOn && (
-                  <div className="width-100p bg-blue">
-                    <Switch data-role="main-intelnote">
-                      <Route exact path="/" component={AnkiPageConnected} />
-                      {/* <Route path="/ankiTags" component={AnkiTagsPageConnected} /> */}
-                      <Redirect from="/*" to="/" />
-                    </Switch>
-                  </div>
+                  <Switch data-role="main-intelnote">
+                    <Route exact path="/" component={AnkiPageConnected} />
+                    {/* <Route path="/ankiTags" component={AnkiTagsPageConnected} /> */}
+                    <Redirect from="/*" to="/" />
+                  </Switch>
                 )}
 
                 {(isAnkiOn || isNotesOn) && (

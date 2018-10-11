@@ -97,7 +97,6 @@ export class AnkiList extends React.Component {
                   ref={(ref) => { this.questionInput = ref; }}
                   placeholder={activeAnki.size ? activeAnki.get('question') : ''}
                 />
-
               </Form.Group>
               <Form.Group>
                 <TextArea

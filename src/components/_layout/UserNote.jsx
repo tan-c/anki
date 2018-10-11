@@ -85,7 +85,7 @@ export class Note extends React.Component {
         <TextArea
           type="text"
           style={{
-            minHeight: 300,
+            height: '100%',
             background: updating ? 'teal' : 'white',
           }}
           name={field}

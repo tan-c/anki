@@ -20,8 +20,8 @@ import AnkiRowConnected from './Row';
 export class AnkiList extends React.Component {
   onKeyDownSaveAnki = (event) => {
     const { selectedAnkiTagId } = this.props;
-    const question = this.questionInput.value;
-    const answer = this.answerInput.value;
+    const question = this.questionInput.ref.value;
+    const answer = this.answerInput.ref.value;
 
     if (event.which === 13 && event.metaKey) {
       const ankiInfo = {
@@ -90,7 +90,6 @@ export class AnkiList extends React.Component {
             <Form>
               <Form.Group>
                 <TextArea
-                  className="width-100p height-60"
                   rows="2"
                   type="text"
                   name="question"
@@ -100,7 +99,6 @@ export class AnkiList extends React.Component {
               </Form.Group>
               <Form.Group>
                 <TextArea
-                  className="width-100p height-100"
                   rows="4"
                   type="text"
                   name="answer"

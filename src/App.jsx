@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { Menu, Container } from 'semantic-ui-react';
+// import { Menu, Container } from 'semantic-ui-react';
 
 import {
   Switch, Route, Redirect, withRouter

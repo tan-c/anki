@@ -47,6 +47,9 @@ export class SubHeader extends React.Component {
         data-role="subheader"
         id="subheader"
         className={`${window.isMobile && 'mobile'}`}
+        style={{
+          paddingLeft: 10
+        }}
       >
         {/* <div
           role="menuitem"

@@ -56,6 +56,8 @@ export class Header extends React.Component {
     return (
       <Menu
         fixed="top"
+        inverted
+        color="blue"
         // inverted
         data-role="header"
         className={`${showEyeTimeoutBliking && 'bg-orange'}`}

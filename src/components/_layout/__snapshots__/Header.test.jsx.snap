@@ -3,8 +3,10 @@
 exports[`Header Unit Tests when normally set up renders correctly 1`] = `
 <Menu
   className="false"
+  color="blue"
   data-role="header"
   fixed="top"
+  inverted={true}
 >
   <Container>
     <MenuItem

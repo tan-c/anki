@@ -5,6 +5,11 @@ exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
   className="undefined"
   data-role="subheader"
   id="subheader"
+  style={
+    Object {
+      "paddingLeft": 10,
+    }
+  }
 >
   <MenuItem
     name="ankisCount"

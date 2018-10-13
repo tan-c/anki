@@ -8,7 +8,7 @@ import {
   todayDailyRecordSelector,
 } from 'utility-redux/hourblock/dailyRecord';
 import { TaskActions, todayTasksSelector } from 'utility-redux/hourblock/task';
-import { Grid, Input } from 'semantic-ui-react';
+import { Grid, Input, Icon } from 'semantic-ui-react';
 
 import { Map } from 'immutable';
 import moment from 'moment';
@@ -70,22 +70,22 @@ export class Footer extends React.Component {
 
   renderPlannedPomoRow = (sectionOfDay, nextPlannedPomo) => (
     <Grid.Row
-      columns={6}
       style={{
         padding: 0,
+        overflow: 'hidden',
       }}
     >
-      <div style={{
-        width: 80,
-        textAlign: 'center'
-      }}
+      <Grid.Column
+        width={2}
+        textAlign="center"
       >
         {moment().tz('Asia/Tokyo').startOf('day').add(sectionOfDay / 2, 'hour')
           .format('HH:mm')}
-      </div>
+      </Grid.Column>
 
       <Grid.Column
         width={3}
+        textAlign="center"
         style={{
           backgroundColor: `${nextPlannedPomo.getIn(['project', 'category', 'color'])}`,
           // overflow: 'hidden'
@@ -94,9 +94,12 @@ export class Footer extends React.Component {
         {nextPlannedPomo.hasIn(['project', 'category']) ? nextPlannedPomo.getIn(['project', 'name']) : ''}
       </Grid.Column>
 
-      <Grid.Column
-        width={3}
-      >
+      <Grid.Column width={10}>
+        {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'main'])}` : 'No Recur'}
+        {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'main'])}` : 'No Recur'}
+      </Grid.Column>
+
+      {/* <Grid.Column width={8}>
         <Input
           fluid
           type="text"
@@ -113,20 +116,17 @@ export class Footer extends React.Component {
         />
       </Grid.Column>
 
-      <Grid.Column column={1}>
+      <Grid.Column width={3}>
         {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'recur'])}` : 'No Recur'}
-      </Grid.Column>
+      </Grid.Column> */}
 
-      <i
-        style={{
-          width: 30
-        }}
-        role="button"
-        tabIndex="-1"
-        className="fa fa-fw fa-check width-30 height-lineheight-30"
-        disabled={!this.props.todayDailyRecord.count() || this.props.todayDailyRecord.hasIn(['pomo', sectionOfDay])}
-        onClick={event => this.saveDailyPomo(sectionOfDay, nextPlannedPomo)}
-      />
+      <Grid.Column width={1}>
+        <Icon
+          name="check"
+          disabled={!this.props.todayDailyRecord.count() || this.props.todayDailyRecord.hasIn(['pomo', sectionOfDay])}
+          onClick={event => this.saveDailyPomo(sectionOfDay, nextPlannedPomo)}
+        />
+      </Grid.Column>
     </Grid.Row>
 
   )
@@ -139,7 +139,6 @@ export class Footer extends React.Component {
       <Grid style={{
         position: 'fixed',
         bottom: 0,
-        width: '100%',
         height: 120,
         borderTop: '1px solid black',
         background: 'white',

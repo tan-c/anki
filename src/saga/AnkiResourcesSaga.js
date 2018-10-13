@@ -18,7 +18,7 @@ export function* loadAllDataSaga() {
   const httpParams = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? {
     limit: 100,
   } : {
-    limit: 1000,
+    // limit: 1000,
   };
 
   yield* getAll('anki', 'an', httpParams, {

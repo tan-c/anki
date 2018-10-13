@@ -77,8 +77,9 @@ export class Note extends React.Component {
             backgroundColor: 'red',
             color: 'white',
             position: 'absolute',
-            right: 5,
+            right: 0,
             top: 10,
+            width: 100,
             zIndex: 1111
           }}
         >

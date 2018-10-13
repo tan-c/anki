@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import { bindActionCreators } from 'redux';
-import toastr from 'toastr';
+// import toastr from 'toastr';
 import { Form, TextArea } from 'semantic-ui-react';
 
 import { UserActions, currentUserSelector } from 'utility-redux/common/user';

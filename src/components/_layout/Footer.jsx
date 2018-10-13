@@ -135,10 +135,13 @@ export class Footer extends React.Component {
 
     return (
       <Grid style={{
-        position: 'absolute',
+        position: 'fixed',
         bottom: 0,
         width: '100%',
-        height: 120
+        height: 120,
+        borderTop: '1px solid black',
+        background: 'white',
+        zIndex: 1111,
       }}
       >
         {isTasksOn && todayTasks.count() > 0 && todayTasks.map(task => (
@@ -155,15 +158,21 @@ export class Footer extends React.Component {
               {task.hasIn(['project', 'category']) ? task.getIn(['project', 'name']) : 'No Cate'}
             </div>
 
-            <Grid.Column className="width-40 border-right-white text-center">
+            <Grid.Column
+              className="width-40 border-right-white text-center"
+            >
               {task.get('estimateHour')}
             </Grid.Column>
 
-            <Grid.Column className="width-40 border-right-white text-center">
+            <Grid.Column
+              className="width-40 border-right-white text-center"
+            >
               {task.get('recur')}
             </Grid.Column>
 
-            <Grid.Column className="flex-1 padding-horizontal-5">
+            <Grid.Column
+              className="flex-1 padding-horizontal-5"
+            >
               {task.get('content')}
             </Grid.Column>
 

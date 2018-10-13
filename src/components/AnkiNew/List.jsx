@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 // import toastr from 'toastr';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
-import { Form, TextArea, Segment } from 'semantic-ui-react';
+import { Form, TextArea, Grid } from 'semantic-ui-react';
 
 import TextareaControlledConnected from 'utility-react-component/Form/TextareaControlled';
 import {
@@ -56,9 +56,6 @@ export class AnkiList extends React.Component {
         className="anki-list padding-horizontal-5 border-left-black"
         style={{ overflow: 'auto' }}
       >
-        {/* <div className="flex-container-row typical-setup"> */}
-        {/* </div> */}
-
         {activeAnki.size > 0
           && (
             <Form>
@@ -111,14 +108,14 @@ export class AnkiList extends React.Component {
           )
         }
 
-        <Segment.Group>
+        <Grid divided="vertically">
           {ankisSorted.valueSeq().map(anki => (
             <AnkiRowConnected
               anki={anki}
               key={anki.get('_id')}
             />
           ))}
-        </Segment.Group>
+        </Grid>
       </div>
     );
   }

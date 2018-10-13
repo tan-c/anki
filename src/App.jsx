@@ -90,13 +90,8 @@ export class App extends React.Component {
                   </Switch>
                 )}
 
-                {(isAnkiOn || isNotesOn) && (
-                  <React.Fragment>
-                    {isAnkiOn && <AnkiListConnected />}
-                    {isNotesOn && <NoteConnected field="notes" />}
-                  </React.Fragment>
-                )}
-
+                {isAnkiOn && <AnkiListConnected />}
+                {isNotesOn && <NoteConnected field="notes" />}
               </React.Fragment>
             )
           }

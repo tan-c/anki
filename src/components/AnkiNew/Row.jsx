@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Map } from 'immutable';
-import { Segment } from 'semantic-ui-react';
+import { Grid, Icon } from 'semantic-ui-react';
 
 import { AnkiActions, activeAnkiSelector } from 'utility-redux/anki/anki';
 import { UiActions } from 'utility-redux/common/ui';
@@ -14,46 +14,40 @@ export class AnkiRow extends React.Component {
     const { anki, activeAnki } = this.props;
 
     return (
-      <Segment
-        data-role="anki-row"
-        // inverted
-        // color="red"
-        className={`${
-          activeAnki.get('_id') === anki.get('_id')
-            ? 'bg-orange'
-            : 'border-black-20'
-        }`}
+      <Grid.Row style={{
+        padding: 0,
+        minHeight: 30
+      }}
       >
-        <span style={{
+        <div style={{
           width: 30
         }}
         >
-          {anki.getIn(['revision', 'round'])}
-          {'/'}
-          {anki.getIn(['revision', 'passing'])}
-          {' - '}
-        </span>
+          {`${anki.getIn(['revision', 'round'])}/${anki.getIn(['revision', 'passing'])} - `}
+        </div>
 
-        <span className="flex-1 margin-left-5">{anki.get('question')}</span>
+        <Grid.Column>
+          {anki.get('question')}
+        </Grid.Column>
 
-        <span className="width-20 bg-orange text-center text-white">
+        <div style={{
+          width: 20
+        }}
+        >
           {anki.has('tags') ? anki.get('tags').size : 0}
-        </span>
-        <i
-          role="button"
-          tabIndex="-1"
-          className="fa fa-close fa-fw font-14"
+        </div>
+
+        <Icon
+          name="close"
           onClick={_ => this.props.AnkiActions.deleteRecord(anki)}
         />
 
-        <i
-          role="button"
-          tabIndex="-1"
-          className="fa fa-fw fa-edit font-14"
+        <Icon
+          name="edit"
           onClick={_ => this.props.UiActions.updateIn(['activeAnkiId'], anki.get('_id'))
           }
         />
-      </Segment>
+      </Grid.Row>
     );
   }
 }

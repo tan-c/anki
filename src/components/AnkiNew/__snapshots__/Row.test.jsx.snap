@@ -1,39 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AnkiRow Unit Tests  renders correctly 1`] = `
-<Segment
-  className="bg-orange"
-  data-role="anki-row"
+<GridRow
+  style={
+    Object {
+      "minHeight": 30,
+      "padding": 0,
+    }
+  }
 >
-  <span
+  <div
     style={
       Object {
         "width": 30,
       }
     }
   >
-    /
-     - 
-  </span>
-  <span
-    className="flex-1 margin-left-5"
-  />
-  <span
-    className="width-20 bg-orange text-center text-white"
+    undefined/undefined - 
+  </div>
+  <GridColumn />
+  <div
+    style={
+      Object {
+        "width": 20,
+      }
+    }
   >
     0
-  </span>
-  <i
-    className="fa fa-close fa-fw font-14"
+  </div>
+  <Icon
+    as="i"
+    name="close"
     onClick={[Function]}
-    role="button"
-    tabIndex="-1"
   />
-  <i
-    className="fa fa-fw fa-edit font-14"
+  <Icon
+    as="i"
+    name="edit"
     onClick={[Function]}
-    role="button"
-    tabIndex="-1"
   />
-</Segment>
+</GridRow>
 `;

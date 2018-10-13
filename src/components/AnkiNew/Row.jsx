@@ -14,10 +14,12 @@ export class AnkiRow extends React.Component {
     const { anki, activeAnki } = this.props;
 
     return (
-      <Grid.Row style={{
-        padding: 0,
-        minHeight: 30
-      }}
+      <Grid.Row
+        data-role="anki-row"
+        style={{
+          padding: 0,
+          minHeight: 30
+        }}
       >
         <div style={{
           width: 30

@@ -2,6 +2,7 @@
 
 exports[`AnkiRow Unit Tests  renders correctly 1`] = `
 <GridRow
+  data-role="anki-row"
   style={
     Object {
       "minHeight": 30,

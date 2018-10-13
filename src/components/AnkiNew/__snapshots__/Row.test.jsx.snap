@@ -2,7 +2,7 @@
 
 exports[`AnkiRow Unit Tests  renders correctly 1`] = `
 <Segment
-  className="flex-container-row typical-setup bg-orange"
+  className="bg-orange"
   data-role="anki-row"
 >
   <span

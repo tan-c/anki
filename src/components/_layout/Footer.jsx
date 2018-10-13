@@ -76,7 +76,8 @@ export class Footer extends React.Component {
       }}
     >
       <div style={{
-        width: 50,
+        width: 80,
+        textAlign: 'center'
       }}
       >
         {moment().tz('Asia/Tokyo').startOf('day').add(sectionOfDay / 2, 'hour')
@@ -97,6 +98,7 @@ export class Footer extends React.Component {
         width={3}
       >
         <Input
+          fluid
           type="text"
           size="mini"
           name="tasks.main"
@@ -112,7 +114,7 @@ export class Footer extends React.Component {
       </Grid.Column>
 
       <Grid.Column column={1}>
-        {nextPlannedPomo.has('task') ? `${nextPlannedPomo.getIn(['task', 'recur'])}` : 'No Recur'}
+        {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'recur'])}` : 'No Recur'}
       </Grid.Column>
 
       <i

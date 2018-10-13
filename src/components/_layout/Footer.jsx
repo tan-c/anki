@@ -8,11 +8,11 @@ import {
   todayDailyRecordSelector,
 } from 'utility-redux/hourblock/dailyRecord';
 import { TaskActions, todayTasksSelector } from 'utility-redux/hourblock/task';
+import { Grid, Input } from 'semantic-ui-react';
 
 import { Map } from 'immutable';
 import moment from 'moment';
 // import { bindActionCreators } from 'redux';
-require('./Footer.scss');
 
 export class Footer extends React.Component {
   // constructor(props, context) {
@@ -69,48 +69,64 @@ export class Footer extends React.Component {
   getPomo = (todayPlannedPomos, sectionOfDay) => (todayPlannedPomos.hasIn(['plannedPomos', sectionOfDay]) ? todayPlannedPomos.getIn(['plannedPomos', sectionOfDay]) : Map());
 
   renderPlannedPomoRow = (sectionOfDay, nextPlannedPomo) => (
-    <div className="flex-container-row border-bottom-white-70 height-30">
-      <div
-        className="width-50 text-center"
+    <Grid.Row
+      columns={6}
+      style={{
+        padding: 0,
+      }}
+    >
+      <div style={{
+        width: 50,
+      }}
       >
         {moment().tz('Asia/Tokyo').startOf('day').add(sectionOfDay / 2, 'hour')
           .format('HH:mm')}
       </div>
-      <div
-        className="width-60 text-center  border-bottom-white-70" style={{
+
+      <Grid.Column
+        width={3}
+        style={{
           backgroundColor: `${nextPlannedPomo.getIn(['project', 'category', 'color'])}`,
-          overflow: 'hidden'
+          // overflow: 'hidden'
         }}
       >
         {nextPlannedPomo.hasIn(['project', 'category']) ? nextPlannedPomo.getIn(['project', 'name']) : ''}
-      </div>
+      </Grid.Column>
 
-      <input
-        type="text"
-        className="flex-2 border-right-white-20"
-        name="tasks.main"
-        ref={(ref) => { this.hourblockPlanneMinorInput = ref; }}
-        placeholder={nextPlannedPomo.getIn(['tasks', 'main'])}
-        onKeyDown={(event) => {
-          if (event.keyCode === 13) {
-            this.onChangePlannedPomo(sectionOfDay, nextPlannedPomo, event);
-            this.hourblockPlanneMinorInput.value = '';
-          }
-        }}
-      />
+      <Grid.Column
+        width={3}
+      >
+        <Input
+          type="text"
+          size="mini"
+          name="tasks.main"
+          ref={(ref) => { this.hourblockPlanneMinorInput = ref; }}
+          placeholder={nextPlannedPomo.getIn(['tasks', 'main'])}
+          onKeyDown={(event) => {
+            if (event.keyCode === 13) {
+              this.onChangePlannedPomo(sectionOfDay, nextPlannedPomo, event);
+              this.hourblockPlanneMinorInput.value = '';
+            }
+          }}
+        />
+      </Grid.Column>
 
-      <div className="border-left-white-70 border-right-white-70 width-100 padding-horizontal-5">
+      <Grid.Column column={1}>
         {nextPlannedPomo.has('task') ? `${nextPlannedPomo.getIn(['task', 'recur'])}` : 'No Recur'}
-      </div>
+      </Grid.Column>
 
       <i
+        style={{
+          width: 30
+        }}
         role="button"
         tabIndex="-1"
         className="fa fa-fw fa-check width-30 height-lineheight-30"
         disabled={!this.props.todayDailyRecord.count() || this.props.todayDailyRecord.hasIn(['pomo', sectionOfDay])}
         onClick={event => this.saveDailyPomo(sectionOfDay, nextPlannedPomo)}
       />
-    </div>
+    </Grid.Row>
+
   )
 
   render() {
@@ -118,53 +134,59 @@ export class Footer extends React.Component {
     const { currentSectionOfDay } = this.state;
 
     return (
-      <footer>
-        {isTasksOn && (
-          <Fragment>
-            {todayTasks.count() > 0 && todayTasks.map(task => (
-              <div className="flex-container-row border-bottom-white-70 height-30" key={task.get('_id')}>
-                <div
-                  className="width-60 text-center  border-bottom-white-70 border-right-white" style={{
-                    backgroundColor: `${task.getIn(['project', 'category', 'color'])}`,
-                    overflow: 'hidden'
-                  }}
-                >
-                  {task.hasIn(['project', 'category']) ? task.getIn(['project', 'name']) : 'No Cate'}
-                </div>
+      <Grid style={{
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        height: 120
+      }}
+      >
+        {isTasksOn && todayTasks.count() > 0 && todayTasks.map(task => (
+          <Grid.Row
+            key={task.get('_id')}
+          >
+            <div
+              style={{
+                width: 60,
+                backgroundColor: `${task.getIn(['project', 'category', 'color'])}`,
+                overflow: 'hidden'
+              }}
+            >
+              {task.hasIn(['project', 'category']) ? task.getIn(['project', 'name']) : 'No Cate'}
+            </div>
 
-                <div className="width-40 border-right-white text-center">
-                  {task.get('estimateHour')}
-                </div>
+            <Grid.Column className="width-40 border-right-white text-center">
+              {task.get('estimateHour')}
+            </Grid.Column>
 
-                <div className="width-40 border-right-white text-center">
-                  {task.get('recur')}
-                </div>
+            <Grid.Column className="width-40 border-right-white text-center">
+              {task.get('recur')}
+            </Grid.Column>
 
-                <div className="flex-1 padding-horizontal-5">
-                  {task.get('content')}
-                </div>
-                <i
-                  role="button"
-                  tabIndex="-1"
-                  className="fa fa-fw fa-check width-30 height-lineheight-30"
-                  onClick={(_) => {
-                    if (task.has('recur') && task.get('recur') !== 'none') {
-                      const taskMap = {
-                        daily: 'day',
-                        weekly: 'week',
-                        monthly: 'month',
-                        yearly: 'year',
-                      };
-                      this.props.TaskActions.update(task.set('targetCompletion', moment(task.get('targetCompletion')).add(1, taskMap[task.get('recur')])), task);
-                    } else {
-                      this.props.TaskActions.deleteRecord(task);
-                    }
-                  }}
-                />
-              </div>
-            ))}
-          </Fragment>
-        )}
+            <Grid.Column className="flex-1 padding-horizontal-5">
+              {task.get('content')}
+            </Grid.Column>
+
+            <i
+              role="button"
+              tabIndex="-1"
+              className="fa fa-fw fa-check width-30 height-lineheight-30"
+              onClick={(_) => {
+                if (task.has('recur') && task.get('recur') !== 'none') {
+                  const taskMap = {
+                    daily: 'day',
+                    weekly: 'week',
+                    monthly: 'month',
+                    yearly: 'year',
+                  };
+                  this.props.TaskActions.update(task.set('targetCompletion', moment(task.get('targetCompletion')).add(1, taskMap[task.get('recur')])), task);
+                } else {
+                  this.props.TaskActions.deleteRecord(task);
+                }
+              }}
+            />
+          </Grid.Row>
+        ))}
 
         {!isTasksOn && (
           <Fragment>
@@ -175,7 +197,7 @@ export class Footer extends React.Component {
           </Fragment>
         )}
 
-      </footer>
+      </Grid>
     );
   }
 }

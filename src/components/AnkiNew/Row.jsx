@@ -18,7 +18,7 @@ export class AnkiRow extends React.Component {
         data-role="anki-row"
         // inverted
         // color="red"
-        className={`flex-container-row typical-setup ${
+        className={`${
           activeAnki.get('_id') === anki.get('_id')
             ? 'bg-orange'
             : 'border-black-20'

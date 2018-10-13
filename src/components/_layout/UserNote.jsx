@@ -68,7 +68,10 @@ export class Note extends React.Component {
     const { inputValue, updating } = this.state;
 
     return (
-      <Form style={{ height: '100vh' }}>
+      <Form style={{
+        height: 'calc(100vh - 100px - 120px)'
+      }}
+      >
         <div
           style={{
             backgroundColor: 'red',

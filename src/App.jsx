@@ -23,7 +23,7 @@ import '@PROJECT_ROOT/node_modules/semantic-ui-less/semantic.less';
 import LoginPageConnected from 'utility-react-component/Page/LoginPage';
 
 import HeaderConnected from './components/_layout/Header';
-// import FooterConnected from './components/_layout/Footer';
+import FooterConnected from './components/_layout/Footer';
 
 import SubHeaderConnected from './components/_layout/SubHeader';
 // import SettingsConnected from './components/_layout/Settings';
@@ -73,7 +73,7 @@ export class App extends React.Component {
               <React.Fragment>
                 <HeaderConnected />
                 <SubHeaderConnected />
-                {/* <FooterConnected /> */}
+                <FooterConnected />
                 {/* <SettingsConnected /> */}
 
                 {eyeSaving && <EyeModal />}

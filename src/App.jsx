@@ -55,9 +55,6 @@ export class App extends React.Component {
       currentUser, isAnkiOn, isNotesOn, isAnkiModalOn
     } = this.props;
 
-    console.log('🔥🔥🔥🔥🔥 currentUser 🔥🔥🔥🔥🔥');
-    console.log(currentUser);
-
     const eyeSaving = currentUser.hasIn(['config', 'eyeSaving'])
       && currentUser.getIn(['config', 'eyeSaving']);
 

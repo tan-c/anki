@@ -60,6 +60,7 @@ jobs:
           name: Run test and save coverage result
           command: |
             # notify Code Climate of a pending test report using `before-build`
+            cd /js-base-image/packages/project && npm ci --production
             /root/project/cc-test-reporter before-build
             cd /js-base-image/packages/project && npm run test:ci
             # upload test report to Code Climate using `after-build`

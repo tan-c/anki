@@ -95,8 +95,8 @@ export class Footer extends React.Component {
       </Grid.Column>
 
       <Grid.Column width={10}>
-        {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'main'])}` : 'No Recur'}
-        {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'main'])}` : 'No Recur'}
+        {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'main'])}` : 'No Main'}
+        {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'recur'])}` : 'No Recur'}
       </Grid.Column>
 
       {/* <Grid.Column width={8}>

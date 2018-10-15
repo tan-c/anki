@@ -56,6 +56,7 @@ export class Header extends React.Component {
     return (
       <Menu
         fixed="top"
+        id="header"
         inverted
         color="blue"
         // inverted
@@ -98,7 +99,8 @@ export class Header extends React.Component {
           <Menu.Menu position="right">
             <Button
               color="blue"
-              onClick={_ => this.logout()}
+              id="logout-button"
+              onClick={this.logout}
             >
               AN
             </Button>

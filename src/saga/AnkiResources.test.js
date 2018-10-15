@@ -13,7 +13,7 @@ describe('loadAllDataSaga Unit Test', () => {
     users: []
   };
 
-  it('First project, currentUser upon SET_CURRENT_USER_ID', () => {
+  it('First project, currentUser upon SET_CURRENT_USER', () => {
     expect(generator.next().value).toEqual(take('SET_CURRENT_USER'));
 
     nextAction = generator.next(data).value;

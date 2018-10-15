@@ -34,24 +34,71 @@ test('Test Anki has login page with right title page before login', async (t) =>
     .eql('Log In To Anki');
 });
 
-// const getPageUrl = ClientFunction(() => window.location.href.toString());
-
 test('Test that testUser can login then logout', async (t) => {
   await t
+    .expect(loginForm.count).eql(1)
     .useRole(testUser)
-    .expect(loginForm.count).eql(0)
+    .expect(loginForm.count)
+    .eql(0)
     .expect(header.count)
     .eql(1)
     .expect(logoutButton.count)
     .eql(1)
     .click(logoutButton)
     .expect(logoutButton.count)
+    .eql(0)
+    .expect(loginForm.count)
+    .eql(1);
+});
+
+
+test('Test that testUser can login then refresh but no need login', async (t) => {
+  await t.expect(header.count)
+    .eql(0)
+    .expect(logoutButton.count)
     .eql(0);
+
+  await t
+    // .typeText('#login-email', 'test@gmail.com')
+    // .typeText('#login-password', 'test1234')
+    // .click(loginButton)
+    // FIXME: there is a problem with role after first initialization, need to wait for it to work
+    // https://github.com/DevExpress/testcafe/issues/2195
+    .useRole(testUser)
+    .navigateTo('/')
+    .wait(500)
+    .expect(loginForm.count)
+    .eql(0)
+    .expect(header.count)
+    .eql(1)
+    .expect(logoutButton.count)
+    .eql(1);
+
+  await t.eval(() => location.reload(true));
+
+  await t.expect(header.count)
+    .eql(1)
+    .expect(logoutButton.count)
+    .eql(1);
 });
 
 test('Test that wrongTestUser cannot login', async (t) => {
+  await t
+    .useRole(wrongTestUser)
+    .expect(loginForm.count)
+    .eql(1);
+});
+
+test('Test that wrongTestUser cannot login then refresh still cannot login', async (t) => {
   await t.useRole(wrongTestUser)
     .expect(loginForm.count).eql(1);
+
+  await t.eval(() => location.reload(true));
+
+  await t.expect(header.count)
+    .eql(0)
+    .expect(logoutButton.count)
+    .eql(0);
 });
 
 

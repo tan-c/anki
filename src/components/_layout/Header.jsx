@@ -7,9 +7,9 @@ import { Map } from 'immutable';
 import toastr from 'toastr';
 
 import { Menu, Container, Button } from 'semantic-ui-react';
+import { currentUserSelector } from 'utility-redux/common/user';
 
 // import { UiActions } from 'utility-redux/common/ui';
-import { currentUserSelector } from 'utility-redux/common/user';
 
 export class Header extends React.Component {
   // constructor(props, context) {
@@ -17,7 +17,7 @@ export class Header extends React.Component {
   // }
 
   state = {
-    showEyeTimeoutBliking: false,
+    showEyeTimeoutBlinking: false,
     currentTime: moment()
   };
 
@@ -33,7 +33,7 @@ export class Header extends React.Component {
     this.updateTimeRunner = setInterval(() => {
       this.setState({
         // eslint-disable-line react/no-set-state
-        showEyeTimeoutBliking:
+        showEyeTimeoutBlinking:
           moment().minutes() % 30 >= 29 && moment().seconds() % 2 === 0,
         currentTime: moment()
       });
@@ -45,13 +45,12 @@ export class Header extends React.Component {
     localStorage.removeItem('access_token');
     localStorage.removeItem('expires_at');
     toastr.info('Localstorage cleared, redirecting...');
-    location.reload();
+    this.props.removeCurrentUser(this.props.currentUser);
   };
 
   render() {
-    const { currentUser } = this.props;
-
-    const { currentTime, showEyeTimeoutBliking } = this.state;
+    // const { currentUser } = this.props;
+    const { currentTime, showEyeTimeoutBlinking } = this.state;
 
     return (
       <Menu
@@ -61,7 +60,7 @@ export class Header extends React.Component {
         color="blue"
         // inverted
         data-role="header"
-        className={`${showEyeTimeoutBliking && 'bg-orange'}`}
+        className={`${showEyeTimeoutBlinking && 'bg-orange'}`}
       >
         <Container>
           {/* {!window.isMobile && (
@@ -126,7 +125,12 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    removeCurrentUser: currentUser => dispatch({
+      type: 'DELETE_USER_SUCCESS',
+      user: currentUser,
+    }),
+  };
 }
 
 export default connect(

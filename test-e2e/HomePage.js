@@ -13,8 +13,8 @@ const header = Selector('#header');
 // NOTE: on circleci to read from environment
 const testUser = Role(url, async (t) => {
   await t
-    .typeText('#login-email', 'test@gmail.com')
-    .typeText('#login-password', 'test1234')
+    .typeText('#login-email', process.env.NODE_ENV === 'production' ? process.env.TEST_EMAIL : 'test@gmail.com')
+    .typeText('#login-password', process.env.NODE_ENV === 'production' ? process.env.TEST_PASSWORD : 'test1234')
     .click(loginButton);
 });
 

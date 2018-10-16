@@ -1,6 +1,5 @@
 import { Selector, Role } from 'testcafe';
 
-
 // NOTE: the app will be saved from /dist with http-server, which defaults at 8080 port
 
 const url = process.env.NODE_ENV === 'production' ? 'http://10.0.0.10' : 'http://localhost:8090';
@@ -10,11 +9,14 @@ const logoutButton = Selector('#logout-button');
 const loginForm = Selector('.login-form');
 const header = Selector('#header');
 
+const testUserEmail = process.env.NODE_ENV === 'production' ? process.env.TEST_EMAIL : 'test@gmail.com';
+const testUserPassword = process.env.NODE_ENV === 'production' ? process.env.TEST_PASSWORD : 'test1234';
 // NOTE: on circleci to read from environment
+// FIXME: the testUser is just not working because the redirect is taking too much time to happen... for now just use the raw way of doing thigs
 const testUser = Role(url, async (t) => {
   await t
-    .typeText('#login-email', process.env.NODE_ENV === 'production' ? process.env.TEST_EMAIL : 'test@gmail.com')
-    .typeText('#login-password', process.env.NODE_ENV === 'production' ? process.env.TEST_PASSWORD : 'test1234')
+    .typeText('#login-email', testUserEmail)
+    .typeText('#login-password', testUserPassword)
     .click(loginButton);
 });
 
@@ -37,8 +39,16 @@ test('Test Anki has login page with right title page before login', async (t) =>
 test('Test that testUser can login then logout', async (t) => {
   await t
     .expect(loginForm.count).eql(1)
-    .useRole(testUser)
-    .expect(loginForm.count)
+    .typeText('#login-email', testUserEmail)
+    .typeText('#login-password', testUserPassword)
+    .click(loginButton);
+  // .useRole(testUser)
+  // .navigateTo('/')
+  // .wait(10000);
+
+  // const errors = await t.getBrowserConsoleMessages();
+
+  await t.expect(loginForm.count)
     .eql(0)
     .expect(header.count)
     .eql(1)
@@ -59,14 +69,9 @@ test('Test that testUser can login then refresh but no need login', async (t) =>
     .eql(0);
 
   await t
-    // .typeText('#login-email', 'test@gmail.com')
-    // .typeText('#login-password', 'test1234')
-    // .click(loginButton)
-    // FIXME: there is a problem with role after first initialization, need to wait for it to work
-    // https://github.com/DevExpress/testcafe/issues/2195
-    .useRole(testUser)
-    .navigateTo('/')
-    .wait(500)
+    .typeText('#login-email', testUserEmail)
+    .typeText('#login-password', testUserPassword)
+    .click(loginButton)
     .expect(loginForm.count)
     .eql(0)
     .expect(header.count)

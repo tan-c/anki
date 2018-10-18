@@ -30,4 +30,8 @@ export function* loadAllDataSaga() {
   yield* getAll('daily_record', 'hr', {
     limit: 1
   });
+
+  yield* getAll('housing_price', 'an', {}, {
+    acceptHeader: 'application/octet-stream'
+  });
 }

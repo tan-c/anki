@@ -44,6 +44,7 @@ import AnkiPageConnected from './components/AnkiLearn/Page';
 import EyeModal from './components/_layout/Modal/Eye';
 import ErrorBoundary from './ErrorBoundary';
 
+import './index.scss';
 // import { subscribeUser } from './helper/notification';
 
 window.isMobile = Math.min(document.documentElement.clientWidth, screen.width) <= 450; // P9 is 424

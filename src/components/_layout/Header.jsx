@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { Map } from 'immutable';
 import toastr from 'toastr';
 
 import { Menu, Container, Button } from 'semantic-ui-react';
 import { currentUserSelector } from 'utility-redux/common/user';
-
-// import { UiActions } from 'utility-redux/common/ui';
+import { UiActions } from 'utility-redux/common/ui';
 
 export class Header extends React.Component {
   // constructor(props, context) {
@@ -49,7 +48,7 @@ export class Header extends React.Component {
   };
 
   render() {
-    // const { currentUser } = this.props;
+    const { isSidebarOn } = this.props;
     const { currentTime, showEyeTimeoutBlinking } = this.state;
 
     return (
@@ -87,6 +86,17 @@ export class Header extends React.Component {
             }
           />
         )} */}
+          <Menu.Menu>
+            <Button
+              color="blue"
+              id="logout-button"
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['anki', 'isSidebarOn'], !isSidebarOn);
+              }}
+            >
+              Show Menu
+            </Button>
+          </Menu.Menu>
 
           <Menu.Item
             position="right"
@@ -111,15 +121,21 @@ export class Header extends React.Component {
 }
 
 Header.defaultProps = {
-  currentUser: Map()
+  currentUser: Map(),
+
 };
 
 Header.propTypes = {
-  currentUser: PropTypes.object
+  isSidebarOn: PropTypes.bool,
+  currentUser: PropTypes.object,
+
+  UiActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
+    isSidebarOn: state.ui.getIn(['anki', 'isSidebarOn']),
+
     currentUser: currentUserSelector(state),
   };
 }
@@ -130,6 +146,8 @@ function mapDispatchToProps(dispatch) {
       type: 'DELETE_USER_SUCCESS',
       user: currentUser,
     }),
+
+    UiActions: bindActionCreators(UiActions, dispatch),
   };
 }
 

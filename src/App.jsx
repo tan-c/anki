@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
+import {
+  Sidebar, Segment, Container
+} from 'semantic-ui-react';
+
 // import { Menu, Container } from 'semantic-ui-react';
 
 import {
@@ -24,6 +28,7 @@ import LoginPageConnected from 'utility-react-component/Page/LoginPage';
 
 import HeaderConnected from './components/_layout/Header';
 import FooterConnected from './components/_layout/Footer';
+import SidebarConnected from './components/_layout/Sidebar';
 
 import SubHeaderConnected from './components/_layout/SubHeader';
 // import SettingsConnected from './components/_layout/Settings';
@@ -52,7 +57,9 @@ export class App extends React.Component {
 
   render() {
     const {
-      currentUser, isAnkiOn, isNotesOn, isAnkiModalOn
+      currentUser, isAnkiOn, isNotesOn,
+      isAnkiModalOn,
+      isSidebarOn
     } = this.props;
 
     const eyeSaving = currentUser.hasIn(['config', 'eyeSaving'])
@@ -67,32 +74,39 @@ export class App extends React.Component {
               : 'Undefined'}
           </div>
 
+
           {!currentUser.has('_id') || currentUser.get('_id') === null
             ? <LoginPageConnected pageName="Anki" />
             : (
-              <React.Fragment>
-                <HeaderConnected />
-                <SubHeaderConnected />
-                <FooterConnected />
-                {/* <SettingsConnected /> */}
-
-                {eyeSaving && <EyeModal />}
+              <Sidebar.Pushable>
+                {isSidebarOn && <SidebarConnected />}
 
                 {/* <div className="flex-container-row bg-orange-light" style={{ height: 160 }}>
                   <NoteConnected field="notesDailyPlan" />
                 </div> */}
 
-                {isAnkiModalOn && (
-                  <Switch data-role="main-intelnote">
-                    <Route exact path="/" component={AnkiPageConnected} />
-                    {/* <Route path="/ankiTags" component={AnkiTagsPageConnected} /> */}
-                    <Redirect from="/*" to="/" />
-                  </Switch>
-                )}
+                <Sidebar.Pusher style={{
+                  left: isSidebarOn ? -50 : 0
+                }}
+                >
+                  <HeaderConnected />
+                  <SubHeaderConnected />
+                  {/* <FooterConnected /> */}
+                  {/* <SettingsConnected /> */}
 
-                {isAnkiOn && <AnkiListConnected />}
-                {isNotesOn && <NoteConnected field="notes" />}
-              </React.Fragment>
+                  {eyeSaving && <EyeModal />}
+
+                  {isAnkiModalOn && (
+                    <Switch data-role="main-intelnote">
+                      <Route exact path="/" component={AnkiPageConnected} />
+                      {/* <Route path="/ankiTags" component={AnkiTagsPageConnected} /> */}
+                      <Redirect from="/*" to="/" />
+                    </Switch>
+                  )}
+                  {isAnkiOn && <AnkiListConnected />}
+                  {isNotesOn && <NoteConnected field="notes" />}
+                </Sidebar.Pusher>
+              </Sidebar.Pushable>
             )
           }
         </div>
@@ -102,10 +116,13 @@ export class App extends React.Component {
 }
 
 App.defaultProps = {
-  currentUser: Map()
+  currentUser: Map(),
+  isSidebarOn: false,
 };
 
 App.propTypes = {
+  isSidebarOn: PropTypes.bool,
+
   isAnkiOn: PropTypes.bool.isRequired,
   isNotesOn: PropTypes.bool.isRequired,
   isAnkiModalOn: PropTypes.bool.isRequired,
@@ -116,6 +133,8 @@ App.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    isSidebarOn: state.ui.getIn(['anki', 'isSidebarOn']),
+
     showModal: state.ui.getIn(['showModal']),
     isAnkiOn: state.ui.getIn(['common', 'isAnkiOn']),
     isNotesOn: state.ui.getIn(['common', 'isNotesOn']),

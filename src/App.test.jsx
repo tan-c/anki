@@ -14,7 +14,6 @@ function setup() {
     NoteActions: {},
     UiActions: {},
     isAnkiOn: false,
-    isNotesOn: false
   };
 
   return shallow(<App {...props} />);

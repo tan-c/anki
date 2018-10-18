@@ -25,14 +25,18 @@ const SidebarComponent = () => (
       <Icon name="home" />
       Home
     </Menu.Item>
-    <Menu.Item as={Link} to="/">
-      <Icon name="gamepad" />
-        Games
+    <Menu.Item
+      as={Link}
+      to="/ankiLearn"
+      active={location.href.split('//')[1].split('/')[2] === 'ankiLearn'}
+    >
+      <Icon name="university" />
+      Learn
     </Menu.Item>
     <Menu.Item
       as={Link}
       to="/anki"
-      active={location.href.indexOf('/anki') > -1}
+      active={location.href.split('//')[1].split('/')[2] === 'anki'}
     >
       <Icon name="list" />
         Anki

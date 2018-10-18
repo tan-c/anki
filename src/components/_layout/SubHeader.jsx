@@ -32,7 +32,6 @@ export class SubHeader extends React.Component {
     const {
       isSettingOn,
       isAnkiOn,
-      isNotesOn,
       isTasksOn,
       revisionAnkisTotal,
       selectedAnkiTagId,
@@ -103,16 +102,6 @@ export class SubHeader extends React.Component {
 
               <Button icon>
                 <Icon
-                  name="sticky note outline"
-                  color={`${isNotesOn ? 'blue' : 'black'}`}
-                  onClick={(_) => {
-                    this.props.UiActions.updateIn(['common', 'isNotesOn'], !isNotesOn);
-                  }}
-                />
-              </Button>
-
-              <Button icon>
-                <Icon
                   name="cog"
                   color={`${isSettingOn ? 'blue' : 'black'}`}
                   onClick={(_) => {
@@ -122,19 +111,6 @@ export class SubHeader extends React.Component {
               </Button>
             </Button.Group>
           </Menu.Item>
-
-          {/* <Menu.Item>
-            <span
-              role="button"
-              tabIndex="-1"
-              className={`${isTasksOn && 'bg-blue'}`}
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['common', 'isTasksOn'], !isTasksOn);
-              }}
-            >
-              {`${todayTasks.count()} Tasks`}
-            </span>
-          </Menu.Item> */}
         </Menu.Menu>
         {/* <Button size="mini">Mini</Button> */}
       </Menu>
@@ -145,7 +121,6 @@ export class SubHeader extends React.Component {
 SubHeader.defaultProps = {
   isSettingOn: false,
   isAnkiOn: false,
-  isNotesOn: true,
   isTasksOn: false,
   selectedAnkiTagId: '',
   revisionAnkisTotal: 0,
@@ -157,7 +132,6 @@ SubHeader.defaultProps = {
 SubHeader.propTypes = {
   isSettingOn: PropTypes.bool,
   isAnkiOn: PropTypes.bool,
-  isNotesOn: PropTypes.bool,
   isTasksOn: PropTypes.bool,
   revisionAnkisTotal: PropTypes.number,
   selectedAnkiTagId: PropTypes.string,
@@ -172,7 +146,6 @@ function mapStateToProps(state, ownProps) {
   return {
     isSettingOn: state.ui.getIn(['common', 'isSettingOn']),
     isAnkiOn: state.ui.getIn(['common', 'isAnkiOn']),
-    isNotesOn: state.ui.getIn(['common', 'isNotesOn']),
     isTasksOn: state.ui.getIn(['common', 'isTasksOn']),
     isAnkiModalOn: state.ui.getIn(['common', 'isAnkiModalOn']),
     selectedAnkiTagId: state.ui.get('selectedAnkiTagId'),

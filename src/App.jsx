@@ -61,7 +61,7 @@ export class App extends React.Component {
 
   render() {
     const {
-      currentUser, isAnkiOn, isNotesOn,
+      currentUser, isAnkiOn,
       isSidebarOn
     } = this.props;
 
@@ -120,11 +120,12 @@ export class App extends React.Component {
                     path="/anki"
                     component={AnkiPageConnected}
                   />
+                  <Route
+                    path="/ankiLearn"
+                    component={AnkiListConnected}
+                  />
                   <Redirect from="/*" to="/" />
                 </Switch>
-
-                {/* {isAnkiOn && <AnkiListConnected />}
-                  {isNotesOn && <NoteConnected />} */}
               </Sidebar.Pusher>
             </Sidebar.Pushable>
           )
@@ -143,7 +144,6 @@ App.propTypes = {
   isSidebarOn: PropTypes.bool,
 
   isAnkiOn: PropTypes.bool.isRequired,
-  isNotesOn: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
 
   // UiActions: PropTypes.object.isRequired
@@ -155,7 +155,6 @@ function mapStateToProps(state, ownProps) {
 
     showModal: state.ui.getIn(['showModal']),
     isAnkiOn: state.ui.getIn(['common', 'isAnkiOn']),
-    isNotesOn: state.ui.getIn(['common', 'isNotesOn']),
     currentUser: currentUserSelector(state)
   };
 }

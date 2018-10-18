@@ -17,8 +17,10 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    if (this.state.errorInfo) {
-      toastr.error(`${this.state.error && this.state.error.toString()}`, 'Error Occured');
+    const { errorInfo, error } = this.state;
+    // const {children} = this.props;
+    if (errorInfo) {
+      toastr.error(`${error && error.toString()}`, 'Error Occured');
     }
     // Normally, just render children
     return this.props.children;

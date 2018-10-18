@@ -1,5 +1,7 @@
 import ankis from 'utility-redux/anki/anki';
 import ankiTags from 'utility-redux/anki/ankiTag';
+import housingPrices from 'utility-redux/anki/housingPrice';
+
 import plannedPomos from 'utility-redux/hourblock/plannedPomo';
 import dailyRecords from 'utility-redux/hourblock/dailyRecord';
 import tasks from 'utility-redux/hourblock/task';
@@ -13,6 +15,7 @@ export default {
   plannedPomos,
   dailyRecords,
   tasks,
+  housingPrices,
 
   users,
   ui,

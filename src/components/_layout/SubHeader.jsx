@@ -33,7 +33,6 @@ export class SubHeader extends React.Component {
       isSettingOn,
       isAnkiOn,
       isNotesOn,
-      isAnkiModalOn,
       isTasksOn,
       revisionAnkisTotal,
       selectedAnkiTagId,
@@ -79,10 +78,10 @@ export class SubHeader extends React.Component {
           </div>
         </Menu.Item>
 
-        <Menu.Menu position="right" fitted="vertically">
+        <Menu.Menu fitted="vertically">
           <Menu.Item name="iconButtons">
             <Button.Group>
-              <Button icon>
+              {/* <Button icon>
                 <Icon
                   name="graduation cap"
                   color={`${isAnkiModalOn ? 'blue' : 'black'}`}
@@ -90,7 +89,7 @@ export class SubHeader extends React.Component {
                     this.props.UiActions.updateIn(['common', 'isAnkiModalOn'], !isAnkiModalOn);
                   }}
                 />
-              </Button>
+              </Button> */}
 
               <Button icon>
                 <Icon
@@ -147,7 +146,6 @@ SubHeader.defaultProps = {
   isSettingOn: false,
   isAnkiOn: false,
   isNotesOn: true,
-  isAnkiModalOn: false,
   isTasksOn: false,
   selectedAnkiTagId: '',
   revisionAnkisTotal: 0,
@@ -160,7 +158,6 @@ SubHeader.propTypes = {
   isSettingOn: PropTypes.bool,
   isAnkiOn: PropTypes.bool,
   isNotesOn: PropTypes.bool,
-  isAnkiModalOn: PropTypes.bool,
   isTasksOn: PropTypes.bool,
   revisionAnkisTotal: PropTypes.number,
   selectedAnkiTagId: PropTypes.string,

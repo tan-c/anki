@@ -33,6 +33,9 @@ import SidebarConnected from './components/_layout/Sidebar';
 import SubHeaderConnected from './components/_layout/SubHeader';
 // import SettingsConnected from './components/_layout/Settings';
 import AnkiListConnected from './components/AnkiNew/List';
+
+import HousingPricesConnected from './components/HousingPrices/Page';
+
 import NoteConnected from './components/_layout/UserNote';
 
 import AnkiPageConnected from './components/AnkiLearn/Page';
@@ -58,7 +61,6 @@ export class App extends React.Component {
   render() {
     const {
       currentUser, isAnkiOn, isNotesOn,
-      isAnkiModalOn,
       isSidebarOn
     } = this.props;
 
@@ -67,49 +69,46 @@ export class App extends React.Component {
 
     return (
       <ErrorBoundary>
-        <div data-role="app">
-          <div id="version">
-            {process.env.GIT_VERSION
-              ? process.env.GIT_VERSION.slice(0, 6)
-              : 'Undefined'}
-          </div>
+        <div id="version">
+          {process.env.GIT_VERSION
+            ? process.env.GIT_VERSION.slice(0, 6)
+            : 'Undefined'}
+        </div>
 
 
-          {!currentUser.has('_id') || currentUser.get('_id') === null
-            ? <LoginPageConnected pageName="Anki" />
-            : (
-              <Sidebar.Pushable>
-                {isSidebarOn && <SidebarConnected />}
+        {!currentUser.has('_id') || currentUser.get('_id') === null
+          ? <LoginPageConnected pageName="Anki" />
+          : (
+            <Sidebar.Pushable>
+              {isSidebarOn && <SidebarConnected />}
 
-                {/* <div className="flex-container-row bg-orange-light" style={{ height: 160 }}>
+              {/* <div className="flex-container-row bg-orange-light" style={{ height: 160 }}>
                   <NoteConnected field="notesDailyPlan" />
                 </div> */}
 
-                <Sidebar.Pusher style={{
-                  left: isSidebarOn ? -50 : 0
-                }}
-                >
-                  <HeaderConnected />
-                  <SubHeaderConnected />
-                  {/* <FooterConnected /> */}
-                  {/* <SettingsConnected /> */}
+              <Sidebar.Pusher style={{
+                left: isSidebarOn ? -50 : 0
+              }}
+              >
+                <HeaderConnected />
+                <SubHeaderConnected />
+                {/* <FooterConnected /> */}
+                {/* <SettingsConnected /> */}
 
-                  {eyeSaving && <EyeModal />}
+                {eyeSaving && <EyeModal />}
 
-                  {isAnkiModalOn && (
-                    <Switch data-role="main-intelnote">
-                      <Route exact path="/" component={AnkiPageConnected} />
-                      {/* <Route path="/ankiTags" component={AnkiTagsPageConnected} /> */}
-                      <Redirect from="/*" to="/" />
-                    </Switch>
-                  )}
-                  {isAnkiOn && <AnkiListConnected />}
-                  {isNotesOn && <NoteConnected field="notes" />}
-                </Sidebar.Pusher>
-              </Sidebar.Pushable>
-            )
-          }
-        </div>
+                <Switch data-role="main-intelnote">
+                  <Route exact path="/" component={AnkiPageConnected} />
+                  <Route path="/housingPrices" component={HousingPricesConnected} />
+                  <Redirect from="/*" to="/" />
+                </Switch>
+
+                {/* {isAnkiOn && <AnkiListConnected />}
+                  {isNotesOn && <NoteConnected field="notes" />} */}
+              </Sidebar.Pusher>
+            </Sidebar.Pushable>
+          )
+        }
       </ErrorBoundary>
     );
   }
@@ -125,7 +124,6 @@ App.propTypes = {
 
   isAnkiOn: PropTypes.bool.isRequired,
   isNotesOn: PropTypes.bool.isRequired,
-  isAnkiModalOn: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
 
   // UiActions: PropTypes.object.isRequired
@@ -138,7 +136,6 @@ function mapStateToProps(state, ownProps) {
     showModal: state.ui.getIn(['showModal']),
     isAnkiOn: state.ui.getIn(['common', 'isAnkiOn']),
     isNotesOn: state.ui.getIn(['common', 'isNotesOn']),
-    isAnkiModalOn: state.ui.getIn(['common', 'isAnkiModalOn']),
     currentUser: currentUserSelector(state)
   };
 }

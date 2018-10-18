@@ -30,7 +30,6 @@ export class SubHeader extends React.Component {
 
   render() {
     const {
-      isSettingOn,
       isTasksOn,
       revisionAnkisTotal,
       selectedAnkiTagId,
@@ -77,28 +76,7 @@ export class SubHeader extends React.Component {
         </Menu.Item>
 
         <Menu.Menu fitted="vertically">
-          <Menu.Item name="iconButtons">
-            <Button.Group>
-              {/* <Button icon>
-                <Icon
-                  name="graduation cap"
-                  color={`${isAnkiModalOn ? 'blue' : 'black'}`}
-                  onClick={(_) => {
-                    this.props.UiActions.updateIn(['common', 'isAnkiModalOn'], !isAnkiModalOn);
-                  }}
-                />
-              </Button> */}
-              <Button icon>
-                <Icon
-                  name="cog"
-                  color={`${isSettingOn ? 'blue' : 'black'}`}
-                  onClick={(_) => {
-                    this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
-                  }}
-                />
-              </Button>
-            </Button.Group>
-          </Menu.Item>
+
         </Menu.Menu>
         {/* <Button size="mini">Mini</Button> */}
       </Menu>
@@ -107,7 +85,6 @@ export class SubHeader extends React.Component {
 }
 
 SubHeader.defaultProps = {
-  isSettingOn: false,
   isTasksOn: false,
   selectedAnkiTagId: '',
   revisionAnkisTotal: 0,
@@ -117,7 +94,6 @@ SubHeader.defaultProps = {
 };
 
 SubHeader.propTypes = {
-  isSettingOn: PropTypes.bool,
   isTasksOn: PropTypes.bool,
   revisionAnkisTotal: PropTypes.number,
   selectedAnkiTagId: PropTypes.string,
@@ -130,7 +106,6 @@ SubHeader.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    isSettingOn: state.ui.getIn(['common', 'isSettingOn']),
     isTasksOn: state.ui.getIn(['common', 'isTasksOn']),
     isAnkiModalOn: state.ui.getIn(['common', 'isAnkiModalOn']),
     selectedAnkiTagId: state.ui.get('selectedAnkiTagId'),

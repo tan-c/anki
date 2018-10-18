@@ -6,7 +6,9 @@ import moment from 'moment';
 import { Map } from 'immutable';
 import toastr from 'toastr';
 
-import { Menu, Container, Button } from 'semantic-ui-react';
+import {
+  Menu, Container, Button, Icon
+} from 'semantic-ui-react';
 import { currentUserSelector } from 'utility-redux/common/user';
 import { UiActions } from 'utility-redux/common/ui';
 
@@ -48,7 +50,7 @@ export class Header extends React.Component {
   };
 
   render() {
-    const { isSidebarOn } = this.props;
+    const { isSidebarOn, isSettingOn } = this.props;
     const { currentTime, showEyeTimeoutBlinking } = this.state;
 
     return (
@@ -114,6 +116,26 @@ export class Header extends React.Component {
               AN
             </Button>
           </Menu.Menu>
+
+
+          <Menu.Item name="iconButtons" position="right">
+            {/* <Button icon>
+                <Icon
+                  name="graduation cap"
+                  color={`${isAnkiModalOn ? 'blue' : 'black'}`}
+                  onClick={(_) => {
+                    this.props.UiActions.updateIn(['common', 'isAnkiModalOn'], !isAnkiModalOn);
+                  }}
+                />
+              </Button> */}
+            <Icon
+              name="cog"
+              color={`${isSettingOn ? 'blue' : 'white'}`}
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
+              }}
+            />
+          </Menu.Item>
         </Container>
       </Menu>
     );
@@ -121,11 +143,12 @@ export class Header extends React.Component {
 }
 
 Header.defaultProps = {
+  isSettingOn: false,
   currentUser: Map(),
-
 };
 
 Header.propTypes = {
+  isSettingOn: PropTypes.bool,
   isSidebarOn: PropTypes.bool,
   currentUser: PropTypes.object,
 
@@ -134,6 +157,7 @@ Header.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    isSettingOn: state.ui.getIn(['common', 'isSettingOn']),
     isSidebarOn: state.ui.getIn(['anki', 'isSidebarOn']),
 
     currentUser: currentUserSelector(state),

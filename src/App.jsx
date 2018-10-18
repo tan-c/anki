@@ -61,7 +61,7 @@ export class App extends React.Component {
 
   render() {
     const {
-      currentUser, isAnkiOn,
+      currentUser,
       isSidebarOn
     } = this.props;
 
@@ -76,7 +76,7 @@ export class App extends React.Component {
             top: 0,
             left: 0,
             background: 'red',
-            zIndex: 1111
+            zIndex: 111
           }}
         >
           {process.env.GIT_VERSION
@@ -96,7 +96,7 @@ export class App extends React.Component {
                 </div> */}
 
               <Sidebar.Pusher style={{
-                left: isSidebarOn ? -50 : 0
+                left: isSidebarOn ? -60 : 0
               }}
               >
                 <HeaderConnected />
@@ -143,7 +143,6 @@ App.defaultProps = {
 App.propTypes = {
   isSidebarOn: PropTypes.bool,
 
-  isAnkiOn: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
 
   // UiActions: PropTypes.object.isRequired
@@ -154,7 +153,6 @@ function mapStateToProps(state, ownProps) {
     isSidebarOn: state.ui.getIn(['anki', 'isSidebarOn']),
 
     showModal: state.ui.getIn(['showModal']),
-    isAnkiOn: state.ui.getIn(['common', 'isAnkiOn']),
     currentUser: currentUserSelector(state)
   };
 }

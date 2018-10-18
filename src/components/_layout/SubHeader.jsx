@@ -31,7 +31,6 @@ export class SubHeader extends React.Component {
   render() {
     const {
       isSettingOn,
-      isAnkiOn,
       isTasksOn,
       revisionAnkisTotal,
       selectedAnkiTagId,
@@ -89,17 +88,6 @@ export class SubHeader extends React.Component {
                   }}
                 />
               </Button> */}
-
-              <Button icon>
-                <Icon
-                  name="list"
-                  color={`${isAnkiOn ? 'blue' : 'black'}`}
-                  onClick={(_) => {
-                    this.props.UiActions.updateIn(['common', 'isAnkiOn'], !isAnkiOn);
-                  }}
-                />
-              </Button>
-
               <Button icon>
                 <Icon
                   name="cog"
@@ -120,7 +108,6 @@ export class SubHeader extends React.Component {
 
 SubHeader.defaultProps = {
   isSettingOn: false,
-  isAnkiOn: false,
   isTasksOn: false,
   selectedAnkiTagId: '',
   revisionAnkisTotal: 0,
@@ -131,7 +118,6 @@ SubHeader.defaultProps = {
 
 SubHeader.propTypes = {
   isSettingOn: PropTypes.bool,
-  isAnkiOn: PropTypes.bool,
   isTasksOn: PropTypes.bool,
   revisionAnkisTotal: PropTypes.number,
   selectedAnkiTagId: PropTypes.string,
@@ -145,7 +131,6 @@ SubHeader.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     isSettingOn: state.ui.getIn(['common', 'isSettingOn']),
-    isAnkiOn: state.ui.getIn(['common', 'isAnkiOn']),
     isTasksOn: state.ui.getIn(['common', 'isTasksOn']),
     isAnkiModalOn: state.ui.getIn(['common', 'isAnkiModalOn']),
     selectedAnkiTagId: state.ui.get('selectedAnkiTagId'),

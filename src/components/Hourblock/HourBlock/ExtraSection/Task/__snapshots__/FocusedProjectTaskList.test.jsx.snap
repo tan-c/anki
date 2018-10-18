@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FocusedProjectTaskList Unit Tests when normally set up renders correctly 1`] = `
+<Fragment>
+  <div
+    className="list-with-pinned-bottom"
+  />
+  <div
+    className="flex-container-row pinned-bottom border-top"
+  >
+    <Connect(InputNew)
+      actions={Object {}}
+      inputClassNames="flex-5"
+      inputName="content"
+      newRecord={
+        Object {
+          "project": undefined,
+          "type": "project",
+        }
+      }
+    />
+    <i
+      className="fa fa-fw fa-eye width-30 height-lineheight-30 false"
+      disabled={true}
+      onClick={[Function]}
+      role="button"
+      tabIndex="-1"
+    />
+  </div>
+</Fragment>
+`;

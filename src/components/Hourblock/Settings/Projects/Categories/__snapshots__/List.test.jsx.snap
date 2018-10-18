@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoriesList Unit Tests  renders correctly 1`] = `
+<Fragment>
+  <div
+    className="section-header"
+  >
+    Category Management
+  </div>
+  <div
+    className="section-content list-with-pinned-bottom"
+  >
+    <span
+      className="flex-container-row font-400"
+    >
+      <span
+        className="flex-1 border-right"
+      >
+        Color
+      </span>
+      <span
+        className="flex-3 border-right"
+      >
+        Name
+      </span>
+      <span
+        className="flex-1 border-right"
+      >
+        Hour
+      </span>
+      <span
+        className="flex-1"
+      />
+    </span>
+  </div>
+</Fragment>
+`;

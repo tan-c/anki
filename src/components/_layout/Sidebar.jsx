@@ -41,6 +41,16 @@ const SidebarComponent = () => (
       <Icon name="list" />
         Anki
     </Menu.Item>
+
+    <Menu.Item
+      as={Link}
+      to="/notes"
+      active={location.href.indexOf('/notes') > -1}
+    >
+      <Icon name="sticky note outline" />
+        Notes
+    </Menu.Item>
+
     <Menu.Item
       as={Link}
       to="/housingPrices"
@@ -48,6 +58,14 @@ const SidebarComponent = () => (
     >
       <Icon name="building" />
         Toshigo
+    </Menu.Item>
+    <Menu.Item
+      as={Link}
+      to="/hourblock"
+      active={location.href.indexOf('/hourblock') > -1}
+    >
+      <Icon name="calendar" />
+        HB
     </Menu.Item>
   </Sidebar>
 );

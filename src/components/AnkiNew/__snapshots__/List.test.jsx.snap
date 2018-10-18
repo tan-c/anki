@@ -1,14 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AnkiList Unit Tests  renders correctly 1`] = `
-<div
+<Segment
   className="anki-list padding-horizontal-5 border-left-black"
   data-role="anki-list"
-  style={
-    Object {
-      "overflow": "auto",
-    }
-  }
 >
   <Form
     as="form"
@@ -35,6 +30,12 @@ exports[`AnkiList Unit Tests  renders correctly 1`] = `
   </Form>
   <Grid
     divided="vertically"
+    style={
+      Object {
+        "maxHeight": "calc(100vh - 300px)",
+        "overflow": "auto",
+      }
+    }
   />
-</div>
+</Segment>
 `;

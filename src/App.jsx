@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
+import keydown from 'react-keydown';
 
 import {
   Sidebar, Segment, Container
@@ -33,11 +34,11 @@ import SidebarConnected from './components/_layout/Sidebar';
 import SubHeaderConnected from './components/_layout/SubHeader';
 // import SettingsConnected from './components/_layout/Settings';
 import AnkiListConnected from './components/AnkiNew/List';
-
+import IntelNotesConnected from './components/IntelNotes/IntelNote';
 import HousingPricesConnected from './components/HousingPrices/Page';
+import HourblockConnected from './components/Hourblock/Main';
 
 import NoteConnected from './components/_layout/UserNote';
-
 import AnkiPageConnected from './components/AnkiLearn/Page';
 // import AnkiTagsPageConnected from './components/AnkiTags/Page';
 
@@ -57,6 +58,30 @@ export class App extends React.Component {
     document.addEventListener('touchmove', (event) => {
       event.preventDefault();
     });
+  }
+
+  // componentWillReceiveProps(nextProps) {
+  //   const { currentUser, history } = this.props;
+
+  //   if (!currentUser.has('config') && nextProps.currentUser.has('config')) {
+  //     const currentApp = nextProps.currentUser.getIn(['config', 'recentApp']);
+  //     const path = currentApp.slice(0, 2);
+  //     if (history.location.pathname.indexOf(path) === -1) {
+  //       // Only push if not on this path
+  //       // As pushing same path twice gives you erro
+  //       history.push(`/${path}`);
+  //     }
+  //   }
+
+  //   // if (currentUser.size === 0 && nextProps.currentUser.size > 0) {
+  //   //   subscribeUser();
+  //   // }
+  // }
+
+
+  @keydown('esc')
+  dismissAllModel() {
+    this.props.UiActions.updateIn(['himalayan', 'showModal'], '');
   }
 
   render() {
@@ -113,10 +138,6 @@ export class App extends React.Component {
                     component={() => <NoteConnected field="notes" />}
                   />
                   <Route
-                    path="/housingPrices"
-                    component={HousingPricesConnected}
-                  />
-                  <Route
                     path="/anki"
                     component={AnkiPageConnected}
                   />
@@ -124,6 +145,19 @@ export class App extends React.Component {
                     path="/ankiLearn"
                     component={AnkiListConnected}
                   />
+                  <Route
+                    path="/hourblock"
+                    component={HourblockConnected}
+                  />
+                  <Route
+                    path="/notes"
+                    component={IntelNotesConnected}
+                  />
+                  <Route
+                    path="/housingPrices"
+                    component={HousingPricesConnected}
+                  />
+                  <Redirect from="/housingPrices/*" to="/housingPrices" />
                   <Redirect from="/*" to="/" />
                 </Switch>
               </Sidebar.Pusher>
@@ -142,6 +176,7 @@ App.defaultProps = {
 
 App.propTypes = {
   isSidebarOn: PropTypes.bool,
+  // history: PropTypes.object.isRequired,
 
   currentUser: PropTypes.object,
 

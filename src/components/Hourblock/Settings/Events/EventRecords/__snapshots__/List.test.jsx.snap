@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventRecordsList Unit Tests  renders correctly 1`] = `
+<Fragment>
+  <div
+    className="section-header"
+  >
+    Event Records
+  </div>
+  <div
+    className="section-content"
+  />
+</Fragment>
+`;

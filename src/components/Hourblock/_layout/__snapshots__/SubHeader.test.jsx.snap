@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubHeader Unit Tests when normally set up renders correctly 1`] = `
+<div
+  className="flex-container-row undefined"
+  data-role="subheader"
+  id="subheader"
+>
+  <div
+    className="flex-3 text-left"
+    id="subheader-links"
+  />
+  <i
+    className="line-height-30 width-20 fa fa-fw fa-calendar color-green"
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  />
+  <i
+    className="line-height-30 width-20 fa fa-fw fa-cog false"
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  />
+</div>
+`;

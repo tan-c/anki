@@ -19,25 +19,33 @@ exports[`AnkiRow Unit Tests  renders correctly 1`] = `
   >
     undefined/undefined - 
   </div>
-  <GridColumn />
-  <div
-    style={
-      Object {
-        "width": 20,
-      }
-    }
+  <GridColumn
+    textAlign="left"
+    width={6}
+  />
+  <GridColumn
+    textAlign="center"
+    width={3}
   >
-    0
-  </div>
-  <Icon
-    as="i"
-    name="close"
-    onClick={[Function]}
-  />
-  <Icon
-    as="i"
-    name="edit"
-    onClick={[Function]}
-  />
+    <span
+      style={
+        Object {
+          "width": 20,
+        }
+      }
+    >
+      0
+    </span>
+    <Icon
+      as="i"
+      name="close"
+      onClick={[Function]}
+    />
+    <Icon
+      as="i"
+      name="edit"
+      onClick={[Function]}
+    />
+  </GridColumn>
 </GridRow>
 `;

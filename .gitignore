@@ -36,3 +36,6 @@ common.webpack.js
 prod.build.js
 prod.webpack.js
 dev.webpack.js
+
+
+.config.js

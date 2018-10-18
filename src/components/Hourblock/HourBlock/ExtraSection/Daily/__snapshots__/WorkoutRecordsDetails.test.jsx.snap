@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DailyWorkoutRecordsDetails Unit Tests when normally set up renders correctly 1`] = `
+<Fragment>
+  <Connect(Select)
+    className="flex-container-row typical-setup"
+    onChangeEvent={[Function]}
+    optionContent={
+      Array [
+        "focus",
+        "name",
+      ]
+    }
+    optionSortColumn="focus"
+    options={Immutable.Map {}}
+    selectName="workout"
+  />
+</Fragment>
+`;

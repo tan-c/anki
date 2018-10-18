@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeeklyInsights Unit Tests when normally set up renders correctly 1`] = `
+<div
+  data-role="weekly-insights"
+>
+  <span
+    className="text-center"
+  >
+    0.0
+    K/
+    0.0
+    K
+  </span>
+  <span
+    className="text-center"
+  >
+    0.0
+    K/
+    0.0
+    K
+  </span>
+  <div
+    id="pomoBtn"
+  >
+    0
+     
+    /
+    0.0
+    <br />
+    0
+     
+    /
+    0
+    <div
+      className="bg-orange"
+      style={
+        Object {
+          "bottom": "0px",
+          "height": "40px",
+          "left": "0px",
+          "position": "absolute",
+          "width": "NaN%",
+          "zIndex": "-1",
+        }
+      }
+    />
+  </div>
+</div>
+`;

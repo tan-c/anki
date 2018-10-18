@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthlyTasksList Unit Tests when normally set up renders correctly 1`] = `
+<div
+  className="margin-top-10 margin-bottom-10 border-white"
+  data-role="monthlytasks-list"
+>
+  <span
+    className="flex-container-row typical-setup border-bottom-white-dotted text-left"
+  >
+    <Connect(InputNew)
+      actions={Object {}}
+      inputClassNames="flex-3"
+      inputName="content"
+      newRecord={
+        Object {
+          "targetCompletion": 2017-12-31T15:00:00.000Z,
+          "type": "monthly",
+        }
+      }
+      placeholderContent="generic montly task..."
+    />
+    <i
+      className="width-15 fa fa-fw fa-eye color-green"
+      onClick={[Function]}
+      role="button"
+      tabIndex="-1"
+    />
+    <i
+      className="width-15 fa fa-fw fa-gift false"
+      onClick={[Function]}
+      role="button"
+      tabIndex="-1"
+    />
+  </span>
+</div>
+`;

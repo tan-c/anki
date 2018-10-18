@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DailyTasksList Unit Tests when normally set up renders correctly 1`] = `
+<div
+  className="false"
+  data-role="dailytasks-list"
+>
+  <span
+    className="flex-container-row typical-setup border-bottom-white-dotted text-left"
+  >
+    <span
+      className="flex-1 undefined"
+    >
+      01-01
+    </span>
+    <Connect(InputNew)
+      actions={Object {}}
+      inputClassNames="flex-3"
+      inputName="content"
+      newRecord={
+        Object {
+          "targetCompletion": "2016-12-31T15:00:00.000Z",
+          "type": "daily",
+        }
+      }
+    />
+    <span
+      className="width-20"
+    />
+  </span>
+</div>
+`;

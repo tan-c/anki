@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HourBlockRowPlanned Unit Tests when normally set up renders correctly 1`] = `
+<Fragment>
+  <span
+    className="border-right-white width-50 height-lineheight-30"
+  />
+  <Connect(ProjectSelect)
+    className="width-80 border-right-white height-lineheight-30"
+    onChangeEvent={[Function]}
+  />
+  <div
+    className="flex-1 flex-container-row"
+  >
+    <input
+      className="flex-3 border-right-white-20 undefined"
+      name="tasks.main"
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      type="text"
+      value=""
+    />
+    <input
+      className=" width-200 border-right-white"
+      disabled={true}
+      name="tasks.recur"
+      onKeyDown={[Function]}
+      type="text"
+    />
+  </div>
+</Fragment>
+`;

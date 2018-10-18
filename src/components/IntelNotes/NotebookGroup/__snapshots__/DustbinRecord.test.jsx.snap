@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DustbinRecord Unit Tests  renders correctly 1`] = `
+<div
+  className="flex-container-row typical-setup false"
+  data-role="dustbin-record"
+  onClick={[Function]}
+  role="menuitem"
+  tabIndex="-1"
+>
+  <i
+    className="fa fa-fw fa-trash-o wdith-20"
+  />
+  <div
+    className="flex-1"
+  >
+    Dustbin
+  </div>
+  <span>
+    0
+  </span>
+  <i
+    className="fa fa-fw fa-trash-o wdith-20"
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  />
+</div>
+`;

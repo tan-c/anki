@@ -10,7 +10,7 @@ exports[`App Unit Tests when normally set up renders correctly 1`] = `
         "left": 0,
         "position": "fixed",
         "top": 0,
-        "zIndex": 1111,
+        "zIndex": 111,
       }
     }
   >

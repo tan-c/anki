@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventsList Unit Tests  renders correctly 1`] = `
+<Fragment>
+  <section
+    className="flex-1"
+  >
+    <div
+      className="section-header"
+    >
+      Event List
+    </div>
+    <div
+      className="section-content"
+    >
+      <div
+        className="list-with-pinned-bottom"
+      />
+      <div
+        className="flex-container-row pinned-bottom border-top"
+      >
+        <Connect(InputNew)
+          actions={Object {}}
+          inputName="name"
+        />
+      </div>
+    </div>
+  </section>
+  <section
+    className="flex-1 border-white"
+  >
+    <div
+      className="section-header"
+    >
+      Details -
+    </div>
+    0
+  </section>
+</Fragment>
+`;

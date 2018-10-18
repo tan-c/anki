@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MonthlyTasksList Unit Tests when normally set up renders correctly 1`] = `
+<section
+  className="flex-1"
+  data-role="monthlytasks-list"
+>
+  <div
+    className="section-header"
+    style={
+      Object {
+        "background": undefined,
+      }
+    }
+  >
+     
+    Details
+     
+  </div>
+  <div
+    className="section-content"
+  >
+    0
+  </div>
+</section>
+`;

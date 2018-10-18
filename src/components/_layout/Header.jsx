@@ -130,7 +130,7 @@ export class Header extends React.Component {
               </Button> */}
             <Icon
               name="cog"
-              color={`${isSettingOn ? 'blue' : 'white'}`}
+              // color={`${isSettingOn ? 'blue' : ''}`}
               onClick={(_) => {
                 this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
               }}

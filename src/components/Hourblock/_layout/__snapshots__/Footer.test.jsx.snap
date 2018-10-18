@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Unit Tests when normally set up renders correctly 1`] = `
+<footer
+  data-role="footer"
+>
+  <div
+    className="false"
+    id="calorie-progress-bar"
+    style={
+      Object {
+        "width": "NaN%",
+      }
+    }
+  />
+  <div
+    id="pomo-progress-bar"
+    style={
+      Object {
+        "width": "NaN%",
+      }
+    }
+  />
+</footer>
+`;

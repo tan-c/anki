@@ -1,0 +1,202 @@
+@import '~utility-style/main.scss';
+
+$left-aside-width: 80px;
+$left-aside-width-mobile: 50px;
+$header-height: 50px;
+$subheader-height: 30px;
+$right-aside-width: 260px;
+@import '~animate.css/animate.min.css';
+@import '~font-awesome/css/font-awesome.css';
+@import '~toastr/build/toastr.min.css';
+@import '~react-quill/dist/quill.snow.css';
+@import '~highlight.js/styles/monokai-sublime.css';
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Orbitron:400);
+.ql-editor img {
+  max-width: 100% !important;
+}
+
+.ql-editor * {
+  font-size: 14px;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+#toast-container * {
+  color: white;
+}
+
+body {
+  // background: url("../resource/cat2.jpg") no-repeat center center;
+  background: black; // midnight blue
+  @include coverbg;
+  height: 100vh;
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 15;
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+  transition: 1s opacity;
+  opacity: 0.1;
+}
+
+main {
+  top: calc(#{$header-height} + #{$subheader-height});
+  box-sizing: border-box;
+  width: 100vw;
+  position: fixed;
+  overflow: auto;
+  z-index: 1;
+  background-color: white;
+  color: black;
+  height: calc(100vh - #{$header-height} - #{$subheader-height});
+}
+
+$hima-aside-width: 150px;
+main#intelnote {
+  >div {
+    height: inherit;
+    width: inherit;
+    overflow-y: auto;
+  }
+  #notebook-list {
+    width: $hima-aside-width;
+    height: calc(100vh - #{$header-height} - #{$subheader-height}); // Button btn too
+    background: $blue;
+    position: fixed;
+    color: white;
+    overflow: auto;
+    box-sizing: border-box;
+    padding-bottom: 30px;
+    #new-notebook-group {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 25px;
+      width: $hima-aside-width;
+    }
+  }
+  $note-list-width: 180px;
+  #note-list {
+    width: $note-list-width;
+    height: calc(100vh - #{$header-height} - #{$subheader-height});
+    padding-bottom: 20px;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    left: $hima-aside-width;
+    select {
+      position: fixed;
+      background: white;
+      border: 1px solid black;
+      bottom: 0;
+      z-index: 100;
+      width: $note-list-width;
+      left: $hima-aside-width;
+    }
+  }
+  #note-editor {
+    height: calc(100vh - #{$header-height} - #{$subheader-height});
+    width: calc(100% - #{$hima-aside-width} - #{$note-list-width});
+    left: calc(#{$note-list-width} + #{$hima-aside-width});
+    top: calc(#{$header-height} + #{$subheader-height});
+    position: fixed;
+    box-sizing: border-box;
+    overflow: auto;
+    &.mobile {
+      width: 100vw;
+      left: 0;
+      #note-editor-title {
+        width: 100vw;
+      }
+    }
+    #note-editor-title {
+      height: 40px;
+      position: fixed;
+      width: calc(100% - #{$hima-aside-width} - #{$note-list-width});
+    }
+    #note-editor-main {
+      height: calc(100% - 40px);
+      margin-top: 40px;
+      box-sizing: border-box;
+      #note-editor-left {
+        height: 100%;
+        width: 120px;
+        overflow: auto;
+        * {
+          font-size: 12px;
+        }
+      }
+      .quill-editor {
+        height: 100%;
+        box-sizing: border-box;
+        padding: 2px;
+        .toolbar {
+          padding: 2px;
+          height: 30px;
+        }
+        .quill {
+          height: calc(100% - 30px);
+        }
+        .ql-editor {
+          padding: 5px 8px;
+          left: 0;
+          position: absolute;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// @media screen and (max-width: 500px) {
+//   .half-width,
+//   #pomoPanel,
+//   #planPanel {
+//     margin: 10px !important;
+//     width: calc(100% - 20px) !important;
+//   }
+//   #pomoPanel {
+//     height: 40vh;
+//     #pomoCircle {
+//       width: 320px;
+//       height: 320px;
+//       .arc {
+//         width: 320px;
+//         height: 320px;
+//       }
+//     }
+//   }
+//   #planPanel {
+//     height: 55vh;
+//     box-sizing: border-box;
+//   }
+//
+//   .full-screen {
+//     height: 50vh;
+//   }
+// }
+
+.toast {
+  .toast-message {
+    color: white;
+  }
+}

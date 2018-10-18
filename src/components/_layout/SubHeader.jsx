@@ -121,10 +121,6 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    // loadOtherApp: (newApp, currentUser) => dispatch({ // Will only work once as sagas not in while loop
-    //   type: `GET_${newApp.toUpperCase()}_RESOURCES`,
-    //   currentUser: currentUser.toJS(), // For intelnote
-    // }),
     AnkiTagActions: bindActionCreators(AnkiTagActions, dispatch),
     UiActions: bindActionCreators(UiActions, dispatch),
   };

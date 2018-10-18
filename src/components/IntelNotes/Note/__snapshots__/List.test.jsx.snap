@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteList Unit Tests when in a normal note renders correctly 1`] = `
+<div
+  className="bg-white-70 border-right-dark-blue"
+  data-role="note-list"
+  id="note-list"
+>
+  <div
+    className="text-center border-bottom-black"
+  >
+    <div
+      className="font-400 flex-1"
+    >
+      Notes:
+      0
+    </div>
+  </div>
+</div>
+`;

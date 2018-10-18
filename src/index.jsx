@@ -13,7 +13,7 @@ import registerServiceWorker from './sw/registerServiceWorker';
 
 moment.suppressDeprecationWarnings = true;
 
-const renderApp = (Component) => {
+const renderAppDev = (Component) => {
   render(
     <AppContainer warnings={false}>
       <Provider store={store}>
@@ -25,6 +25,20 @@ const renderApp = (Component) => {
     document.getElementById('app')
   );
 };
+
+const renderAppProd = (Component) => {
+  render(
+    <Provider store={store}>
+      <HashRouter>
+        <Component />
+      </HashRouter>
+    </Provider>,
+    document.getElementById('app')
+  );
+};
+
+const renderApp = process.env.NODE_ENV === 'development' ? renderAppDev : renderAppProd;
+
 renderApp(AppConnected);
 
 // The trigger to login is handled in App.jsx by Auth0

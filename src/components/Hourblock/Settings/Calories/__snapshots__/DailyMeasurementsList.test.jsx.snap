@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DailyMeasurementsList Unit Tests  renders correctly 1`] = `
+<Fragment>
+  <section
+    className="flex-1"
+  >
+    <div
+      className="section-header"
+    >
+      Daily Measurement Item List
+    </div>
+    <div
+      className="section-content"
+    >
+      <div
+        className="list-with-pinned-bottom"
+      >
+        <span
+          className="flex-container-row"
+        >
+          <span
+            className="flex-2"
+          />
+          <span
+            className="flex-1"
+            key="weight"
+          >
+            weight
+          </span>
+          <span
+            className="flex-1"
+            key="height"
+          >
+            height
+          </span>
+          <span
+            className="flex-1"
+            key="waist"
+          >
+            waist
+          </span>
+          <span
+            className="flex-1"
+            key="armCircumference"
+          >
+            armCircumference
+          </span>
+          <span
+            className="flex-1"
+            key="thighCircumference"
+          >
+            thighCircumference
+          </span>
+        </span>
+      </div>
+      <div
+        className="flex-container-row pinned-bottom border-top"
+      >
+        <Connect(InputNew)
+          actions={Object {}}
+          inputClassNames="flex-1"
+          newRecord={
+            Object {
+              "startedAt": "2016-12-31T15:00:00.000Z",
+            }
+          }
+        />
+      </div>
+    </div>
+  </section>
+  <section
+    className="flex-1"
+  >
+    <Connect(DailyCaloriesChart) />
+  </section>
+</Fragment>
+`;

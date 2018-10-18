@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotebookGroupList Unit Tests  renders correctly 1`] = `
+<div
+  data-role="notebookgroup-list"
+  id="notebook-list"
+>
+  <Connect(DustbinRecord) />
+  <Connect(RecentNoteRow) />
+  <div
+    className="spacing-10"
+  />
+  <button
+    className="bg-green"
+    id="new-notebook-group"
+    onClick={[Function]}
+  >
+    + Notebook Group
+  </button>
+</div>
+`;

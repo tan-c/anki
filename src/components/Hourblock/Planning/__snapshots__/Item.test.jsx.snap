@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlanningItem Unit Tests  renders correctly 1`] = `
+<div
+  className="flex-4 margin-right-1 line-height-25 flex-container-row"
+  data-role="planning-item"
+  style={
+    Object {
+      "backgroundColor": "undefined",
+    }
+  }
+>
+  <span
+    className="flex-1"
+    disabled={false}
+    onClick={[Function]}
+    role="button"
+    tabIndex="-1"
+  />
+</div>
+`;

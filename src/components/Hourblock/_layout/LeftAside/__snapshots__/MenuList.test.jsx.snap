@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuList Unit Tests when normally set up renders correctly 1`] = `
+<nav
+  data-role="menu-list"
+  id="menu"
+>
+  <ul>
+    <li
+      className=""
+    >
+      <Link
+        replace={false}
+        to="/"
+      >
+        <i
+          className="fa fa-fw fa-dashboard"
+        />
+      </Link>
+    </li>
+    <li
+      className=""
+    >
+      <Link
+        replace={false}
+        to="/planning"
+      >
+        <i
+          className="fa fa-fw fa-calendar"
+        />
+      </Link>
+    </li>
+    <li
+      className=""
+    >
+      <Link
+        replace={false}
+        to="/tasks"
+      >
+        <i
+          className="fa fa-fw fa-list"
+        />
+      </Link>
+    </li>
+    <li
+      className=""
+    >
+      <Link
+        replace={false}
+        to="/settings"
+      >
+        <i
+          className="fa fa-fw fa-cog"
+        />
+      </Link>
+    </li>
+  </ul>
+</nav>
+`;

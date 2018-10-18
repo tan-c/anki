@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryInsights Unit Tests when normally set up renders correctly 1`] = `
+<div
+  data-role="weekly-insights"
+/>
+`;

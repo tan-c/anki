@@ -17,7 +17,11 @@ const SidebarComponent = () => (
       width: 100
     }}
   >
-    <Menu.Item as={Link} to="/">
+    <Menu.Item
+      as={Link}
+      to="/"
+      active={location.href.split('//')[1].split('/')[2] === ''}
+    >
       <Icon name="home" />
       Home
     </Menu.Item>
@@ -25,11 +29,19 @@ const SidebarComponent = () => (
       <Icon name="gamepad" />
         Games
     </Menu.Item>
-    <Menu.Item as={Link} to="/anki">
+    <Menu.Item
+      as={Link}
+      to="/anki"
+      active={location.href.indexOf('/anki') > -1}
+    >
       <Icon name="list" />
         Anki
     </Menu.Item>
-    <Menu.Item as={Link} to="/housingPrices">
+    <Menu.Item
+      as={Link}
+      to="/housingPrices"
+      active={location.href.indexOf('/housingPrices') > -1}
+    >
       <Icon name="building" />
         Toshigo
     </Menu.Item>

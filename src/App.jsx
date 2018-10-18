@@ -70,7 +70,15 @@ export class App extends React.Component {
 
     return (
       <ErrorBoundary>
-        <div id="version">
+        <div
+          id="version" style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            background: 'red',
+            zIndex: 1111
+          }}
+        >
           {process.env.GIT_VERSION
             ? process.env.GIT_VERSION.slice(0, 6)
             : 'Undefined'}
@@ -99,13 +107,24 @@ export class App extends React.Component {
                 {eyeSaving && <EyeModal />}
 
                 <Switch data-role="main-intelnote">
-                  <Route exact path="/" component={AnkiPageConnected} />
-                  <Route path="/housingPrices" component={HousingPricesConnected} />
+                  <Route
+                    exact
+                    path="/"
+                    component={() => <NoteConnected field="notes" />}
+                  />
+                  <Route
+                    path="/housingPrices"
+                    component={HousingPricesConnected}
+                  />
+                  <Route
+                    path="/anki"
+                    component={AnkiPageConnected}
+                  />
                   <Redirect from="/*" to="/" />
                 </Switch>
 
                 {/* {isAnkiOn && <AnkiListConnected />}
-                  {isNotesOn && <NoteConnected field="notes" />} */}
+                  {isNotesOn && <NoteConnected />} */}
               </Sidebar.Pusher>
             </Sidebar.Pushable>
           )

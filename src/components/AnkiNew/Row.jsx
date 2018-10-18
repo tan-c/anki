@@ -28,27 +28,35 @@ export class AnkiRow extends React.Component {
           {`${anki.getIn(['revision', 'round'])}/${anki.getIn(['revision', 'passing'])} - `}
         </div>
 
-        <Grid.Column>
+        <Grid.Column
+          width={6}
+          textAlign="left"
+        >
           {anki.get('question')}
         </Grid.Column>
 
-        <div style={{
-          width: 20
-        }}
+        <Grid.Column
+          width={3}
+          textAlign="center"
         >
-          {anki.has('tags') ? anki.get('tags').size : 0}
-        </div>
+          <span style={{
+            width: 20
+          }}
+          >
+            {anki.has('tags') ? anki.get('tags').size : 0}
+          </span>
 
-        <Icon
-          name="close"
-          onClick={_ => this.props.AnkiActions.deleteRecord(anki)}
-        />
+          <Icon
+            name="close"
+            onClick={_ => this.props.AnkiActions.deleteRecord(anki)}
+          />
 
-        <Icon
-          name="edit"
-          onClick={_ => this.props.UiActions.updateIn(['activeAnkiId'], anki.get('_id'))
-          }
-        />
+          <Icon
+            name="edit"
+            onClick={_ => this.props.UiActions.updateIn(['activeAnkiId'], anki.get('_id'))
+            }
+          />
+        </Grid.Column>
       </Grid.Row>
     );
   }

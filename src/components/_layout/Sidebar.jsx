@@ -14,7 +14,7 @@ const SidebarComponent = () => (
     visible
     width="thin"
     style={{
-      width: 90
+      width: 90,
     }}
   >
     <Menu.Item

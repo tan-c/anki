@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import SelectConnected from 'utility-react-component/Form/Select';
 
 import {
-  Menu, Icon, Button
+  Menu
 } from 'semantic-ui-react';
 
 import { UiActions } from 'utility-redux/common/ui';
@@ -43,8 +43,10 @@ export class SubHeader extends React.Component {
         data-role="subheader"
         id="subheader"
         className={`${window.isMobile && 'mobile'}`}
+        attached
         style={{
-          paddingLeft: 10
+          paddingLeft: 10,
+          marginTop: 40
         }}
       >
         {/* <div

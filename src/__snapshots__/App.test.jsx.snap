@@ -3,16 +3,21 @@
 exports[`App Unit Tests when normally set up renders correctly 1`] = `
 <ErrorBoundary>
   <div
-    data-role="app"
+    id="version"
+    style={
+      Object {
+        "background": "red",
+        "left": 0,
+        "position": "fixed",
+        "top": 0,
+        "zIndex": 1111,
+      }
+    }
   >
-    <div
-      id="version"
-    >
-      Undefined
-    </div>
-    <Connect(LoginPage)
-      pageName="Anki"
-    />
+    Undefined
   </div>
+  <Connect(LoginPage)
+    pageName="Anki"
+  />
 </ErrorBoundary>
 `;

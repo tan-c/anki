@@ -1,0 +1,102 @@
+$left-aside-width: 80px;
+$left-aside-width-mobile: 50px;
+$header-height: 50px;
+$subheader-height: 30px;
+$right-aside-width: 260px;
+@import '~animate.css/animate.min.css';
+@import '~font-awesome/css/font-awesome.css';
+@import '~toastr/build/toastr.min.css';
+@import "mixin";
+@import "utilities";
+@import "modal";
+@import "widget";
+@import "layout";
+@import "overwrite";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Orbitron:400);
+.ql-editor img {
+  max-width: 100% !important;
+}
+
+.ql-editor * {
+  font-size: 14px;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+#toast-container * {
+  color: white;
+}
+
+body {
+  // background: url("../resource/cat2.jpg") no-repeat center center;
+  background: black; // midnight blue
+  @include coverbg;
+  height: 100vh;
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 15;
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+  transition: 1s opacity;
+  opacity: 0.1;
+}
+
+main {
+  top: calc(#{$header-height} + #{$subheader-height});
+  box-sizing: border-box;
+  width: 100vw;
+  position: fixed;
+  overflow: auto;
+  z-index: 1;
+  background-color: white;
+  color: black;
+  height: calc(100vh - #{$header-height} - #{$subheader-height});
+}
+
+
+// @media screen and (max-width: 500px) {
+//   .half-width,
+//   #pomoPanel,
+//   #planPanel {
+//     margin: 10px !important;
+//     width: calc(100% - 20px) !important;
+//   }
+//   #pomoPanel {
+//     height: 40vh;
+//     #pomoCircle {
+//       width: 320px;
+//       height: 320px;
+//       .arc {
+//         width: 320px;
+//         height: 320px;
+//       }
+//     }
+//   }
+//   #planPanel {
+//     height: 55vh;
+//     box-sizing: border-box;
+//   }
+//
+//   .full-screen {
+//     height: 50vh;
+//   }
+// }

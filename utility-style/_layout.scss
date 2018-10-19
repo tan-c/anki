@@ -1,0 +1,93 @@
+
+#version {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: red;
+}
+
+header {
+  height: $header-height;
+  position: fixed;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background: $white-10;
+  z-index: 3;
+  #currentTime {
+    text-align: center;
+    color:white;
+    font-size: 24px;
+    width: 100px;
+    display: block;
+    height: $header-height;
+    line-height: $header-height;
+    box-sizing: border-box;
+  }
+  .profile-image {
+    // border: 1px solid white;
+    width: 36px;
+    border-radius: 1000px;
+    height: 36px;
+  }
+  #more-icon {
+    line-height: $header-height;
+    text-align: center;
+    right: 0;
+    &.active,
+    &:hover {
+      background: $white-20;
+    }
+  }
+}
+
+#subheader {
+  position: fixed;
+  top: $header-height;
+  height: $subheader-height;
+  background: $white-20;
+  padding-left: $left-aside-width;
+  padding-right: 20px;
+  width: 100vw;
+  z-index: 1;
+  a {
+    color: white;
+  }
+  span {
+    line-height: $subheader-height;
+    font-size: 14px;
+    color: $white-70;
+  }
+  &.mobile {
+    padding-left: 0;
+  }
+  #subheader-links span {
+    display: inline-block;
+    margin-left: 10px;
+    @include transition(color 1s ease 0s);
+    &.active,
+    &:hover {
+      border-bottom: 3px solid $green;
+      color: $orange;
+      font-weight: 600;
+    }
+  }
+}
+
+#settings {
+  height: calc(100vh - 80px);
+  width: 160px;
+  position: absolute;
+  z-index: 1000000;
+  top: 80px;
+  background: black;
+  opacity: 0.9;
+  color: white;
+  right: 0px;
+  display: none;
+  &.active {
+    display: block;
+  }
+  @include transition(right 0.5s ease 0);
+}

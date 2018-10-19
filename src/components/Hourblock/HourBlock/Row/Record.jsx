@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-// import { TaskActions } from 'utility-redux/hourblock/task';
-import { selectableEventsSortedByProjectThenCategorySelector } from 'utility-redux/hourblock/event';
-import { currentUserSelector } from 'utility-redux/common/user';
-import { UiActions } from 'utility-redux/common/ui';
+// import { TaskActions } from 'utility-redux/task';
+import { selectableEventsSortedByProjectThenCategorySelector } from 'utility-redux/event';
+import { currentUserSelector } from 'utility-redux/user';
+import { UiActions } from 'utility-redux/ui';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
 export class HourBlockRowRecord extends React.Component {

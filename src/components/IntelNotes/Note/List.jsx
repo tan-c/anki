@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
-import { activeNotebookNotesSortedSelector } from 'utility-redux/anki/note';
+import { activeNotebookNotesSortedSelector } from 'utility-redux/note';
 
 import NoteRowConnected from './Row';
 

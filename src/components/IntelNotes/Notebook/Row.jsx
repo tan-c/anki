@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import { Map } from 'immutable';
 
-import { NotebookActions } from 'utility-redux/anki/notebook';
-import { NoteActions } from 'utility-redux/anki/note';
-import { UiActions } from 'utility-redux/common/ui';
+import { NotebookActions } from 'utility-redux/notebook';
+import { NoteActions } from 'utility-redux/note';
+import { UiActions } from 'utility-redux/ui';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 
 export class NotebookRow extends React.Component {

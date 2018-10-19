@@ -7,14 +7,14 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment';
 
-import { selectedProjectDailyRecordPomosSelector } from 'utility-redux/hourblock/dailyRecord';
-import { selectedProjectPlannedPomosSelector } from 'utility-redux/hourblock/plannedPomo';
+import { selectedProjectDailyRecordPomosSelector } from 'utility-redux/dailyRecord';
+import { selectedProjectPlannedPomosSelector } from 'utility-redux/plannedPomo';
 import {
   ProjectActions,
   selectedProjectSelector
-} from 'utility-redux/hourblock/project';
-import { selectedProjectTasksSelector } from 'utility-redux/hourblock/task';
-import { selectedProjectEventsSelector } from 'utility-redux/hourblock/event';
+} from 'utility-redux/project';
+import { selectedProjectTasksSelector } from 'utility-redux/task';
+import { selectedProjectEventsSelector } from 'utility-redux/event';
 
 export class SelectedProjectDetails extends React.Component {
   // constructor(props, context) {

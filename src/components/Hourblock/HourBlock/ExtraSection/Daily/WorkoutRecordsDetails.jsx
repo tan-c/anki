@@ -9,8 +9,8 @@ import { Map } from 'immutable';
 import SelectConnected from 'utility-react-component/Form/Select';
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
 
-import { WorkoutRecordActions, currentWorkoutRecordsAndMostRecentRecordSelector } from 'utility-redux/hourblock/workoutRecord';
-import { workoutsSortedByFocusSelector } from 'utility-redux/hourblock/workout';
+import { WorkoutRecordActions, currentWorkoutRecordsAndMostRecentRecordSelector } from 'utility-redux/workoutRecord';
+import { workoutsSortedByFocusSelector } from 'utility-redux/workout';
 
 export class DailyWorkoutRecordsDetails extends React.Component {
   // constructor(props, context) {

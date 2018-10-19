@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import moment from 'moment-timezone';
 // import { Map } from 'immutable';
-import { currentUserSelector } from 'utility-redux/common/user';
-import { totalProjectTasksCountSelector } from 'utility-redux/hourblock/task';
+import { currentUserSelector } from 'utility-redux/user';
+import { totalProjectTasksCountSelector } from 'utility-redux/task';
 import DailyRecordsChartConnected from './DailyRecordsChart';
-// import { UiActions } from 'utility-redux/common/ui';
+// import { UiActions } from 'utility-redux/ui';
 
 import HourBlockListConnected from './List';
 

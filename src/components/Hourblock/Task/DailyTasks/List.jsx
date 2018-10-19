@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
-import { selectedYearlyTaskSelector } from 'utility-redux/hourblock/task';
+import { selectedYearlyTaskSelector } from 'utility-redux/task';
 
 
 import DailyTasksRow from './Row';

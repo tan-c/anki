@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { UserActions, currentUserSelector } from 'utility-redux/common/user';
-import { AnkiTagActions } from 'utility-redux/anki/ankiTag';
+import { UserActions, currentUserSelector } from 'utility-redux/user';
+import { AnkiTagActions } from 'utility-redux/ankiTag';
 import InputNewComponent from 'utility-react-component/Form/Input/New';
 
 export class Settings extends React.Component {

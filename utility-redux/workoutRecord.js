@@ -2,8 +2,8 @@ import { createSelector } from 'reselect';
 import moment from 'moment';
 import { fromJS } from 'immutable';
 
-import { actionCreate } from '../_base/actionCreate';
-import { reducerCreate } from '../_base/reducerCreate';
+import { actionCreate } from './_base/actionCreate';
+import { reducerCreate } from './_base/reducerCreate';
 
 export default reducerCreate('workout_record');
 export const {

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment';
 
-import { EventRecordActions, selectedEventEventRecordsSelector } from 'utility-redux/hourblock/eventRecord';
+import { EventRecordActions, selectedEventEventRecordsSelector } from 'utility-redux/eventRecord';
 
 export class EventRecordsList extends React.Component {
   render() {

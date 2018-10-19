@@ -10,7 +10,7 @@ import {
   DailyRecordActions,
   currentDailyRecordSelector,
   getTodayTotalCaloriesSelector,
-} from 'utility-redux/hourblock/dailyRecord';
+} from 'utility-redux/dailyRecord';
 
 export class DailyCalorieDetails extends React.Component {
   state = {

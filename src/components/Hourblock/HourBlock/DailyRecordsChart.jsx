@@ -6,9 +6,9 @@ import { Map } from 'immutable';
 import moment from 'moment-timezone';
 import Highcharts from 'highcharts';
 
-import { dailyRecordByDayOfYearSortedRecencySelector } from 'utility-redux/hourblock/dailyRecord';
-import { categoriesSortedSelector } from 'utility-redux/hourblock/category';
-import { projectsByIdSortedSelector } from 'utility-redux/hourblock/project';
+import { dailyRecordByDayOfYearSortedRecencySelector } from 'utility-redux/dailyRecord';
+import { categoriesSortedSelector } from 'utility-redux/category';
+import { projectsByIdSortedSelector } from 'utility-redux/project';
 
 export class DailyRecordsChart extends React.Component {
   // constructor(props, context) {

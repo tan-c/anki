@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { UiActions } from 'utility-redux/common/ui';
-import { currentUserRecentNoteSelector } from 'utility-redux/common/user';
+import { UiActions } from 'utility-redux/ui';
+import { currentUserRecentNoteSelector } from 'utility-redux/user';
 
 export class RecentNoteRow extends React.Component {
   // constructor(props, context) {

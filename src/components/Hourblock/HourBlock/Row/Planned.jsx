@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 import { connect } from 'react-redux';
-import { currentUserSelector } from 'utility-redux/common/user';
+import { currentUserSelector } from 'utility-redux/user';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
-// import { projectFirstTaskSelector } from 'utility-redux/hourblock/task';
+// import { projectFirstTaskSelector } from 'utility-redux/task';
 
 // FIXME: should be using the input controlled here but keydown event is different
 // import InputControlled from 'utility-react-component/Form/Input/Controlled';

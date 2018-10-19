@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { UserActions, currentUserSelector } from 'utility-redux/common/user';
+import { UserActions, currentUserSelector } from 'utility-redux/user';
 
 export class Settings extends React.Component {
   // constructor(props, context) {

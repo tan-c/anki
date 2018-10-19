@@ -10,14 +10,14 @@ import {
   Menu
 } from 'semantic-ui-react';
 
-import { UiActions } from 'utility-redux/common/ui';
-import { AnkiTagActions } from 'utility-redux/anki/ankiTag';
-import { todayTasksSelector } from 'utility-redux/hourblock/task';
+import { UiActions } from 'utility-redux/ui';
+import { AnkiTagActions } from 'utility-redux/ankiTag';
+import { todayTasksSelector } from 'utility-redux/task';
 
 import {
   revisionAnkisTotalSelector,
   filteredAnkisSelector
-} from 'utility-redux/anki/anki';
+} from 'utility-redux/anki';
 import { Map } from 'immutable';
 // import { Button } from 'semantic-ui-react';
 

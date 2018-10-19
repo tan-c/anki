@@ -6,8 +6,8 @@ import moment from 'moment';
 import { Map } from 'immutable';
 import toastr from 'toastr';
 
-// import { UiActions } from 'utility-redux/common/ui';
-import { currentUserSelector } from 'utility-redux/common/user';
+// import { UiActions } from 'utility-redux/ui';
+import { currentUserSelector } from 'utility-redux/user';
 
 export class Header extends React.Component {
   // constructor(props, context) {

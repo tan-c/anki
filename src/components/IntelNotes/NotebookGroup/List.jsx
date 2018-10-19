@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { NotebookGroupActions } from 'utility-redux/anki/notebookGroup';
+import { NotebookGroupActions } from 'utility-redux/notebookGroup';
 
 import DustbinRecordConnected from './DustbinRecord';
 import RecentNoteRowConnected from './RecentNoteRow';

@@ -11,8 +11,8 @@ import {
 } from 'react-redux';
 
 // import { loadavg } from 'os';
-import { UiActions } from 'utility-redux/common/ui';
-import { UserActions } from 'utility-redux/common/user';
+import { UiActions } from 'utility-redux/ui';
+import { UserActions } from 'utility-redux/user';
 
 export class LoginPage extends React.Component {
   // constructor(props, context) {

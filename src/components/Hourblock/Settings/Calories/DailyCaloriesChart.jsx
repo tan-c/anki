@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
 import Highcharts from 'highcharts';
-// import { UiActions } from 'utility-redux/common/ui';
+// import { UiActions } from 'utility-redux/ui';
 
-import { dailyRecordByDayOfYearSortedRecencySelector } from 'utility-redux/hourblock/dailyRecord';
+import { dailyRecordByDayOfYearSortedRecencySelector } from 'utility-redux/dailyRecord';
 
 export class DailyCaloriesChart extends React.Component {
   constructor(props, context) {

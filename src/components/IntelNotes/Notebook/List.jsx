@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Map } from 'immutable';
 // import { bindActionCreators } from 'redux';
 
-import { notebookGroupNotebooksSortedSelector } from 'utility-redux/anki/notebook';
+import { notebookGroupNotebooksSortedSelector } from 'utility-redux/notebook';
 import NotebookListRowConnected from './Row';
 
 export class NotebookList extends React.Component {

@@ -3,7 +3,7 @@
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
-// import { CalorieActions } from 'utility-redux/hourblock/calorie';
+// import { CalorieActions } from 'utility-redux/calorie';
 // import InputNewConnected from 'utility-react-component/Form/Input/New';
 // import Input from 'utility-react-component/Form/Input/Uncontrolled';
 // import SelectConnected from 'utility-react-component/Form/Select';

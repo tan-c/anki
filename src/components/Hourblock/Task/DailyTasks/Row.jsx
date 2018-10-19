@@ -8,7 +8,7 @@ import moment from 'moment-timezone';
 import {
   TaskActions,
   dailyTasksSelector,
-} from 'utility-redux/hourblock/task';
+} from 'utility-redux/task';
 
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
 import DefaultSelect from 'utility-react-component/Form/Select';

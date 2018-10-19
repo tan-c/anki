@@ -15,8 +15,8 @@ import {
   Switch, Route, Redirect, withRouter
 } from 'react-router-dom';
 
-import { currentUserSelector } from 'utility-redux/common/user';
-// import { UiActions } from 'utility-redux/common/ui';
+import { currentUserSelector } from 'utility-redux/user';
+// import { UiActions } from 'utility-redux/ui';
 
 import '../../../node_modules/toastr/toastr.less';
 import '../../../node_modules/semantic-ui-less/semantic.less';

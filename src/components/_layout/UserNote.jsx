@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 // import toastr from 'toastr';
 import { Form, TextArea } from 'semantic-ui-react';
 
-import { UserActions, currentUserSelector } from 'utility-redux/common/user';
+import { UserActions, currentUserSelector } from 'utility-redux/user';
 
 require('./UserNote.scss');
 

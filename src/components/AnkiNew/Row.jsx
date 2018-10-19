@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import { Grid, Icon } from 'semantic-ui-react';
 
-import { AnkiActions, activeAnkiSelector } from 'utility-redux/anki/anki';
-import { UiActions } from 'utility-redux/common/ui';
+import { AnkiActions, activeAnkiSelector } from 'utility-redux/anki';
+import { UiActions } from 'utility-redux/ui';
 
 export class AnkiRow extends React.Component {
   render() {

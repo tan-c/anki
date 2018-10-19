@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment';
-import { EventRecordActions } from 'utility-redux/hourblock/eventRecord';
-import { UiActions } from 'utility-redux/common/ui';
+import { EventRecordActions } from 'utility-redux/eventRecord';
+import { UiActions } from 'utility-redux/ui';
 
 export class EventDetails extends React.Component {
   // constructor(props, context) {

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { DailyRecordActions, currentDailyRecordSelector } from 'utility-redux/hourblock/dailyRecord';
+import { DailyRecordActions, currentDailyRecordSelector } from 'utility-redux/dailyRecord';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 
 export class DailySleepDetails extends React.Component {

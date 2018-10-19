@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { thisWeekMetricsSelector } from 'utility-redux/hourblock/dailyRecord';
-import { categoriesSortedSelector } from 'utility-redux/hourblock/category';
-import { projectsByCategoryIdSelector } from 'utility-redux/hourblock/project';
-import { projectBasedPlannedPomoTotalSelector } from 'utility-redux/hourblock/plannedPomo';
+import { thisWeekMetricsSelector } from 'utility-redux/dailyRecord';
+import { categoriesSortedSelector } from 'utility-redux/category';
+import { projectsByCategoryIdSelector } from 'utility-redux/project';
+import { projectBasedPlannedPomoTotalSelector } from 'utility-redux/plannedPomo';
 
 export class CategoryInsights extends React.Component {
   // constructor(props, context) {

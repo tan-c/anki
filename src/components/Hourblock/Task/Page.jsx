@@ -9,8 +9,8 @@ import Input from 'utility-react-component/Form/Input/Uncontrolled';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
-import { TaskActions, currentYearlyTasksSortedSelector } from 'utility-redux/hourblock/task';
-import { UiActions } from 'utility-redux/common/ui';
+import { TaskActions, currentYearlyTasksSortedSelector } from 'utility-redux/task';
+import { UiActions } from 'utility-redux/ui';
 
 import MonthlyTasksListConnected from './MonthlyTasks/List';
 import DailyTaskPlanningConnected from './DailyTasks/List';

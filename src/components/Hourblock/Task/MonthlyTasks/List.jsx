@@ -11,7 +11,7 @@ import {
   TaskActions,
   monthlyTasksSelector,
   selectedYearlyTaskSelector,
-} from 'utility-redux/hourblock/task';
+} from 'utility-redux/task';
 
 import MonthlyTasksRowConnected from './Row';
 

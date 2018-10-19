@@ -9,8 +9,8 @@ import {
   lastWeekMetricsSelector,
   yearlyAverageSelector,
   todayTotalComplianceSelector
-} from 'utility-redux/hourblock/dailyRecord';
-import { calorieWeeklySelector } from 'utility-redux/hourblock/dailyMeasurement';
+} from 'utility-redux/dailyRecord';
+import { calorieWeeklySelector } from 'utility-redux/dailyMeasurement';
 
 export class WeeklyInsights extends React.Component {
   // constructor(props, context) {

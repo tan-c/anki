@@ -6,8 +6,8 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
-import { selectedWorkoutSelector } from 'utility-redux/hourblock/workout';
-import { WorkoutRecordActions } from 'utility-redux/hourblock/workoutRecord';
+import { selectedWorkoutSelector } from 'utility-redux/workout';
+import { WorkoutRecordActions } from 'utility-redux/workoutRecord';
 
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 import Input from 'utility-react-component/Form/Input/Uncontrolled';

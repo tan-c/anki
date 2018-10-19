@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
-import { TaskActions, projectTasksSelector } from 'utility-redux/hourblock/task';
-import { todayPlannedPomosSelector } from 'utility-redux/hourblock/plannedPomo';
-import { UiActions } from 'utility-redux/common/ui';
+import { TaskActions, projectTasksSelector } from 'utility-redux/task';
+import { todayPlannedPomosSelector } from 'utility-redux/plannedPomo';
+import { UiActions } from 'utility-redux/ui';
 
 export class ProjectTaskList extends React.Component {
   state = {

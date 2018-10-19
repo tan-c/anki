@@ -6,8 +6,8 @@ import { withRouter, Link } from 'react-router-dom';
 // import { Map } from 'immutable';
 // import toastr from 'toastr';
 
-import { UiActions } from 'utility-redux/common/ui';
-// import { UserActions, currentUserSelector } from 'utility-redux/common/user';
+import { UiActions } from 'utility-redux/ui';
+// import { UserActions, currentUserSelector } from 'utility-redux/user';
 
 export class SubHeader extends React.Component {
   // state = {

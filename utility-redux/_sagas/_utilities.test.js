@@ -13,7 +13,7 @@ const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8081
 
 describe('Saga Utilities Action Unit Test', () => {
   beforeAll(() => {
-    const ls = require('../../../../utility-test/setup/localStorage.js');
+    const ls = require('../../utility-test/setup/localStorage.js');
     ls.setLocalStorage();
   });
 

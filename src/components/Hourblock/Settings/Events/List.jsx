@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { EventActions, eventsSortedByProjectThenCategorySelector } from 'utility-redux/hourblock/event';
-import { UiActions } from 'utility-redux/common/ui';
+import { EventActions, eventsSortedByProjectThenCategorySelector } from 'utility-redux/event';
+import { UiActions } from 'utility-redux/ui';
 
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 import Input from 'utility-react-component/Form/Input/Uncontrolled';

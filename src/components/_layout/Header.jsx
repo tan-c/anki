@@ -9,8 +9,8 @@ import toastr from 'toastr';
 import {
   Menu, Container, Button, Icon
 } from 'semantic-ui-react';
-import { currentUserSelector } from 'utility-redux/common/user';
-import { UiActions } from 'utility-redux/common/ui';
+import { currentUserSelector } from 'utility-redux/user';
+import { UiActions } from 'utility-redux/ui';
 
 export class Header extends React.Component {
   // constructor(props, context) {

@@ -7,8 +7,8 @@ import toastr from 'toastr';
 
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 
-import { NotebookActions } from 'utility-redux/anki/notebook';
-import { NotebookGroupActions } from 'utility-redux/anki/notebookGroup';
+import { NotebookActions } from 'utility-redux/notebook';
+import { NotebookGroupActions } from 'utility-redux/notebookGroup';
 
 export class NotebookGroupRow extends React.Component {
   constructor(props) {

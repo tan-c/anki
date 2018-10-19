@@ -7,8 +7,8 @@ import SelectConnected from 'utility-react-component/Form/Select';
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 
-import { WorkoutActions, workoutsSortedByFocusSelector } from 'utility-redux/hourblock/workout';
-import { UiActions } from 'utility-redux/common/ui';
+import { WorkoutActions, workoutsSortedByFocusSelector } from 'utility-redux/workout';
+import { UiActions } from 'utility-redux/ui';
 
 import { Map } from 'immutable';
 

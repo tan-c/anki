@@ -6,11 +6,11 @@ import { withRouter } from 'react-router-dom';
 // import { Map } from 'immutable';
 // import toastr from 'toastr';
 
-import { UiActions } from 'utility-redux/common/ui';
+import { UiActions } from 'utility-redux/ui';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
-import { overduedTasksSelector } from 'utility-redux/hourblock/task';
+import { overduedTasksSelector } from 'utility-redux/task';
 
-// import { currentUserSelector } from 'utility-redux/common/user';
+// import { currentUserSelector } from 'utility-redux/user';
 
 export class SubHeader extends React.Component {
   // state = {

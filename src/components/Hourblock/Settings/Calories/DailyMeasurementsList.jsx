@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment-timezone';
 
-import { DailyMeasurementActions } from 'utility-redux/hourblock/dailyMeasurement';
+import { DailyMeasurementActions } from 'utility-redux/dailyMeasurement';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 import DailyCaloriesChartConnected from './DailyCaloriesChart';

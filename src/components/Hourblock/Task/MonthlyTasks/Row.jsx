@@ -8,7 +8,7 @@ import { Map } from 'immutable';
 import {
   TaskActions,
   selectedYearlyTaskSelector,
-} from 'utility-redux/hourblock/task';
+} from 'utility-redux/task';
 
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
 

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { thisWeekMetricsSelector, lastWeekMetricsSelector } from 'utility-redux/hourblock/dailyRecord';
-import { calorieWeeklySelector } from 'utility-redux/hourblock/dailyMeasurement';
+import { thisWeekMetricsSelector, lastWeekMetricsSelector } from 'utility-redux/dailyRecord';
+import { calorieWeeklySelector } from 'utility-redux/dailyMeasurement';
 
 export class Footer extends React.Component {
   // constructor(props, context) {

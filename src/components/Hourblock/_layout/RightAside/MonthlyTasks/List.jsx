@@ -6,7 +6,7 @@ import moment from 'moment-timezone';
 import { Map } from 'immutable';
 
 import InputNewConnected from 'utility-react-component/Form/Input/New';
-import { TaskActions, monthlyTasksSelector } from 'utility-redux/hourblock/task';
+import { TaskActions, monthlyTasksSelector } from 'utility-redux/task';
 
 export class MonthlyTasksList extends React.Component {
   constructor(props, context) {

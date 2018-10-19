@@ -16,7 +16,7 @@ import {
   AnkiActions,
   currentAnkiSelector,
   revisionAnkisTotalSelector
-} from 'utility-redux/anki/anki';
+} from 'utility-redux/anki';
 
 // require('./anki-modal.scss');
 

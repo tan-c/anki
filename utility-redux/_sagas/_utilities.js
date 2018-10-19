@@ -14,9 +14,7 @@ window.Promise = Promise;
 
 const namespaceMapping = {
   ab: 'abyssinian',
-  in: 'intelNote',
   an: 'anki',
-  hr: 'hourblock'
 };
 
 export function* getAll(apiNameSnake, namespace, params = {
@@ -67,7 +65,7 @@ export function* getAll(apiNameSnake, namespace, params = {
     const {
       err,
       root
-    } = yield call(protobuf.load, require(`../${namespaceMapping[namespace]}/${apiNameCamel}.proto`)); // eslint-disable-line
+    } = yield call(protobuf.load, require(`../${apiNameCamel}.proto`)); // eslint-disable-line
 
     if (err) {
       throw err;

@@ -6,9 +6,9 @@ import { bindActionCreators } from 'redux';
 
 // import toastr from 'toastr';
 
-import { NoteActions } from 'utility-redux/anki/note';
-import { UiActions } from 'utility-redux/common/ui';
-import { UserActions, currentUserSelector } from 'utility-redux/common/user';
+import { NoteActions } from 'utility-redux/note';
+import { UiActions } from 'utility-redux/ui';
+import { UserActions, currentUserSelector } from 'utility-redux/user';
 
 export class NoteRow extends React.Component {
   onDragOver = (event) => {

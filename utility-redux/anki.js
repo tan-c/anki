@@ -8,10 +8,10 @@ import moment from 'moment-timezone';
 
 import {
   actionCreate
-} from '../_base/actionCreate';
+} from './_base/actionCreate';
 import {
   reducerCreate
-} from '../_base/reducerCreate';
+} from './_base/reducerCreate';
 
 export default reducerCreate('anki', 'an');
 export const {

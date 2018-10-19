@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 // import keydown from 'react-keydown';
 import { Map } from 'immutable';
 
-import { UiActions } from 'utility-redux/common/ui';
-import { UserActions, currentUserSelector } from 'utility-redux/common/user';
+import { UiActions } from 'utility-redux/ui';
+import { UserActions, currentUserSelector } from 'utility-redux/user';
 
 export class ModalSearch extends React.Component {
   constructor(props, context) {

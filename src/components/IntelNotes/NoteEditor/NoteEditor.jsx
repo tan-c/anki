@@ -8,8 +8,8 @@ import keydown from 'react-keydown';
 import { Map } from 'immutable';
 
 import InputControlledConnected from 'utility-react-component/Form/Input/Controlled';
-import { NoteActions, activeNoteSelector } from 'utility-redux/anki/note';
-import { FileActions } from 'utility-redux/anki/file';
+import { NoteActions, activeNoteSelector } from 'utility-redux/note';
+import { FileActions } from 'utility-redux/file';
 
 import { ImageDrop } from '../_vendor/ImageDrop';
 

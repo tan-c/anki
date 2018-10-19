@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
-import { UiActions } from 'utility-redux/common/ui';
-import { PlannedPomoActions, plannedPomoByDayOfWeekSelector } from 'utility-redux/hourblock/plannedPomo';
+import { UiActions } from 'utility-redux/ui';
+import { PlannedPomoActions, plannedPomoByDayOfWeekSelector } from 'utility-redux/plannedPomo';
 import PlanningItemConnected from './Item';
 
 export class PlanningPage extends React.Component {

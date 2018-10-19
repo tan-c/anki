@@ -5,9 +5,9 @@ import { bindActionCreators } from 'redux';
 
 import { Map } from 'immutable';
 
-import { UiActions } from 'utility-redux/common/ui';
-import { CategoryActions, categoriesSortedSelector } from 'utility-redux/hourblock/category';
-import { ProjectActions, projectsByCategoryIdSelector } from 'utility-redux/hourblock/project';
+import { UiActions } from 'utility-redux/ui';
+import { CategoryActions, categoriesSortedSelector } from 'utility-redux/category';
+import { ProjectActions, projectsByCategoryIdSelector } from 'utility-redux/project';
 
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
 import InputNewConnected from 'utility-react-component/Form/Input/New';

@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { PlannedPomoActions, nextTwoPlannedPomosSelector, todayPlannedPomosSelector } from 'utility-redux/hourblock/plannedPomo';
+import { PlannedPomoActions, nextTwoPlannedPomosSelector, todayPlannedPomosSelector } from 'utility-redux/plannedPomo';
 import {
   DailyRecordActions,
   todayDailyRecordSelector,
-} from 'utility-redux/hourblock/dailyRecord';
-import { TaskActions, todayTasksSelector } from 'utility-redux/hourblock/task';
+} from 'utility-redux/dailyRecord';
+import { TaskActions, todayTasksSelector } from 'utility-redux/task';
 import { Grid, Input, Icon } from 'semantic-ui-react';
 
 import { Map } from 'immutable';

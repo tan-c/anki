@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map, List } from 'immutable';
 
-import { AnkiActions } from 'utility-redux/anki/anki';
-import { AnkiTagActions } from 'utility-redux/anki/ankiTag';
-// import { UiActions } from 'utility-redux/common/ui';
+import { AnkiActions } from 'utility-redux/anki';
+import { AnkiTagActions } from 'utility-redux/ankiTag';
+// import { UiActions } from 'utility-redux/ui';
 
 export class AnkiTagsPage extends React.Component {
   // constructor(props, context) {

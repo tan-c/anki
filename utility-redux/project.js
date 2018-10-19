@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 import { fromJS } from 'immutable';
 
-import { actionCreate } from '../_base/actionCreate';
-import { reducerCreate } from '../_base/reducerCreate';
+import { actionCreate } from './_base/actionCreate';
+import { reducerCreate } from './_base/reducerCreate';
 
 export default reducerCreate('project');
 export const {

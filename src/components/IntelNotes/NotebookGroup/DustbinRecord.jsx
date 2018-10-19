@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { UiActions } from 'utility-redux/common/ui';
-import { NoteActions } from 'utility-redux/anki/note';
+import { UiActions } from 'utility-redux/ui';
+import { NoteActions } from 'utility-redux/note';
 
 export class DustbinRecord extends React.Component {
   // constructor(props, context) {

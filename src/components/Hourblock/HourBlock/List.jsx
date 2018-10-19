@@ -7,12 +7,12 @@ import { withRouter } from 'react-router-dom';
 import { Map } from 'immutable';
 import toastr from 'toastr';
 
-import { PlannedPomoActions, plannedPomoByDayOfWeekSelector } from 'utility-redux/hourblock/plannedPomo';
-import { DailyRecordActions, dailyRecordByDayOfYearSelector } from 'utility-redux/hourblock/dailyRecord';
-import { allProjectTasksOrderedSelector } from 'utility-redux/hourblock/task';
+import { PlannedPomoActions, plannedPomoByDayOfWeekSelector } from 'utility-redux/plannedPomo';
+import { DailyRecordActions, dailyRecordByDayOfYearSelector } from 'utility-redux/dailyRecord';
+import { allProjectTasksOrderedSelector } from 'utility-redux/task';
 
-import { EventRecordActions } from 'utility-redux/hourblock/eventRecord';
-import { UiActions } from 'utility-redux/common/ui';
+import { EventRecordActions } from 'utility-redux/eventRecord';
+import { UiActions } from 'utility-redux/ui';
 
 import HourBlockRowRecordConnected from './Row/Record';
 import HourBlockRowPlannedConnected from './Row/Planned';

@@ -1,6 +1,6 @@
 import expect from 'expect';
 import { createStore, combineReducers } from 'redux';
-import { UserActions } from 'utility-redux/common/user';
+import { UserActions } from 'utility-redux/user';
 import { fromJS } from 'immutable';
 import rootReducer from './reducers';
 

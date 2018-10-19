@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Map, isImmutable } from 'immutable';
 import moment from 'moment';
 
-import { TaskActions, dailyTasksSelector } from 'utility-redux/hourblock/task';
+import { TaskActions, dailyTasksSelector } from 'utility-redux/task';
 import InputNewComponent from 'utility-react-component/Form/Input/New';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
-import { projectsByCategoryNameSelector } from 'utility-redux/hourblock/project';
+import { projectsByCategoryNameSelector } from 'utility-redux/project';
 
 export class ProjectSelect extends React.Component {
   // constructor(props, context) {

@@ -1,25 +1,25 @@
-import ankis from 'utility-redux/anki/anki';
-import ankiTags from 'utility-redux/anki/ankiTag';
-import housingPrices from 'utility-redux/anki/housingPrice';
-import notes from 'utility-redux/anki/note';
-import notebooks from 'utility-redux/anki/notebook';
-import notebookGroups from 'utility-redux/anki/notebookGroup';
-import files from 'utility-redux/anki/file';
+import ankis from 'utility-redux/anki';
+import ankiTags from 'utility-redux/ankiTag';
+import housingPrices from 'utility-redux/housingPrice';
+import notes from 'utility-redux/note';
+import notebooks from 'utility-redux/notebook';
+import notebookGroups from 'utility-redux/notebookGroup';
+import files from 'utility-redux/file';
 
-import dailyRecords from 'utility-redux/hourblock/dailyRecord';
-import tasks from 'utility-redux/hourblock/task';
-import categories from 'utility-redux/hourblock/category';
-import dailyMeasurements from 'utility-redux/hourblock/dailyMeasurement';
-import plannedPomos from 'utility-redux/hourblock/plannedPomo';
-import projects from 'utility-redux/hourblock/project';
-import events from 'utility-redux/hourblock/event';
-import eventRecords from 'utility-redux/hourblock/eventRecord';
-import workouts from 'utility-redux/hourblock/workout';
-import workoutRecords from 'utility-redux/hourblock/workoutRecord';
+import dailyRecords from 'utility-redux/dailyRecord';
+import tasks from 'utility-redux/task';
+import categories from 'utility-redux/category';
+import dailyMeasurements from 'utility-redux/dailyMeasurement';
+import plannedPomos from 'utility-redux/plannedPomo';
+import projects from 'utility-redux/project';
+import events from 'utility-redux/event';
+import eventRecords from 'utility-redux/eventRecord';
+import workouts from 'utility-redux/workout';
+import workoutRecords from 'utility-redux/workoutRecord';
 
 
-import users from 'utility-redux/common/user';
-import ui from 'utility-redux/common/ui';
+import users from 'utility-redux/user';
+import ui from 'utility-redux/ui';
 
 export default {
   ankis,

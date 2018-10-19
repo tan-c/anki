@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { TaskActions, projectTasksSelector } from 'utility-redux/hourblock/task';
+import { TaskActions, projectTasksSelector } from 'utility-redux/task';
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { Map } from 'immutable';
 
-import { dailyRecordPomoCountByDayOfYearSelector } from 'utility-redux/hourblock/dailyRecord';
+import { dailyRecordPomoCountByDayOfYearSelector } from 'utility-redux/dailyRecord';
 
 class DailyPomoCount extends React.Component {
   render() {

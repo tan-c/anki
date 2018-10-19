@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { DailyMeasurementActions, currentDayMeasurementSelector } from 'utility-redux/hourblock/dailyMeasurement';
+import { DailyMeasurementActions, currentDayMeasurementSelector } from 'utility-redux/dailyMeasurement';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 
 export class DailyMeasurements extends React.Component {

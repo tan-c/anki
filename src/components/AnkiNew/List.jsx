@@ -13,9 +13,9 @@ import {
   AnkiActions,
   ankisSortedSelector,
   activeAnkiSelector,
-} from 'utility-redux/anki/anki';
+} from 'utility-redux/anki';
 
-import { UiActions } from 'utility-redux/common/ui';
+import { UiActions } from 'utility-redux/ui';
 
 import AnkiRowConnected from './Row';
 

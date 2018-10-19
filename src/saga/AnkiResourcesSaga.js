@@ -21,12 +21,12 @@ export function* loadAllDataSaga() {
     limit: 500,
   };
 
-  yield* getAll('anki', 'an', httpParams, {
+  yield* getAll('anki', httpParams, {
     acceptHeader: 'application/octet-stream'
   });
-  yield* getAll('anki_tag', 'an');
+  yield* getAll('anki_tag');
 
-  yield* getAll('housing_price', 'an', {}, {
+  yield* getAll('housing_price', {}, {
     acceptHeader: 'application/octet-stream'
   });
 
@@ -38,20 +38,20 @@ export function* loadAllDataSaga() {
   //   limit: 500,
   // };
 
-  // yield* getAll('anki', 'an', httpParams, {
+  // yield* getAll('anki',, httpParams, {
   //   acceptHeader: 'application/octet-stream'
   // });
-  // yield* getAll('anki_tag', 'an');
-  // yield* getAll('task', 'hr');
-  // yield* getAll('planned_pomo', 'hr');
-  // yield* getAll('daily_record', 'hr', {
+  // yield* getAll('anki_tag');
+  // yield* getAll('task'));
+  // yield* getAll('planned_pomo'));
+  // yield* getAll('daily_record'), {
   //   limit: 1
   // });
 
   // if (!window.isMobile) {
-  yield* getAll('note', 'an', {});
-  yield* getAll('notebook', 'an', {});
-  yield* getAll('notebook_group', 'an', {});
+  yield* getAll('note', {});
+  yield* getAll('notebook', {});
+  yield* getAll('notebook_group', {});
 
   // Set Recent notes
   // if (currentUser.config.hima.recentNote._id != null) {
@@ -61,7 +61,7 @@ export function* loadAllDataSaga() {
   //     value: currentUser.config.hima.recentNote._id,
   //   });
 
-  //   yield* get('note', currentUser.config.hima.recentNote, 'in');
+  //   yield* get('note', currentUser.config.hima.recentNote));
 
   //   yield put({
   //     type: 'UPDATE_IN_UI_SUCCESS',
@@ -70,22 +70,22 @@ export function* loadAllDataSaga() {
   //   });
   // }
 
-  yield* getAll('category', 'hr');
-  yield* getAll('project', 'hr');
+  yield* getAll('category');
+  yield* getAll('project');
 
-  yield* getAll('daily_record', 'hr', {
+  yield* getAll('daily_record', {
     limit: window.isMobile ? 1 : 28,
     populate: 1, // To speed things up // Today should be populated
   });
-  yield* getAll('planned_pomo', 'hr');
-  yield* getAll('daily_measurement', 'hr');
-  yield* getAll('workout', 'hr');
-  yield* getAll('workout_record', 'hr');
+  yield* getAll('planned_pomo');
+  yield* getAll('daily_measurement');
+  yield* getAll('workout');
+  yield* getAll('workout_record');
 
   if (!window.isMobile) {
-    yield* getAll('task', 'hr');
-    yield* getAll('event', 'hr');
-    yield* getAll('event_record', 'hr');
+    yield* getAll('task');
+    yield* getAll('event');
+    yield* getAll('event_record');
 
     // yield* getAll('calorie');
   }

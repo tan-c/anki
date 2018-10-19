@@ -5,4 +5,4 @@ import { reducerCreate } from './_base/reducerCreate';
 export default reducerCreate('notebook_group');
 export const {
   NotebookGroupActions
-} = actionCreate('notebook_group', 'an');
+} = actionCreate('notebook_group');

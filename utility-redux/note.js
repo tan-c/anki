@@ -5,7 +5,7 @@ import { reducerCreate } from './_base/reducerCreate';
 export default reducerCreate('note');
 export const {
   NoteActions
-} = actionCreate('note', 'an');
+} = actionCreate('note');
 
 const getNotes = state => state.notes;
 const getActiveNotebookId = state => state.ui.getIn(['himalayan', 'activeNotebookId']);

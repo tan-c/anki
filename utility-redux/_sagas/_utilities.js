@@ -12,12 +12,7 @@ const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8081
 
 window.Promise = Promise;
 
-const namespaceMapping = {
-  ab: 'abyssinian',
-  an: 'anki',
-};
-
-export function* getAll(apiNameSnake, namespace, params = {
+export function* getAll(apiNameSnake, params = {
   limit: 0,
   populate: 1
 }, options = {}) {
@@ -30,7 +25,7 @@ export function* getAll(apiNameSnake, namespace, params = {
     capitalizedNameCamel,
     capitalizedNameSnakePlural,
     modelName,
-  } = require('../_utility/getVariousNames')(apiNameSnake, namespace);
+  } = require('../_utility/getVariousNames')(apiNameSnake);
 
   const axiosGetAllParams = {
     method: 'GET',
@@ -72,7 +67,7 @@ export function* getAll(apiNameSnake, namespace, params = {
     }
 
     const buffer = new Uint8Array(response.data);
-    const resource = root.lookupType(`${namespaceMapping[namespace]}.${capitalizedNameCamel}`);
+    const resource = root.lookupType(`${capitalizedNameCamel}`);
 
     const payload = resource.decode(buffer);
     const errMsg = resource.verify(payload);
@@ -91,12 +86,12 @@ export function* getAll(apiNameSnake, namespace, params = {
   });
 }
 
-export function* get(apiNameSnake, data, namespace = 'hr') {
+export function* get(apiNameSnake, data) {
   const {
     apiNameCamel,
     capitalizedNameSnake,
     modelName,
-  } = require('../_utility/getVariousNames')(apiNameSnake, namespace);
+  } = require('../_utility/getVariousNames')(apiNameSnake);
 
   const response = yield call(axios, ({
     method: 'get',
@@ -114,12 +109,12 @@ export function* get(apiNameSnake, data, namespace = 'hr') {
   });
 }
 
-export function* create(apiNameSnake, namespace = 'hr') {
+export function* create(apiNameSnake) {
   const {
     apiNameCamel,
     capitalizedNameSnake,
     modelName,
-  } = require('../_utility/getVariousNames')(apiNameSnake, namespace);
+  } = require('../_utility/getVariousNames')(apiNameSnake);
 
   const response = yield call(axios, ({
     method: 'post',

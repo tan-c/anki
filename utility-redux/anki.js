@@ -13,10 +13,10 @@ import {
   reducerCreate
 } from './_base/reducerCreate';
 
-export default reducerCreate('anki', 'an');
+export default reducerCreate('anki');
 export const {
   AnkiActions,
-} = actionCreate('anki', 'an');
+} = actionCreate('anki');
 
 const endOfTodayUnix = moment().tz('Asia/Tokyo').endOf('day').valueOf(); // FIXME: this will not be right for normal note
 

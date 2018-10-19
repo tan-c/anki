@@ -7,7 +7,7 @@ import { reducerCreate } from './_base/reducerCreate';
 export default reducerCreate('user');
 export const {
   UserActions
-} = actionCreate('user', ''); // No namespace
+} = actionCreate('user');
 
 const getUsers = state => state.users;
 // FIXME: since there will only be one user in users, currentUser is just the first user

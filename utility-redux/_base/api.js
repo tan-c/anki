@@ -20,12 +20,8 @@ function wrapRequest(req) { // Not including with credentials for jest testing
 }
 
 export default class BaseApi {
-  constructor(modelName, namespace = 'hr') {
-    if (namespace.length) {
-      this.modelName = `${namespace}/${modelName}`;
-    } else {
-      this.modelName = modelName;
-    }
+  constructor(modelName) {
+    this.modelName = modelName;
   }
 
   get(data, params = {}) {

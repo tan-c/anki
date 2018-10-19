@@ -5,7 +5,7 @@ import { reducerCreate } from './_base/reducerCreate';
 export default reducerCreate('notebook');
 export const {
   NotebookActions
-} = actionCreate('notebook', 'an');
+} = actionCreate('notebook');
 
 const getNotebooks = state => state.notebooks;
 const getActiveNotebookGroupId = (state, notebookGroupId) => notebookGroupId;

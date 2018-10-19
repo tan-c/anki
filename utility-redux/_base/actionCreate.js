@@ -9,13 +9,13 @@ toastr.options = {
 
 // const UPDATE_VIA_SOCKET = ['dailyRecord'];
 
-export const actionCreate = (apiNameSnake, namespace = 'hr') => {
+export const actionCreate = (apiNameSnake) => {
   const {
     apiNameCamel,
     capitalizedNameCamel,
     capitalizedNameSnakePlural,
     capitalizedNameSnake,
-  } = require('../_utility/getVariousNames')(apiNameSnake, namespace);
+  } = require('../_utility/getVariousNames')(apiNameSnake);
 
   const getResourceSuccess = data => ({
     type: `LOAD_${capitalizedNameSnake}_SUCCESS`,
@@ -44,7 +44,7 @@ export const actionCreate = (apiNameSnake, namespace = 'hr') => {
 
   class ExtendedClassApi extends BaseApi {
     constructor() {
-      super(apiNameCamel, namespace);
+      super(apiNameCamel);
     }
   }
 

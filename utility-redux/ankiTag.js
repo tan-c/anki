@@ -2,7 +2,7 @@
 import { actionCreate } from './_base/actionCreate';
 import { reducerCreate } from './_base/reducerCreate';
 
-export default reducerCreate('anki_tag', 'an');
+export default reducerCreate('anki_tag');
 export const {
   AnkiTagActions
-} = actionCreate('anki_tag', 'an');
+} = actionCreate('anki_tag');

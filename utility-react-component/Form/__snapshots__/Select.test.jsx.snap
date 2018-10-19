@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Unit Tests when normally set up renders correctly 1`] = `
+<select
+  className=""
+  name="select"
+  onChange={[Function]}
+  style={
+    Object {
+      "borderLeft": "3px solid white",
+    }
+  }
+  type="text"
+  value=""
+>
+  <option
+    key="0"
+    value=""
+  >
+    - 
+    select
+     - 
+  </option>
+</select>
+`;

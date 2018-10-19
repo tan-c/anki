@@ -1,0 +1,33 @@
+syntax = "proto3";
+package anki;
+// import "google/protobuf/any.proto";
+// import "ankiTag.proto";
+
+message Anki {
+  repeated OneRecord records = 1;
+
+  message OneRecord {
+    string _id = 99;
+    string question = 2;
+    string answer = 3;
+    string lastUpdate = 4;
+    string createdAt = 5;
+    string type = 6;
+
+    Revision revision = 10;
+    message Revision {
+      int32 round = 11;
+      int32 passing = 12;
+      string nextTime = 13;
+    }
+
+    // FIXME: loading the ankitag from ankkTag.proto needs the right loader
+    // Currently the fileloader wont load proto within another prototo
+    repeated AnkiTag tags = 30; // field by default is optional
+    message AnkiTag {
+      int32 _id = 99;
+      string name = 1;
+      string createdAt = 2;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputControlled Unit Tests when normally set up renders correctly 1`] = `
+<input
+  className="flex-1"
+  name=""
+  onChange={[Function]}
+  onKeyDown={[Function]}
+  type="text"
+  value=""
+/>
+`;

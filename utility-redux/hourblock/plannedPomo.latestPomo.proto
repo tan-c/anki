@@ -1,0 +1,27 @@
+syntax = "proto3";
+package hourblock;
+
+message LastestPomo {
+  string content = 1;
+  string title = 2;
+}
+
+// message Customer {
+//     string username = 1;
+//     repeated string email_addresses = 2;
+//     CustomerType type = 3;
+//     Address address = 4;
+// }
+
+// enum CustomerType {
+//     REGULAR = 0;
+//     MEMBER = 1;
+//     SPONSOR = 2;
+// }
+
+// message Address {
+//     string address = 1;
+//     string city = 2;
+//     string state = 3;
+//     string zip_code = 4;
+// }

@@ -1,0 +1,27 @@
+syntax = "proto3";
+package anki;
+// import "google/protobuf/any.proto";
+
+message AnkiTag {
+  repeated OneRecord records = 1;
+
+  message OneRecord {
+    int32 _id = 99;
+    string name = 1;
+    string createdAt = 2;
+  }
+}
+
+// I do not think this file is being used at all
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}

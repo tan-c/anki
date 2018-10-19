@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputNewConnected Unit Tests when normally set up renders correctly 1`] = `
+<input
+  className="flex-1"
+  name="inputNamePlaceholder"
+  onKeyDown={[Function]}
+  placeholder="add new"
+  type="text"
+/>
+`;

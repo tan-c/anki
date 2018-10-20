@@ -18,8 +18,6 @@ import {
   revisionAnkisTotalSelector
 } from 'utility-redux/anki';
 
-// require('./anki-modal.scss');
-
 export class AnkiPage extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -111,7 +109,7 @@ export class AnkiPage extends React.Component {
     // update the revision time to be x days from now
     if (currentAnki.has('lastUpdate') !== undefined) {
       const revisionElapsedDaysUnparsed = (new Date().getTime()
-          - new Date(currentAnki.get('lastUpdate')).getTime())
+        - new Date(currentAnki.get('lastUpdate')).getTime())
         / 60
         / 60
         / 1000
@@ -120,7 +118,7 @@ export class AnkiPage extends React.Component {
     }
 
     const createdElapsedDaysUnparsed = (new Date().getTime()
-        - new Date(currentAnki.get('createdAt')).getTime())
+      - new Date(currentAnki.get('createdAt')).getTime())
       / 60
       / 60
       / 1000
@@ -183,11 +181,11 @@ export class AnkiPage extends React.Component {
         </Header>
 
         {showAnswer
-            && (
-              <Container text textAlign="center">
-                {currentAnki.get('answer')}
-              </Container>
-            )
+          && (
+            <Container text textAlign="center">
+              {currentAnki.get('answer')}
+            </Container>
+          )
         }
 
         <Divider />
@@ -198,7 +196,7 @@ export class AnkiPage extends React.Component {
               primary
               onClick={this.toggleAnswer}
             >
-                SHOW ANSWER
+              SHOW ANSWER
             </Button>
           )}
 

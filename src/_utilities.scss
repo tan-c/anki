@@ -16,6 +16,7 @@ $grey-light: #E6E9ED;
 $green: #27ae60; // nephritis
 $green-light: rgba(#27ae60, 0.5);
 $red: #DB4848;
+
 .hidden {
   display: none;
 }
@@ -27,6 +28,7 @@ $red: #DB4848;
 @for $i from 3 through 8 {
   .font-#{$i*100} {
     font-weight: #{$i*100};
+
     * {
       font-weight: #{$i*100};
     }
@@ -37,30 +39,37 @@ $red: #DB4848;
   .opacity-#{$i} {
     opacity: #{$i/100};
   }
+
   .font-#{$i} {
     font-size: #{$i}px;
   }
+
   .height-#{$i} {
     height: #{$i}px;
     display: inline-block;
   }
+
   .height-lineheight-#{$i} {
     height: #{$i}px;
     line-height: #{$i}px !important;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .line-height-#{$i} {
     line-height: #{$i}px !important;
   }
+
   .height-#{$i}p {
     height: #{$i * 1%};
   }
+
   .width-#{$i}p {
     width: #{$i * 1%};
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .width-#{$i * 5} {
     width: #{$i * 5}px;
     -webkit-box-sizing: border-box;
@@ -71,6 +80,7 @@ $red: #DB4848;
 $text-position: left,
 right,
 center;
+
 @for $i from 1 through length($text-position) {
   .text-#{nth($text-position, $i)} {
     text-align: nth($text-position, $i);
@@ -128,34 +138,40 @@ $dir-names: top,
 left,
 right,
 bottom;
+
 @for $i from 1 through length($color-names) {
   .bg-#{nth($color-names, $i)} {
     background-color: nth($colors, $i) !important;
   }
+
   .color-#{nth($color-names, $i)},
   .text-#{nth($color-names, $i)} {
     color: nth($colors, $i);
-    @include transition(all 0.5s ease);
   }
+
   .color-#{nth($color-names, $i)}-important {
     color: nth($colors, $i) !important;
   }
+
   .border-#{nth($color-names, $i)} {
     border: 1px solid nth($colors, $i) !important;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   @each $dir in $dir-names {
     .border-#{$dir}-#{nth($color-names, $i)} {
       border-#{$dir}: 1px solid nth($colors, $i);
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
     }
+
     .border-#{$dir}-#{nth($color-names, $i)}-dotted {
       border-#{$dir}: 1px dotted nth($colors, $i);
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
     }
+
     @for $len from 1 through 20 {
       .border-#{$dir}-#{nth($color-names, $i)}-#{$len}px {
         border-#{$dir}: #{$len}px solid nth($colors, $i);
@@ -172,46 +188,56 @@ bottom;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .margin-horizontal-#{$i} {
     margin-left: #{$i}px;
     margin-right: #{$i}px;
   }
+
   .margin-horizontal-#{$i * 5} {
     margin-left: #{$i * 5}px;
     margin-right: #{$i * 5}px;
   }
+
   .margin-vertical-#{$i} {
     margin-top: #{$i}px;
     margin-bottom: #{$i}px;
   }
+
   .margin-vertical-#{$i * 5} {
     margin-top: #{$i * 5}px;
     margin-bottom: #{$i * 5}px;
   }
+
   .padding-#{$i * 5} {
     padding: #{$i * 5}px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .padding-horizontal-#{$i * 5} {
     padding-left: #{$i * 5}px;
     padding-right: #{$i * 5}px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .padding-vertical-#{$i * 5} {
     padding-top: #{$i * 5}px;
     padding-bottom: #{$i * 5}px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   @each $dir in $dir-names {
     .margin-#{$dir}-#{$i} {
       margin-#{$dir}: #{$i}px;
     }
+
     .margin-#{$dir}-#{$i * 5} {
       margin-#{$dir}: #{$i * 5}px;
     }
+
     .padding-#{$dir}-#{$i * 5} {
       padding-#{$dir}: #{$i * 5}px;
       -webkit-box-sizing: border-box;
@@ -224,6 +250,7 @@ bottom;
   .opacity-#{$i * 10} {
     opacity: #{$i/10};
   }
+
   .spacing-#{$i * 5} {
     clear: both;
     display: block;
@@ -300,6 +327,7 @@ a {
   -ms-flex-pack: center;
   justify-content: center;
   overflow: hidden;
+
   >* {
     overflow: hidden;
     word-break: break-all;
@@ -318,6 +346,7 @@ a {
   -ms-flex-pack: center;
   justify-content: center;
   overflow: hidden;
+
   >* {
     overflow: hidden;
     word-break: break-all;
@@ -344,27 +373,33 @@ a {
   display: flex;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+
   &.typical-setup {
     margin: 2px 0;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+
     >* {
       line-height: 30px;
     }
+
     @media screen and (max-width: 415px) {
       >* {
         line-height: 30px;
       }
     }
   }
+
   section {
     overflow: auto;
     padding: 0 2px;
   }
+
   >* {
     min-height: 30px;
     overflow: hidden;
   }
+
   @media screen and (max-width: 415px) {
     >* {
       min-height: 30px;

@@ -133,9 +133,9 @@ export class App extends React.Component {
                     position: 'fixed',
                     overflow: 'auto',
                     zIndex: 1,
-                    backgroundColor: 'white',
-                    color: 'black',
-                    height: 'calc(100vh - 80px)'
+                    height: 'calc(100vh - 80px)',
+                    background: 'black',
+                    color: 'white',
                   }}
                   attached
                 >

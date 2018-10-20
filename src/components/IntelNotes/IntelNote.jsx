@@ -8,8 +8,6 @@ import { IntelNotePage } from './Page';
 import SearchModal from '../_layout/Modal/Search';
 import FileModal from '../_layout/Modal/File';
 
-import './intelnote.scss';
-
 export class MainIntelNote extends React.Component {
   render() {
     const {

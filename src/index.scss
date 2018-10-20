@@ -1,5 +1,446 @@
+$left-aside-width: 80px;
+$left-aside-width-mobile: 50px;
+$header-height: 50px;
+$subheader-height: 30px;
+$right-aside-width: 260px;
+@import '~animate.css/animate.min.css';
+@import '~font-awesome/css/font-awesome.css';
+@import '~toastr/build/toastr.min.css';
+@import '~react-table/react-table.css';
+@import "utilities";
+@import "intelnote";
+@import "hourblock";
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Orbitron:400);
+
 #app {
   height: 100%
 }
 
-@import '~react-table/react-table.css';
+
+#version {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: red;
+}
+
+header {
+  height: $header-height;
+  position: fixed;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background: $white-10;
+  z-index: 3;
+
+  #currentTime {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    width: 100px;
+    display: block;
+    height: $header-height;
+    line-height: $header-height;
+    box-sizing: border-box;
+  }
+
+  .profile-image {
+    // border: 1px solid white;
+    width: 36px;
+    border-radius: 1000px;
+    height: 36px;
+  }
+
+  #more-icon {
+    line-height: $header-height;
+    text-align: center;
+    right: 0;
+
+    &.active,
+    &:hover {
+      background: $white-20;
+    }
+  }
+}
+
+#settings {
+  height: calc(100vh - 80px);
+  width: 160px;
+  position: absolute;
+  z-index: 1000000;
+  top: 80px;
+  background: black;
+  opacity: 0.9;
+  color: white;
+  right: 0px;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.fa[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ql-editor img {
+  max-width: 100% !important;
+}
+
+.ql-editor * {
+  font-size: 14px;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+#toast-container * {
+  color: white;
+}
+
+body {
+  // background: url("../resource/cat2.jpg") no-repeat center center;
+  // background: black; // midnight blue
+  // @include coverbg;
+  height: 100vh;
+  width: 100%;
+  // color: white;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 15;
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+  transition: 1s opacity;
+  opacity: 0.1;
+}
+
+#modal-eye {
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background: black;
+  z-index: 1000;
+  opacity: 0.8;
+
+  #current-time {
+    text-align: center;
+    margin-top: 400px;
+    font-size: 48px;
+  }
+}
+
+#modal-eye {
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background: black;
+  z-index: 1000;
+  opacity: 0.8;
+
+  #current-time {
+    text-align: center;
+    margin-top: 400px;
+    font-size: 48px;
+  }
+}
+
+
+
+#modal {
+  @extend .flex-component-center;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: calc(100vw - 280px);
+  position: absolute;
+  background: $black-70;
+
+  %box {
+    background: white;
+    border-radius: 2px;
+    z-index: 10;
+    position: relative;
+  }
+
+  &.mobile {
+    width: 100%;
+
+    #canvas {
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+
+  $search-box-height : 500px;
+  $search-box-width : 1000px;
+
+  #search-box {
+    @extend %box;
+    width: $search-box-width;
+    height: $search-box-height;
+  }
+
+  $search-content-height: 40px;
+
+  #search-content {
+    font-size: 20px;
+    line-height: 30px;
+    padding: 5px;
+    height : calc(#{$search-content-height});
+    box-sizing: border-box;
+    border-bottom: 1px solid $black-70;
+  }
+
+  #search-results {
+    height : calc(#{$search-box-height} - #{$search-content-height}) !important;
+    overflow: auto;
+
+    .search-results-record {
+      color: black;
+
+      &:hover {
+        background: $black-20;
+      }
+    }
+  }
+
+  #canvas {
+    position: fixed;
+    top : calc(#{$header-height} + #{$subheader-height});
+    left: 0;
+    height : calc(100vh - #{$header-height} - #{$subheader-height});
+    width: calc(100vw - 280px);
+    background: $black-70;
+    z-index: 9;
+  }
+}
+
+label {
+  height: 30px;
+  line-height: 30px;
+  background: $white-20;
+}
+
+.badge {
+  height: 20px;
+  line-height: 20px;
+  padding: 0px 4px;
+  font-size: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.badge-big {
+  height: 30px;
+  line-height: 30px;
+  padding: 4px 8px;
+  font-size: 18px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+section {
+  .section-header {
+    width: calc(100% - 10px);
+    padding: 0 5px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    background: $white-10;
+    text-align: center;
+
+    // fixme: the header for section should be fixed
+    span,
+    i {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 30px;
+    }
+  }
+
+  .section-subheader {
+    text-align: left;
+    margin-bottom: 10px;
+    clear: both;
+    padding-left: 10px;
+    border-left: 4px white solid;
+  }
+
+  .section-content {
+    width: calc(100% - 10px);
+    margin: 5px;
+    overflow: auto;
+    height: calc(100% - 30px);
+    position: relative;
+
+    &.no-header {
+      height: calc(100% - 5px);
+    }
+  }
+}
+
+input {
+  color: white;
+  width: 100%;
+  background: $white-20;
+  border: none;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-sizing: border-box;
+  margin: 0 1px;
+
+  &:focus {
+    border: 1px solid white;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+}
+
+%btn {
+  outline: none;
+  border: 1px solid white;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  box-sizing: border-box;
+
+  &.unselected {
+    border-color: $white-30;
+    color: $white-30;
+  }
+
+  &:hover {
+    // @include transition(border-color 0.5s ease, color 0.5s ease);
+    border-color: $orange;
+    color: $orange;
+  }
+}
+
+.btn {
+  @extend %btn;
+  line-height: 35px;
+  height: 35px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.btn-large {
+  @extend %btn;
+  line-height: 35px;
+  height: 35px;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing: border-box;
+  background: grey;
+}
+
+.btn-sm {
+  @extend %btn;
+  line-height: 20px;
+  height: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.btn-group {
+  width: 100%;
+  text-align: center;
+
+  .btn,
+  .btn-sm {
+    margin: 5px;
+  }
+}
+
+strong {
+  font-weight: 700;
+}
+
+.anki {
+  height: 14px;
+  width: 20px;
+  background: $blue;
+  color: white;
+  position: absolute;
+  border-radius: 2px;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  z-index: 10000;
+}
+
+i {
+  min-width: 15px;
+  display: inline-block;
+  text-align: center;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+select {
+  border: 0px;
+  border-radius: 0px;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 0px solid;
+  height: 30px;
+  background: transparent;
+  border-bottom: 1px solid $white-30;
+  width: 100%;
+  color: white;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.label {
+  border: 1px solid white;
+  border-radius: 1px;
+  background: $black-70;
+  color: white;
+  padding: 0 5px;
+  margin-right: 5px;
+}
+
+select,
+input[type="text"],
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0px;
+  outline: none;
+}

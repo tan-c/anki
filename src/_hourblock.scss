@@ -1,0 +1,347 @@
+$left-aside-width: 120px;
+$left-aside-width-mobile: 50px;
+$header-height: 50px;
+$subheader-height: 30px;
+$right-aside-width: 300px;
+$footer-height: 16px;
+
+// $footer-height: 30px;
+input::placeholder {
+  color: white;
+  opacity: 0.7;
+  /* Firefox */
+}
+
+main#hourblock {
+  color: white;
+  background-color: black;
+  bottom: $footer-height;
+  left: $left-aside-width;
+  width: calc(100vw - #{$left-aside-width});
+
+  &.with-right-calendar {
+    width: calc(100vw - #{$right-aside-width} - #{$left-aside-width});
+  }
+
+  text-align: center;
+  height: calc(100vh - #{$header-height} - #{$subheader-height} - #{$footer-height});
+
+  &.mobile {
+    width: 100vw;
+    left: 0;
+  }
+
+  .scrollable {
+    overflow-y: auto;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: row;
+    height: inherit;
+    overflow: auto;
+
+    >section {
+      background: $white-10;
+      height: inherit;
+      margin: 5px;
+      width: 100%;
+      overflow: auto;
+
+      >.section-content {
+        height: calc(100% - 30px);
+      }
+
+      >section {
+        position: relative;
+        overflow: auto;
+        margin-bottom: 10px;
+        background: $white-10;
+      }
+
+      >section:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  $footer-height: 16px;
+
+  #version {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: red;
+  }
+
+  header {
+    height: $header-height;
+    position: fixed;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: $white-10;
+    z-index: 3;
+
+    #logo {
+      height: 40px;
+      background: url("/logo-white-long.png") no-repeat center center;
+      background-size: auto 90%;
+      position: absolute;
+      width: 200px;
+    }
+
+    #currentTime {
+      text-align: center;
+      color: white;
+      font-size: 24px;
+      width: 100px;
+      display: block;
+      height: $header-height;
+      line-height: $header-height;
+      box-sizing: border-box;
+    }
+
+    .profile-image {
+      // border: 1px solid white;
+      width: 36px;
+      border-radius: 1000px;
+      height: 36px;
+    }
+
+    #more-icon {
+      line-height: $header-height;
+      text-align: center;
+      right: 0;
+
+      &.active,
+      &:hover {
+        background: $white-20;
+      }
+    }
+  }
+
+  #subheader {
+    position: fixed;
+    top: $header-height;
+    height: $subheader-height;
+    background: $white-20;
+    padding-left: $left-aside-width;
+    padding-right: 20px;
+    width: 100vw;
+    z-index: 1;
+
+    // a {
+    //   color: white;
+    // }
+    span {
+      line-height: $subheader-height;
+      font-size: 14px;
+      color: $white-70;
+    }
+
+    #subheader-links span {
+      display: inline-block;
+      margin-left: 10px;
+
+      &.active,
+      &:hover {
+        border-bottom: 3px solid $green;
+        color: $orange;
+        font-weight: 600;
+      }
+    }
+  }
+
+  footer {
+    height: $footer-height;
+    position: fixed;
+    width: 100vw;
+    border-top: 1px solid $white-30;
+    background: $white-30;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+
+    #calorie-progress-bar {
+      background: $green;
+      height: #{$footer-height/2};
+      position: absolute;
+      left: 0;
+    }
+
+    #pomo-progress-bar {
+      background: $orange-light;
+      height: #{$footer-height/2};
+      position: absolute;
+      left: 0;
+      top: #{$footer-height/2};
+    }
+  }
+
+  aside {
+    width: $left-aside-width;
+    top: calc(#{$header-height}+#{$subheader-height}+2px); // Space for overlapping
+    position: fixed;
+    bottom: $footer-height;
+    height: calc(100vh - #{$header-height} - #{$subheader-height} - #{$footer-height});
+    background: $white-20;
+    z-index: 1;
+
+    &.mobile {
+      width: $left-aside-width-mobile;
+    }
+
+    #menu {
+      a {
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        width: inherit;
+        text-align: center;
+        padding-left: 4px;
+        margin-bottom: 2px;
+
+        &:hover {
+          border-left: 4px solid $green;
+          background: $white-30;
+          padding-left: 0;
+        }
+
+        &.active {
+          border-left: 4px solid $green;
+          background: $white-30;
+          padding-left: 0;
+        }
+
+        span {
+          text-decoration: none;
+          margin-left: 5px;
+        }
+      }
+
+      i {
+        color: white;
+        height: inherit;
+        line-height: inherit;
+        font-size: 16px;
+      }
+    }
+
+    .badge {
+      position: absolute;
+      right: 5px;
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    .cat-insight {
+      margin-bottom: 5px;
+      position: relative;
+
+      .cat-prog-bar {
+        width: 100%;
+        position: absolute;
+        height: 20px;
+        z-index: -1;
+        left: 0;
+        top: 0;
+      }
+
+      .cat-label {
+        margin: 4px 0;
+        padding-left: 3px;
+        padding-right: 3px;
+        overflow: hidden;
+        font-size: 12px;
+        word-break: break-all;
+        display: block;
+        line-height: 20px;
+        box-sizing: border-box;
+      }
+
+      .project-list {
+        padding: 1px 2px;
+        text-align: center;
+        margin: 2px 0;
+        position: relative;
+
+        >div {
+          display: block;
+          position: relative;
+          overflow: hidden;
+          height: 15px;
+          line-height: 15px;
+        }
+
+        .proj-prog-bar {
+          position: absolute;
+          height: 3px;
+          z-index: -1;
+          left: 0;
+          top: 6px;
+        }
+
+        div {
+          font-size: 12px;
+        }
+
+        span {
+          position: absolute;
+          height: 3px;
+          z-index: -1;
+          left: 0;
+          top: 4px;
+        }
+      }
+    }
+
+    #pomoBtn {
+      width: $left-aside-width;
+      position: fixed;
+      bottom: $footer-height;
+      left: 0;
+      font-size: 12px;
+      text-align: center;
+      height: 40px;
+
+      >div {
+        box-sizing: border-box;
+        line-height: 20px;
+        height: 20px;
+        font-size: 10px;
+        z-index: 3;
+        position: relative;
+      }
+    }
+  }
+
+  aside#left-menu {
+    left: 0;
+  }
+
+  aside#right-menu {
+    width: $right-aside-width;
+    right: 0;
+  }
+
+  #settings {
+    height: calc(100vh - 80px);
+    width: 160px;
+    position: absolute;
+    z-index: 1000000;
+    top: 80px;
+    background: black;
+    opacity: 0.9;
+    color: white;
+    right: 0px;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+}

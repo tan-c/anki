@@ -10,6 +10,7 @@ import {
   Menu, Container, Button, Icon
 } from 'semantic-ui-react';
 import { currentUserSelector } from 'utility-redux/user';
+import { threeDayMeasurementSelector } from 'utility-redux/dailyMeasurement';
 import { UiActions } from 'utility-redux/ui';
 
 export class Header extends React.Component {
@@ -24,6 +25,10 @@ export class Header extends React.Component {
 
   componentDidMount() {
     this.updateCurrentTime();
+
+    if (!window.isMobile) {
+      this.updateWeather();
+    }
   }
 
   componentWillUnmount() {
@@ -41,8 +46,15 @@ export class Header extends React.Component {
     }, 3000);
   };
 
+  updateWeather = () => {
+    this.props.updateWeather();
+    setInterval(() => {
+      this.props.updateWeather();
+    }, 1000 * 60 * 60);
+  }
+
+
   logout = () => {
-    // Clear Access Token and ID Token from local storage
     localStorage.removeItem('access_token');
     localStorage.removeItem('expires_at');
     toastr.info('Localstorage cleared, redirecting...');
@@ -50,8 +62,18 @@ export class Header extends React.Component {
   };
 
   render() {
-    const { isSidebarOn, isSettingOn } = this.props;
+    const {
+      isSidebarOn,
+      isSettingOn,
+      currentUser,
+      weatherInfo,
+      threeDayMeasurement,
+      currentUserImageSrc,
+    } = this.props;
+
     const { currentTime, showEyeTimeoutBlinking } = this.state;
+
+    const currentApp = currentUser.hasIn(['config', 'recentApp']) ? currentUser.getIn(['config', 'recentApp']) : '';
 
     return (
       <Menu
@@ -62,7 +84,60 @@ export class Header extends React.Component {
         // inverted
         data-role="header"
         className={`${showEyeTimeoutBlinking && 'bg-orange'}`}
+        style={{
+          height: 50
+        }}
       >
+        <div
+          id="logo"
+          style={{
+            height: 50,
+            // background: url("/logo-white-long.png") no-repeat center center;
+            backgroundSize: 'auto 90%',
+            position: 'absolute',
+            width: '200'
+          }}
+        />
+
+        {!window.isMobile && (
+          <span className="height-50 border-right padding-horizontal-10">
+            {threeDayMeasurement.valueSeq().map(item => (
+              <span className="font-24 margin-left-10 line-height-50" key={item.get('_id')}>
+                {item.get('morningWeight')}
+                kg -
+              </span>
+            ))}
+          </span>
+        )}
+
+        {!window.isMobile && (
+          <span
+            className="height-50 border-right padding-horizontal-10"
+          >
+            <span className="font-24 margin-left-10 line-height-50">
+              {parseInt(weatherInfo.getIn(['current', 'temp']), 10)}
+              {' '}
+              -
+              {parseInt(weatherInfo.getIn(['next', 'weather', 'temp']), 10)}
+              °C
+            </span>
+            <span className="margin-left-5 height-25">
+              {weatherInfo.getIn(['city', 'name'])}
+            </span>
+          </span>
+        )}
+
+        {!window.isMobile && (
+          <span className="height-50 padding-horizontal-10 line-height-25 text-right">
+            <span className="height-25">
+              欢迎回来,
+              {currentUser.get('userName')}
+            </span>
+            <br />
+            <span className="height-25 font-12">{currentUser.get('email')}</span>
+          </span>
+        )}
+
         <Container>
           {/* {!window.isMobile && (
           <span className="height-50 padding-horizontal-10 line-height-25 text-right">
@@ -77,17 +152,23 @@ export class Header extends React.Component {
           </span>
         )} */}
 
-          {/* {!window.isMobile && (
-          <img
-            alt="pic"
-            className="profile-image"
-            src={
-              currentUser.has('imageUrl')
-                ? currentUser.get('imageUrl')
-                : currentUserImageSrc
-            }
-          />
-        )} */}
+          {!window.isMobile && (
+            <img
+              alt="pic"
+              className="profile-image"
+              src={
+                currentUser.has('imageUrl')
+                  ? currentUser.get('imageUrl')
+                  : currentUserImageSrc
+              }
+              style={{
+                width: 36,
+                borderRadius: 1000,
+                height: 36,
+              }}
+            />
+          )}
+
           <Menu.Menu>
             <Button
               color="blue"
@@ -103,6 +184,11 @@ export class Header extends React.Component {
           <Menu.Item
             position="right"
             name="currentTime"
+            style={{
+              fontSize: 24,
+              height: 50,
+              lineHeight: 50,
+            }}
           >
             {currentTime.format('HH:mm')}
           </Menu.Item>
@@ -145,12 +231,19 @@ export class Header extends React.Component {
 Header.defaultProps = {
   isSettingOn: false,
   currentUser: Map(),
+  weatherInfo: Map(),
+  threeDayMeasurement: Map(),
 };
 
 Header.propTypes = {
   isSettingOn: PropTypes.bool,
   isSidebarOn: PropTypes.bool,
   currentUser: PropTypes.object,
+  currentUserImageSrc: PropTypes.string.isRequired,
+  weatherInfo: PropTypes.object,
+  threeDayMeasurement: PropTypes.object,
+
+  updateWeather: PropTypes.func.isRequired,
 
   UiActions: PropTypes.object.isRequired,
 };
@@ -161,6 +254,9 @@ function mapStateToProps(state, ownProps) {
     isSidebarOn: state.ui.getIn(['anki', 'isSidebarOn']),
 
     currentUser: currentUserSelector(state),
+    currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),
+    weatherInfo: state.ui.getIn(['common', 'api', 'weatherInfo']),
+    threeDayMeasurement: threeDayMeasurementSelector(state),
   };
 }
 
@@ -169,6 +265,9 @@ function mapDispatchToProps(dispatch) {
     removeCurrentUser: currentUser => dispatch({
       type: 'DELETE_USER_SUCCESS',
       user: currentUser,
+    }),
+    updateWeather: _ => dispatch({
+      type: 'SET_WEATHER_INFO',
     }),
 
     UiActions: bindActionCreators(UiActions, dispatch),

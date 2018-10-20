@@ -46,7 +46,7 @@ export class SubHeader extends React.Component {
         attached
         style={{
           paddingLeft: 10,
-          marginTop: 40,
+          marginTop: 50,
           height: 40
         }}
       >

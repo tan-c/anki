@@ -33,13 +33,23 @@ const SidebarComponent = () => (
       <Icon name="university" />
       Learn
     </Menu.Item>
+
     <Menu.Item
       as={Link}
       to="/anki"
       active={location.href.split('//')[1].split('/')[2] === 'anki'}
     >
       <Icon name="list" />
-        Anki
+      Anki
+    </Menu.Item>
+
+    <Menu.Item
+      as={Link}
+      to="/hourblock"
+      active={location.href.indexOf('/hourblock') > -1}
+    >
+      <Icon name="calendar" />
+      HB
     </Menu.Item>
 
     <Menu.Item
@@ -48,7 +58,7 @@ const SidebarComponent = () => (
       active={location.href.indexOf('/notes') > -1}
     >
       <Icon name="sticky note outline" />
-        Notes
+      Notes
     </Menu.Item>
 
     <Menu.Item
@@ -57,16 +67,9 @@ const SidebarComponent = () => (
       active={location.href.indexOf('/housingPrices') > -1}
     >
       <Icon name="building" />
-        Toshigo
+      Toshigo
     </Menu.Item>
-    <Menu.Item
-      as={Link}
-      to="/hourblock"
-      active={location.href.indexOf('/hourblock') > -1}
-    >
-      <Icon name="calendar" />
-        HB
-    </Menu.Item>
+
   </Sidebar>
 );
 

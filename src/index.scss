@@ -8,8 +8,6 @@ $right-aside-width: 260px;
 @import '~toastr/build/toastr.min.css';
 @import '~react-table/react-table.css';
 @import "utilities";
-@import "intelnote";
-@import "hourblock";
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://fonts.googleapis.com/css?family=Orbitron:400);
@@ -26,54 +24,13 @@ $right-aside-width: 260px;
   background: red;
 }
 
-header {
-  height: $header-height;
-  position: fixed;
-  align-items: center;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  background: $white-10;
-  z-index: 3;
-
-  #currentTime {
-    text-align: center;
-    color: white;
-    font-size: 24px;
-    width: 100px;
-    display: block;
-    height: $header-height;
-    line-height: $header-height;
-    box-sizing: border-box;
-  }
-
-  .profile-image {
-    // border: 1px solid white;
-    width: 36px;
-    border-radius: 1000px;
-    height: 36px;
-  }
-
-  #more-icon {
-    line-height: $header-height;
-    text-align: center;
-    right: 0;
-
-    &.active,
-    &:hover {
-      background: $white-20;
-    }
-  }
-}
-
 #settings {
   height: calc(100vh - 80px);
   width: 160px;
   position: absolute;
   z-index: 1000000;
-  top: 80px;
+  top: 90px;
   background: black;
-  opacity: 0.9;
   color: white;
   right: 0px;
   display: none;
@@ -443,4 +400,449 @@ button {
   appearance: none;
   border-radius: 0px;
   outline: none;
+}
+
+
+$left-aside-width: 120px;
+$left-aside-width-mobile: 50px;
+$header-height: 50px;
+$subheader-height: 30px;
+$right-aside-width: 300px;
+$footer-height: 16px;
+
+main#hourblock {
+  color: white;
+  background-color: black;
+  bottom: $footer-height;
+  left: $left-aside-width;
+  width: calc(100vw - #{$left-aside-width});
+
+  &.with-right-calendar {
+    width: calc(100vw - #{$right-aside-width} - #{$left-aside-width});
+  }
+
+  text-align: center;
+  height: calc(100vh - #{$header-height} - #{$subheader-height} - #{$footer-height});
+
+  &.mobile {
+    width: 100vw;
+    left: 0;
+  }
+
+  .scrollable {
+    overflow-y: auto;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: row;
+    height: inherit;
+    overflow: auto;
+
+    >section {
+      background: $white-10;
+      height: inherit;
+      margin: 5px;
+      width: 100%;
+      overflow: auto;
+
+      >.section-content {
+        height: calc(100% - 30px);
+      }
+
+      >section {
+        position: relative;
+        overflow: auto;
+        margin-bottom: 10px;
+        background: $white-10;
+      }
+
+      >section:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  $footer-height: 16px;
+
+  #subheader {
+    position: fixed;
+    top: $header-height;
+    height: $subheader-height;
+    background: $white-20;
+    padding-left: $left-aside-width;
+    padding-right: 20px;
+    width: 100vw;
+    z-index: 1;
+
+    span {
+      line-height: $subheader-height;
+      font-size: 14px;
+      color: $white-70;
+    }
+
+    #subheader-links span {
+      display: inline-block;
+      margin-left: 10px;
+
+      &.active,
+      &:hover {
+        border-bottom: 3px solid $green;
+        color: $orange;
+        font-weight: 600;
+      }
+    }
+  }
+
+  footer {
+    height: $footer-height;
+    position: fixed;
+    width: 100vw;
+    border-top: 1px solid $white-30;
+    background: $white-30;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+
+    #calorie-progress-bar {
+      background: $green;
+      height: #{$footer-height/2};
+      position: absolute;
+      left: 0;
+    }
+
+    #pomo-progress-bar {
+      background: $orange-light;
+      height: #{$footer-height/2};
+      position: absolute;
+      left: 0;
+      top: #{$footer-height/2};
+    }
+  }
+
+  aside {
+    width: $left-aside-width;
+    top: calc(#{$header-height}+#{$subheader-height}+2px); // Space for overlapping
+    position: fixed;
+    bottom: $footer-height;
+    height: calc(100vh - #{$header-height} - #{$subheader-height} - #{$footer-height});
+    background: $white-20;
+    z-index: 1;
+
+    &.mobile {
+      width: $left-aside-width-mobile;
+    }
+
+    #menu {
+      a {
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        width: inherit;
+        text-align: center;
+        padding-left: 4px;
+        margin-bottom: 2px;
+
+        &:hover {
+          border-left: 4px solid $green;
+          background: $white-30;
+          padding-left: 0;
+        }
+
+        &.active {
+          border-left: 4px solid $green;
+          background: $white-30;
+          padding-left: 0;
+        }
+
+        span {
+          text-decoration: none;
+          margin-left: 5px;
+        }
+      }
+
+      i {
+        color: white;
+        height: inherit;
+        line-height: inherit;
+        font-size: 16px;
+      }
+    }
+
+    .badge {
+      position: absolute;
+      right: 5px;
+      margin-top: 4px;
+      font-size: 12px;
+    }
+
+    .cat-insight {
+      margin-bottom: 5px;
+      position: relative;
+
+      .cat-prog-bar {
+        width: 100%;
+        position: absolute;
+        height: 20px;
+        z-index: -1;
+        left: 0;
+        top: 0;
+      }
+
+      .cat-label {
+        margin: 4px 0;
+        padding-left: 3px;
+        padding-right: 3px;
+        overflow: hidden;
+        font-size: 12px;
+        word-break: break-all;
+        display: block;
+        line-height: 20px;
+        box-sizing: border-box;
+      }
+
+      .project-list {
+        padding: 1px 2px;
+        text-align: center;
+        margin: 2px 0;
+        position: relative;
+
+        >div {
+          display: block;
+          position: relative;
+          overflow: hidden;
+          height: 15px;
+          line-height: 15px;
+        }
+
+        .proj-prog-bar {
+          position: absolute;
+          height: 3px;
+          z-index: -1;
+          left: 0;
+          top: 6px;
+        }
+
+        div {
+          font-size: 12px;
+        }
+
+        span {
+          position: absolute;
+          height: 3px;
+          z-index: -1;
+          left: 0;
+          top: 4px;
+        }
+      }
+    }
+
+    #pomoBtn {
+      width: $left-aside-width;
+      position: fixed;
+      bottom: $footer-height;
+      left: 0;
+      font-size: 12px;
+      text-align: center;
+      height: 40px;
+
+      >div {
+        box-sizing: border-box;
+        line-height: 20px;
+        height: 20px;
+        font-size: 10px;
+        z-index: 3;
+        position: relative;
+      }
+    }
+  }
+
+  aside#left-menu {
+    left: 0;
+  }
+
+  aside#right-menu {
+    width: $right-aside-width;
+    right: 0;
+  }
+}
+
+$left-aside-width: 80px;
+$left-aside-width-mobile: 50px;
+$header-height: 50px;
+$subheader-height: 30px;
+$right-aside-width: 260px;
+@import '~animate.css/animate.min.css';
+@import '~font-awesome/css/font-awesome.css';
+@import '~toastr/build/toastr.min.css';
+@import '~react-quill/dist/quill.snow.css';
+@import '~highlight.js/styles/monokai-sublime.css';
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Orbitron:400);
+
+.ql-editor img {
+  max-width: 100% !important;
+}
+
+.ql-editor * {
+  font-size: 14px;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+#toast-container * {
+  color: white;
+}
+
+body {
+  // background: url("../resource/cat2.jpg") no-repeat center center;
+  background: black; // midnight blue
+  // @include coverbg;
+  height: 100vh;
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 15;
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+  transition: 1s opacity;
+  opacity: 0.1;
+}
+
+$hima-aside-width: 150px;
+
+main#intelnote {
+  >div {
+    height: inherit;
+    width: inherit;
+    overflow-y: auto;
+  }
+
+  #notebook-list {
+    width: $hima-aside-width;
+    height: calc(100vh - #{$header-height} - #{$subheader-height}); // Button btn too
+    background: $blue;
+    position: fixed;
+    color: white;
+    overflow: auto;
+    box-sizing: border-box;
+    padding-bottom: 30px;
+
+    #new-notebook-group {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 25px;
+      width: $hima-aside-width;
+    }
+  }
+
+  $note-list-width: 180px;
+
+  #note-list {
+    width: $note-list-width;
+    height: calc(100vh - #{$header-height} - #{$subheader-height});
+    padding-bottom: 20px;
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    left: $hima-aside-width;
+
+    select {
+      position: fixed;
+      background: white;
+      border: 1px solid black;
+      bottom: 0;
+      z-index: 100;
+      width: $note-list-width;
+      left: $hima-aside-width;
+    }
+  }
+
+  #note-editor {
+    height: calc(100vh - #{$header-height} - #{$subheader-height});
+    width: calc(100% - #{$hima-aside-width} - #{$note-list-width});
+    left: calc(#{$note-list-width} + #{$hima-aside-width});
+    top: calc(#{$header-height} + #{$subheader-height});
+    position: fixed;
+    box-sizing: border-box;
+    overflow: auto;
+
+    &.mobile {
+      width: 100vw;
+      left: 0;
+
+      #note-editor-title {
+        width: 100vw;
+      }
+    }
+
+    #note-editor-title {
+      height: 40px;
+      position: fixed;
+      width: calc(100% - #{$hima-aside-width} - #{$note-list-width});
+    }
+
+    #note-editor-main {
+      height: calc(100% - 40px);
+      margin-top: 40px;
+      box-sizing: border-box;
+
+      #note-editor-left {
+        height: 100%;
+        width: 120px;
+        overflow: auto;
+
+        * {
+          font-size: 12px;
+        }
+      }
+
+      .quill-editor {
+        height: 100%;
+        box-sizing: border-box;
+        padding: 2px;
+
+        .toolbar {
+          padding: 2px;
+          height: 30px;
+        }
+
+        .quill {
+          height: calc(100% - 30px);
+        }
+
+        .ql-editor {
+          padding: 5px 8px;
+          left: 0;
+          position: absolute;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.toast {
+  .toast-message {
+    color: white;
+  }
 }

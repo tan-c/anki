@@ -125,40 +125,56 @@ export class App extends React.Component {
               >
                 <HeaderConnected />
                 <SubHeaderConnected />
+
+                <Segment
+                  style={{
+                    top: '80px',
+                    width: '100vw',
+                    position: 'fixed',
+                    overflow: 'auto',
+                    zIndex: 1,
+                    backgroundColor: 'white',
+                    color: 'black',
+                    height: 'calc(100vh - 80px)'
+                  }}
+                  attached
+                >
+                  <Switch>
+                    <Route
+                      exact
+                      path="/"
+                      component={() => <NoteConnected field="notes" />}
+                    />
+                    <Route
+                      path="/anki"
+                      component={AnkiPageConnected}
+                    />
+                    <Route
+                      path="/ankiLearn"
+                      component={AnkiListConnected}
+                    />
+                    <Route
+                      path="/hourblock"
+                      component={HourblockConnected}
+                    />
+                    <Route
+                      path="/notes"
+                      component={IntelNotesConnected}
+                    />
+                    <Route
+                      path="/housingPrices"
+                      component={HousingPricesConnected}
+                    />
+                    <Redirect from="/housingPrices/*" to="/housingPrices" />
+                    <Redirect from="/*" to="/" />
+                  </Switch>
+                </Segment>
                 {/* <FooterConnected /> */}
                 {/* <SettingsConnected /> */}
 
                 {eyeSaving && <EyeModal />}
 
-                <Switch data-role="main-intelnote">
-                  <Route
-                    exact
-                    path="/"
-                    component={() => <NoteConnected field="notes" />}
-                  />
-                  <Route
-                    path="/anki"
-                    component={AnkiPageConnected}
-                  />
-                  <Route
-                    path="/ankiLearn"
-                    component={AnkiListConnected}
-                  />
-                  <Route
-                    path="/hourblock"
-                    component={HourblockConnected}
-                  />
-                  <Route
-                    path="/notes"
-                    component={IntelNotesConnected}
-                  />
-                  <Route
-                    path="/housingPrices"
-                    component={HousingPricesConnected}
-                  />
-                  <Redirect from="/housingPrices/*" to="/housingPrices" />
-                  <Redirect from="/*" to="/" />
-                </Switch>
+
               </Sidebar.Pusher>
             </Sidebar.Pushable>
           )

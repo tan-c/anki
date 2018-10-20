@@ -58,18 +58,6 @@ video {
   opacity: 0.1;
 }
 
-main {
-  top: calc(#{$header-height} + #{$subheader-height});
-  box-sizing: border-box;
-  width: 100vw;
-  position: fixed;
-  overflow: auto;
-  z-index: 1;
-  background-color: white;
-  color: black;
-  height: calc(100vh - #{$header-height} - #{$subheader-height});
-}
-
 $hima-aside-width: 150px;
 main#intelnote {
   >div {

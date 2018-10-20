@@ -42,39 +42,6 @@ header {
   }
 }
 
-#subheader {
-  position: fixed;
-  top: $header-height;
-  height: $subheader-height;
-  background: $white-20;
-  padding-left: $left-aside-width;
-  padding-right: 20px;
-  width: 100vw;
-  z-index: 1;
-  a {
-    color: white;
-  }
-  span {
-    line-height: $subheader-height;
-    font-size: 14px;
-    color: $white-70;
-  }
-  &.mobile {
-    padding-left: 0;
-  }
-  #subheader-links span {
-    display: inline-block;
-    margin-left: 10px;
-    @include transition(color 1s ease 0s);
-    &.active,
-    &:hover {
-      border-bottom: 3px solid $green;
-      color: $orange;
-      font-weight: 600;
-    }
-  }
-}
-
 #settings {
   height: calc(100vh - 80px);
   width: 160px;

@@ -128,17 +128,15 @@ header {
   padding-right: 20px;
   width: 100vw;
   z-index: 1;
-  a {
-    color: white;
-  }
+  // a {
+  //   color: white;
+  // }
   span {
     line-height: $subheader-height;
     font-size: 14px;
     color: $white-70;
   }
-  &.mobile {
-    padding-left: 0;
-  }
+
   #subheader-links span {
     display: inline-block;
     margin-left: 10px;

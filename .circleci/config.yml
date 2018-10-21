@@ -42,7 +42,8 @@ jobs:
             - node_modules
 
   test:
-    # working_directory: /js-base-image # default is Default is /root/project
+    # working_directory: /js-base-image
+    # default is Default is /root/project
     docker:
       - image: $DOCKER_ADD/js-base-image:latest
     steps:
@@ -64,7 +65,7 @@ jobs:
             /root/project/cc-test-reporter before-build
             cd /js-base-image/packages/project && npm run test:ci
             # upload test report to Code Climate using `after-build`
-            cd /js-base-image/ && /root/project/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
+            cd /js-base-image/packages/project && /root/project/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
           no_output_timeout: 15m
       - store_test_results:
           path: /js-base-image/packages/project/coverage/

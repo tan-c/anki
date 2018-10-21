@@ -86,17 +86,30 @@ export class HourBlockPage extends React.Component {
     const { dayMomentObject } = this.state;
 
     return (
-      <Fragment>
-        <section className="flex-2">
-          <DailyMeasurementsConnected dayMomentObject={dayMomentObject} />
-          <DailySleepDetailsConnected dayMomentObject={dayMomentObject} />
-          <div className="spacing-10" />
-          <DailyCalorieDetailsConnected dayMomentObject={dayMomentObject} />
-        </section>
-        {!window.isMobile && <DailyRecordsChartConnected />}
+      <Grid>
+        <Grid.Row>
+          <DailyMeasurementsConnected
+            dayMomentObject={dayMomentObject}
+          />
 
-        {!window.isMobile && <EventDetailsConnected />}
-      </Fragment>
+          <DailySleepDetailsConnected
+            dayMomentObject={dayMomentObject}
+          />
+
+          <DailyCalorieDetailsConnected
+            dayMomentObject={dayMomentObject}
+          />
+        </Grid.Row>
+
+        <Grid.Row>
+          {!window.isMobile && <DailyRecordsChartConnected />}
+        </Grid.Row>
+
+        <Grid.Row>
+          {!window.isMobile && <EventDetailsConnected />}
+        </Grid.Row>
+
+      </Grid>
     );
   }
 
@@ -154,6 +167,7 @@ export class HourBlockPage extends React.Component {
             {this.renderRightSection()}
           </Grid.Column>
         </Grid.Row>
+
         <Grid.Row>
           <FooterConnected />
         </Grid.Row>

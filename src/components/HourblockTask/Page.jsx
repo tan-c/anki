@@ -38,15 +38,27 @@ export class TasksPage extends React.Component {
     const { currentYearlyTasksSorted, totalProjectTasksCount } = this.props;
 
     return (
-      <Grid.Row columns={4}>
-        <Grid.Column>
+      <Grid.Row
+        columns={4}
+        style={{
+          height: '100%'
+        }}
+      >
+        <Grid.Column
+          style={{
+            overflow: 'auto'
+          }}
+        >
           {`Task - ${totalProjectTasksCount}`}
           <ProjectTaskListConnected />
           <FocusedProjectTaskListConnected />
         </Grid.Column>
 
-
-        <Grid.Column>
+        <Grid.Column
+          style={{
+            overflow: 'auto'
+          }}
+        >
           <div className="section-header">2018 Tasks</div>
           <div className="section-content">
             <div className="list-with-pinned-bottom">
@@ -87,11 +99,19 @@ export class TasksPage extends React.Component {
           </div>
         </Grid.Column>
 
-        <Grid.Column>
+        <Grid.Column
+          style={{
+            overflow: 'auto'
+          }}
+        >
           <MonthlyTasksListConnected />
         </Grid.Column>
 
-        <Grid.Column>
+        <Grid.Column
+          style={{
+            overflow: 'auto'
+          }}
+        >
           <DailyTaskPlanningConnected />
         </Grid.Column>
       </Grid.Row>

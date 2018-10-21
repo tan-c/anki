@@ -67,9 +67,9 @@ jobs:
             cd /js-base-image/ && /root/project/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
           no_output_timeout: 15m
       - store_test_results:
-          path: /js-base-image/coverage/
+          path: /js-base-image/packages/project/coverage/
       - store_artifacts:
-          path: /js-base-image/coverage/
+          path: /js-base-image/packages/project/coverage/
 
   test:e2e:
     docker:

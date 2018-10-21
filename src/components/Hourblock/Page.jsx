@@ -23,7 +23,6 @@ import DailyMeasurementsConnected from './ExtraSection/Daily/Measurements';
 import CategoryInsightsConnected from './LeftAside/CategoryInsights';
 import WeeklyInsightsConnected from './LeftAside/WeeklyInsights';
 
-import RightAsideConnected from './RightAside';
 import FooterConnected from './Footer';
 
 export class HourBlockPage extends React.Component {
@@ -68,7 +67,9 @@ export class HourBlockPage extends React.Component {
               {dayMomentObject.isoWeek()}
             </span>
 
-            <div className="flex-1 text-right margin-right-10">
+            <div
+              className="flex-1 text-right margin-right-10"
+            >
               <div className="font-400 color-green height-20 line-height-20">QUICK LINK</div>
               <br />
               <div className="height-20 line-height-20">
@@ -185,7 +186,6 @@ export class HourBlockPage extends React.Component {
           <WeeklyInsightsConnected />
         </aside>
 
-        <RightAsideConnected />
         <FooterConnected />
 
         <div

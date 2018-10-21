@@ -6,7 +6,7 @@ import toJson from 'enzyme-to-json';
 // import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
-import { RightAside } from './index';
+import { RightAside } from './Page';
 
 function setup() {
   const props = {

@@ -12,7 +12,8 @@ import {
 
 import { UiActions } from 'utility-redux/ui';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
-import { todayTasksSelector } from 'utility-redux/task';
+import { todayTasksSelector, overduedTasksSelector } from 'utility-redux/task';
+import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
 import {
   revisionAnkisTotalSelector,
@@ -35,7 +36,11 @@ export class SubHeader extends React.Component {
       selectedAnkiTagId,
       ankiTags,
       filteredAnkis,
-      todayTasks
+      todayTasks,
+      location, selectedProjectId,
+      updatingRecurTask, edittingTarget,
+      isSettingOn, showMonthlyCalendar,
+      overduedTasksCount
     } = this.props;
 
     return (
@@ -82,6 +87,68 @@ export class SubHeader extends React.Component {
 
         </Menu.Menu>
         {/* <Button size="mini">Mini</Button> */}
+
+        <div id="subheader-links" className="flex-3 text-left">
+          {location.pathname.indexOf('planning') > -1
+            && (
+              <React.Fragment>
+                <span className="width-100">
+                  <ProjectSelectConnected
+                    onChangeEvent={event => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'selectedProjectId'], event.target.value)}
+                    value={selectedProjectId}
+                    color=""
+                  />
+                </span>
+
+                <span role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingRecurTask'], !updatingRecurTask)}>
+                  Set Recur Task
+                </span>
+              </React.Fragment>
+            )
+          }
+
+          {location.pathname.indexOf('settings') > -1
+            && (
+              <React.Fragment>
+                <span className={`${edittingTarget === 'events' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'events')}>Edit Events</span>
+
+                <span className={`${edittingTarget === 'workouts' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'workouts')}>Edit Workouts</span>
+
+                <span className={`${edittingTarget === 'calories' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'calories')}>Edit Measurement</span>
+
+                <span className={`${edittingTarget === 'projects' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'projects')}>Edit Categories/Projects</span>
+
+                <span className={`${edittingTarget === 'dailyPomoCount' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'dailyPomoCount')}>Show Daily Pomo</span>
+              </React.Fragment>
+            )
+          }
+        </div>
+
+        <i
+          role="button"
+          tabIndex="-1"
+          className={`line-height-30 width-20 fa fa-fw fa-calendar ${showMonthlyCalendar && 'color-green'}`}
+          onClick={(_) => {
+            this.props.UiActions.updateIn(['hourblock', 'hourblockPage', 'showMonthlyCalendar'], !showMonthlyCalendar);
+          }}
+        />
+
+        {overduedTasksCount > 0 && (
+          <span className="bg-red">
+            {overduedTasksCount}
+            {' '}
+            {'Tasks'}
+          </span>
+        )}
+
+        <i
+          role="button"
+          tabIndex="-1"
+          className={`line-height-30 width-20 fa fa-fw fa-cog ${isSettingOn && 'color-blue'}`}
+          onClick={(_) => {
+            this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
+          }}
+        />
       </Menu>
     );
   }
@@ -94,6 +161,13 @@ SubHeader.defaultProps = {
   ankiTags: Map(),
   filteredAnkis: Map(),
   todayTasks: Map(),
+
+  overduedTasksCount: 0,
+  selectedProjectId: '',
+  edittingTarget: 'events',
+  updatingRecurTask: false,
+  showMonthlyCalendar: true,
+  isSettingOn: false,
 };
 
 SubHeader.propTypes = {
@@ -103,6 +177,15 @@ SubHeader.propTypes = {
   ankiTags: PropTypes.object,
   filteredAnkis: PropTypes.object,
   todayTasks: PropTypes.object,
+
+
+  overduedTasksCount: PropTypes.number,
+  location: PropTypes.object.isRequired,
+  updatingRecurTask: PropTypes.bool,
+  selectedProjectId: PropTypes.string,
+  edittingTarget: PropTypes.string,
+  isSettingOn: PropTypes.bool,
+  showMonthlyCalendar: PropTypes.bool,
 
   UiActions: PropTypes.object.isRequired,
 };
@@ -117,6 +200,16 @@ function mapStateToProps(state, ownProps) {
     todayTasks: todayTasksSelector(state),
 
     revisionAnkisTotal: revisionAnkisTotalSelector(state),
+
+
+    overduedTasksCount: overduedTasksSelector(state),
+
+    selectedProjectId: state.ui.getIn(['hourblock', 'planningPage', 'selectedProjectId']),
+    updatingRecurTask: state.ui.getIn(['hourblock', 'planningPage', 'updatingRecurTask']),
+    edittingTarget: state.ui.getIn(['hourblock', 'settingsPage', 'edittingTarget']),
+    showMonthlyCalendar: state.ui.getIn(['hourblock', 'hourblockPage', 'showMonthlyCalendar']),
+    isSettingOn: state.ui.getIn(['common', 'isSettingOn']),
+
   };
 }
 

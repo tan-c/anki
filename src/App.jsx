@@ -194,8 +194,6 @@ App.propTypes = {
   // history: PropTypes.object.isRequired,
 
   currentUser: PropTypes.object,
-
-  // UiActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -203,7 +201,7 @@ function mapStateToProps(state, ownProps) {
     isSidebarOn: state.ui.getIn(['anki', 'isSidebarOn']),
 
     showModal: state.ui.getIn(['showModal']),
-    currentUser: currentUserSelector(state)
+    currentUser: currentUserSelector(state),
   };
 }
 

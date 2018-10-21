@@ -54,8 +54,6 @@ const SidebarComponent = () => (
     </Menu.Item>
 
     <Menu.Item
-      as={Link}
-      to="/anki"
       active={location.href.split('//')[1].split('/')[2] === 'anki'}
     >
       <Icon name="university" />

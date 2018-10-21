@@ -22,7 +22,7 @@ describe('Header Unit Tests', () => {
     wrapper.setState({ currentTime: moment('2017-01-01') });
     it('renders correctly', () => {
       // const jsonOutput = toJson(wrapper);
-      // expect(jsonOutput).toMatchSnapshot();
+      // // expect(jsonOutput).toMatchSnapshot();
       expect(wrapper.find("Menu[data-role='header']")).toHaveLength(1);
     });
   });

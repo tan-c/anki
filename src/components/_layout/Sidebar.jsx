@@ -1,8 +1,9 @@
 import React from 'react';
 import {
   Header,
-  Icon, Image, Menu, Segment, Sidebar,
-  Input
+  Icon, Menu, Sidebar,
+  Input,
+  Image
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
@@ -15,11 +16,14 @@ const SidebarComponent = () => (
     visible
     width="thin"
     style={{
-      width: 120,
+      width: 140,
     }}
   >
     <Menu.Item>
-      <Input placeholder="Search..." />
+      <Image
+        src="/logo-white-long.png"
+        size="small"
+      />
     </Menu.Item>
 
     <Menu.Item
@@ -33,12 +37,29 @@ const SidebarComponent = () => (
 
     <Menu.Item
       as={Link}
+      to="/hourblock"
+      active={location.href.indexOf('/hourblock') > -1}
+    >
+      <Icon name="calendar" />
+      Hourblock
+    </Menu.Item>
+
+    <Menu.Item
+      as={Link}
+      to="/notes"
+      active={location.href.indexOf('/notes') > -1}
+    >
+      <Icon name="sticky note outline" />
+      IntelNote
+    </Menu.Item>
+
+    <Menu.Item
+      as={Link}
       to="/anki"
       active={location.href.split('//')[1].split('/')[2] === 'anki'}
     >
       <Icon name="university" />
       Anki
-
       <Menu.Menu>
         <Menu.Item
           as={Link}
@@ -56,25 +77,6 @@ const SidebarComponent = () => (
           Anki Learn
         </Menu.Item>
       </Menu.Menu>
-
-    </Menu.Item>
-
-    <Menu.Item
-      as={Link}
-      to="/hourblock"
-      active={location.href.indexOf('/hourblock') > -1}
-    >
-      <Icon name="calendar" />
-      HB
-    </Menu.Item>
-
-    <Menu.Item
-      as={Link}
-      to="/notes"
-      active={location.href.indexOf('/notes') > -1}
-    >
-      <Icon name="sticky note outline" />
-      Notes
     </Menu.Item>
 
     <Menu.Item

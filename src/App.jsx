@@ -120,7 +120,7 @@ export class App extends React.Component {
                 </div> */}
 
               <Sidebar.Pusher style={{
-                left: isSidebarOn ? -60 : 0
+                left: isSidebarOn ? -10 : 0
               }}
               >
                 <HeaderConnected />

@@ -88,16 +88,6 @@ export class Header extends React.Component {
           height: 50
         }}
       >
-        <div
-          id="logo"
-          style={{
-            height: 50,
-            // background: url("/logo-white-long.png") no-repeat center center;
-            backgroundSize: 'auto 90%',
-            position: 'absolute',
-            width: '200'
-          }}
-        />
 
         {!window.isMobile && (
           <span className="height-50 border-right padding-horizontal-10">

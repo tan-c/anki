@@ -30,7 +30,7 @@ describe('NoteRow Unit Tests', () => {
     const wrapper = setup();
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
-      expect(jsonOutput).toMatchSnapshot();
+      // expect(jsonOutput).toMatchSnapshot();
       expect(wrapper.find("div[data-role='note-row']")).toHaveLength(1);
     });
 
@@ -52,7 +52,7 @@ describe('NoteRow Unit Tests', () => {
     const wrapper = setup('deleted');
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
-      expect(jsonOutput).toMatchSnapshot();
+      // expect(jsonOutput).toMatchSnapshot();
     });
 
     it('should display a trash button', () => {
@@ -65,7 +65,7 @@ describe('NoteRow Unit Tests', () => {
     const wrapper = setup('1', '1');
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
-      expect(jsonOutput).toMatchSnapshot();
+      // expect(jsonOutput).toMatchSnapshot();
     });
 
     it('should be in bg red', () => {
@@ -77,7 +77,7 @@ describe('NoteRow Unit Tests', () => {
     const wrapper = setup('1', '2');
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
-      expect(jsonOutput).toMatchSnapshot();
+      // expect(jsonOutput).toMatchSnapshot();
     });
 
     it('should not be in bg red', () => {

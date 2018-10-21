@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`DailyCaloriesChart Unit Tests when normally set up renders correctly 1`] = `
-<div
-  className="flex-1"
-  data-role="dailycalories-chart"
-  id="chart"
-/>
-`;

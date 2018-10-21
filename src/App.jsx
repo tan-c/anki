@@ -36,7 +36,7 @@ import SubHeaderConnected from './components/_layout/SubHeader';
 import AnkiListConnected from './components/AnkiNew/List';
 import IntelNotesConnected from './components/IntelNotes/IntelNote';
 import HousingPricesConnected from './components/HousingPrices/Page';
-import HourblockConnected from './components/Hourblock/Main';
+import HourblockConnected from './components/Hourblock/Page';
 
 import NoteConnected from './components/UserNote';
 import AnkiPageConnected from './components/AnkiLearn/Page';

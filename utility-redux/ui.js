@@ -42,9 +42,8 @@ const initialState = {
     },
   },
 
-  anki: {
-    isSidebarOn: true,
-  }
+  isLeftSidebarOn: true,
+  isRightSidebarOn: true,
 };
 
 export default function UiReducer(state = fromJS(initialState), action) {

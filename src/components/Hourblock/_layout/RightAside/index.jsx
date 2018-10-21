@@ -12,9 +12,6 @@ export class RightAside extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    // Note you cannot just add [] as the would be the same object by reference
-
-
     this.state = {
       activeMonth: moment().tz('Asia/Tokyo').month(),
       todayMoment: moment().tz('Asia/Tokyo').startOf('day'),

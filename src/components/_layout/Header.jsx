@@ -63,7 +63,8 @@ export class Header extends React.Component {
 
   render() {
     const {
-      isSidebarOn,
+      isLeftSidebarOn,
+      isRightSidebarOn,
       isSettingOn,
       currentUser,
       weatherInfo,
@@ -164,10 +165,19 @@ export class Header extends React.Component {
               color="blue"
               id="logout-button"
               onClick={(_) => {
-                this.props.UiActions.updateIn(['anki', 'isSidebarOn'], !isSidebarOn);
+                this.props.UiActions.updateIn(['isLeftSidebarOn'], !isLeftSidebarOn);
               }}
             >
-              Show Menu
+              Show Left Menu
+            </Button>
+            <Button
+              color="blue"
+              id="logout-button"
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
+              }}
+            >
+              Show Right Menu
             </Button>
           </Menu.Menu>
 
@@ -220,6 +230,9 @@ export class Header extends React.Component {
 
 Header.defaultProps = {
   isSettingOn: false,
+  isLeftSidebarOn: true,
+  isRightSidebarOn: true,
+
   currentUser: Map(),
   weatherInfo: Map(),
   threeDayMeasurement: Map(),
@@ -227,7 +240,9 @@ Header.defaultProps = {
 
 Header.propTypes = {
   isSettingOn: PropTypes.bool,
-  isSidebarOn: PropTypes.bool,
+  isLeftSidebarOn: PropTypes.bool,
+  isRightSidebarOn: PropTypes.bool,
+
   currentUser: PropTypes.object,
   currentUserImageSrc: PropTypes.string.isRequired,
   weatherInfo: PropTypes.object,
@@ -241,7 +256,8 @@ Header.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     isSettingOn: state.ui.getIn(['common', 'isSettingOn']),
-    isSidebarOn: state.ui.getIn(['anki', 'isSidebarOn']),
+    isLeftSidebarOn: state.ui.getIn(['isLeftSidebarOn']),
+    isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
 
     currentUser: currentUserSelector(state),
     currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),

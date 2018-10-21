@@ -28,7 +28,8 @@ import LoginPageConnected from 'utility-react-component/Page/LoginPage';
 
 import HeaderConnected from './components/_layout/Header';
 import FooterConnected from './components/_layout/Footer';
-import SidebarConnected from './components/_layout/Sidebar';
+import LeftSidebarConnected from './components/_layout/LeftSidebar';
+import RightSidebarConnected from './components/_layout/RightSidebar';
 
 import SubHeaderConnected from './components/_layout/SubHeader';
 // import SettingsConnected from './components/_layout/Settings';
@@ -86,7 +87,8 @@ export class App extends React.Component {
   render() {
     const {
       currentUser,
-      isSidebarOn
+      isLeftSidebarOn,
+      isRightSidebarOn
     } = this.props;
 
     const eyeSaving = currentUser.hasIn(['config', 'eyeSaving'])
@@ -108,19 +110,16 @@ export class App extends React.Component {
             : 'Undefined'}
         </div>
 
+        {isRightSidebarOn && <RightSidebarConnected />}
 
         {!currentUser.has('_id') || currentUser.get('_id') === null
           ? <LoginPageConnected pageName="Anki" />
           : (
             <Sidebar.Pushable>
-              {isSidebarOn && <SidebarConnected />}
-
-              {/* <div className="flex-container-row bg-orange-light" style={{ height: 160 }}>
-                  <NoteConnected field="notesDailyPlan" />
-                </div> */}
+              {isLeftSidebarOn && <LeftSidebarConnected />}
 
               <Sidebar.Pusher style={{
-                left: isSidebarOn ? -10 : 0
+                // left: isLeftSidebarOn ? -10 : 0
               }}
               >
                 <HeaderConnected />
@@ -186,11 +185,13 @@ export class App extends React.Component {
 
 App.defaultProps = {
   currentUser: Map(),
-  isSidebarOn: false,
+  isLeftSidebarOn: false,
+  isRightSidebarOn: true,
 };
 
 App.propTypes = {
-  isSidebarOn: PropTypes.bool,
+  isLeftSidebarOn: PropTypes.bool,
+  isRightSidebarOn: PropTypes.bool,
   // history: PropTypes.object.isRequired,
 
   currentUser: PropTypes.object,
@@ -198,7 +199,8 @@ App.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    isSidebarOn: state.ui.getIn(['anki', 'isSidebarOn']),
+    isLeftSidebarOn: state.ui.getIn(['isLeftSidebarOn']),
+    isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
 
     showModal: state.ui.getIn(['showModal']),
     currentUser: currentUserSelector(state),

@@ -20,6 +20,11 @@ import DailyWorkoutRecordsDetailsConnected from './ExtraSection/Daily/WorkoutRec
 import DailyCalorieDetailsConnected from './ExtraSection/Daily/CalorieDetails';
 import DailySleepDetailsConnected from './ExtraSection/Daily/SleepDetails';
 import DailyMeasurementsConnected from './ExtraSection/Daily/Measurements';
+import CategoryInsightsConnected from './LeftAside/CategoryInsights';
+import WeeklyInsightsConnected from './LeftAside/WeeklyInsights';
+
+import RightAsideConnected from './RightAside';
+import FooterConnected from './Footer';
 
 export class HourBlockPage extends React.Component {
   constructor(props, context) {
@@ -59,7 +64,7 @@ export class HourBlockPage extends React.Component {
             >
               {dayMomentObject.format('YYYY-MM-DD ddd')}
               {' '}
-- W
+              - W
               {dayMomentObject.isoWeek()}
             </span>
 
@@ -174,17 +179,29 @@ export class HourBlockPage extends React.Component {
     }
 
     return (
-      <div className="flex-container-row page" data-role="hourblock-page">
-        <section className="flex-5">
-          {this.renderHourBlockList()}
-        </section>
+      <main id="hourblock">
+        <aside id="left-menu" className={`${window.isMobile && 'mobile'}`}>
+          <CategoryInsightsConnected />
+          <WeeklyInsightsConnected />
+        </aside>
 
-        {showTaskSection && (
-          <section className="flex-container flex-2 no-bg">
-            {this.renderRightSection()}
+        <RightAsideConnected />
+        <FooterConnected />
+
+        <div
+          className="flex-container-row page" data-role="hourblock-page"
+        >
+          <section className="flex-5">
+            {this.renderHourBlockList()}
           </section>
-        )}
-      </div>
+
+          {showTaskSection && (
+            <section className="flex-container flex-2 no-bg">
+              {this.renderRightSection()}
+            </section>
+          )}
+        </div>
+      </main>
     );
   }
 }

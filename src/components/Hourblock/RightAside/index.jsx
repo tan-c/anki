@@ -5,8 +5,8 @@ import React from 'react';
 // import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
-import MonthlyTasksListConnected from './MonthlyTasks/List';
-import DailyTasksListConnected from './DailyTasks/List';
+import MonthlyTasksListConnected from './MonthlyTasksList';
+import DailyTasksListConnected from './DailyTasksList';
 
 export class RightAside extends React.Component {
   constructor(props, context) {

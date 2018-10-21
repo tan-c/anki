@@ -40,9 +40,9 @@ import HourblockConnected from './components/Hourblock/Main';
 
 import NoteConnected from './components/UserNote';
 import AnkiPageConnected from './components/AnkiLearn/Page';
-// import AnkiTagsPageConnected from './components/AnkiTags/Page';
+import AnkiTagsPageConnected from './components/AnkiTags/Page';
 
-import EyeModal from './components/_layout/Modal/Eye';
+import EyeModal from './components/_modal/Eye';
 import ErrorBoundary from './ErrorBoundary';
 
 import './index.scss';
@@ -146,12 +146,16 @@ export class App extends React.Component {
                         component={() => <NoteConnected field="notes" />}
                       />
                       <Route
-                        path="/anki"
+                        path="/ankiList"
                         component={AnkiPageConnected}
                       />
                       <Route
                         path="/ankiLearn"
                         component={AnkiListConnected}
+                      />
+                      <Route
+                        path="/ankiTag"
+                        component={AnkiTagsPageConnected}
                       />
                       <Route
                         path="/hourblock"

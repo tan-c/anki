@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 import { IntelNotePage } from './Page';
 
-import SearchModal from '../_layout/Modal/Search';
-import FileModal from '../_layout/Modal/File';
+import SearchModal from '../_modal/Search';
+import FileModal from '../_modal/File';
 
 export class MainIntelNote extends React.Component {
   render() {

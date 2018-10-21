@@ -36,12 +36,44 @@ const SidebarComponent = () => (
     </Menu.Item>
 
     <Menu.Item
-      as={Link}
-      to="/hourblock"
-      active={location.href.indexOf('/hourblock') > -1}
+      active={location.href.split('//')[1].split('/')[2] === 'hourblock'}
     >
       <Icon name="calendar" />
       Hourblock
+
+      <Menu.Menu>
+        <Menu.Item
+          as={Link}
+          to="/hourblock"
+          active={location.href.split('//')[1].split('/')[2] === 'hourblock' && location.href.split('//')[1].split('/')[3] === undefined}
+        >
+          Dashboard
+        </Menu.Item>
+
+        <Menu.Item
+          as={Link}
+          to="/hourblock/planning"
+          active={location.href.split('//')[1].split('/')[2] === 'hourblock' && location.href.split('//')[1].split('/')[3] === 'planning'}
+        >
+          Planning
+        </Menu.Item>
+
+        <Menu.Item
+          as={Link}
+          to="/hourblock/tasks"
+          active={location.href.split('//')[1].split('/')[2] === 'hourblock' && location.href.split('//')[1].split('/')[3] === 'tasks'}
+        >
+          Tasks
+        </Menu.Item>
+
+        <Menu.Item
+          as={Link}
+          to="/hourblock/settings"
+          active={location.href.split('//')[1].split('/')[2] === 'ankiList' && location.href.split('//')[1].split('/')[3] === 'settings'}
+        >
+          Settings
+        </Menu.Item>
+      </Menu.Menu>
     </Menu.Item>
 
     <Menu.Item
@@ -61,8 +93,8 @@ const SidebarComponent = () => (
       <Menu.Menu>
         <Menu.Item
           as={Link}
-          to="/anki"
-          active={location.href.split('//')[1].split('/')[2] === 'anki'}
+          to="/ankiList"
+          active={location.href.split('//')[1].split('/')[2] === 'ankiList'}
         >
           Anki List
         </Menu.Item>
@@ -73,6 +105,13 @@ const SidebarComponent = () => (
           active={location.href.split('//')[1].split('/')[2] === 'ankiLearn'}
         >
           Anki Learn
+        </Menu.Item>
+        <Menu.Item
+          as={Link}
+          to="/ankiTag"
+          active={location.href.split('//')[1].split('/')[2] === 'ankiTag'}
+        >
+          Anki Tag
         </Menu.Item>
       </Menu.Menu>
     </Menu.Item>
@@ -85,7 +124,6 @@ const SidebarComponent = () => (
       <Icon name="building" />
       Toshigo
     </Menu.Item>
-
   </Sidebar>
 );
 

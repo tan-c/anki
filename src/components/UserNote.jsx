@@ -86,7 +86,7 @@ export class Note extends React.Component {
 
     return (
       <Form style={{
-        height: 'calc(100vh - 100px - 120px)'
+        height: 'calc(100vh - 100px)'
       }}
       >
         <div

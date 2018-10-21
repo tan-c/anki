@@ -120,7 +120,6 @@ export class HourBlockPage extends React.Component {
       return (
         <div
           className="flex-container page"
-          data-role="hourblock-page"
         >
           <section className="flex-container flex-1 no-bg">
             {this.renderRightSection()}

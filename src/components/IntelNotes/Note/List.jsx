@@ -12,18 +12,20 @@ export class NoteList extends React.Component {
     const { notes } = this.props;
 
     return (
-      <div data-role="note-list" id="note-list" className="bg-white-70 border-right-dark-blue">
+      <React.Fragment>
         <div className="text-center border-bottom-black">
-          <div className="font-400 flex-1">
-Notes:
-            {notes.size}
-          </div>
+          Notes:
+          {' '}
+          {notes.size}
         </div>
 
         {notes.valueSeq().map(note => (
-          <NoteRowConnected key={note.get('_id')} note={note} />
+          <NoteRowConnected
+            key={note.get('_id')}
+            note={note}
+          />
         ))}
-      </div>);
+      </React.Fragment>);
   }
 }
 

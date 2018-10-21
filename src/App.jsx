@@ -38,7 +38,7 @@ import RightSidebarConnected from './components/_layout/RightSidebar';
 import SubHeaderConnected from './components/_layout/SubHeader';
 // import SettingsConnected from './components/_layout/Settings';
 import AnkiListConnected from './components/AnkiList/List';
-import IntelNotesConnected from './components/IntelNotes/IntelNote';
+import IntelNotesConnected from './components/IntelNotes/Page';
 import HousingPricesConnected from './components/HousingPrices/Page';
 import HourblockConnected from './components/Hourblock/Page';
 

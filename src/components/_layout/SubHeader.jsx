@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import SelectConnected from 'utility-react-component/Form/Select';
 
 import {
-  Menu
+  Menu,
 } from 'semantic-ui-react';
 
 import { UiActions } from 'utility-redux/ui';
@@ -52,40 +52,45 @@ export class SubHeader extends React.Component {
         >
           {filteredAnkis.size}
         </div> */}
-        <Menu.Item name="ankisCount">
-          <SelectConnected
-            onChangeEvent={
-              e => this.props.UiActions.updateIn(['selectedAnkiTagId'], e.target.value)
-            }
-            options={ankiTags}
-            className={`width-80 ${!selectedAnkiTagId.length && 'bg-red'}`}
-            value={selectedAnkiTagId}
-          />
+        {location.pathname.indexOf('anki') > -1
+          && (
+            <React.Fragment>
+              <Menu.Item>
+                <SelectConnected
+                  onChangeEvent={
+                    e => this.props.UiActions.updateIn(['selectedAnkiTagId'], e.target.value)
+                  }
+                  options={ankiTags}
+                  className={`width-80 ${!selectedAnkiTagId.length && 'bg-red'}`}
+                  value={selectedAnkiTagId}
+                />
+              </Menu.Item>
 
-          <div
-            role="menuitem"
-            tabIndex="-1"
-            className="width-60 height-lineheight-30 text-center bg-green"
-          >
-            {filteredAnkis.size}
-            {'/'}
-            {revisionAnkisTotal}
-          </div>
-        </Menu.Item>
+              <Menu.Item>
+                {filteredAnkis.size}
+                {'/'}
+                {revisionAnkisTotal}
+              </Menu.Item>
+            </React.Fragment>
+          )}
 
         {location.pathname.indexOf('planning') > -1
           && (
-            <Menu.Item>
-              <ProjectSelectConnected
-                onChangeEvent={event => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'selectedProjectId'], event.target.value)}
-                value={selectedProjectId}
-                color=""
-              />
+            <React.Fragment>
+              <Menu.Item>
+                <ProjectSelectConnected
+                  onChangeEvent={event => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'selectedProjectId'], event.target.value)}
+                  value={selectedProjectId}
+                  color=""
+                />
+              </Menu.Item>
 
-              <span role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingRecurTask'], !updatingRecurTask)}>
-                Set Recur Task
-              </span>
-            </Menu.Item>
+              <Menu.Item>
+                <span role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingRecurTask'], !updatingRecurTask)}>
+                  Set Recur Task
+                </span>
+              </Menu.Item>
+            </React.Fragment>
           )
         }
 

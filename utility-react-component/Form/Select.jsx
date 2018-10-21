@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import { isImmutable } from 'immutable';
+import {
+  Select,
+} from 'semantic-ui-react';
 
 // ****  EXAMPLE ***
 // <Select
@@ -13,7 +16,7 @@ import { isImmutable } from 'immutable';
 //   options={['main', 'addition', 'snack', 'drink']}
 // />
 
-export class Select extends React.Component {
+export class SelectComponent extends React.Component {
   // constructor(props, context) {
   //  super(props, context);
   // }
@@ -43,7 +46,7 @@ export class Select extends React.Component {
     } = this.props;
 
     return (
-      <select
+      <Select
         type="text"
         name={selectName}
         className={className}
@@ -52,10 +55,10 @@ export class Select extends React.Component {
         style={{ borderLeft: '3px solid white' }}
       >
         <option key="0" value="">
--
+          -
           {selectName}
           {' '}
--
+          -
           {' '}
         </option>
         {!isImmutable(options) && options.map(item => (
@@ -68,22 +71,22 @@ export class Select extends React.Component {
             {this.renderOptionItem(item)}
           </option>))
         }
-      </select>
+      </Select>
     );
   }
 }
 
-Select.defaultProps = {
+SelectComponent.defaultProps = {
   selectName: 'select',
   className: '',
   options: [],
   optionContent: ['name'],
   optionSortColumn: 'name',
   value: '',
-  onChangeEvent: () => {},
+  onChangeEvent: () => { },
 };
 
-Select.propTypes = {
+SelectComponent.propTypes = {
   selectName: PropTypes.string,
   className: PropTypes.string,
   options: PropTypes.any, // Either object or array
@@ -107,4 +110,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(Select);
+export default connect(mapStateToProps)(SelectComponent);

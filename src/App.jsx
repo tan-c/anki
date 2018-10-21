@@ -38,7 +38,7 @@ import IntelNotesConnected from './components/IntelNotes/IntelNote';
 import HousingPricesConnected from './components/HousingPrices/Page';
 import HourblockConnected from './components/Hourblock/Main';
 
-import NoteConnected from './components/_layout/UserNote';
+import NoteConnected from './components/UserNote';
 import AnkiPageConnected from './components/AnkiLearn/Page';
 // import AnkiTagsPageConnected from './components/AnkiTags/Page';
 

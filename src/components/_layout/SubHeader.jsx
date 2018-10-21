@@ -45,10 +45,12 @@ export class SubHeader extends React.Component {
 
     return (
       <Menu
+        attached
         data-role="subheader"
         id="subheader"
-        className={`${window.isMobile && 'mobile'}`}
-        attached
+        className={
+          `${window.isMobile && 'mobile'} border-black-bottom`
+        }
         style={{
           paddingLeft: 10,
           marginTop: 50,
@@ -116,9 +118,23 @@ export class SubHeader extends React.Component {
 
                 <span className={`${edittingTarget === 'calories' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'calories')}>Edit Measurement</span>
 
-                <span className={`${edittingTarget === 'projects' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'projects')}>Edit Categories/Projects</span>
+                <span
+                  className={`${edittingTarget === 'projects' && 'active'}`}
+                  role="menuitem"
+                  tabIndex="-1"
+                  onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'projects')}
+                >
+                  Edit Categories/Projects
+                </span>
 
-                <span className={`${edittingTarget === 'dailyPomoCount' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'dailyPomoCount')}>Show Daily Pomo</span>
+                <span
+                  className={`${edittingTarget === 'dailyPomoCount' && 'active'}`}
+                  role="menuitem"
+                  tabIndex="-1"
+                  onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'dailyPomoCount')}
+                >
+                  Show Daily Pomo
+                </span>
               </React.Fragment>
             )
           }
@@ -133,13 +149,15 @@ export class SubHeader extends React.Component {
           }}
         />
 
-        {overduedTasksCount > 0 && (
-          <span className="bg-red">
-            {overduedTasksCount}
-            {' '}
-            {'Tasks'}
-          </span>
-        )}
+        {
+          overduedTasksCount > 0 && (
+            <span className="bg-red">
+              {overduedTasksCount}
+              {' '}
+              {'Tasks'}
+            </span>
+          )
+        }
       </Menu>
     );
   }

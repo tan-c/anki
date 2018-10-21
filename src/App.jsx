@@ -9,7 +9,8 @@ import {
   Sidebar,
   Segment,
   Container,
-  Grid
+  Grid,
+  Menu
 } from 'semantic-ui-react';
 
 // import { Menu, Container } from 'semantic-ui-react';
@@ -118,94 +119,119 @@ export class App extends React.Component {
             : 'Undefined'}
         </div>
 
-
         {!currentUser.has('_id') || currentUser.get('_id') === null
           ? <LoginPageConnected pageName="Anki" />
           : (
             <React.Fragment>
-              {isRightSidebarOn && <RightSidebarConnected />}
-              <Sidebar.Pushable>
-                {isLeftSidebarOn && <LeftSidebarConnected />}
-
-                <Sidebar.Pusher style={{
-                  // left: isLeftSidebarOn ? -10 : 0
-                }}
+              {isLeftSidebarOn && (
+                <Sidebar
+                  as={Menu}
+                  animation="push"
+                  inverted
+                  vertical
+                  visible
+                  width="thin"
+                  style={{
+                    width: 140,
+                  }}
                 >
-                  <HeaderConnected />
-                  <SubHeaderConnected />
+                  <LeftSidebarConnected />
+                </Sidebar>
+              )}
 
-                  <Grid
-                    style={{
-                      top: '80px',
-                      width: '100vw',
-                      position: 'fixed',
-                      overflow: 'auto',
-                      zIndex: 1,
-                      height: 'calc(100vh - 80px)',
-                      background: 'black',
-                      color: 'white',
-                    }}
-                    attached
-                  >
-                    <Switch>
-                      <Route
-                        exact
-                        path="/"
-                        component={() => <NoteConnected field="notes" />}
-                      />
-                      <Route
-                        path="/anki/list"
-                        component={AnkiPageConnected}
-                      />
-                      <Route
-                        path="/anki/learn"
-                        component={AnkiListConnected}
-                      />
-                      <Route
-                        path="/anki/tag"
-                        component={AnkiTagsPageConnected}
-                      />
-                      <Route
-                        exact
-                        path="/hourblock"
-                        component={HourblockConnected}
-                      />
-                      <Route
-                        path="/hourblock/calendar"
-                        component={HourblockCalendarPageConnected}
-                      />
-                      <Route
-                        path="/hourblock/planning"
-                        component={HourblockPlanningPageConnected}
-                      />
-                      <Route
-                        path="/hourblock/task"
-                        component={HourblockTaskPageConnected}
-                      />
-                      <Route
-                        path="/hourblock/setting"
-                        component={HourblockSettingPageConnected}
-                      />
-                      <Route
-                        exact
-                        path="/notes"
-                        component={IntelNotesConnected}
-                      />
-                      <Route
-                        path="/housingPrices"
-                        component={HousingPricesConnected}
-                      />
-                      <Redirect from="/housingPrices/*" to="/housingPrices" />
-                      <Redirect from="/*" to="/" />
-                    </Switch>
-                  </Grid>
+              <Grid style={{
+                height: '100vh',
+                width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
+                left: `${isLeftSidebarOn ? '140px' : 0}`,
+                position: 'absolute',
+              }}
+              >
+                <Grid.Row>
+                  <Grid.Column width={16}>
+                    <Sidebar.Pushable>
+                      {isRightSidebarOn && <RightSidebarConnected />}
+                      <Sidebar.Pusher style={{
+                        // left: isLeftSidebarOn ? -10 : 0
+                      }}
+                      >
+                        <HeaderConnected />
+                        <SubHeaderConnected />
 
-                  {/* <FooterConnected /> */}
-                  {/* <SettingsConnected /> */}
+                        <Grid
+                          style={{
+                            top: '80px',
+                            width: '100%',
+                            position: 'fixed',
+                            overflow: 'auto',
+                            zIndex: 1,
+                            height: 'calc(100vh - 80px)',
+                            background: 'black',
+                            color: 'white',
+                          }}
+                          attached
+                        >
+                          <Switch>
+                            <Route
+                              exact
+                              path="/"
+                              component={() => <NoteConnected field="notes" />}
+                            />
+                            <Route
+                              path="/anki/list"
+                              component={AnkiPageConnected}
+                            />
+                            <Route
+                              path="/anki/learn"
+                              component={AnkiListConnected}
+                            />
+                            <Route
+                              path="/anki/tag"
+                              component={AnkiTagsPageConnected}
+                            />
+                            <Route
+                              exact
+                              path="/hourblock"
+                              component={HourblockConnected}
+                            />
+                            <Route
+                              path="/hourblock/calendar"
+                              component={HourblockCalendarPageConnected}
+                            />
+                            <Route
+                              path="/hourblock/planning"
+                              component={HourblockPlanningPageConnected}
+                            />
+                            <Route
+                              path="/hourblock/task"
+                              component={HourblockTaskPageConnected}
+                            />
+                            <Route
+                              path="/hourblock/setting"
+                              component={HourblockSettingPageConnected}
+                            />
+                            <Route
+                              exact
+                              path="/notes"
+                              component={IntelNotesConnected}
+                            />
+                            <Route
+                              path="/housingPrices"
+                              component={HousingPricesConnected}
+                            />
+                            <Redirect from="/housingPrices/*" to="/housingPrices" />
+                            <Redirect from="/*" to="/" />
+                          </Switch>
+                        </Grid>
 
-                  {eyeSaving && <EyeModal />}
-                </Sidebar.Pusher>
-              </Sidebar.Pushable>
+                        {/* <FooterConnected /> */}
+                        {/* <SettingsConnected /> */}
+
+                        {eyeSaving && <EyeModal />}
+                      </Sidebar.Pusher>
+                    </Sidebar.Pushable>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </React.Fragment>
           )
         }

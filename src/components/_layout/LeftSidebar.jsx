@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Header,
-  Icon, Menu, Sidebar,
+  Icon, Menu,
   Input,
   Image,
   Label
@@ -13,17 +12,7 @@ export class SidebarComponent extends React.Component {
   render() {
     const { location } = this.props;
     return (
-      <Sidebar
-        as={Menu}
-        animation="push"
-        inverted
-        vertical
-        visible
-        width="thin"
-        style={{
-          width: 140,
-        }}
-      >
+      <React.Fragment>
         <Menu.Item>
           <Image
             src="/logo-white-long.png"
@@ -143,7 +132,7 @@ export class SidebarComponent extends React.Component {
           <Icon name="building" />
           Toshigo
         </Menu.Item>
-      </Sidebar>
+      </React.Fragment>
     );
   }
 }

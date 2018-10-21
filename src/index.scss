@@ -548,65 +548,50 @@ $hima-aside-width: 150px;
 
 $note-list-width: 180px;
 
-#note-editor {
-  height: calc(100vh - #{$header-height} - #{$subheader-height});
-  width: calc(100% - #{$hima-aside-width} - #{$note-list-width});
-  left: calc(#{$note-list-width} + #{$hima-aside-width});
-  top: calc(#{$header-height} + #{$subheader-height});
+#note-editor-title {
+  height: 40px;
   position: fixed;
+  width: calc(100% - #{$hima-aside-width} - #{$note-list-width});
+}
+
+#note-editor-main {
+  height: calc(100% - 40px);
+  margin-top: 40px;
   box-sizing: border-box;
-  overflow: auto;
 
-  &.mobile {
-    width: 100vw;
-    left: 0;
+  #note-editor-left {
+    height: 100%;
+    width: 120px;
+    overflow: auto;
 
-    #note-editor-title {
-      width: 100vw;
+    * {
+      font-size: 12px;
     }
   }
 
-  #note-editor-title {
-    height: 40px;
-    position: fixed;
-    width: calc(100% - #{$hima-aside-width} - #{$note-list-width});
+  .quill {
+    color: black;
   }
 
-  #note-editor-main {
-    height: calc(100% - 40px);
-    margin-top: 40px;
+  .quill-editor {
+    height: 100%;
     box-sizing: border-box;
+    padding: 2px;
 
-    #note-editor-left {
-      height: 100%;
-      width: 120px;
-      overflow: auto;
-
-      * {
-        font-size: 12px;
-      }
+    .toolbar {
+      padding: 2px;
+      height: 30px;
     }
 
-    .quill-editor {
-      height: 100%;
-      box-sizing: border-box;
-      padding: 2px;
+    .quill {
+      height: calc(100% - 30px);
+    }
 
-      .toolbar {
-        padding: 2px;
-        height: 30px;
-      }
-
-      .quill {
-        height: calc(100% - 30px);
-      }
-
-      .ql-editor {
-        padding: 5px 8px;
-        left: 0;
-        position: absolute;
-        width: 100%;
-      }
+    .ql-editor {
+      padding: 5px 8px;
+      left: 0;
+      position: absolute;
+      width: 100%;
     }
   }
 }

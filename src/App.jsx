@@ -154,6 +154,8 @@ export class App extends React.Component {
                   height: 50,
                   width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
                   left: 0, // `${isLeftSidebarOn ? '140px' : 0}`,
+                  zIndex: 100,
+                  position: 'absolute'
                 }}
               >
                 <HeaderConnected />
@@ -169,6 +171,8 @@ export class App extends React.Component {
                   height: 30,
                   width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
                   marginLeft: `${isLeftSidebarOn ? '140px' : 0}`,
+                  zIndex: 100,
+                  position: 'absolute'
                 }}
               >
                 <SubHeaderConnected />
@@ -183,6 +187,7 @@ export class App extends React.Component {
                 height: 'calc(100vh - 80px)',
                 background: 'black',
                 color: 'white',
+                top: 80
               }}
               >
                 <Switch>

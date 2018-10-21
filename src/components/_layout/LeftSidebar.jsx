@@ -97,23 +97,23 @@ export class SidebarComponent extends React.Component {
           <Menu.Menu>
             <Menu.Item
               as={Link}
-              to="/ankiList"
-              active={location.pathname === '/ankiList'}
+              to="/anki/list"
+              active={location.pathname === '/anki/list'}
             >
               Anki List
             </Menu.Item>
 
             <Menu.Item
               as={Link}
-              to="/ankiLearn"
-              active={location.pathname === '/ankiLearn'}
+              to="/anki/learn"
+              active={location.pathname === '/anki/learn'}
             >
               Anki Learn
             </Menu.Item>
             <Menu.Item
               as={Link}
-              to="/ankiTag"
-              active={location.pathname === '/ankiTag'}
+              to="/anki/tag"
+              active={location.pathname === '/anki/tag'}
             >
               Anki Tag
             </Menu.Item>

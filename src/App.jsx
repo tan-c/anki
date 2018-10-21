@@ -150,15 +150,15 @@ export class App extends React.Component {
                         component={() => <NoteConnected field="notes" />}
                       />
                       <Route
-                        path="/ankiList"
+                        path="/anki/list"
                         component={AnkiPageConnected}
                       />
                       <Route
-                        path="/ankiLearn"
+                        path="/anki/learn"
                         component={AnkiListConnected}
                       />
                       <Route
-                        path="/ankiTag"
+                        path="/anki/tag"
                         component={AnkiTagsPageConnected}
                       />
                       <Route

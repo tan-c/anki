@@ -165,7 +165,10 @@ export class HourBlockPage extends React.Component {
 
     if (window.isMobile) {
       return (
-        <div className="flex-container page" data-role="hourblock-page">
+        <div
+          className="flex-container page"
+          data-role="hourblock-page"
+        >
           {showTaskSection && (
             <section className="flex-container flex-1 no-bg">
               {this.renderRightSection()}

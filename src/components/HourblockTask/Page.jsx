@@ -12,8 +12,10 @@ import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjec
 import { TaskActions, currentYearlyTasksSortedSelector } from 'utility-redux/task';
 import { UiActions } from 'utility-redux/ui';
 
+import { Grid, } from 'semantic-ui-react';
 import MonthlyTasksListConnected from './MonthlyTasks/List';
 import DailyTaskPlanningConnected from './DailyTasks/List';
+
 
 export class TasksPage extends React.Component {
   // constructor(props, context) {
@@ -29,8 +31,8 @@ export class TasksPage extends React.Component {
     const { currentYearlyTasksSorted } = this.props;
 
     return (
-      <div data-role="task-page" className="flex-container-row page">
-        <section className="flex-1">
+      <Grid>
+        <Grid.Column width={6}>
           <div className="section-header">2018 Tasks</div>
           <div className="section-content">
             <div className="list-with-pinned-bottom">
@@ -69,11 +71,16 @@ export class TasksPage extends React.Component {
               />
             </div>
           </div>
-        </section>
+        </Grid.Column>
 
-        <MonthlyTasksListConnected />
-        <DailyTaskPlanningConnected />
-      </div>
+        <Grid.Column width={6}>
+          <MonthlyTasksListConnected />
+        </Grid.Column>
+
+        <Grid.Column width={6}>
+          <DailyTaskPlanningConnected />
+        </Grid.Column>
+      </Grid>
     );
   }
 }

@@ -29,16 +29,16 @@ export class MonthlyTasksList extends React.Component {
     const { selectedYearlyTask, monthlyTasks } = this.props;
 
     return (
-      <section data-role="monthlytasks-list" className="flex-1">
+      <React.Fragment>
         <div className="section-header" style={{ background: selectedYearlyTask.getIn(['project', 'category', 'color']) }}>
           {selectedYearlyTask.get('content')}
           {' '}
-Details
+          Details
           {' '}
         </div>
 
         <div className="section-content">
-          { selectedYearlyTask.size && [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(month => (
+          {selectedYearlyTask.size && [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(month => (
             <div key={month} className="margin-bottom-10">
               <div className="flex-container-row typical-setup">
                 <span className="flex-1">
@@ -65,7 +65,7 @@ Details
             </div>))
           }
         </div>
-      </section>
+      </React.Fragment>
     );
   }
 }

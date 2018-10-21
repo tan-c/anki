@@ -49,12 +49,12 @@ export class DailyTasksList extends React.Component {
     const { activeMonth, showPast } = this.state;
 
     return (
-      <section data-role="dailytasks-list" className="flex-1">
+      <React.Fragment>
         <div className="section-header flex-container-row" style={{ background: selectedYearlyTask.getIn(['project', 'category', 'color']) }}>
           <span className="flex-1">
             {selectedYearlyTask.get('content')}
             {' '}
-Details
+            Details
           </span>
           <span className="widdth-20">
             <i
@@ -80,7 +80,7 @@ Details
               </div>))}
           </span>
 
-          { selectedYearlyTask.size && this.monthList[activeMonth].filter(dayVal => dayVal.isPast === showPast).map(dayVal => (
+          {selectedYearlyTask.size && this.monthList[activeMonth].filter(dayVal => dayVal.isPast === showPast).map(dayVal => (
             <DailyTasksRow
               key={dayVal.dayMomentObject.unix()}
               dayVal={dayVal}
@@ -88,7 +88,7 @@ Details
             />
           ))}
         </div>
-      </section>
+      </React.Fragment>
     );
   }
 }

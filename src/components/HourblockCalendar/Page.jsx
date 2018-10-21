@@ -5,8 +5,10 @@ import React from 'react';
 // import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
+import { Grid } from 'semantic-ui-react';
 import MonthlyTasksListConnected from './MonthlyTasksList';
 import DailyTasksListConnected from './DailyTasksList';
+
 
 export class RightAside extends React.Component {
   constructor(props, context) {
@@ -53,13 +55,8 @@ export class RightAside extends React.Component {
     const monthList = this.createMonthlyList();
 
     return (
-      <aside
-        id="right-menu"
-        style={{ overflow: 'auto' }}
-        className="display-right"
-        data-role="right-aside"
-      >
-        <div className="margin-top-10 margin-bottom-10">
+      <Grid.Row>
+        <Grid.Column>
           <span className="flex-container-row">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
               <div
@@ -82,8 +79,8 @@ export class RightAside extends React.Component {
               dayVal={dayVal}
             />
           ))}
-        </div>
-      </aside>
+        </Grid.Column>
+      </Grid.Row>
     );
   }
 }

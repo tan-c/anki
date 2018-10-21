@@ -53,77 +53,76 @@ export class AnkiList extends React.Component {
     } = this.props;
 
     return (
-      <Segment
-        data-role="anki-list"
-        className="anki-list padding-horizontal-5 border-left-black"
-      >
-        {activeAnki.size > 0
-          && (
-            <Form>
-              <TextareaControlledConnected
-                inputName="question"
-                record={activeAnki}
-                actions={this.props.AnkiActions}
-                inputClassNames="width-100p height-60"
-                inputType="textarea"
-                textareaRow={2}
-                callback={(_) => { this.props.UiActions.updateIn(['activeAnkiId'], ''); }}
-              />
-
-              <TextareaControlledConnected
-                inputName="answer"
-                record={activeAnki}
-                actions={this.props.AnkiActions}
-                inputClassNames="width-100p height-100"
-                inputType="textarea"
-                textareaRow={4}
-                callback={(_) => { this.props.UiActions.updateIn(['activeAnkiId'], ''); }}
-              />
-            </Form>
-          )
-        }
-
-        {activeAnki.size === 0
-          && (
-            <Form>
-              <Form.Group>
-                <TextArea
-                  rows="2"
-                  type="text"
-                  name="question"
-                  ref={(ref) => { this.questionInput = ref; }}
-                  placeholder={activeAnki.size ? activeAnki.get('question') : ''}
+      <Grid.Row>
+        <Grid.Column>
+          {activeAnki.size > 0
+            && (
+              <Form>
+                <TextareaControlledConnected
+                  inputName="question"
+                  record={activeAnki}
+                  actions={this.props.AnkiActions}
+                  inputClassNames="width-100p height-60"
+                  inputType="textarea"
+                  textareaRow={2}
+                  callback={(_) => { this.props.UiActions.updateIn(['activeAnkiId'], ''); }}
                 />
-              </Form.Group>
-              <Form.Group>
-                <TextArea
-                  rows="4"
-                  type="text"
-                  name="answer"
-                  ref={(ref) => { this.answerInput = ref; }}
-                  placeholder={activeAnki.size ? activeAnki.get('answer') : ''}
-                  onKeyDown={this.onKeyDownSaveAnki}
-                />
-              </Form.Group>
-            </Form>
-          )
-        }
 
-        <Grid
-          divided="vertically"
-          style={{
-            overflow: 'auto',
-            maxHeight: 'calc(100vh - 300px)'
-          }}
-        >
-          {ankisSorted.valueSeq().map(anki => (
-            <AnkiRowConnected
-              anki={anki}
-              key={anki.get('_id')}
-            />
-          ))}
-        </Grid>
-      </Segment>
+                <TextareaControlledConnected
+                  inputName="answer"
+                  record={activeAnki}
+                  actions={this.props.AnkiActions}
+                  inputClassNames="width-100p height-100"
+                  inputType="textarea"
+                  textareaRow={4}
+                  callback={(_) => { this.props.UiActions.updateIn(['activeAnkiId'], ''); }}
+                />
+              </Form>
+            )
+          }
+
+          {activeAnki.size === 0
+            && (
+              <Form>
+                <Form.Group>
+                  <TextArea
+                    rows="2"
+                    type="text"
+                    name="question"
+                    ref={(ref) => { this.questionInput = ref; }}
+                    placeholder={activeAnki.size ? activeAnki.get('question') : ''}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <TextArea
+                    rows="4"
+                    type="text"
+                    name="answer"
+                    ref={(ref) => { this.answerInput = ref; }}
+                    placeholder={activeAnki.size ? activeAnki.get('answer') : ''}
+                    onKeyDown={this.onKeyDownSaveAnki}
+                  />
+                </Form.Group>
+              </Form>
+            )
+          }
+
+          <Grid
+            divided="vertically"
+            style={{
+              overflow: 'auto',
+              maxHeight: 'calc(100vh - 300px)'
+            }}
+          >
+            {ankisSorted.valueSeq().map(anki => (
+              <AnkiRowConnected
+                anki={anki}
+                key={anki.get('_id')}
+              />
+            ))}
+          </Grid>
+        </Grid.Column>
+      </Grid.Row>
     );
   }
 }

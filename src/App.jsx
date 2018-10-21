@@ -6,7 +6,10 @@ import { Map } from 'immutable';
 import keydown from 'react-keydown';
 
 import {
-  Sidebar, Segment, Container
+  Sidebar,
+  Segment,
+  Container,
+  Grid
 } from 'semantic-ui-react';
 
 // import { Menu, Container } from 'semantic-ui-react';
@@ -33,7 +36,7 @@ import RightSidebarConnected from './components/_layout/RightSidebar';
 
 import SubHeaderConnected from './components/_layout/SubHeader';
 // import SettingsConnected from './components/_layout/Settings';
-import AnkiListConnected from './components/AnkiNew/List';
+import AnkiListConnected from './components/AnkiList/List';
 import IntelNotesConnected from './components/IntelNotes/IntelNote';
 import HousingPricesConnected from './components/HousingPrices/Page';
 import HourblockConnected from './components/Hourblock/Page';
@@ -131,7 +134,7 @@ export class App extends React.Component {
                   <HeaderConnected />
                   <SubHeaderConnected />
 
-                  <Segment
+                  <Grid
                     style={{
                       top: '80px',
                       width: '100vw',
@@ -195,7 +198,8 @@ export class App extends React.Component {
                       <Redirect from="/housingPrices/*" to="/housingPrices" />
                       <Redirect from="/*" to="/" />
                     </Switch>
-                  </Segment>
+                  </Grid>
+
                   {/* <FooterConnected /> */}
                   {/* <SettingsConnected /> */}
 

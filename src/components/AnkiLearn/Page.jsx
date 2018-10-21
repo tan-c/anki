@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
 import keydown from 'react-keydown';
 // import toastr from 'toastr';
 // import Highlight from 'react-highlight'; // FIXME: removed as it introduced an older version of react
@@ -126,99 +125,103 @@ export class AnkiPage extends React.Component {
     createdElapsedDays = parseInt(createdElapsedDaysUnparsed, 10) + 1;
 
     return (
-      <Card
-        fluid
-        // id="modal-anki"
-        className={`${window.isMobile && 'mobile'}`}
-        data-role="modal-anki"
-        style={{
-          minHeight: 300
-        }}
-      >
-        <Container>
-          <Grid>
-            <Grid.Column floated="left" width={5} />
-            <Grid.Column floated="right" width={5} textAlign="right">
-              {currentAnki.size > 0 && (
-                <React.Fragment>
-                  <span className="pull-right bg-green label">
-                    {revisionAnkisTotal}
-                  </span>
-
-                  {!window.isMobile && (
+      <Grid.Row>
+        <Grid.Column>
+          <Card
+            fluid
+            // id="modal-anki"
+            className={`${window.isMobile && 'mobile'}`}
+            data-role="modal-anki"
+            style={{
+              minHeight: 300
+            }}
+          >
+            <Container>
+              <Grid>
+                <Grid.Column floated="left" width={5} />
+                <Grid.Column floated="right" width={5} textAlign="right">
+                  {currentAnki.size > 0 && (
                     <React.Fragment>
                       <span className="pull-right bg-green label">
-                        {'Created: '}
-                        {createdElapsedDays}
-                        {'d Ago'}
+                        {revisionAnkisTotal}
                       </span>
 
-                      <span className="pull-right bg-green label">
-                        {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
-                          'revision',
-                          'round'
-                        ])}/${currentAnki.getIn(['revision', 'passing'])}`}
-                      </span>
+                      {!window.isMobile && (
+                        <React.Fragment>
+                          <span className="pull-right bg-green label">
+                            {'Created: '}
+                            {createdElapsedDays}
+                            {'d Ago'}
+                          </span>
+
+                          <span className="pull-right bg-green label">
+                            {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
+                              'revision',
+                              'round'
+                            ])}/${currentAnki.getIn(['revision', 'passing'])}`}
+                          </span>
+                        </React.Fragment>
+                      )}
+
+                      {currentAnki.has('tags') && currentAnki.get('tags').map((tag, index) => (
+                        <span
+                          className="pull-right bg-orange label"
+                          key={tag.get('_id')}
+                        >
+                          {tag.get('name')}
+                        </span>
+                      ))}
                     </React.Fragment>
                   )}
+                </Grid.Column>
+              </Grid>
+            </Container>
 
-                  {currentAnki.has('tags') && currentAnki.get('tags').map((tag, index) => (
-                    <span
-                      className="pull-right bg-orange label"
-                      key={tag.get('_id')}
-                    >
-                      {tag.get('name')}
-                    </span>
-                  ))}
+            <Header as="h3" textAlign="center">
+              {currentAnki.get('question')}
+            </Header>
+
+            {showAnswer
+              && (
+                <Container text textAlign="center">
+                  {currentAnki.get('answer')}
+                </Container>
+              )
+            }
+
+            <Divider />
+
+            <Container textAlign="center">
+              {!showAnswer && (
+                <Button
+                  primary
+                  onClick={this.toggleAnswer}
+                >
+                  SHOW ANSWER
+                </Button>
+              )}
+
+              {showAnswer && (
+                <React.Fragment>
+                  <Button
+                    className="btn-large"
+                    onClick={event => this.updateAnki(event, 1)}
+                  >
+                    PASS
+                  </Button>
+
+                  <Button
+                    color="green"
+                    onClick={evnet => this.updateAnki(event, 2)}
+                  >
+                    GOOD
+                  </Button>
                 </React.Fragment>
               )}
-            </Grid.Column>
-          </Grid>
-        </Container>
-
-        <Header as="h3" textAlign="center">
-          {currentAnki.get('question')}
-        </Header>
-
-        {showAnswer
-          && (
-            <Container text textAlign="center">
-              {currentAnki.get('answer')}
             </Container>
-          )
-        }
-
-        <Divider />
-
-        <Container textAlign="center">
-          {!showAnswer && (
-            <Button
-              primary
-              onClick={this.toggleAnswer}
-            >
-              SHOW ANSWER
-            </Button>
-          )}
-
-          {showAnswer && (
-            <React.Fragment>
-              <Button
-                className="btn-large"
-                onClick={event => this.updateAnki(event, 1)}
-              >
-                PASS
-              </Button>
-
-              <Button
-                color="green"
-                onClick={evnet => this.updateAnki(event, 2)}
-              >
-                GOOD
-              </Button>
-            </React.Fragment>
-          )}
-        </Container>
-      </Card>
+          </Card>
+        </Grid.Column>
+      </Grid.Row>
     );
   }
 }

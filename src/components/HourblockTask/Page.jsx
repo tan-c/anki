@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,8 +31,8 @@ export class TasksPage extends React.Component {
     const { currentYearlyTasksSorted } = this.props;
 
     return (
-      <Grid>
-        <Grid.Column width={6}>
+      <Grid.Row columns={3}>
+        <Grid.Column>
           <div className="section-header">2018 Tasks</div>
           <div className="section-content">
             <div className="list-with-pinned-bottom">
@@ -73,14 +73,14 @@ export class TasksPage extends React.Component {
           </div>
         </Grid.Column>
 
-        <Grid.Column width={6}>
+        <Grid.Column>
           <MonthlyTasksListConnected />
         </Grid.Column>
 
-        <Grid.Column width={6}>
+        <Grid.Column>
           <DailyTaskPlanningConnected />
         </Grid.Column>
-      </Grid>
+      </Grid.Row>
     );
   }
 }

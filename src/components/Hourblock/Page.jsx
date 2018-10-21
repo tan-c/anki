@@ -183,8 +183,8 @@ export class HourBlockPage extends React.Component {
     }
 
     return (
-      <main id="hourblock">
-        <Grid>
+      <React.Fragment>
+        <Grid.Row id="hourblock">
           <Grid.Column width={2} className="left-aside">
             <CategoryInsightsConnected />
             <WeeklyInsightsConnected />
@@ -198,9 +198,11 @@ export class HourBlockPage extends React.Component {
               {this.renderRightSection()}
             </Grid.Column>
           )}
-        </Grid>
-        <FooterConnected />
-      </main>
+        </Grid.Row>
+        <Grid.Row>
+          <FooterConnected />
+        </Grid.Row>
+      </React.Fragment>
     );
   }
 }

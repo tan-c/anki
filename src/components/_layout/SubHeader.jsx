@@ -44,19 +44,7 @@ export class SubHeader extends React.Component {
     } = this.props;
 
     return (
-      <Menu
-        attached
-        data-role="subheader"
-        id="subheader"
-        className={
-          `${window.isMobile && 'mobile'} border-black-bottom`
-        }
-        style={{
-          paddingLeft: 10,
-          marginTop: 50,
-          height: 40
-        }}
-      >
+      <React.Fragment>
         {/* <div
           role="menuitem"
           tabIndex="-1"
@@ -158,7 +146,7 @@ export class SubHeader extends React.Component {
             </span>
           )
         }
-      </Menu>
+      </React.Fragment>
     );
   }
 }

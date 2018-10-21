@@ -66,20 +66,10 @@ export class Header extends React.Component {
 
     const currentApp = currentUser.hasIn(['config', 'recentApp']) ? currentUser.getIn(['config', 'recentApp']) : '';
 
-    return (
-      <Menu
-        fixed="top"
-        id="header"
-        inverted
-        color="blue"
-        // inverted
-        data-role="header"
-        className={`${showEyeTimeoutBlinking && 'bg-orange'}`}
-        style={{
-          height: 50
-        }}
-      >
+    // className = {`${showEyeTimeoutBlinking && 'bg-orange'}`
 
+    return (
+      <React.Fragment>
         {!window.isMobile && (
           <span className="height-50 border-right padding-horizontal-10">
             {threeDayMeasurement.valueSeq().map(item => (
@@ -91,109 +81,66 @@ export class Header extends React.Component {
           </span>
         )}
 
-        {!window.isMobile && (
-          <span
-            className="height-50 border-right padding-horizontal-10"
-          >
-            <span className="font-24 margin-left-10 line-height-50">
-              {parseInt(weatherInfo.getIn(['current', 'temp']), 10)}
-              {' '}
-              -
-              {parseInt(weatherInfo.getIn(['next', 'weather', 'temp']), 10)}
-              °C
-            </span>
-            <span className="margin-left-5 height-25">
-              {weatherInfo.getIn(['city', 'name'])}
-            </span>
-          </span>
-        )}
+        <span className="font-24 margin-left-10 line-height-50">
+          {parseInt(weatherInfo.getIn(['current', 'temp']), 10)}
+          {' '}
+          -
+          {parseInt(weatherInfo.getIn(['next', 'weather', 'temp']), 10)}
+          °C
+        </span>
 
-        {!window.isMobile && (
-          <span className="height-50 padding-horizontal-10 line-height-25 text-right">
-            <span className="height-25">
-              欢迎回来,
-              {currentUser.get('userName')}
-            </span>
-            <br />
-            <span className="height-25 font-12">{currentUser.get('email')}</span>
-          </span>
-        )}
+        <span className="margin-left-5 height-25">
+          {weatherInfo.getIn(['city', 'name'])}
+        </span>
 
-        <Container>
-          {/* {!window.isMobile && (
-          <span className="height-50 padding-horizontal-10 line-height-25 text-right">
-            <span className="height-25">
-              {'欢迎回来,'}
-              {currentUser.get('userName')}
-            </span>
-            <br />
-            <span className="height-25 font-12">
-              {currentUser.get('email')}
-            </span>
-          </span>
-        )} */}
+        <Menu.Item>
+          <img
+            alt="pic"
+            src={
+              currentUser.has('imageUrl')
+                ? currentUser.get('imageUrl')
+                : currentUserImageSrc
+            }
+            style={{
+              width: 36,
+              borderRadius: 1000,
+              height: 36,
+            }}
+          />
+        </Menu.Item>
 
-          {!window.isMobile && (
-            <img
-              alt="pic"
-              className="profile-image"
-              src={
-                currentUser.has('imageUrl')
-                  ? currentUser.get('imageUrl')
-                  : currentUserImageSrc
-              }
-              style={{
-                width: 36,
-                borderRadius: 1000,
-                height: 36,
-              }}
-            />
-          )}
-
-          <Menu.Menu>
+        {/* <Menu.Menu>
             <Button
-              color="blue"
+              color="white"
               onClick={(_) => {
                 this.props.UiActions.updateIn(['isLeftSidebarOn'], !isLeftSidebarOn);
               }}
             >
               Show Left Menu
             </Button>
-            <Button
-              color="blue"
+          </Menu.Menu> */}
+
+        <Menu.Item style={{
+          fontSize: 24,
+          height: 50,
+          lineHeight: 50,
+        }}
+        >
+          {currentTime.format('HH:mm')}
+        </Menu.Item>
+
+        <Menu.Item name="iconButtons" position="right">
+          <Button icon>
+            <Icon
+              color="white"
+              name="graduation cap"
               onClick={(_) => {
                 this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
               }}
-            >
-              Show Right Menu
-            </Button>
-          </Menu.Menu>
-
-          <Menu.Item
-            position="right"
-            name="currentTime"
-            style={{
-              fontSize: 24,
-              height: 50,
-              lineHeight: 50,
-            }}
-          >
-            {currentTime.format('HH:mm')}
-          </Menu.Item>
-
-          <Menu.Item name="iconButtons" position="right">
-            {/* <Button icon>
-                <Icon
-                  name="graduation cap"
-                  color={`${isAnkiModalOn ? 'blue' : 'black'}`}
-                  onClick={(_) => {
-                    this.props.UiActions.updateIn(['common', 'isAnkiModalOn'], !isAnkiModalOn);
-                  }}
-                />
-              </Button> */}
-          </Menu.Item>
-        </Container>
-      </Menu>
+            />
+          </Button>
+        </Menu.Item>
+      </React.Fragment>
     );
   }
 }

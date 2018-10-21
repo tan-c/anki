@@ -85,13 +85,13 @@ export class RightSidebarComponent extends React.Component {
           </Button>
         </Menu.Item>
 
-        <Menu.Item
-          as={Link}
-          to="/notes"
-          active={location.href.indexOf('/notes') > -1}
-        >
-          <Icon name="sticky note outline" />
-          IntelNote
+        <Menu.Item>
+          <span className="height-25">
+            欢迎回来,
+            {currentUser.get('userName')}
+          </span>
+          <br />
+          <span className="height-25 font-12">{currentUser.get('email')}</span>
         </Menu.Item>
 
         <Menu.Item

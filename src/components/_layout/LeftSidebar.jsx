@@ -105,7 +105,7 @@ export class SidebarComponent extends React.Component {
         <Menu.Item
           active={location.pathname === '/anki'}
         >
-          <Icon name="university" />
+          <Icon name="graduation cap" />
           Anki
           <Menu.Menu>
             <Menu.Item

@@ -162,6 +162,7 @@ export class App extends React.Component {
                         component={AnkiTagsPageConnected}
                       />
                       <Route
+                        exact
                         path="/hourblock"
                         component={HourblockConnected}
                       />
@@ -178,6 +179,7 @@ export class App extends React.Component {
                         component={HourblockSettingPageConnected}
                       />
                       <Route
+                        exact
                         path="/notes"
                         component={IntelNotesConnected}
                       />

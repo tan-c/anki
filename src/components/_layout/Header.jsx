@@ -130,7 +130,7 @@ export class Header extends React.Component {
         </Menu.Item>
 
         <Menu.Item name="iconButtons" position="right">
-          <Button icon>
+          <Button icon id="right-aside-button">
             <Icon
               color="white"
               name="graduation cap"

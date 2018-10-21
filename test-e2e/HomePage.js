@@ -1,13 +1,17 @@
-import { Selector, Role } from 'testcafe';
+import {
+  Selector,
+  Role
+} from 'testcafe';
 
 // NOTE: the app will be saved from /dist with http-server, which defaults at 8080 port
 
 const url = process.env.NODE_ENV === 'production' ? 'http://10.0.0.10' : 'http://localhost:8090';
 
 const loginButton = Selector('#login-button');
+const rightAsideButton = Selector('#right-aside-button');
 const logoutButton = Selector('#logout-button');
 const loginForm = Selector('.login-form');
-const header = Selector('#header');
+const header = Selector('div[data-role="header"]');
 
 const testUserEmail = process.env.NODE_ENV === 'production' ? process.env.TEST_EMAIL : 'test@gmail.com';
 const testUserPassword = process.env.NODE_ENV === 'production' ? process.env.TEST_PASSWORD : 'test1234';
@@ -31,7 +35,9 @@ fixture('HomePage').page(url); // docker.for.mac.localhost works on local mac wh
 test('Test Anki has login page with right title page before login', async (t) => {
   await t
     .expect(loginForm.count).eql(1)
-    .expect(logoutButton.count).eql(0)
+    .expect(rightAsideButton.count).eql(0)
+    .expect(logoutButton.count)
+    .eql(0)
     .expect(Selector('h2').innerText)
     .eql('Log In To Anki');
 });
@@ -52,6 +58,11 @@ test('Test that testUser can login then logout', async (t) => {
     .eql(0)
     .expect(header.count)
     .eql(1)
+    .expect(rightAsideButton.count)
+    .eql(1)
+    .expect(logoutButton.count)
+    .eql(0)
+    .click(rightAsideButton)
     .expect(logoutButton.count)
     .eql(1)
     .click(logoutButton)
@@ -65,6 +76,7 @@ test('Test that testUser can login then logout', async (t) => {
 test('Test that testUser can login then refresh but no need login', async (t) => {
   await t.expect(header.count)
     .eql(0)
+    .expect(rightAsideButton.count).eql(0)
     .expect(logoutButton.count)
     .eql(0);
 
@@ -76,13 +88,19 @@ test('Test that testUser can login then refresh but no need login', async (t) =>
     .eql(0)
     .expect(header.count)
     .eql(1)
-    .expect(logoutButton.count)
+    .expect(rightAsideButton.count)
     .eql(1);
+  // .expect(logoutButton.count)
+  // .eql(1);
 
   await t.eval(() => location.reload(true));
 
   await t.expect(header.count)
     .eql(1)
+    .expect(rightAsideButton.count).eql(1)
+    .expect(logoutButton.count)
+    .eql(0)
+    .click(rightAsideButton)
     .expect(logoutButton.count)
     .eql(1);
 });
@@ -102,6 +120,7 @@ test('Test that wrongTestUser cannot login then refresh still cannot login', asy
 
   await t.expect(header.count)
     .eql(0)
+    .expect(rightAsideButton.count).eql(0)
     .expect(logoutButton.count)
     .eql(0);
 });

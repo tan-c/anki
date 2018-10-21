@@ -44,7 +44,8 @@ export class DailyMeasurements extends React.Component {
       type: 'gym',
     }];
 
-    const { currentDayMeasurementRecord, showingItemType } = this.props;
+    const { currentDayMeasurementRecord } = this.props;
+    const showingItemType = 'gym';
 
     return (
       <React.Fragment>
@@ -78,7 +79,6 @@ DailyMeasurements.defaultProps = {
 
 DailyMeasurements.propTypes = {
   // dayMomentObject: PropTypes.object.isRequired,
-  showingItemType: PropTypes.string.isRequired,
   currentDayMeasurementRecord: PropTypes.object,
 
   DailyMeasurementActions: PropTypes.object.isRequired,
@@ -87,7 +87,6 @@ DailyMeasurements.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     // dayMomentObject: ownProps.dayMomentObject,
-    showingItemType: ownProps.showingItemType,
     currentDayMeasurementRecord: currentDayMeasurementSelector(state, ownProps.dayMomentObject),
   };
 }

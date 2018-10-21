@@ -34,7 +34,6 @@ const initialState = {
   common: {
     currentUserId: '',
     currentUserImageSrc: '', // Based on the imageSrc from the auth0
-    isAuthenticated: false,
 
     api: {
       weatherInfo: {},
@@ -42,7 +41,7 @@ const initialState = {
   },
 
   isLeftSidebarOn: true,
-  isRightSidebarOn: true,
+  isRightSidebarOn: false,
 };
 
 export default function UiReducer(state = fromJS(initialState), action) {

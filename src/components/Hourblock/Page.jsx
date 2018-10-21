@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import moment from 'moment-timezone';
 // import { Map } from 'immutable';
 import { currentUserSelector } from 'utility-redux/user';
-import { totalProjectTasksCountSelector } from 'utility-redux/task';
-import { Grid, Image } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import DailyRecordsChartConnected from './DailyRecordsChart';
 // import { UiActions } from 'utility-redux/ui';
 
@@ -14,9 +13,6 @@ import DailyRecordsChartConnected from './DailyRecordsChart';
 import HourBlockListConnected from './List';
 
 import EventDetailsConnected from './ExtraSection/Event/Details';
-
-import ProjectTaskListConnected from './ExtraSection/Task/ProjectTaskList';
-import FocusedProjectTaskListConnected from './ExtraSection/Task/FocusedProjectTaskList';
 
 import DailyCalorieDetailsConnected from './ExtraSection/Daily/CalorieDetails';
 import DailySleepDetailsConnected from './ExtraSection/Daily/SleepDetails';
@@ -30,7 +26,6 @@ export class HourBlockPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      showingItemType: 'daily',
       dayObjectOffset: 0,
       // NOTE - This should be based on localtimezone
       dayMomentObject: moment().startOf('day'),
@@ -88,55 +83,18 @@ export class HourBlockPage extends React.Component {
   }
 
   renderRightSection = () => {
-    const { dayMomentObject, showingItemType } = this.state;
-    const { totalProjectTasksCount } = this.props;
+    const { dayMomentObject } = this.state;
 
     return (
       <Fragment>
-        <span className="flex-container-row typical-setup border-green">
-          <span
-            className={`flex-1 ${showingItemType === 'tasks' ? 'bg-green' : ''} ${showingItemType === 'tasks' && totalProjectTasksCount > 0 ? 'bg-red' : ''}`}
-            role="button"
-            tabIndex="-1"
-            onClick={_ => this.setState({ showingItemType: 'tasks' })}
-          >
-            {`Task - ${totalProjectTasksCount}`}
-          </span>
-          <span
-            className={`border-right-green flex-1 ${showingItemType === 'daily' && 'bg-green'}`} role="button" tabIndex="-1"
-            onClick={_ => this.setState({ showingItemType: 'daily' })}
-          >
-            Daily
-          </span>
-        </span>
+        <section className="flex-2">
+          <DailyMeasurementsConnected dayMomentObject={dayMomentObject} />
+          <DailySleepDetailsConnected dayMomentObject={dayMomentObject} />
+          <div className="spacing-10" />
+          <DailyCalorieDetailsConnected dayMomentObject={dayMomentObject} />
+        </section>
+        {!window.isMobile && <DailyRecordsChartConnected />}
 
-        {showingItemType === 'tasks'
-          && (
-            <React.Fragment>
-              <section className="flex-1">
-                <ProjectTaskListConnected />
-              </section>
-              <section className="flex-1">
-                <FocusedProjectTaskListConnected />
-              </section>
-            </React.Fragment>
-          )
-        }
-
-        {showingItemType === 'daily'
-          && (
-            <React.Fragment>
-              <section className="flex-2">
-                <DailyMeasurementsConnected dayMomentObject={dayMomentObject} showingItemType={showingItemType} />
-                <DailySleepDetailsConnected dayMomentObject={dayMomentObject} />
-                <div className="spacing-10" />
-                <DailyCalorieDetailsConnected dayMomentObject={dayMomentObject} />
-              </section>
-              {!window.isMobile && <DailyRecordsChartConnected />}
-            </React.Fragment>
-          )
-
-        }
         {!window.isMobile && <EventDetailsConnected />}
       </Fragment>
     );
@@ -191,18 +149,16 @@ export class HourBlockPage extends React.Component {
 
 HourBlockPage.defaultProps = {
   showTaskSection: false,
-  totalProjectTasksCount: 0
 };
 
 HourBlockPage.propTypes = {
   showTaskSection: PropTypes.bool,
-  totalProjectTasksCount: PropTypes.number,
+
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     showTaskSection: currentUserSelector(state).hasIn(['config', 'showTaskSection']) && currentUserSelector(state).getIn(['config', 'showTaskSection']),
-    totalProjectTasksCount: totalProjectTasksCountSelector(state),
   };
 }
 

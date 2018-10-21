@@ -11,8 +11,7 @@ function setup() {
   const props = {
     pageName: '',
     location: {},
-    loggedIn: () => {},
-    isAuthenticated: false,
+    loggedIn: () => { },
     authLock: {
       show: () => { }
     },

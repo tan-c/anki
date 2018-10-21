@@ -5,16 +5,23 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
+import {
+  TaskActions,
+  currentYearlyTasksSortedSelector,
+  totalProjectTasksCountSelector
+} from 'utility-redux/task';
+
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
-import { TaskActions, currentYearlyTasksSortedSelector } from 'utility-redux/task';
 import { UiActions } from 'utility-redux/ui';
 
 import { Grid, } from 'semantic-ui-react';
 import MonthlyTasksListConnected from './MonthlyTasks/List';
 import DailyTaskPlanningConnected from './DailyTasks/List';
+import ProjectTaskListConnected from './ProjectTaskList';
+import FocusedProjectTaskListConnected from './FocusedProjectTaskList';
 
 
 export class TasksPage extends React.Component {
@@ -28,10 +35,17 @@ export class TasksPage extends React.Component {
   // }
 
   render() {
-    const { currentYearlyTasksSorted } = this.props;
+    const { currentYearlyTasksSorted, totalProjectTasksCount } = this.props;
 
     return (
-      <Grid.Row columns={3}>
+      <Grid.Row columns={4}>
+        <Grid.Column>
+          {`Task - ${totalProjectTasksCount}`}
+          <ProjectTaskListConnected />
+          <FocusedProjectTaskListConnected />
+        </Grid.Column>
+
+
         <Grid.Column>
           <div className="section-header">2018 Tasks</div>
           <div className="section-content">
@@ -87,10 +101,12 @@ export class TasksPage extends React.Component {
 
 TasksPage.defaultProps = {
   currentYearlyTasksSorted: Map(),
+  totalProjectTasksCount: 0
 };
 
 TasksPage.propTypes = {
   currentYearlyTasksSorted: PropTypes.object,
+  totalProjectTasksCount: PropTypes.number,
 
   TaskActions: PropTypes.object.isRequired,
   UiActions: PropTypes.object.isRequired,
@@ -98,6 +114,8 @@ TasksPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    totalProjectTasksCount: totalProjectTasksCountSelector(state),
+
     currentYearlyTasksSorted: currentYearlyTasksSortedSelector(state),
   };
 }

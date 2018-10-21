@@ -126,101 +126,99 @@ export class AnkiPage extends React.Component {
 
     return (
       <Grid.Row>
-        <Grid.Column>
-          <Card
-            fluid
-            // id="modal-anki"
-            className={`${window.isMobile && 'mobile'}`}
-            data-role="modal-anki"
-            style={{
-              minHeight: 300
-            }}
-          >
-            <Container>
-              <Grid>
-                <Grid.Column floated="left" width={5} />
-                <Grid.Column floated="right" width={5} textAlign="right">
-                  {currentAnki.size > 0 && (
-                    <React.Fragment>
-                      <span className="pull-right bg-green label">
-                        {revisionAnkisTotal}
-                      </span>
+        <Card
+          fluid
+          // id="modal-anki"
+          className={`${window.isMobile && 'mobile'}`}
+          data-role="modal-anki"
+          style={{
+            minHeight: 300
+          }}
+        >
+          <Container>
+            <Grid>
+              <Grid.Column floated="left" width={5} />
+              <Grid.Column floated="right" width={5} textAlign="right">
+                {currentAnki.size > 0 && (
+                  <React.Fragment>
+                    <span className="pull-right bg-green label">
+                      {revisionAnkisTotal}
+                    </span>
 
-                      {!window.isMobile && (
-                        <React.Fragment>
-                          <span className="pull-right bg-green label">
-                            {'Created: '}
-                            {createdElapsedDays}
-                            {'d Ago'}
-                          </span>
-
-                          <span className="pull-right bg-green label">
-                            {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
-                              'revision',
-                              'round'
-                            ])}/${currentAnki.getIn(['revision', 'passing'])}`}
-                          </span>
-                        </React.Fragment>
-                      )}
-
-                      {currentAnki.has('tags') && currentAnki.get('tags').map((tag, index) => (
-                        <span
-                          className="pull-right bg-orange label"
-                          key={tag.get('_id')}
-                        >
-                          {tag.get('name')}
+                    {!window.isMobile && (
+                      <React.Fragment>
+                        <span className="pull-right bg-green label">
+                          {'Created: '}
+                          {createdElapsedDays}
+                          {'d Ago'}
                         </span>
-                      ))}
-                    </React.Fragment>
-                  )}
-                </Grid.Column>
-              </Grid>
-            </Container>
 
-            <Header as="h3" textAlign="center">
-              {currentAnki.get('question')}
-            </Header>
+                        <span className="pull-right bg-green label">
+                          {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
+                            'revision',
+                            'round'
+                          ])}/${currentAnki.getIn(['revision', 'passing'])}`}
+                        </span>
+                      </React.Fragment>
+                    )}
 
-            {showAnswer
-              && (
-                <Container text textAlign="center">
-                  {currentAnki.get('answer')}
-                </Container>
-              )
-            }
+                    {currentAnki.has('tags') && currentAnki.get('tags').map((tag, index) => (
+                      <span
+                        className="pull-right bg-orange label"
+                        key={tag.get('_id')}
+                      >
+                        {tag.get('name')}
+                      </span>
+                    ))}
+                  </React.Fragment>
+                )}
+              </Grid.Column>
+            </Grid>
+          </Container>
 
-            <Divider />
+          <Header as="h3" textAlign="center">
+            {currentAnki.get('question')}
+          </Header>
 
-            <Container textAlign="center">
-              {!showAnswer && (
+          {showAnswer
+            && (
+              <Container text textAlign="center">
+                {currentAnki.get('answer')}
+              </Container>
+            )
+          }
+
+          <Divider />
+
+          <Container textAlign="center">
+            {!showAnswer && (
+              <Button
+                primary
+                onClick={this.toggleAnswer}
+              >
+                SHOW ANSWER
+              </Button>
+            )}
+
+            {showAnswer && (
+              <React.Fragment>
                 <Button
-                  primary
-                  onClick={this.toggleAnswer}
+                  className="btn-large"
+                  onClick={event => this.updateAnki(event, 1)}
                 >
-                  SHOW ANSWER
+                  PASS
                 </Button>
-              )}
 
-              {showAnswer && (
-                <React.Fragment>
-                  <Button
-                    className="btn-large"
-                    onClick={event => this.updateAnki(event, 1)}
-                  >
-                    PASS
-                  </Button>
-
-                  <Button
-                    color="green"
-                    onClick={evnet => this.updateAnki(event, 2)}
-                  >
-                    GOOD
-                  </Button>
-                </React.Fragment>
-              )}
-            </Container>
-          </Card>
-        </Grid.Column>
+                <Button
+                  color="green"
+                  onClick={evnet => this.updateAnki(event, 2)}
+                >
+                  GOOD
+                </Button>
+              </React.Fragment>
+            )}
+          </Container>
+        </Card>
       </Grid.Row>
     );
   }

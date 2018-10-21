@@ -15,21 +15,19 @@ export class AnkiRow extends React.Component {
 
     return (
       <Grid.Row
-        data-role="anki-row"
         style={{
           padding: 0,
           minHeight: 30
         }}
       >
-        <div style={{
-          width: 30
-        }}
+        <Grid.Column
+          width={1}
         >
           {`${anki.getIn(['revision', 'round'])}/${anki.getIn(['revision', 'passing'])} - `}
-        </div>
+        </Grid.Column>
 
         <Grid.Column
-          width={6}
+          width={12}
           textAlign="left"
         >
           {anki.get('question')}

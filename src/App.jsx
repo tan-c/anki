@@ -187,7 +187,8 @@ export class App extends React.Component {
                 height: 'calc(100vh - 80px)',
                 background: 'black',
                 color: 'white',
-                top: 80
+                top: 80,
+                margin: 0
               }}
               >
                 <Switch>

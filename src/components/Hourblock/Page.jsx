@@ -86,7 +86,18 @@ export class HourBlockPage extends React.Component {
     const { dayMomentObject } = this.state;
 
     return (
-      <Grid>
+      <Grid style={{
+        flexDirection: 'column'
+      }}
+      >
+        <Grid.Row>
+          {!window.isMobile && <DailyRecordsChartConnected />}
+        </Grid.Row>
+
+        <Grid.Row>
+          {!window.isMobile && <EventDetailsConnected />}
+        </Grid.Row>
+
         <Grid.Row>
           <DailyMeasurementsConnected
             dayMomentObject={dayMomentObject}
@@ -100,15 +111,6 @@ export class HourBlockPage extends React.Component {
             dayMomentObject={dayMomentObject}
           />
         </Grid.Row>
-
-        <Grid.Row>
-          {!window.isMobile && <DailyRecordsChartConnected />}
-        </Grid.Row>
-
-        <Grid.Row>
-          {!window.isMobile && <EventDetailsConnected />}
-        </Grid.Row>
-
       </Grid>
     );
   }

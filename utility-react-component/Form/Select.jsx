@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import { isImmutable } from 'immutable';
-import {
-  Select,
-} from 'semantic-ui-react';
+// import {
+//   Select,
+// } from 'semantic-ui-react';
 
 // ****  EXAMPLE ***
 // <Select
@@ -46,7 +46,7 @@ export class SelectComponent extends React.Component {
     } = this.props;
 
     return (
-      <Select
+      <select
         type="text"
         name={selectName}
         className={className}
@@ -71,7 +71,7 @@ export class SelectComponent extends React.Component {
             {this.renderOptionItem(item)}
           </option>))
         }
-      </Select>
+      </select>
     );
   }
 }

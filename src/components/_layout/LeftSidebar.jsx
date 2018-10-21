@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   Icon, Menu,
   Input,
@@ -7,10 +8,12 @@ import {
   Label
 } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
+import { overduedTasksSelector } from 'utility-redux/task';
 
 export class SidebarComponent extends React.Component {
   render() {
-    const { location } = this.props;
+    const { location, overduedTasksCount } = this.props;
+
     return (
       <React.Fragment>
         <Menu.Item>
@@ -53,7 +56,7 @@ export class SidebarComponent extends React.Component {
                 color="teal"
                 size="tiny"
               >
-                1
+                {overduedTasksCount}
               </Label>
               Calendar
             </Menu.Item>
@@ -146,9 +149,19 @@ export class SidebarComponent extends React.Component {
   }
 }
 
+function mapStateToProps(state, ownProps) {
+  return {
+    overduedTasksCount: overduedTasksSelector(state),
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+  };
+}
 
 SidebarComponent.propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-export default withRouter(SidebarComponent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SidebarComponent));

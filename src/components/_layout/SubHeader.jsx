@@ -12,7 +12,7 @@ import {
 
 import { UiActions } from 'utility-redux/ui';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
-import { todayTasksSelector, overduedTasksSelector } from 'utility-redux/task';
+import { todayTasksSelector } from 'utility-redux/task';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
 import {
@@ -72,11 +72,6 @@ export class SubHeader extends React.Component {
             {revisionAnkisTotal}
           </div>
         </Menu.Item>
-
-        <Menu.Menu fitted="vertically">
-
-        </Menu.Menu>
-        {/* <Button size="mini">Mini</Button> */}
 
         <div id="subheader-links" className="flex-3 text-left">
           {location.pathname.indexOf('planning') > -1
@@ -195,9 +190,6 @@ function mapStateToProps(state, ownProps) {
     todayTasks: todayTasksSelector(state),
 
     revisionAnkisTotal: revisionAnkisTotalSelector(state),
-
-
-    overduedTasksCount: overduedTasksSelector(state),
 
     selectedProjectId: state.ui.getIn(['hourblock', 'planningPage', 'selectedProjectId']),
     updatingRecurTask: state.ui.getIn(['hourblock', 'planningPage', 'updatingRecurTask']),

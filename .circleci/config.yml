@@ -70,7 +70,6 @@ jobs:
           path: /js-base-image/coverage/
       - store_artifacts:
           path: /js-base-image/coverage/
-      # - run: ls -al /js-base-image/coverage/
 
   test:e2e:
     docker:

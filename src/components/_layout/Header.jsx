@@ -56,7 +56,6 @@ export class Header extends React.Component {
     const {
       isLeftSidebarOn,
       isRightSidebarOn,
-      isSettingOn,
       currentUser,
       weatherInfo,
       threeDayMeasurement,
@@ -192,13 +191,6 @@ export class Header extends React.Component {
                   }}
                 />
               </Button> */}
-            <Icon
-              name="cog"
-              // color={`${isSettingOn ? 'blue' : ''}`}
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
-              }}
-            />
           </Menu.Item>
         </Container>
       </Menu>
@@ -207,7 +199,6 @@ export class Header extends React.Component {
 }
 
 Header.defaultProps = {
-  isSettingOn: false,
   isLeftSidebarOn: true,
   isRightSidebarOn: true,
 
@@ -217,7 +208,6 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
-  isSettingOn: PropTypes.bool,
   isLeftSidebarOn: PropTypes.bool,
   isRightSidebarOn: PropTypes.bool,
 
@@ -233,7 +223,6 @@ Header.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    isSettingOn: state.ui.getIn(['common', 'isSettingOn']),
     isLeftSidebarOn: state.ui.getIn(['isLeftSidebarOn']),
     isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
 

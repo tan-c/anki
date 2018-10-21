@@ -39,7 +39,7 @@ export class SubHeader extends React.Component {
       todayTasks,
       location, selectedProjectId,
       updatingRecurTask, edittingTarget,
-      isSettingOn, showMonthlyCalendar,
+      showMonthlyCalendar,
       overduedTasksCount
     } = this.props;
 
@@ -140,15 +140,6 @@ export class SubHeader extends React.Component {
             {'Tasks'}
           </span>
         )}
-
-        <i
-          role="button"
-          tabIndex="-1"
-          className={`line-height-30 width-20 fa fa-fw fa-cog ${isSettingOn && 'color-blue'}`}
-          onClick={(_) => {
-            this.props.UiActions.updateIn(['common', 'isSettingOn'], !isSettingOn);
-          }}
-        />
       </Menu>
     );
   }
@@ -167,7 +158,6 @@ SubHeader.defaultProps = {
   edittingTarget: 'events',
   updatingRecurTask: false,
   showMonthlyCalendar: true,
-  isSettingOn: false,
 };
 
 SubHeader.propTypes = {
@@ -184,7 +174,6 @@ SubHeader.propTypes = {
   updatingRecurTask: PropTypes.bool,
   selectedProjectId: PropTypes.string,
   edittingTarget: PropTypes.string,
-  isSettingOn: PropTypes.bool,
   showMonthlyCalendar: PropTypes.bool,
 
   UiActions: PropTypes.object.isRequired,
@@ -208,7 +197,6 @@ function mapStateToProps(state, ownProps) {
     updatingRecurTask: state.ui.getIn(['hourblock', 'planningPage', 'updatingRecurTask']),
     edittingTarget: state.ui.getIn(['hourblock', 'settingsPage', 'edittingTarget']),
     showMonthlyCalendar: state.ui.getIn(['hourblock', 'hourblockPage', 'showMonthlyCalendar']),
-    isSettingOn: state.ui.getIn(['common', 'isSettingOn']),
 
   };
 }

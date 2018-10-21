@@ -34,7 +34,6 @@ const initialState = {
   common: {
     currentUserId: '',
     currentUserImageSrc: '', // Based on the imageSrc from the auth0
-    isSettingOn: false,
     isAuthenticated: false,
 
     api: {

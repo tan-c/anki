@@ -4,9 +4,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 
+import { Map } from 'immutable';
+
+import { UserActions, currentUserSelector } from 'utility-redux/user';
+import { AnkiTagActions } from 'utility-redux/ankiTag';
+import InputNewComponent from 'utility-react-component/Form/Input/New';
+
 import {
   Header,
-  Icon, Menu, Sidebar,
+  Icon,
+  Menu,
+  Sidebar,
   Button
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -20,6 +28,40 @@ export class RightSidebarComponent extends React.Component {
   };
 
   render() {
+    const {
+      currentUser,
+      ankiTags
+    } = this.props;
+
+    const configs = [{
+      type: 'common',
+      items: [{
+        name: 'eyeSaving',
+        displayName: 'Eye Saving',
+        value: currentUser.hasIn(['config', 'eyeSaving']) && currentUser.getIn(['config', 'eyeSaving']),
+      }],
+    }, {
+      type: 'mainpage',
+      items: [{
+        name: 'showTaskSection',
+        displayName: 'Show Task',
+        value: currentUser.hasIn(['config', 'showTaskSection']) && currentUser.getIn(['config', 'showTaskSection']),
+      }, {
+        name: 'showEventsInPomo',
+        displayName: 'Show Events',
+        value: currentUser.hasIn(['config', 'showEventsInPomo']) && currentUser.getIn(['config', 'showEventsInPomo']),
+      }, {
+        name: 'showMinorTask',
+        displayName: 'Minor Task',
+        value: currentUser.hasIn(['config', 'showMinorTask']) && currentUser.getIn(['config', 'showMinorTask']),
+      }, {
+        name: 'enableChangeRecur',
+        displayName: 'Change Recur',
+        value: currentUser.hasIn(['config', 'enableChangeRecur']) && currentUser.getIn(['config', 'enableChangeRecur']),
+      }
+      ]
+    }];
+
     return (
       <Sidebar
         as={Menu}
@@ -45,24 +87,6 @@ export class RightSidebarComponent extends React.Component {
 
         <Menu.Item
           as={Link}
-          to="/"
-          active={location.href.split('//')[1].split('/')[2] === ''}
-        >
-          <Icon name="home" />
-          Home
-        </Menu.Item>
-
-        <Menu.Item
-          as={Link}
-          to="/hourblock"
-          active={location.href.indexOf('/hourblock') > -1}
-        >
-          <Icon name="calendar" />
-          Hourblock
-        </Menu.Item>
-
-        <Menu.Item
-          as={Link}
           to="/notes"
           active={location.href.indexOf('/notes') > -1}
         >
@@ -78,14 +102,93 @@ export class RightSidebarComponent extends React.Component {
           <Icon name="building" />
           Toshigo
         </Menu.Item>
+
+        {configs.map(configType => (
+          <div key={configType.type}>
+            <div className="flex-container-row typical-setup border-bottom-white">
+              {configType.type}
+            </div>
+
+            {configType.items.map(config => (
+              <div key={config.name} className="flex-container-row typical-setup">
+                <span className="flex-1">
+                  {config.displayName}
+                  {config.value}
+                </span>
+                <span
+                  className={`width-40 border-white text-center ${config.value ? 'bg-green' : 'bg-red'}`} tabIndex={-1} role="button" onClick={() => {
+                    this.props.UserActions.update(currentUser.setIn(['config', config.name], !config.value));
+                  }}
+                >
+                  {config.value ? 'ON' : 'OFF'}
+                </span>
+              </div>
+            ))}
+
+          </div>
+        ))}
+
+
+        <div>
+          <div className="border-bottom-white">
+            AnkiTags
+          </div>
+
+          <InputNewComponent
+            inputName="name"
+            inputClassNames="flex-1"
+            // newRecord={{
+            //   // targetCompletion: dayVal.dayMomentObject,
+            //   // type: 'daily',
+            // }}
+            actions={this.props.AnkiTagActions}
+          />
+
+          {ankiTags.valueSeq().map(tag => (
+            <div
+              className="flex-container-row"
+              key={tag.get('_id')}
+            >
+              <span className="flex-1">
+                {tag.get('name')}
+              </span>
+              <span className="width-20">
+                <i
+                  role="button"
+                  tabIndex="-1"
+                  className="line-height-30 width-20 fa fa-fw fa-close"
+                  onClick={(_) => {
+                    this.props.AnkiTagActions.deleteRecord(tag);
+                  }}
+                />
+              </span>
+
+            </div>
+          ))}
+        </div>
       </Sidebar>
     );
   }
 }
 
+RightSidebarComponent.defaultProps = {
+  currentUser: Map(),
+  ankiTags: Map(),
+};
+
+RightSidebarComponent.propTypes = {
+  currentUser: PropTypes.object,
+  ankiTags: PropTypes.object,
+
+  UserActions: PropTypes.object.isRequired,
+  AnkiTagActions: PropTypes.object.isRequired,
+};
+
 
 function mapStateToProps(state, ownProps) {
   return {
+    currentUser: currentUserSelector(state),
+    ankiTags: state.ankiTags,
   };
 }
 
@@ -95,6 +198,8 @@ function mapDispatchToProps(dispatch) {
       type: 'DELETE_USER_SUCCESS',
       user: currentUser,
     }),
+    UserActions: bindActionCreators(UserActions, dispatch),
+    AnkiTagActions: bindActionCreators(AnkiTagActions, dispatch),
   };
 }
 

@@ -18,7 +18,6 @@ import EventDetailsConnected from './ExtraSection/Event/Details';
 import ProjectTaskListConnected from './ExtraSection/Task/ProjectTaskList';
 import FocusedProjectTaskListConnected from './ExtraSection/Task/FocusedProjectTaskList';
 
-import DailyWorkoutRecordsDetailsConnected from './ExtraSection/Daily/WorkoutRecordsDetails';
 import DailyCalorieDetailsConnected from './ExtraSection/Daily/CalorieDetails';
 import DailySleepDetailsConnected from './ExtraSection/Daily/SleepDetails';
 import DailyMeasurementsConnected from './ExtraSection/Daily/Measurements';
@@ -109,12 +108,6 @@ export class HourBlockPage extends React.Component {
           >
             Daily
           </span>
-          <span
-            className={`border-right-green flex-1 ${showingItemType === 'gym' && 'bg-green'}`} role="button" tabIndex="-1"
-            onClick={_ => this.setState({ showingItemType: 'gym' })}
-          >
-            Gym
-          </span>
         </span>
 
         {showingItemType === 'tasks'
@@ -144,17 +137,6 @@ export class HourBlockPage extends React.Component {
           )
 
         }
-
-        {showingItemType === 'gym'
-          && (
-            <section className="flex-2">
-              <DailyMeasurementsConnected dayMomentObject={dayMomentObject} showingItemType={showingItemType} />
-              <div className="spacing-10" />
-              <DailyWorkoutRecordsDetailsConnected dayMomentObject={dayMomentObject} />
-            </section>
-          )
-        }
-
         {!window.isMobile && <EventDetailsConnected />}
       </Fragment>
     );

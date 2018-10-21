@@ -76,11 +76,20 @@ export class SidebarComponent extends React.Component {
 
             <Menu.Item
               as={Link}
+              to="/hourblock/workout"
+              active={location.pathname === '/hourblock/workout'}
+            >
+              Workout
+            </Menu.Item>
+
+            <Menu.Item
+              as={Link}
               to="/hourblock/setting"
               active={location.pathname === '/hourblock/setting'}
             >
               Settings
             </Menu.Item>
+
           </Menu.Menu>
         </Menu.Item>
 

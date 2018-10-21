@@ -50,11 +50,15 @@ import HourblockPlanningPageConnected from './components/HourblockPlanning/Page'
 import HourblockTaskPageConnected from './components/HourblockTask/Page';
 import HourblockSettingPageConnected from './components/HourblockSettings/Page';
 import HourblockCalendarPageConnected from './components/HourblockCalendar/Page';
+import HourblockWorkoutPageConnected from './components/HourblockWorkout/Page';
+
 
 import EyeModal from './components/_modal/Eye';
 import ErrorBoundary from './ErrorBoundary';
 
 import './index.scss';
+
+{ /* <DailyWorkoutRecordsDetailsConnected dayMomentObject={dayMomentObject} /> */ }
 // import { subscribeUser } from './helper/notification';
 
 window.isMobile = Math.min(document.documentElement.clientWidth, screen.width) <= 450; // P9 is 424
@@ -196,6 +200,10 @@ export class App extends React.Component {
                             <Route
                               path="/hourblock/calendar"
                               component={HourblockCalendarPageConnected}
+                            />
+                            <Route
+                              path="/hourblock/workout"
+                              component={HourblockWorkoutPageConnected}
                             />
                             <Route
                               path="/hourblock/planning"

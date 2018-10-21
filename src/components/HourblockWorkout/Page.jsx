@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-// import moment from 'moment';
+import moment from 'moment';
 import { Map } from 'immutable';
 
 import SelectConnected from 'utility-react-component/Form/Select';
@@ -41,7 +41,7 @@ export class DailyWorkoutRecordsDetails extends React.Component {
           optionContent={['focus', 'name']}
         />
 
-        { currentWorkoutRecords.valueSeq().map(record => (
+        {currentWorkoutRecords.valueSeq().map(record => (
           <React.Fragment key={record.getIn(['currentRecord', '_id'])}>
             <div className="flex-container-row typical-setup text-left">
               <span className="flex-6">
@@ -65,17 +65,17 @@ export class DailyWorkoutRecordsDetails extends React.Component {
               />
             </div>
 
-            { record.get('recentRecord') !== null
-            && (
-              <div className="flex-container-row typical-setup bg-white-10 text-left height-lineheight-20">
-                <span className="flex-5" />
-                {['rep', 'value', 'set'].map(field => (
-                  <span className="flex-1" key={field}>
-                    { record.getIn(['recentRecord', field])}
-                  </span>))}
-                <div className="width-20" />
-              </div>
-            )
+            {record.get('recentRecord') !== null
+              && (
+                <div className="flex-container-row typical-setup bg-white-10 text-left height-lineheight-20">
+                  <span className="flex-5" />
+                  {['rep', 'value', 'set'].map(field => (
+                    <span className="flex-1" key={field}>
+                      {record.getIn(['recentRecord', field])}
+                    </span>))}
+                  <div className="width-20" />
+                </div>
+              )
             }
           </React.Fragment>))
         }
@@ -100,8 +100,8 @@ DailyWorkoutRecordsDetails.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     sortedWorkouts: workoutsSortedByFocusSelector(state),
-    currentWorkoutRecords: currentWorkoutRecordsAndMostRecentRecordSelector(state, ownProps.dayMomentObject),
-    dayMomentObject: ownProps.dayMomentObject,
+    currentWorkoutRecords: currentWorkoutRecordsAndMostRecentRecordSelector(state, moment().startOf('day').add(0, 'day')),
+    dayMomentObject: moment().startOf('day').add(0, 'day'),
   };
 }
 

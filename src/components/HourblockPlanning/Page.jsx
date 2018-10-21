@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
+import { Grid } from 'semantic-ui-react';
 
 import { UiActions } from 'utility-redux/ui';
 import { PlannedPomoActions, plannedPomoByDayOfWeekSelector } from 'utility-redux/plannedPomo';
@@ -63,40 +64,37 @@ export class PlanningPage extends React.Component {
     const { plannedPomos } = this.props;
 
     return (
-      <div data-role="planning-page" className="page">
-        <section className="flex-1">
-          <div className="section-header">
-            <span className="flex-container-row border-bottom">
-              <span className="flex-1 border-right" />
-              {plannedPomos.keySeq().map((key, index) => (
-                <span className="flex-4 border-right" key={key}>
-                  {parseInt(key, 10) + 1}
-                </span>))}
+      <React.Fragment>
+        <Grid.Row>
+          <span className="flex-1 border-right" />
+          {plannedPomos.keySeq().map((key, index) => (
+            <span className="flex-4 border-right" key={key}>
+              {parseInt(key, 10) + 1}
+            </span>))}
+        </Grid.Row>
+
+        {this.getHourblocks().map(hourblock => (
+          <Grid.Row
+            className={`flex-container-row typical-setup border-bottom ${hourblock % 2 === 0 && 'border-top'} ${hourblock % 4 === 0 && 'border-top-white'}`}
+            key={hourblock}
+          >
+            <span className="width-50">
+              {moment().tz('Asia/Tokyo').startOf('day').add(hourblock / 2, 'hour')
+                .format('HH:mm')}
             </span>
-          </div>
 
-          <div className="section-content">
-            {this.getHourblocks().map(hourblock => (
-              <span className={`flex-container-row typical-setup border-bottom ${hourblock % 2 === 0 && 'border-top'} ${hourblock % 4 === 0 && 'border-top-white'}`} key={hourblock}>
-                <span className="width-50">
-                  {moment().tz('Asia/Tokyo').startOf('day').add(hourblock / 2, 'hour')
-                    .format('HH:mm')}
-                </span>
-
-                {[0, 1, 2, 3, 4, 5, 6].map(day => (
-                  <PlanningItemConnected
-                    key={day}
-                    hourblock={hourblock}
-                    day={day}
-                    plannedPomo={plannedPomos.getIn([day.toString(), 'plannedPomos', hourblock.toString()]) || Map()}
-                    updatePlannedPomo={this.updatePlannedPomo}
-                    updateRecurTask={this.updateRecurTask}
-                  />
-                ))}
-              </span>))}
-          </div>
-        </section>
-      </div>
+            {[0, 1, 2, 3, 4, 5, 6].map(day => (
+              <PlanningItemConnected
+                key={day}
+                hourblock={hourblock}
+                day={day}
+                plannedPomo={plannedPomos.getIn([day.toString(), 'plannedPomos', hourblock.toString()]) || Map()}
+                updatePlannedPomo={this.updatePlannedPomo}
+                updateRecurTask={this.updateRecurTask}
+              />
+            ))}
+          </Grid.Row>))}
+      </React.Fragment>
     );
   }
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
+import { Grid } from 'semantic-ui-react';
 import EventListConnected from './Events/List';
 import EventRecordsListConnected from './Events/EventRecords/List';
 
@@ -22,7 +23,7 @@ export class SettingsPage extends React.Component {
     const { edittingTarget } = this.props;
 
     return (
-      <div data-role="settings-page" className="flex-container-row page">
+      <Grid.Row>
         {edittingTarget === 'events'
           && (
             <React.Fragment>
@@ -47,7 +48,6 @@ export class SettingsPage extends React.Component {
             </React.Fragment>
           )
         }
-
 
         {edittingTarget === 'calories'
           && (
@@ -77,12 +77,10 @@ export class SettingsPage extends React.Component {
 
         {edittingTarget === 'dailyPomoCount'
           && (
-            <section className="flex-2">
-              <DailyPomoCountConnected />
-            </section>
+            <DailyPomoCountConnected />
           )
         }
-      </div>
+      </Grid.Row>
     );
   }
 }

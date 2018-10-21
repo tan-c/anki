@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import { bindActionCreators } from 'redux';
 // import toastr from 'toastr';
-import { Form, TextArea } from 'semantic-ui-react';
+import { Form, TextArea, Grid } from 'semantic-ui-react';
 
 import { UserActions, currentUserSelector } from 'utility-redux/user';
 
@@ -85,9 +85,8 @@ export class Note extends React.Component {
     const { inputValue, updating } = this.state;
 
     return (
-      <Form style={{
-        height: 'calc(100vh - 100px)'
-      }}
+      <Form
+        as={Grid.Row}
       >
         <div
           style={{

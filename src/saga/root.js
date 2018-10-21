@@ -6,16 +6,14 @@ import {
   loadAllDataSaga
 } from './AnkiResourcesSaga';
 
-// import { loadAllDataSaga } from './IntelNoteResourcesSaga';
 import {
   loadFilesSaga
 } from './loadFilesSaga';
 
-// import { loadApiWeatherSaga } from './loadApiWeatherSaga';
 import {
   loadWeeklyPopulatedDailyRecordsSaga
 } from './loadWeeklyPopulatedDailyRecordsSaga';
-// import { loadFilesSaga } from './_sagas/loadFilesSaga';
+
 import {
   loadDailyMeasurementsSaga
 } from './loadDailyMeasurementsSaga';
@@ -25,7 +23,7 @@ import {
 export default function* rootSaga() {
   yield fork(loadAllDataSaga);
   // yield fork(loadAllDataSaga);
-  yield fork(loadFilesSaga);
+  // yield fork(loadFilesSaga);
   // yield fork(loadCurrentUserSaga);
 
   // yield fork(loadApiWeatherSaga);

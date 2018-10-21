@@ -1,13 +1,17 @@
 import {
-  take, put
+  take,
+  put
 } from 'redux-saga/effects';
 
 import {
-  getAll, get
+  getAll,
+  get
 } from 'utility-redux/_sagas/_utilities';
 
 export function* loadAllDataSaga() {
-  const { currentUser } = yield take('SET_CURRENT_USER');
+  const {
+    currentUser
+  } = yield take('SET_CURRENT_USER');
 
   yield put({
     type: 'LOAD_USERS_SUCCESS',
@@ -24,34 +28,19 @@ export function* loadAllDataSaga() {
   yield* getAll('anki', httpParams, {
     acceptHeader: 'application/octet-stream'
   });
+
   yield* getAll('anki_tag');
-
-  yield* getAll('housing_price', {}, {
-    acceptHeader: 'application/octet-stream'
-  });
-
 
   // Using the userAgent to check device instead of width
   // const httpParams = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? {
   //   limit: 100,
   // } : {
   //   limit: 500,
-  // };
+  // };ous
 
-  // yield* getAll('anki',, httpParams, {
-  //   acceptHeader: 'application/octet-stream'
-  // });
-  // yield* getAll('anki_tag');
-  // yield* getAll('task'));
-  // yield* getAll('planned_pomo'));
-  // yield* getAll('daily_record'), {
-  //   limit: 1
-  // });
-
-  // if (!window.isMobile) {
-  yield* getAll('note', {});
-  yield* getAll('notebook', {});
-  yield* getAll('notebook_group', {});
+  yield* getAll('note');
+  yield* getAll('notebook');
+  yield* getAll('notebook_group');
 
   // Set Recent notes
   // if (currentUser.config.hima.recentNote._id != null) {
@@ -77,6 +66,7 @@ export function* loadAllDataSaga() {
     limit: window.isMobile ? 1 : 28,
     populate: 1, // To speed things up // Today should be populated
   });
+
   yield* getAll('planned_pomo');
   yield* getAll('daily_measurement');
   yield* getAll('workout');
@@ -89,6 +79,10 @@ export function* loadAllDataSaga() {
 
     // yield* getAll('calorie');
   }
+
+  yield* getAll('housing_price', {}, {
+    acceptHeader: 'application/octet-stream'
+  });
 
   // }
 }

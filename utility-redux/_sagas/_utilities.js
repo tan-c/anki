@@ -51,6 +51,7 @@ export function* getAll(apiNameSnake, params = {
   }
 
   const response = yield call(axios, axiosGetAllParams);
+
   let resData = response.data;
 
   if (acceptHeader !== 'application/json') {

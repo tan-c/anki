@@ -53,6 +53,7 @@ export class SidebarComponent extends React.Component {
             >
               Dashboard
             </Menu.Item>
+            abel
 
             <Menu.Item
               as={Link}
@@ -60,7 +61,7 @@ export class SidebarComponent extends React.Component {
               active={location.pathname === '/hourblock/calendar'}
             >
               <Label
-                color="teal"
+                color={todayTasks.count() >= 3 ? 'orange' : 'green'}
                 size="tiny"
               >
                 {todayTasks.count()}

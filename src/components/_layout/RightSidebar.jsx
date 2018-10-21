@@ -43,10 +43,6 @@ export class RightSidebarComponent extends React.Component {
     }, {
       type: 'mainpage',
       items: [{
-        name: 'showTaskSection',
-        displayName: 'Show Task',
-        value: currentUser.hasIn(['config', 'showTaskSection']) && currentUser.getIn(['config', 'showTaskSection']),
-      }, {
         name: 'showEventsInPomo',
         displayName: 'Show Events',
         value: currentUser.hasIn(['config', 'showEventsInPomo']) && currentUser.getIn(['config', 'showEventsInPomo']),

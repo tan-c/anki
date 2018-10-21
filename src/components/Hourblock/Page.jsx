@@ -101,19 +101,15 @@ export class HourBlockPage extends React.Component {
   }
 
   render() {
-    const { showTaskSection } = this.props;
-
     if (window.isMobile) {
       return (
         <div
           className="flex-container page"
           data-role="hourblock-page"
         >
-          {showTaskSection && (
-            <section className="flex-container flex-1 no-bg">
-              {this.renderRightSection()}
-            </section>
-          )}
+          <section className="flex-container flex-1 no-bg">
+            {this.renderRightSection()}
+          </section>
 
           <section className="flex-1">
             {this.renderHourBlockList()}
@@ -124,20 +120,39 @@ export class HourBlockPage extends React.Component {
 
     return (
       <React.Fragment>
-        <Grid.Row id="hourblock">
-          <Grid.Column width={2} className="left-aside">
+        <Grid.Row
+          id="hourblock" style={{
+            height: '100%'
+          }}
+        >
+          <Grid.Column
+            width={2}
+            className="left-aside"
+            style={{
+              overflow: 'auto'
+            }}
+          >
             <CategoryInsightsConnected />
             <WeeklyInsightsConnected />
           </Grid.Column>
 
-          <Grid.Column width={10}>
+          <Grid.Column
+            width={10}
+            style={{
+              overflow: 'auto'
+            }}
+          >
             {this.renderHourBlockList()}
           </Grid.Column>
-          {showTaskSection && (
-            <Grid.Column width={4}>
-              {this.renderRightSection()}
-            </Grid.Column>
-          )}
+
+          <Grid.Column
+            width={4}
+            style={{
+              overflow: 'auto'
+            }}
+          >
+            {this.renderRightSection()}
+          </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <FooterConnected />
@@ -148,17 +163,14 @@ export class HourBlockPage extends React.Component {
 }
 
 HourBlockPage.defaultProps = {
-  showTaskSection: false,
 };
 
 HourBlockPage.propTypes = {
-  showTaskSection: PropTypes.bool,
 
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    showTaskSection: currentUserSelector(state).hasIn(['config', 'showTaskSection']) && currentUserSelector(state).getIn(['config', 'showTaskSection']),
   };
 }
 

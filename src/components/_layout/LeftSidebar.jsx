@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Map } from 'immutable';
 import {
   Icon, Menu,
   Input,
@@ -8,11 +9,18 @@ import {
   Label
 } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
-import { overduedTasksSelector } from 'utility-redux/task';
+import {
+  overduedTasksSelector,
+  todayTasksSelector
+} from 'utility-redux/task';
 
 export class SidebarComponent extends React.Component {
   render() {
-    const { location, overduedTasksCount } = this.props;
+    const {
+      location,
+      overduedTasksCount,
+      todayTasks
+    } = this.props;
 
     return (
       <React.Fragment>
@@ -37,7 +45,6 @@ export class SidebarComponent extends React.Component {
         >
           <Icon name="calendar" />
           Hourblock
-
           <Menu.Menu>
             <Menu.Item
               as={Link}
@@ -56,9 +63,11 @@ export class SidebarComponent extends React.Component {
                 color="teal"
                 size="tiny"
               >
+                {todayTasks.count()}
+                /
                 {overduedTasksCount}
               </Label>
-              Calendar
+              Cal
             </Menu.Item>
 
             <Menu.Item
@@ -149,9 +158,20 @@ export class SidebarComponent extends React.Component {
   }
 }
 
+SidebarComponent.defaultProps = {
+  overduedTasksCount: 0,
+  todayTasks: Map(),
+};
+
+SidebarComponent.propTypes = {
+  overduedTasksCount: PropTypes.number,
+  todayTasks: PropTypes.object,
+};
+
 function mapStateToProps(state, ownProps) {
   return {
     overduedTasksCount: overduedTasksSelector(state),
+    todayTasks: todayTasksSelector(state),
   };
 }
 

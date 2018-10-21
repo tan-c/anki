@@ -65,7 +65,7 @@ export class PlanningPage extends React.Component {
 
     return (
       <React.Fragment>
-        <Grid.Row>
+        <Grid.Row data-role="planning-page">
           <span className="flex-1 border-right" />
           {plannedPomos.keySeq().map((key, index) => (
             <span className="flex-4 border-right" key={key}>

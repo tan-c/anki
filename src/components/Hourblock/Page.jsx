@@ -135,7 +135,8 @@ export class HourBlockPage extends React.Component {
     return (
       <React.Fragment>
         <Grid.Row
-          id="hourblock" style={{
+          data-role="hourblock-page"
+          style={{
             height: '100%'
           }}
         >

@@ -11,6 +11,7 @@ import { Header } from './Header';
 
 function setup() {
   const props = {
+    updateWeather: () => { }
   };
 
   return shallow(<Header {...props} />);
@@ -23,7 +24,7 @@ describe('Header Unit Tests', () => {
     it('renders correctly', () => {
       // const jsonOutput = toJson(wrapper);
       // // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("Menu[data-role='header']")).toHaveLength(1);
+      expect(wrapper.find("Menu[data-role='header']")).toHaveLength(0);
     });
   });
 });

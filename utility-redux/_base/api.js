@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { isImmutable } from 'immutable';
+import {
+  isImmutable
+} from 'immutable';
 import Promise from 'bluebird';
 
 const BASE_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : 'https://api.tanchen.me';
@@ -27,7 +29,7 @@ export default class BaseApi {
   get(data, params = {}) {
     const dataId = isImmutable(data) ? data.get('_id') : data._id;
     return axios(wrapRequest({
-      method: 'get',
+      method: 'GET',
       url: `${BASE_URL}/${this.modelName}/${dataId}`,
       params,
     }));

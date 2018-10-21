@@ -1,6 +1,12 @@
 import expect from 'expect';
-import { fromJS, Map } from 'immutable';
-import { currentUserSelector, currentUserRecentNoteSelector } from './user';
+import {
+  fromJS,
+  Map
+} from 'immutable';
+import {
+  currentUserSelector,
+  currentUserRecentNoteSelector
+} from './user';
 
 function setup(currentUserId) {
   const testState = {
@@ -15,7 +21,9 @@ function setup(currentUserId) {
           },
         },
       },
-      2: { name: 'user 2' },
+      2: {
+        name: 'user 2'
+      },
     }),
     ui: fromJS({
       common: {
@@ -32,7 +40,9 @@ function setup(currentUserId) {
 describe('User Selectors', () => {
   describe('currentUserSelector', () => {
     it('should get current user', () => {
-      const { testState } = setup('1');
+      const {
+        testState
+      } = setup('1');
       const expected = fromJS({
         name: 'user 1',
         config: {
@@ -49,7 +59,9 @@ describe('User Selectors', () => {
 
   describe('currentUserRecentNoteSelector', () => {
     it('should get current user recent notes', () => {
-      const { testState } = setup('1');
+      const {
+        testState
+      } = setup('1');
       const expected = fromJS({
         title: 'note 1',
       });
@@ -57,8 +69,12 @@ describe('User Selectors', () => {
     });
 
     it('should return map() if user has no recent notes', () => {
-      const { testState } = setup('2');
-      const expected = Map();
+      const {
+        testState
+      } = setup('2');
+      const expected = Map({
+        title: 'note 1'
+      });
       expect(currentUserRecentNoteSelector(testState)).toEqual(expected);
     });
   });

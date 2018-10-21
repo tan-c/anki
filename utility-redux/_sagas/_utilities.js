@@ -95,7 +95,7 @@ export function* get(apiNameSnake, data) {
   } = require('../_utility/getVariousNames')(apiNameSnake);
 
   const response = yield call(axios, ({
-    method: 'get',
+    method: 'GET',
     url: `${BASE_URL}/${modelName}/${data._id}`,
     withCredentials: true,
     headers: {

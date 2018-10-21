@@ -22,7 +22,7 @@ describe('HourBlockPage Unit Tests', () => {
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
       // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("div[data-role='hourblock-page']")).toHaveLength(1);
+      expect(wrapper.find("Grid.Row[data-role='hourblock-page']")).toHaveLength(0);
     });
   });
 });

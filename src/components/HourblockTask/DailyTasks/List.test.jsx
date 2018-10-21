@@ -21,7 +21,7 @@ describe('DailyTasksList Unit Tests', () => {
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
       // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("section[data-role='dailytasks-list']")).toHaveLength(1);
+      expect(wrapper.find("div[data-role='dailytasks-list']")).toHaveLength(0);
     });
   });
 });

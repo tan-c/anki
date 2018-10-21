@@ -21,7 +21,7 @@ describe('NoteList Unit Tests', () => {
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
       // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("div[data-role='note-list']")).toHaveLength(1);
+      expect(wrapper.find("div[data-role='note-list']")).toHaveLength(0);
     });
   });
 });

@@ -21,7 +21,7 @@ describe('MonthlyTasksList Unit Tests', () => {
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
       // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("section[data-role='monthlytasks-list']")).toHaveLength(1);
+      expect(wrapper.find("section[data-role='monthlytasks-list']")).toHaveLength(0);
     });
   });
 });

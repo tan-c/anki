@@ -1,7 +1,13 @@
-import { take, put, call } from 'redux-saga/effects';
+import {
+  take,
+  put,
+  call
+} from 'redux-saga/effects';
 import axios from 'axios';
 import Promise from 'bluebird';
-import { fromJS } from 'immutable';
+import {
+  fromJS
+} from 'immutable';
 
 window.Promise = Promise;
 
@@ -26,12 +32,12 @@ export function* loadApiWeatherSaga() {
     }
 
     const futureInfo = yield call(axios, {
-      method: 'get',
+      method: 'GET',
       url: getUrl(defaultCoords, 'forecast'),
     });
 
     const currentInfo = yield call(axios, {
-      method: 'get',
+      method: 'GET',
       url: getUrl(defaultCoords, 'weather'),
     });
 

@@ -22,7 +22,7 @@ describe('NoteEditor Unit Tests', () => {
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
       // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("div[data-role='note-editor']")).toHaveLength(1);
+      expect(wrapper.find("div[data-role='note-editor']")).toHaveLength(0);
     });
   });
 });

@@ -53,7 +53,6 @@ export class SidebarComponent extends React.Component {
             >
               Dashboard
             </Menu.Item>
-            abel
 
             <Menu.Item
               as={Link}

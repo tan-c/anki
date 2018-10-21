@@ -10,7 +10,6 @@ const initialState = {
       currentSectionOfDay: -1, // Start with -1 so it will always be different
       focusedProjectId: '',
       selectedEventRecordId: '',
-      showMonthlyCalendar: true,
     },
     planningPage: {
       updatingRecurTask: false,

@@ -42,6 +42,10 @@ import NoteConnected from './components/UserNote';
 import AnkiPageConnected from './components/AnkiLearn/Page';
 import AnkiTagsPageConnected from './components/AnkiTags/Page';
 
+import HourblockPlanningPageConnected from './components/HourblockPlanning/Page';
+import HourblockTaskPageConnected from './components/HourblockTask/Page';
+import HourblockSettingPageConnected from './components/HourblockSettings/Page';
+
 import EyeModal from './components/_modal/Eye';
 import ErrorBoundary from './ErrorBoundary';
 
@@ -160,6 +164,18 @@ export class App extends React.Component {
                       <Route
                         path="/hourblock"
                         component={HourblockConnected}
+                      />
+                      <Route
+                        path="/hourblock/planning"
+                        component={HourblockPlanningPageConnected}
+                      />
+                      <Route
+                        path="/hourblock/task"
+                        component={HourblockTaskPageConnected}
+                      />
+                      <Route
+                        path="/hourblock/setting"
+                        component={HourblockSettingPageConnected}
                       />
                       <Route
                         path="/notes"

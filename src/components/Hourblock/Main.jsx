@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 import HourblockPageConnected from './HourBlock/Page';
-import PlanningPageConnected from './Planning/Page';
-import TasksPageConnected from './Task/Page';
-import SettingsPageConnected from './Settings/Page';
 
 import FooterConnected from './_layout/Footer';
 import LeftAsideConnected from './_layout/LeftAside';
@@ -30,9 +27,6 @@ export class MainHourBlock extends React.Component {
 
         <Switch>
           <Route exact path="/hourblock" component={HourblockPageConnected} />
-          <Route path="/hourblock/planning" component={PlanningPageConnected} />
-          <Route path="/hourblock/tasks" component={TasksPageConnected} />
-          <Route path="/hourblock/settings" component={SettingsPageConnected} />
         </Switch>
       </main>);
   }

@@ -4,7 +4,8 @@ import {
   Header,
   Icon, Menu, Sidebar,
   Input,
-  Image
+  Image,
+  Label
 } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -59,6 +60,12 @@ export class SidebarComponent extends React.Component {
               to="/hourblock/calendar"
               active={location.pathname === '/hourblock/calendar'}
             >
+              <Label
+                color="teal"
+                size="tiny"
+              >
+                1
+              </Label>
               Calendar
             </Menu.Item>
 

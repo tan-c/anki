@@ -35,30 +35,40 @@ export class WeeklyInsights extends React.Component {
       <div data-role="weekly-insights">
         <span className="text-center">
           {(thisWeekTotalCalorie / 1000).toFixed(1)}
-K/
+          K/
           {(calorieWeeklyWeightLoss / 1000).toFixed(1)}
-K
+          K
         </span>
         <span className="text-center">
           {(thisWeekTotalCalorie / 1000).toFixed(1)}
-K/
+          K/
           {(calorieWeeklyMaintain / 1000).toFixed(1)}
-K
+          K
         </span>
 
-        <div id="pomoBtn">
-          {todayTotal}
-          {' '}
-/
-          {yearlyAverage.toFixed(1)}
+        <div style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          fontSize: 12,
+          textAlign: 'center',
+          height: 40
+        }}
+        >
+          {`${todayTotal}/${yearlyAverage.toFixed(1)}`}
           <br />
-          {thisWeekTotal}
-          {' '}
-/
-          {lastWeekTotal}
+          {`${thisWeekTotal}/${lastWeekTotal}`}
           <div
             className="bg-orange" style={{
-              width: `${todayTotal <= yearlyAverage ? (todayTotal * 100) / yearlyAverage : 100}%`, position: 'absolute', left: '0px', bottom: '0px', height: '40px', zIndex: '-1',
+              width: `${todayTotal <= yearlyAverage ? (todayTotal * 100) / yearlyAverage : 100}%`,
+              left: 0,
+              bottom: 0,
+              height: 40,
+              zIndex: -1,
+              boxSizing: 'border-box',
+              lineHeight: 20,
+              fontSize: 10,
+              position: 'relative'
             }}
           />
         </div>

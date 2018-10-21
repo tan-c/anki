@@ -410,88 +410,11 @@ $right-aside-width: 300px;
 $footer-height: 16px;
 
 main#hourblock {
-  color: white;
-  background-color: black;
-  bottom: $footer-height;
-  left: $left-aside-width;
-  width: calc(100vw - #{$left-aside-width});
-
-  &.with-right-calendar {
-    width: calc(100vw - #{$right-aside-width} - #{$left-aside-width});
-  }
-
-  text-align: center;
-  height: calc(100vh - #{$header-height} - #{$subheader-height} - #{$footer-height});
-
-  &.mobile {
-    width: 100vw;
-    left: 0;
-  }
-
   .scrollable {
     overflow-y: auto;
   }
 
-  .page {
-    display: flex;
-    flex-direction: row;
-    height: inherit;
-    overflow: auto;
-
-    >section {
-      background: $white-10;
-      height: inherit;
-      margin: 5px;
-      width: 100%;
-      overflow: auto;
-
-      >.section-content {
-        height: calc(100% - 30px);
-      }
-
-      >section {
-        position: relative;
-        overflow: auto;
-        margin-bottom: 10px;
-        background: $white-10;
-      }
-
-      >section:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-
   $footer-height: 16px;
-
-  #subheader {
-    position: fixed;
-    top: $header-height;
-    height: $subheader-height;
-    background: $white-20;
-    padding-left: $left-aside-width;
-    padding-right: 20px;
-    width: 100vw;
-    z-index: 1;
-
-    span {
-      line-height: $subheader-height;
-      font-size: 14px;
-      color: $white-70;
-    }
-
-    #subheader-links span {
-      display: inline-block;
-      margin-left: 10px;
-
-      &.active,
-      &:hover {
-        border-bottom: 3px solid $green;
-        color: $orange;
-        font-weight: 600;
-      }
-    }
-  }
 
   footer {
     height: $footer-height;
@@ -520,19 +443,7 @@ main#hourblock {
     }
   }
 
-  aside {
-    width: $left-aside-width;
-    top: calc(#{$header-height}+#{$subheader-height}+2px); // Space for overlapping
-    position: fixed;
-    bottom: $footer-height;
-    height: calc(100vh - #{$header-height} - #{$subheader-height} - #{$footer-height});
-    background: $white-20;
-    z-index: 1;
-
-    &.mobile {
-      width: $left-aside-width-mobile;
-    }
-
+  .left-aside {
     #menu {
       a {
         height: 30px;
@@ -636,34 +547,6 @@ main#hourblock {
         }
       }
     }
-
-    #pomoBtn {
-      width: $left-aside-width;
-      position: fixed;
-      bottom: $footer-height;
-      left: 0;
-      font-size: 12px;
-      text-align: center;
-      height: 40px;
-
-      >div {
-        box-sizing: border-box;
-        line-height: 20px;
-        height: 20px;
-        font-size: 10px;
-        z-index: 3;
-        position: relative;
-      }
-    }
-  }
-
-  aside#left-menu {
-    left: 0;
-  }
-
-  aside#right-menu {
-    width: $right-aside-width;
-    right: 0;
   }
 }
 

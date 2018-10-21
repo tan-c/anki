@@ -6,8 +6,10 @@ import moment from 'moment-timezone';
 // import { Map } from 'immutable';
 import { currentUserSelector } from 'utility-redux/user';
 import { totalProjectTasksCountSelector } from 'utility-redux/task';
+import { Grid, Image } from 'semantic-ui-react';
 import DailyRecordsChartConnected from './DailyRecordsChart';
 // import { UiActions } from 'utility-redux/ui';
+
 
 import HourBlockListConnected from './List';
 
@@ -56,32 +58,30 @@ export class HourBlockPage extends React.Component {
     const { dayMomentObject } = this.state;
     return (
       <Fragment>
-        {!window.isMobile && (
-          <div className="bg-white-20 height-40 flex-container-row">
-            <span
-              className={`flex-1 text-left height-40 line-height-40 font-400 font-24 margin-left-10 ${dayMomentObject.dayOfYear() === moment().dayOfYear() ? 'color-green' : ''}`}
-            >
-              {dayMomentObject.format('YYYY-MM-DD ddd')}
-              {' '}
-              - W
-              {dayMomentObject.isoWeek()}
-            </span>
+        <div className="bg-white-20 height-40 flex-container-row">
+          <span
+            className={`flex-1 text-left height-40 line-height-40 font-400 font-24 margin-left-10 ${dayMomentObject.dayOfYear() === moment().dayOfYear() ? 'color-green' : ''}`}
+          >
+            {dayMomentObject.format('YYYY-MM-DD ddd')}
+            {' '}
+            - W
+            {dayMomentObject.isoWeek()}
+          </span>
 
-            <div
-              className="flex-1 text-right margin-right-10"
-            >
-              <div className="font-400 color-green height-20 line-height-20">QUICK LINK</div>
-              <br />
-              <div className="height-20 line-height-20">
-                <span role="button" tabIndex="-1" onClick={_ => this.updateDayMomentObject(-1)}>Last Day</span>
-                <span>|</span>
-                <span role="button" tabIndex="-1" onClick={_ => this.updateDayMomentObject(0)}>Today</span>
-                <span>|</span>
-                <span role="button" tabIndex="-1" onClick={_ => this.updateDayMomentObject(1)}>Next Day</span>
-              </div>
+          <div
+            className="flex-1 text-right margin-right-10"
+          >
+            <div className="font-400 color-green height-20 line-height-20">QUICK LINK</div>
+            <br />
+            <div className="height-20 line-height-20">
+              <span role="button" tabIndex="-1" onClick={_ => this.updateDayMomentObject(-1)}>Last Day</span>
+              <span>|</span>
+              <span role="button" tabIndex="-1" onClick={_ => this.updateDayMomentObject(0)}>Today</span>
+              <span>|</span>
+              <span role="button" tabIndex="-1" onClick={_ => this.updateDayMomentObject(1)}>Next Day</span>
             </div>
           </div>
-        )}
+        </div>
 
         <HourBlockListConnected dayMomentObject={dayMomentObject} />
       </Fragment>
@@ -181,26 +181,22 @@ export class HourBlockPage extends React.Component {
 
     return (
       <main id="hourblock">
-        <aside id="left-menu" className={`${window.isMobile && 'mobile'}`}>
-          <CategoryInsightsConnected />
-          <WeeklyInsightsConnected />
-        </aside>
+        <Grid>
+          <Grid.Column width={2} className="left-aside">
+            <CategoryInsightsConnected />
+            <WeeklyInsightsConnected />
+          </Grid.Column>
 
-        <FooterConnected />
-
-        <div
-          className="flex-container-row page" data-role="hourblock-page"
-        >
-          <section className="flex-5">
+          <Grid.Column width={10}>
             {this.renderHourBlockList()}
-          </section>
-
+          </Grid.Column>
           {showTaskSection && (
-            <section className="flex-container flex-2 no-bg">
+            <Grid.Column width={4}>
               {this.renderRightSection()}
-            </section>
+            </Grid.Column>
           )}
-        </div>
+        </Grid>
+        <FooterConnected />
       </main>
     );
   }

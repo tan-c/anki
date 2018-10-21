@@ -110,72 +110,72 @@ export class App extends React.Component {
             : 'Undefined'}
         </div>
 
-        {isRightSidebarOn && <RightSidebarConnected />}
 
         {!currentUser.has('_id') || currentUser.get('_id') === null
           ? <LoginPageConnected pageName="Anki" />
           : (
-            <Sidebar.Pushable>
-              {isLeftSidebarOn && <LeftSidebarConnected />}
+            <React.Fragment>
+              {isRightSidebarOn && <RightSidebarConnected />}
+              <Sidebar.Pushable>
+                {isLeftSidebarOn && <LeftSidebarConnected />}
 
-              <Sidebar.Pusher style={{
-                // left: isLeftSidebarOn ? -10 : 0
-              }}
-              >
-                <HeaderConnected />
-                <SubHeaderConnected />
-
-                <Segment
-                  style={{
-                    top: '80px',
-                    width: '100vw',
-                    position: 'fixed',
-                    overflow: 'auto',
-                    zIndex: 1,
-                    height: 'calc(100vh - 80px)',
-                    background: 'black',
-                    color: 'white',
-                  }}
-                  attached
+                <Sidebar.Pusher style={{
+                  // left: isLeftSidebarOn ? -10 : 0
+                }}
                 >
-                  <Switch>
-                    <Route
-                      exact
-                      path="/"
-                      component={() => <NoteConnected field="notes" />}
-                    />
-                    <Route
-                      path="/anki"
-                      component={AnkiPageConnected}
-                    />
-                    <Route
-                      path="/ankiLearn"
-                      component={AnkiListConnected}
-                    />
-                    <Route
-                      path="/hourblock"
-                      component={HourblockConnected}
-                    />
-                    <Route
-                      path="/notes"
-                      component={IntelNotesConnected}
-                    />
-                    <Route
-                      path="/housingPrices"
-                      component={HousingPricesConnected}
-                    />
-                    <Redirect from="/housingPrices/*" to="/housingPrices" />
-                    <Redirect from="/*" to="/" />
-                  </Switch>
-                </Segment>
-                {/* <FooterConnected /> */}
-                {/* <SettingsConnected /> */}
+                  <HeaderConnected />
+                  <SubHeaderConnected />
 
-                {eyeSaving && <EyeModal />}
+                  <Segment
+                    style={{
+                      top: '80px',
+                      width: '100vw',
+                      position: 'fixed',
+                      overflow: 'auto',
+                      zIndex: 1,
+                      height: 'calc(100vh - 80px)',
+                      background: 'black',
+                      color: 'white',
+                    }}
+                    attached
+                  >
+                    <Switch>
+                      <Route
+                        exact
+                        path="/"
+                        component={() => <NoteConnected field="notes" />}
+                      />
+                      <Route
+                        path="/anki"
+                        component={AnkiPageConnected}
+                      />
+                      <Route
+                        path="/ankiLearn"
+                        component={AnkiListConnected}
+                      />
+                      <Route
+                        path="/hourblock"
+                        component={HourblockConnected}
+                      />
+                      <Route
+                        path="/notes"
+                        component={IntelNotesConnected}
+                      />
+                      <Route
+                        path="/housingPrices"
+                        component={HousingPricesConnected}
+                      />
+                      <Redirect from="/housingPrices/*" to="/housingPrices" />
+                      <Redirect from="/*" to="/" />
+                    </Switch>
+                  </Segment>
+                  {/* <FooterConnected /> */}
+                  {/* <SettingsConnected /> */}
 
-
-              </Sidebar.Pusher>
-            </Sidebar.Pushable>
+                  {eyeSaving && <EyeModal />}
+                </Sidebar.Pusher>
+              </Sidebar.Pushable>
+            </React.Fragment>
           )
         }
       </ErrorBoundary>

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { Map } from 'immutable';
-import toastr from 'toastr';
 
 import {
   Menu, Container, Button, Icon
@@ -52,14 +51,6 @@ export class Header extends React.Component {
       this.props.updateWeather();
     }, 1000 * 60 * 60);
   }
-
-
-  logout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('expires_at');
-    toastr.info('Localstorage cleared, redirecting...');
-    this.props.removeCurrentUser(this.props.currentUser);
-  };
 
   render() {
     const {
@@ -163,7 +154,6 @@ export class Header extends React.Component {
           <Menu.Menu>
             <Button
               color="blue"
-              id="logout-button"
               onClick={(_) => {
                 this.props.UiActions.updateIn(['isLeftSidebarOn'], !isLeftSidebarOn);
               }}
@@ -172,7 +162,6 @@ export class Header extends React.Component {
             </Button>
             <Button
               color="blue"
-              id="logout-button"
               onClick={(_) => {
                 this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
               }}
@@ -192,17 +181,6 @@ export class Header extends React.Component {
           >
             {currentTime.format('HH:mm')}
           </Menu.Item>
-
-          <Menu.Menu position="right">
-            <Button
-              color="blue"
-              id="logout-button"
-              onClick={this.logout}
-            >
-              AN
-            </Button>
-          </Menu.Menu>
-
 
           <Menu.Item name="iconButtons" position="right">
             {/* <Button icon>

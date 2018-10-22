@@ -158,7 +158,7 @@ export class App extends React.Component {
                 style={{
                   height: 50,
                   width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
-                  left: 0, // `${isLeftSidebarOn ? '140px' : 0}`,
+                  left: `${isLeftSidebarOn ? '140px' : 0}`,
                   zIndex: 100,
                   position: 'absolute'
                 }}

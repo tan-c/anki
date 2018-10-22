@@ -52,7 +52,7 @@ export class HourBlockPage extends React.Component {
     const { dayMomentObject } = this.state;
     return (
       <Fragment>
-        <div className="bg-white-20 height-40 flex-container-row">
+        <div id="bg-white-20 height-40 flex-container-row">
           <span
             className={`flex-1 text-left height-40 line-height-40 font-400 font-24 margin-left-10 ${dayMomentObject.dayOfYear() === moment().dayOfYear() ? 'color-green' : ''}`}
           >
@@ -136,6 +136,7 @@ export class HourBlockPage extends React.Component {
       <React.Fragment>
         <Grid.Row
           data-role="hourblock-page"
+          id="hourblock"
           style={{
             height: '100%'
           }}

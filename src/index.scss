@@ -375,39 +375,6 @@ $right-aside-width: 300px;
 $footer-height: 16px;
 
 #hourblock {
-  .scrollable {
-    overflow-y: auto;
-  }
-
-  $footer-height: 16px;
-
-  footer {
-    height: $footer-height;
-    position: fixed;
-    width: 100vw;
-    border-top: 1px solid $white-30;
-    background: $white-30;
-    z-index: 100;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-
-    #calorie-progress-bar {
-      background: $green;
-      height: #{$footer-height/2};
-      position: absolute;
-      left: 0;
-    }
-
-    #pomo-progress-bar {
-      background: $orange-light;
-      height: #{$footer-height/2};
-      position: absolute;
-      left: 0;
-      top: #{$footer-height/2};
-    }
-  }
-
   .left-aside {
     #menu {
       a {
@@ -453,8 +420,7 @@ $footer-height: 16px;
     }
 
     .cat-insight {
-      margin-bottom: 5px;
-      position: relative;
+
 
       .cat-prog-bar {
         width: 100%;
@@ -463,18 +429,6 @@ $footer-height: 16px;
         z-index: -1;
         left: 0;
         top: 0;
-      }
-
-      .cat-label {
-        margin: 4px 0;
-        padding-left: 3px;
-        padding-right: 3px;
-        overflow: hidden;
-        font-size: 12px;
-        word-break: break-all;
-        display: block;
-        line-height: 20px;
-        box-sizing: border-box;
       }
 
       .project-list {

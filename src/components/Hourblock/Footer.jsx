@@ -20,15 +20,50 @@ export class Footer extends React.Component {
       thisWeekTotal, lastWeekTotal, calorieWeeklyMaintain, thisWeekTotalCalorie, calorieWeeklyWeightLoss,
     } = this.props;
     return (
-      <footer data-role="footer">
-        <div id="calorie-progress-bar" className={`${thisWeekTotalCalorie > calorieWeeklyWeightLoss && 'bg-red'}`} style={{ width: `${(thisWeekTotalCalorie / calorieWeeklyMaintain) * 100}%` }} />
-        <div id="pomo-progress-bar" style={{ width: `${(thisWeekTotal / lastWeekTotal) * 100}%` }} />
+      <footer
+        data-role="footer"
+        style={{
+          height: 16,
+          position: 'fixed',
+          width: '100vw',
+          borderTop: '1px solid white',
+          background: 'white',
+          zIndex: 100,
+          bottom: 0,
+          left: 0,
+          textAlign: 'center'
+        }}
+      >
+        <div
+          id="calorie-progress-bar"
+          className={`${thisWeekTotalCalorie > calorieWeeklyWeightLoss && 'bg-red'}`}
+          style={{
+            width: `${(thisWeekTotalCalorie / calorieWeeklyMaintain) * 100}%`,
+            background: 'green',
+            height: 8,
+            position: 'absolute',
+            left: 0
+          }}
+        />
+
+        <div
+          id="pomo-progress-bar"
+          style={{
+            width: `${(thisWeekTotal / lastWeekTotal) * 100}%`,
+            background: 'orange',
+            height: 8,
+            position: 'absolute',
+            left: 0,
+            top: 8
+          }}
+        />
       </footer>
     );
   }
 }
 
 Footer.defaultProps = {
+
 };
 
 Footer.propTypes = {

@@ -27,34 +27,45 @@ export class CategoryInsights extends React.Component {
     } = this.props;
 
     return (
-      <div data-role="weekly-insights">
+      <React.Fragment>
         {categories.valueSeq().map(cat => (
-          <div className="cat-insight text-center" key={cat.get('_id')}>
-            <div className="cat-label">
-              {cat.get('name')}
-              {' '}
--
-              {' '}
+          <div
+            className="cat-insight text-center"
+            key={cat.get('_id')}
+          >
+            <div
+              className="cat-label" style={{
+                margin: '4px 0',
+                paddingLeft: 3,
+                paddingRight: 3,
+                overflow: 'hidden',
+                fontSize: 12,
+                wordBreak: 'break-all',
+                display: 'block',
+                boxSizing: 'border-box'
+              }}
+            >
+              {`${cat.get('name')}  `}
               {categoryTotal.get(cat.get('_id')) === undefined ? 0 : categoryTotal.get(cat.get('_id'))}
             </div>
             <div className="cat-prog-bar" style={{ backgroundColor: cat.get('color'), borderLeft: `2px solid ${cat.get('color')}` }} />
 
             <div className="project-list">
-              { projectsByCategoryId.has(cat.get('_id')) && projectsByCategoryId.get(cat.get('_id')).valueSeq().map(proj => (
+              {projectsByCategoryId.has(cat.get('_id')) && projectsByCategoryId.get(cat.get('_id')).valueSeq().map(proj => (
                 <div key={proj.get('_id')}>
-                  { proj.get('name') }
+                  {proj.get('name')}
                   {' '}
--
+                  -
                   {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}
-/
-                  {projectPlannedTotal[proj.get('_id')] !== undefined ? projectPlannedTotal[proj.get('_id')] : 0 }
+                  /
+                  {projectPlannedTotal[proj.get('_id')] !== undefined ? projectPlannedTotal[proj.get('_id')] : 0}
                   {/* { proj.get('estimatedHour') } */}
 
-                  { proj.get('estimatedHour') > 0 && projectTotal.has(proj.get('_id')) && projectTotal.get(proj.get('_id')) >= proj.get('estimatedHour')
-                  && <i className="fa fa-fw fa-check color-green" />
+                  {proj.get('estimatedHour') > 0 && projectTotal.has(proj.get('_id')) && projectTotal.get(proj.get('_id')) >= proj.get('estimatedHour')
+                    && <i className="fa fa-fw fa-check color-green" />
                   }
 
-                  { proj.get('estimatedHour') > 0
+                  {proj.get('estimatedHour') > 0
                     && projectTotal.has(proj.get('_id'))
                     && projectTotal.get(proj.get('_id')) < proj.get('estimatedHour')
                     && <div className="proj-prog-bar" style={{ backgroundColor: cat.get('color'), width: `${(projectTotal.get(proj.get('_id')) / proj.get('estimatedHour')) * 100}%` }} />
@@ -64,7 +75,7 @@ export class CategoryInsights extends React.Component {
             </div>
           </div>))
         }
-      </div>
+      </React.Fragment>
     );
   }
 }

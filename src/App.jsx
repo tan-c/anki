@@ -110,10 +110,11 @@ export class App extends React.Component {
     return (
       <ErrorBoundary>
         <div
-          id="version" style={{
+          id="version"
+          style={{
             position: 'fixed',
             top: 0,
-            left: 140,
+            left: 0,
             background: 'red',
             zIndex: 111
           }}

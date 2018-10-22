@@ -6,7 +6,7 @@ import moment from 'moment';
 import { Map } from 'immutable';
 
 import {
-  Menu, Container, Button, Icon
+  Menu, Button, Icon
 } from 'semantic-ui-react';
 import { currentUserSelector } from 'utility-redux/user';
 import { threeDayMeasurementSelector } from 'utility-redux/dailyMeasurement';
@@ -130,9 +130,12 @@ export class Header extends React.Component {
         </Menu.Item>
 
         <Menu.Item name="iconButtons" position="right">
-          <Button icon id="right-aside-button">
+          <Button
+            icon
+            id="right-aside-button"
+          >
             <Icon
-              color="white"
+              color="blue"
               name="graduation cap"
               onClick={(_) => {
                 this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);

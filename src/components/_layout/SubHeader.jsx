@@ -96,31 +96,44 @@ export class SubHeader extends React.Component {
 
         {location.pathname.indexOf('setting') > -1
           && (
-            <Menu.Item>
-              <span className={`${edittingTarget === 'events' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'events')}>Edit Events</span>
+            <React.Fragment>
 
-              <span className={`${edittingTarget === 'workouts' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'workouts')}>Edit Workouts</span>
 
-              <span className={`${edittingTarget === 'calories' && 'active'}`} role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'calories')}>Edit Measurement</span>
+              <Menu.Item
+                className={`${edittingTarget === 'events' && 'active'}`}
+                onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'events')}
+              >
+                Edit Events
+              </Menu.Item>
 
-              <span
+              <Menu.Item
+                className={`${edittingTarget === 'workouts' && 'active'}`}
+                onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'workouts')}
+              >
+                Edit Workouts
+              </Menu.Item>
+
+              <Menu.Item
+                className={`${edittingTarget === 'calories' && 'active'}`}
+                onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'calories')}
+              >
+                Edit Measurement
+              </Menu.Item>
+
+              <Menu.Item
                 className={`${edittingTarget === 'projects' && 'active'}`}
-                role="menuitem"
-                tabIndex="-1"
                 onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'projects')}
               >
                 Edit Categories/Projects
-              </span>
+              </Menu.Item>
 
-              <span
+              <Menu.Item
                 className={`${edittingTarget === 'dailyPomoCount' && 'active'}`}
-                role="menuitem"
-                tabIndex="-1"
                 onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'dailyPomoCount')}
               >
                 Show Daily Pomo
-              </span>
-            </Menu.Item>
+              </Menu.Item>
+            </React.Fragment>
           )
         }
 

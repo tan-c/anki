@@ -169,6 +169,7 @@ export class App extends React.Component {
 
               <Menu
                 attached
+                inverted
                 data-role="subheader"
                 id="subheader"
                 style={{
@@ -179,7 +180,6 @@ export class App extends React.Component {
                   marginLeft: `${isLeftSidebarOn ? '140px' : 0}`,
                   zIndex: 100,
                   position: 'absolute',
-                  background: 'black'
                 }}
               >
                 <SubHeaderConnected />

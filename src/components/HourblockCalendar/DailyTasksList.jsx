@@ -41,7 +41,7 @@ export class DailyTasksList extends React.Component {
         data-role="dailytasks-list"
         className={`${dayVal.dayMomentObject.dayOfYear() === moment().dayOfYear() && 'border-orange-light'}`}
       >
-        {(!dayVal.isPast || (dailyTasks.has(dayVal.dayOfYearString) && dailyTasks.get(dayVal.dayOfYearString).filter(task => task.get('isCompleted') === false).size > 0))
+        {(!dayVal.isPast || (dailyTasks.has(dayVal.dayOfYearString) && dailyTasks.get(dayVal.dayOfYearString).size > 0))
           && (
             <span className="flex-container-row typical-setup border-bottom-white-dotted text-left">
               <span className={`flex-1 ${dayVal.isWeekend && 'color-orange'}`}>
@@ -61,26 +61,26 @@ export class DailyTasksList extends React.Component {
 
               <span className="width-20">
                 {dailyTasks.has(dayVal.dayOfYearString)
-              && (
-                <div>
-                  {dailyTasks.get(dayVal.dayOfYearString).size === 1 && dailyTasks.getIn([dayVal.dayOfYearString, '0', 'estimateHour'])}
-                  {dailyTasks.get(dayVal.dayOfYearString).size > 1
-                && dailyTasks.get(dayVal.dayOfYearString).reduce((currentSum, b) => (isImmutable(currentSum) ? currentSum.get('estimateHour') : currentSum) + b.get('estimateHour'))}
-                </div>
-              )}
+                  && (
+                    <div>
+                      {dailyTasks.get(dayVal.dayOfYearString).size === 1 && dailyTasks.getIn([dayVal.dayOfYearString, '0', 'estimateHour'])}
+                      {dailyTasks.get(dayVal.dayOfYearString).size > 1
+                        && dailyTasks.get(dayVal.dayOfYearString).reduce((currentSum, b) => (isImmutable(currentSum) ? currentSum.get('estimateHour') : currentSum) + b.get('estimateHour'))}
+                    </div>
+                  )}
               </span>
             </span>
           )
         }
 
-        { dailyTasks.has(dayVal.dayOfYearString) && dailyTasks.get(dayVal.dayOfYearString).filter(task => task.get('isCompleted') === false).size > 0 && dailyTasks.get(dayVal.dayOfYearString).sort((a, b) => (b.getIn(['priority']) - a.getIn(['priority']))).map(task => (
+        {dailyTasks.has(dayVal.dayOfYearString) && dailyTasks.get(dayVal.dayOfYearString).size > 0 && dailyTasks.get(dayVal.dayOfYearString).sort((a, b) => (b.getIn(['priority']) - a.getIn(['priority']))).map(task => (
           <React.Fragment key={task.get('_id')}>
             <div
-              className={`flex-container-row typical-setup overflow-hidden border-bottom-white-20 ${task.get('isCompleted') && 'color-grey text-line-through'}`}
-              // style={{
-              //   height: 30,
-              //   overflow: 'scroll'
-              // }}
+              className={'flex-container-row typical-setup overflow-hidden border-bottom-white-20}'}
+            // style={{
+            //   height: 30,
+            //   overflow: 'scroll'
+            // }}
             >
               <span className="width-30 text-center" style={{ background: task.getIn(['project', 'category', 'color']) }}>
                 <ProjectSelectConnected
@@ -109,16 +109,16 @@ export class DailyTasksList extends React.Component {
                 />
               </span>
 
-              <span className={`flex-1 text-left ${task.get('isCompleted') && 'color-grey text-line-through'}`}>
+              <span className="flex-1 text-left">
                 {task.get('content')}
               </span>
 
               {task.get('recur') !== 'none'
-              && (
-                <span className="width-15 bg-orange text-center">
-                  {task.get('recur')[0].toUpperCase()}
-                </span>
-              )
+                && (
+                  <span className="width-15 bg-orange text-center">
+                    {task.get('recur')[0].toUpperCase()}
+                  </span>
+                )
               }
 
               {/* <i

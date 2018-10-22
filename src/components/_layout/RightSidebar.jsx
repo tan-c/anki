@@ -133,10 +133,6 @@ export class RightSidebarComponent extends React.Component {
           <InputNewComponent
             inputName="name"
             inputClassNames="flex-1"
-            // newRecord={{
-            //   // targetCompletion: dayVal.dayMomentObject,
-            //   // type: 'daily',
-            // }}
             actions={this.props.AnkiTagActions}
           />
 

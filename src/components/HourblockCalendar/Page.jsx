@@ -55,7 +55,7 @@ export class RightAside extends React.Component {
     const monthList = this.createMonthlyList();
 
     return (
-      <Grid.Row>
+      <Grid.Row columns={3}>
         <Grid.Column>
           <span className="flex-container-row">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
@@ -72,7 +72,13 @@ export class RightAside extends React.Component {
           </span>
 
           <MonthlyTasksListConnected activeMonth={activeMonth} />
+        </Grid.Column>
 
+        <Grid.Column>
+          All past weekly tasks and current week tasks
+        </Grid.Column>
+
+        <Grid.Column>
           {monthList[activeMonth].map(dayVal => (
             <DailyTasksListConnected
               key={dayVal.dayMomentObject.unix()}

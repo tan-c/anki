@@ -178,7 +178,8 @@ export class App extends React.Component {
                   width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
                   marginLeft: `${isLeftSidebarOn ? '140px' : 0}`,
                   zIndex: 100,
-                  position: 'absolute'
+                  position: 'absolute',
+                  background: 'black'
                 }}
               >
                 <SubHeaderConnected />

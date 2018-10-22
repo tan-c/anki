@@ -13,7 +13,6 @@ export class MonthlyTasksList extends React.Component {
     super(props, context);
 
     this.state = {
-      showMonthlyTask: true,
       showMonthlyTaskRewards: false,
     };
   }
@@ -25,7 +24,7 @@ export class MonthlyTasksList extends React.Component {
 
   render() {
     const { monthlyTasks, activeMonth } = this.props;
-    const { showMonthlyTask, showMonthlyTaskRewards } = this.state;
+    const { showMonthlyTaskRewards } = this.state;
 
     return (
       <div data-role="monthlytasks-list" className="margin-top-10 margin-bottom-10 border-white">
@@ -44,13 +43,6 @@ export class MonthlyTasksList extends React.Component {
 
           <i
             role="button" tabIndex="-1"
-            className={`width-15 fa fa-fw fa-eye ${showMonthlyTask && 'color-green'}`} onClick={_ => this.setState({
-              showMonthlyTask: !showMonthlyTask,
-            })}
-          />
-
-          <i
-            role="button" tabIndex="-1"
             className={`width-15 fa fa-fw fa-gift ${showMonthlyTaskRewards && 'color-green'}`} onClick={_ => this.setState({
               showMonthlyTaskRewards: !showMonthlyTaskRewards,
             })}
@@ -58,11 +50,11 @@ export class MonthlyTasksList extends React.Component {
         </span>
 
 
-        { showMonthlyTask && monthlyTasks.has(activeMonth.toString()) && monthlyTasks.get(activeMonth.toString()).sort((a, b) => a.getIn(['project', 'category', 'naturalId']) - b.getIn(['project', 'category', 'naturalId'])).map(task => (
+        {monthlyTasks.has(activeMonth.toString()) && monthlyTasks.get(activeMonth.toString()).sort((a, b) => a.getIn(['project', 'category', 'naturalId']) - b.getIn(['project', 'category', 'naturalId'])).map(task => (
           <React.Fragment key={task.get('_id')}>
             <div className="flex-container-row typical-setup border-bottom-white-20">
               <span className="width-10" style={{ background: task.getIn(['project', 'category', 'color']) }} />
-              <span className={`flex-1 text-left ${task.get('isCompleted') && 'color-grey text-line-through'}`}>
+              <span className="flex-1 text-left">
                 {task.get('content')}
               </span>
 

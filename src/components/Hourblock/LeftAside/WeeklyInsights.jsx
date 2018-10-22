@@ -47,9 +47,10 @@ export class WeeklyInsights extends React.Component {
         </span>
 
         <div style={{
-          position: 'fixed',
-          bottom: 0,
+          position: 'absolute',
+          width: '100%',
           left: 0,
+          bottom: 0,
           fontSize: 12,
           textAlign: 'center',
           height: 40

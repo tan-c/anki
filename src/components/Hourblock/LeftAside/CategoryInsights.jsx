@@ -32,6 +32,10 @@ export class CategoryInsights extends React.Component {
           <div
             className="cat-insight text-center"
             key={cat.get('_id')}
+            style={{
+              marginBottom: 5,
+              position: 'relative'
+            }}
           >
             <div
               className="cat-label" style={{
@@ -42,6 +46,7 @@ export class CategoryInsights extends React.Component {
                 fontSize: 12,
                 wordBreak: 'break-all',
                 display: 'block',
+                // lineHeight: 20,
                 boxSizing: 'border-box'
               }}
             >

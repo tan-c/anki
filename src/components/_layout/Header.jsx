@@ -69,17 +69,20 @@ export class Header extends React.Component {
 
     return (
       <React.Fragment>
-        <span className="font-24 margin-left-10 line-height-50">
+        <Menu.Item
+          style={{
+            fontSize: 16,
+            height: 30,
+            lineHeight: 30,
+          }}
+        >
           {parseInt(weatherInfo.getIn(['current', 'temp']), 10)}
           {' '}
           -
           {parseInt(weatherInfo.getIn(['next', 'weather', 'temp']), 10)}
           °C
-        </span>
-
-        <span className="margin-left-5 height-25">
           {weatherInfo.getIn(['city', 'name'])}
-        </span>
+        </Menu.Item>
 
         {/* <Menu.Item>
           <img
@@ -110,9 +113,9 @@ export class Header extends React.Component {
 
         <Menu.Item
           style={{
-            fontSize: 24,
-            height: 50,
-            lineHeight: 50,
+            fontSize: 16,
+            height: 30,
+            lineHeight: 30,
           }}
         >
           {currentTime.format('HH:mm')}

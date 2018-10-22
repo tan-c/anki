@@ -157,7 +157,7 @@ export class App extends React.Component {
                 // inverted
                 data-role="header"
                 style={{
-                  height: 50,
+                  height: 30,
                   width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
                   left: `${isLeftSidebarOn ? '140px' : 0}`,
                   zIndex: 100,
@@ -174,7 +174,7 @@ export class App extends React.Component {
                 id="subheader"
                 style={{
                   paddingLeft: 10,
-                  marginTop: 50,
+                  marginTop: 30,
                   height: 30,
                   width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
                   marginLeft: `${isLeftSidebarOn ? '140px' : 0}`,
@@ -193,10 +193,10 @@ export class App extends React.Component {
                   position: 'absolute',
                   overflow: 'auto',
                   zIndex: 1,
-                  height: 'calc(100vh - 80px)',
+                  height: 'calc(100vh - 60px)',
                   background: 'black',
                   color: 'white',
-                  top: 80,
+                  top: 60,
                   margin: 0
                 }}
               >

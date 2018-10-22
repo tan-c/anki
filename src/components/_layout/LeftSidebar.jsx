@@ -58,38 +58,10 @@ export class SidebarComponent extends React.Component {
 
             <Menu.Item
               as={Link}
-              to="/hourblock/calendar"
-              active={location.pathname === '/hourblock/calendar'}
-            >
-              <Label
-                color={todayTasks.count() >= 3 ? 'orange' : 'green'}
-                size="tiny"
-              >
-                {todayTasks.count()}
-              </Label>
-              <Label
-                color={thisWeekTasks.count() >= 6 ? 'orange' : 'green'}
-                size="tiny"
-              >
-                {thisWeekTasks.count()}
-              </Label>
-              Cal
-            </Menu.Item>
-
-            <Menu.Item
-              as={Link}
               to="/hourblock/planning"
               active={location.pathname === '/hourblock/planning'}
             >
               Planning
-            </Menu.Item>
-
-            <Menu.Item
-              as={Link}
-              to="/hourblock/task"
-              active={location.pathname === '/hourblock/task'}
-            >
-              Tasks
             </Menu.Item>
 
             <Menu.Item
@@ -108,6 +80,43 @@ export class SidebarComponent extends React.Component {
               Settings
             </Menu.Item>
 
+          </Menu.Menu>
+        </Menu.Item>
+
+        <Menu.Item
+          as={Link}
+          to="/hourblock/calendar"
+          active={location.pathname === '/hourblock/calendar'}
+        >
+          <Label
+            color={todayTasks.count() >= 3 ? 'orange' : 'green'}
+            size="tiny"
+          >
+            {todayTasks.count()}
+          </Label>
+          <Label
+            color={thisWeekTasks.count() >= 6 ? 'orange' : 'green'}
+            size="tiny"
+          >
+            {thisWeekTasks.count()}
+          </Label>
+          Todo
+          <Menu.Menu>
+            <Menu.Item
+              as={Link}
+              to="/hourblock/calendar"
+              active={location.pathname === '/hourblock/calendar'}
+            >
+              Cal
+            </Menu.Item>
+
+            <Menu.Item
+              as={Link}
+              to="/hourblock/task"
+              active={location.pathname === '/hourblock/task'}
+            >
+              Tasks
+            </Menu.Item>
           </Menu.Menu>
         </Menu.Item>
 

@@ -29,6 +29,8 @@ export class WeeklyTasksList extends React.Component {
     for (let i = currentWeekNumber; i <= 53; i += 1) {
       res.push({
         weekNumber: i,
+        startDate: moment().tz('Asia/Tokyo').startOf('isoWeek').add(i - currentWeekNumber, 'week')
+          .format('MM-DD'),
         tasks: weeklyTasks.has(i.toString()) ? weeklyTasks.get(i.toString()) : Map(),
       });
     }
@@ -49,12 +51,10 @@ export class WeeklyTasksList extends React.Component {
               key={weekObject.weekNumber}
             >
               <Grid as={List.Item}>
-                <Grid.Column width={4}>
-                  {weekObject.weekNumber}
-                  /
-                  {weekObject.tasks.count()}
+                <Grid.Column width={6}>
+                  {`${weekObject.startDate} - W${weekObject.weekNumber} - ${weekObject.tasks.count()}`}
                 </Grid.Column>
-                <Grid.Column width={12}>
+                <Grid.Column width={6}>
                   <InputNewComponent
                     inputName="content"
                     inputClassNames=""
@@ -99,7 +99,6 @@ export class WeeklyTasksList extends React.Component {
                   </Segment>
                 ))}
               </Segment.Group>
-
             </Segment>
           ))}
       </Segment.Group>

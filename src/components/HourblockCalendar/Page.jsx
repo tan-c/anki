@@ -7,6 +7,7 @@ import moment from 'moment-timezone';
 
 import { Grid } from 'semantic-ui-react';
 import MonthlyTasksListConnected from './MonthlyTasksList';
+import WeeklyTasksListConnected from './WeeklyTasksList';
 import DailyTasksListConnected from './DailyTasksList';
 
 
@@ -74,11 +75,17 @@ export class RightAside extends React.Component {
           <MonthlyTasksListConnected activeMonth={activeMonth} />
         </Grid.Column>
 
-        <Grid.Column>
-          All past weekly tasks and current week tasks
+        <Grid.Column style={{
+          overflow: 'auto'
+        }}
+        >
+          <WeeklyTasksListConnected />
         </Grid.Column>
 
-        <Grid.Column>
+        <Grid.Column style={{
+          overflow: 'auto'
+        }}
+        >
           {monthList[activeMonth].map(dayVal => (
             <DailyTasksListConnected
               key={dayVal.dayMomentObject.unix()}

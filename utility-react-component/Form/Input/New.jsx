@@ -27,6 +27,7 @@ export class InputNew extends React.Component {
   onKeyDown = (event) => {
     if (event.which === 13) {
       const { newRecord, actions } = this.props;
+
       const { value, name } = event.target;
       // Note this record is of object type
 

@@ -12,15 +12,6 @@ import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncon
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
 export class DailyTasksList extends React.Component {
-  // constructor(props, context) {
-  //  super(props, context);
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //  this.setState({
-  //   });
-  // }
-
   handleKeydownAddTask = (event, dayMomentObject, type) => {
     if (event.which === 13) {
       const { value } = event.target;
@@ -47,6 +38,7 @@ export class DailyTasksList extends React.Component {
               <span className={`flex-1 ${dayVal.isWeekend && 'color-orange'}`}>
                 {dayVal.dayMomentObject.format('MM-DD')}
               </span>
+
               {!dayVal.isPast && (
                 <InputNewComponent
                   inputName="content"

@@ -14,6 +14,7 @@ import {
   todayTasksSelector,
   thisWeekTasksSelector
 } from 'utility-redux/task';
+import { todayMeasurementSelector } from 'utility-redux/dailyMeasurement';
 
 export class SidebarComponent extends React.Component {
   render() {
@@ -21,8 +22,12 @@ export class SidebarComponent extends React.Component {
       location,
       overduedTasksCount,
       todayTasks,
-      thisWeekTasks
+      thisWeekTasks,
+      todayMeasurement
     } = this.props;
+
+    console.log('🔥🔥🔥🔥🔥 todayMeasurement.toJS() 🔥🔥🔥🔥🔥');
+    console.log(todayMeasurement.toJS());
 
     return (
       <React.Fragment>
@@ -64,12 +69,26 @@ export class SidebarComponent extends React.Component {
               Planning
             </Menu.Item>
 
+            {/* {threeDayMeasurement.valueSeq().map(item => (
+              <span className="font-24 margin-left-10 line-height-50" key={item.get('_id')}>
+                {item.get('morningWeight')}
+                kg -
+              </span>
+            ))} */}
+
             <Menu.Item
               as={Link}
               to="/hourblock/workout"
               active={location.pathname === '/hourblock/workout'}
             >
               Workout
+
+              <Label
+                color={todayMeasurement.get('morningWeight') > 0 ? 'grey' : 'red'}
+                size="tiny"
+              >
+                {todayMeasurement.get('morningWeight')}
+              </Label>
             </Menu.Item>
 
             <Menu.Item
@@ -177,19 +196,22 @@ SidebarComponent.defaultProps = {
   overduedTasksCount: 0,
   todayTasks: Map(),
   thisWeekTasks: Map(),
+  todayMeasurement: Map(),
 };
 
 SidebarComponent.propTypes = {
   overduedTasksCount: PropTypes.number,
   todayTasks: PropTypes.object,
   thisWeekTasks: PropTypes.object,
+  todayMeasurement: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     overduedTasksCount: overduedTasksSelector(state),
     todayTasks: todayTasksSelector(state),
-    thisWeekTasks: thisWeekTasksSelector(state)
+    thisWeekTasks: thisWeekTasksSelector(state),
+    todayMeasurement: todayMeasurementSelector(state),
   };
 }
 

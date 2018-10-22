@@ -1,8 +1,14 @@
-import { createSelector } from 'reselect';
+import {
+  createSelector
+} from 'reselect';
 import moment from 'moment-timezone';
 
-import { actionCreate } from './_base/actionCreate';
-import { reducerCreate } from './_base/reducerCreate';
+import {
+  actionCreate
+} from './_base/actionCreate';
+import {
+  reducerCreate
+} from './_base/reducerCreate';
 
 export default reducerCreate('daily_measurement');
 export const {

@@ -6,10 +6,10 @@ import moment from 'moment';
 import { Map } from 'immutable';
 
 import {
-  Menu, Button, Icon
+  Menu, Icon
 } from 'semantic-ui-react';
 import { currentUserSelector } from 'utility-redux/user';
-import { threeDayMeasurementSelector } from 'utility-redux/dailyMeasurement';
+
 import { UiActions } from 'utility-redux/ui';
 
 export class Header extends React.Component {
@@ -58,7 +58,6 @@ export class Header extends React.Component {
       isRightSidebarOn,
       currentUser,
       weatherInfo,
-      threeDayMeasurement,
       currentUserImageSrc,
     } = this.props;
 
@@ -70,17 +69,6 @@ export class Header extends React.Component {
 
     return (
       <React.Fragment>
-        {!window.isMobile && (
-          <span className="height-50 border-right padding-horizontal-10">
-            {threeDayMeasurement.valueSeq().map(item => (
-              <span className="font-24 margin-left-10 line-height-50" key={item.get('_id')}>
-                {item.get('morningWeight')}
-                kg -
-              </span>
-            ))}
-          </span>
-        )}
-
         <span className="font-24 margin-left-10 line-height-50">
           {parseInt(weatherInfo.getIn(['current', 'temp']), 10)}
           {' '}
@@ -150,7 +138,6 @@ Header.defaultProps = {
 
   currentUser: Map(),
   weatherInfo: Map(),
-  threeDayMeasurement: Map(),
 };
 
 Header.propTypes = {
@@ -160,7 +147,6 @@ Header.propTypes = {
   currentUser: PropTypes.object,
   currentUserImageSrc: PropTypes.string.isRequired,
   weatherInfo: PropTypes.object,
-  threeDayMeasurement: PropTypes.object,
 
   updateWeather: PropTypes.func.isRequired,
 
@@ -175,7 +161,6 @@ function mapStateToProps(state, ownProps) {
     currentUser: currentUserSelector(state),
     currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),
     weatherInfo: state.ui.getIn(['common', 'api', 'weatherInfo']),
-    threeDayMeasurement: threeDayMeasurementSelector(state),
   };
 }
 

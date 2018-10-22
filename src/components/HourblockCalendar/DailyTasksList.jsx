@@ -11,6 +11,10 @@ import InputNewComponent from 'utility-react-component/Form/Input/New';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
+import {
+  Icon
+} from 'semantic-ui-react';
+
 export class DailyTasksList extends React.Component {
   handleKeydownAddTask = (event, dayMomentObject, type) => {
     if (event.which === 13) {
@@ -69,12 +73,8 @@ export class DailyTasksList extends React.Component {
           <React.Fragment key={task.get('_id')}>
             <div
               className={'flex-container-row typical-setup overflow-hidden border-bottom-white-20}'}
-            // style={{
-            //   height: 30,
-            //   overflow: 'scroll'
-            // }}
             >
-              <span className="width-30 text-center" style={{ background: task.getIn(['project', 'category', 'color']) }}>
+              <span className="width-60 text-center" style={{ background: task.getIn(['project', 'category', 'color']) }}>
                 <ProjectSelectConnected
                   value={task.size ? task.getIn(['project', '_id']) : ''}
                   onChangeEvent={(event) => {
@@ -82,13 +82,16 @@ export class DailyTasksList extends React.Component {
                     this.props.TaskActions.update(newTask);
                   }}
                 />
-                {/* <i
-                  role="button" tabIndex="-1" className={`fa fa-fw fa-flag ${task.get('priority') === 2 && 'color-red'} ${task.get('priority') === 1 && 'color-orange'}`}
-                  onClick={(_) => {
-                    this.props.TaskActions.update(task.set('priority', (task.get('priority') + 1) % 3), task);
-                  }}
-                /> */}
               </span>
+
+              <i
+                role="button"
+                tabIndex="-1"
+                className={`fa fa-fw fa-flag ${task.get('priority') === 2 && 'color-red'} ${task.get('priority') === 1 && 'color-orange'}`}
+                onClick={(_) => {
+                  this.props.TaskActions.update(task.set('priority', (task.get('priority') + 1) % 3), task);
+                }}
+              />
 
               <span className="width-20">
                 <InputUncontrolledConnected
@@ -113,8 +116,9 @@ export class DailyTasksList extends React.Component {
                 )
               }
 
-              <i
-                role="button" tabIndex="-1" className={`fa fa-fw fa-undo width-15 ${task.has('recur') && task.get('recur') !== 'none' && 'color-green'}`}
+              <Icon
+                className={`width-15 ${task.has('recur') && task.get('recur') !== 'none' && 'color-green'}`}
+                name="sync"
                 onClick={_ => this.props.TaskActions.update(task.set('recur', task.has('recur') ? 'none' : 'daily', task))}
               />
 

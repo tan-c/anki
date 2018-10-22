@@ -93,7 +93,7 @@ export class Header extends React.Component {
           {weatherInfo.getIn(['city', 'name'])}
         </span>
 
-        <Menu.Item>
+        {/* <Menu.Item>
           <img
             alt="pic"
             src={
@@ -107,7 +107,7 @@ export class Header extends React.Component {
               height: 36,
             }}
           />
-        </Menu.Item>
+        </Menu.Item> */}
 
         {/* <Menu.Menu>
             <Button
@@ -120,28 +120,24 @@ export class Header extends React.Component {
             </Button>
           </Menu.Menu> */}
 
-        <Menu.Item style={{
-          fontSize: 24,
-          height: 50,
-          lineHeight: 50,
-        }}
+        <Menu.Item
+          style={{
+            fontSize: 24,
+            height: 50,
+            lineHeight: 50,
+          }}
         >
           {currentTime.format('HH:mm')}
         </Menu.Item>
 
-        <Menu.Item name="iconButtons" position="right">
-          <Button
-            icon
-            id="right-aside-button"
-          >
-            <Icon
-              color="blue"
-              name="graduation cap"
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
-              }}
-            />
-          </Button>
+        <Menu.Item position="right">
+          <Icon
+            color="yellow"
+            name="graduation cap"
+            onClick={(_) => {
+              this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
+            }}
+          />
         </Menu.Item>
       </React.Fragment>
     );

@@ -2,7 +2,7 @@ import toastr from 'toastr';
 import BaseApi from './api';
 
 toastr.options = {
-  positionClass: 'toast-top-left',
+  positionClass: 'toast-bottom-left',
   timeOut: 2000,
   extendedTimeOut: 2000, // after user touch
 };

@@ -2,7 +2,7 @@ import toastr from 'toastr';
 import BaseApi from '../api';
 
 toastr.options = {
-  positionClass: 'toast-top-left'
+  positionClass: 'toast-bottom-left'
 };
 
 const capitalizeWord = word => word.toUpperCase()[0] + word.slice(1);

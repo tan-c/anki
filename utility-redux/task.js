@@ -1,12 +1,18 @@
-import { createSelector } from 'reselect';
+import {
+  createSelector
+} from 'reselect';
 import {
   fromJS,
   Map
 } from 'immutable';
 import moment from 'moment-timezone';
 
-import { actionCreate } from './_base/actionCreate';
-import { reducerCreate } from './_base/reducerCreate';
+import {
+  actionCreate
+} from './_base/actionCreate';
+import {
+  reducerCreate
+} from './_base/reducerCreate';
 
 export default reducerCreate('task');
 export const {
@@ -87,6 +93,12 @@ export const weeklyTasksSelector = createSelector(
   [getTasks],
   tasks => getNewTasks(tasks, 'weekly'),
 );
+
+export const thisWeekTasksSelector = createSelector(
+  [weeklyTasksSelector],
+  tasks => tasks.get(moment().tz('Asia/Tokyo').isoWeek().toString()),
+);
+
 
 export const monthlyTasksSelector = createSelector(
   [getTasks],

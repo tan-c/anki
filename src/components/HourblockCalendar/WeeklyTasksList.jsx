@@ -26,7 +26,7 @@ export class WeeklyTasksList extends React.Component {
     const res = [];
     const currentWeekNumber = moment().tz('Asia/Tokyo').isoWeek();
 
-    for (let i = currentWeekNumber; i <= 53; i += 1) {
+    for (let i = 0; i <= 53; i += 1) {
       res.push({
         weekNumber: i,
         startDate: moment().tz('Asia/Tokyo').startOf('isoWeek').add(i - currentWeekNumber, 'week')
@@ -44,7 +44,7 @@ export class WeeklyTasksList extends React.Component {
     return (
       <Segment.Group>
         {
-          this.getWeeklyTasks().map(weekObject => (
+          this.getWeeklyTasks().filter(weekObject => weekObject.tasks.count() > 0 || weekObject.weekNumber >= currentWeekNumber).map(weekObject => (
             <Segment
               inverted
               attached

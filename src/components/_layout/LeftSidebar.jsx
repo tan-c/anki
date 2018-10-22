@@ -11,7 +11,8 @@ import {
 import { Link, withRouter } from 'react-router-dom';
 import {
   overduedTasksSelector,
-  todayTasksSelector
+  todayTasksSelector,
+  thisWeekTasksSelector
 } from 'utility-redux/task';
 
 export class SidebarComponent extends React.Component {
@@ -19,7 +20,8 @@ export class SidebarComponent extends React.Component {
     const {
       location,
       overduedTasksCount,
-      todayTasks
+      todayTasks,
+      thisWeekTasks
     } = this.props;
 
     return (
@@ -64,8 +66,12 @@ export class SidebarComponent extends React.Component {
                 size="tiny"
               >
                 {todayTasks.count()}
-                /
-                {overduedTasksCount}
+              </Label>
+              <Label
+                color={thisWeekTasks.count() >= 6 ? 'orange' : 'green'}
+                size="tiny"
+              >
+                {thisWeekTasks.count()}
               </Label>
               Cal
             </Menu.Item>
@@ -161,17 +167,20 @@ export class SidebarComponent extends React.Component {
 SidebarComponent.defaultProps = {
   overduedTasksCount: 0,
   todayTasks: Map(),
+  thisWeekTasks: Map(),
 };
 
 SidebarComponent.propTypes = {
   overduedTasksCount: PropTypes.number,
   todayTasks: PropTypes.object,
+  thisWeekTasks: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     overduedTasksCount: overduedTasksSelector(state),
     todayTasks: todayTasksSelector(state),
+    thisWeekTasks: thisWeekTasksSelector(state)
   };
 }
 

@@ -126,7 +126,7 @@ export class SidebarComponent extends React.Component {
               to="/hourblock/calendar"
               active={location.pathname === '/hourblock/calendar'}
             >
-              Cal
+              Calendar
             </Menu.Item>
 
             <Menu.Item

@@ -8,6 +8,11 @@ import { Map } from 'immutable';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 import { TaskActions, monthlyTasksSelector } from 'utility-redux/task';
 
+import {
+  List, Input, Grid, Segment,
+  Button, Icon
+} from 'semantic-ui-react';
+
 export class MonthlyTasksList extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -49,7 +54,6 @@ export class MonthlyTasksList extends React.Component {
           />
         </span>
 
-
         {monthlyTasks.has(activeMonth.toString()) && monthlyTasks.get(activeMonth.toString()).sort((a, b) => a.getIn(['project', 'category', 'naturalId']) - b.getIn(['project', 'category', 'naturalId'])).map(task => (
           <React.Fragment key={task.get('_id')}>
             <div className="flex-container-row typical-setup border-bottom-white-20">
@@ -58,9 +62,25 @@ export class MonthlyTasksList extends React.Component {
                 {task.get('content')}
               </span>
 
-              <i
-                role="button" tabIndex="-1" className="fa fa-fw fa-check width-15"
-                onClick={_ => this.props.TaskActions.deleteRecord(task)}
+              <Icon
+                color={task.get('recur') === 'monthly' ? 'green' : 'grey'}
+                name="sync"
+                onClick={(_) => {
+                  const newTask = task.set('recur', task.get('recur') === 'monthly' ? 'none' : 'monthly');
+                  this.props.TaskActions.update(newTask);
+                }}
+              />
+
+              <Icon
+                name={task.get('recur') === 'monthly' ? 'check' : 'close'}
+                onClick={(_) => {
+                  if (task.get('recur') === 'monthly') {
+                    const newTask = task.set('targetCompletion', moment(task.get('targetCompletion')).add(1, 'month'));
+                    this.props.TaskActions.update(newTask);
+                  } else {
+                    this.props.TaskActions.deleteRecord(task);
+                  }
+                }}
               />
             </div>
 

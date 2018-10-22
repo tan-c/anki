@@ -76,25 +76,34 @@ export class WeeklyTasksList extends React.Component {
                     key={weeklyTask.get('_id')}
                   >
                     <Grid.Column
-                      width={14}
+                      width={10}
                     >
                       {weeklyTask.get('content')}
                     </Grid.Column>
                     <Grid.Column
-                      width={2}
+                      width={4}
                     >
-                      <Button
-                        icon
-                        id="right-aside-button"
-                      >
-                        <Icon
-                          color="blue"
-                          name="close"
-                          onClick={(_) => {
+                      <Icon
+                        color={weeklyTask.get('recur') === 'weekly' ? 'green' : 'grey'}
+                        name="sync"
+                        onClick={(_) => {
+                          const newTask = weeklyTask.set('recur', weeklyTask.get('recur') === 'weekly' ? 'none' : 'weekly');
+                          this.props.TaskActions.update(newTask);
+                        }}
+                      />
+
+                      <Icon
+                        color="blue"
+                        name={weeklyTask.get('recur') === 'weekly' ? 'check' : 'close'}
+                        onClick={(_) => {
+                          if (weeklyTask.get('recur') === 'weekly') {
+                            const newTask = weeklyTask.set('targetCompletion', moment(weeklyTask.get('targetCompletion')).add(1, 'week'));
+                            this.props.TaskActions.update(newTask);
+                          } else {
                             this.props.TaskActions.deleteRecord(weeklyTask);
-                          }}
-                        />
-                      </Button>
+                          }
+                        }}
+                      />
                     </Grid.Column>
                   </Segment>
                 ))}

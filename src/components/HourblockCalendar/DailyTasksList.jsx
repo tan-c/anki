@@ -113,10 +113,10 @@ export class DailyTasksList extends React.Component {
                 )
               }
 
-              {/* <i
+              <i
                 role="button" tabIndex="-1" className={`fa fa-fw fa-undo width-15 ${task.has('recur') && task.get('recur') !== 'none' && 'color-green'}`}
                 onClick={_ => this.props.TaskActions.update(task.set('recur', task.has('recur') ? 'none' : 'daily', task))}
-              /> */}
+              />
 
               <i
                 role="button" tabIndex="-1" className="fa fa-fw fa-check width-15"

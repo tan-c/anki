@@ -15,23 +15,25 @@ import { WorkoutRecordActions, currentWorkoutRecordsAndMostRecentRecordSelector 
 import { workoutsSortedByFocusSelector } from 'utility-redux/workout';
 import WorkoutListConnected from './List';
 import WorkoutRecordsListConnected from './WorkoutRecords/List';
+// import CaloriesListConnected from './Calories/List';
+import DailyMeasurementsListConnected from './Calories/DailyMeasurementsList';
 
 
 export class DailyWorkoutRecordsDetails extends React.Component {
-  // constructor(props, context) {
-  //  super(props, context);
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //  this.setState({
-  //   });
-  // }
-
   render() {
-    const { sortedWorkouts, currentWorkoutRecords, dayMomentObject } = this.props;
+    const {
+      sortedWorkouts,
+      currentWorkoutRecords,
+      dayMomentObject
+    } = this.props;
 
     return (
-      <Grid.Row columns={2}>
+      <Grid.Row columns={3}>
+        <Grid.Column>
+          {/* <CaloriesListConnected /> */}
+          <DailyMeasurementsListConnected />
+        </Grid.Column>
+
         <Grid.Column>
           <WorkoutListConnected />
           <WorkoutRecordsListConnected />

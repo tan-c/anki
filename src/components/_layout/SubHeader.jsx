@@ -106,13 +106,6 @@ export class SubHeader extends React.Component {
               </Menu.Item>
 
               <Menu.Item
-                className={`${edittingTarget === 'calories' && 'active'}`}
-                onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'calories')}
-              >
-                Edit Measurement
-              </Menu.Item>
-
-              <Menu.Item
                 className={`${edittingTarget === 'projects' && 'active'}`}
                 onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'projects')}
               >

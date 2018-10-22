@@ -66,7 +66,7 @@ jobs:
             cd /js-base-image/packages/project && npm run test:ci
             # upload test report to Code Climate using `after-build`
             cd /js-base-image/packages/project && /root/project/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
-          no_output_timeout: 15m
+          no_output_timeout: 20m
       - store_test_results:
           path: /js-base-image/packages/project/coverage/
       - store_artifacts:
@@ -86,9 +86,6 @@ jobs:
       # - run: pwd
       # - run: ls -al /root/project/test-e2e
 
-      - setup_remote_docker:
-          docker_layer_caching: true
-
       - run:
           name: Install Docker client
           command: |
@@ -97,6 +94,9 @@ jobs:
             curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
+
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       - run:
           name: Docker login and build

@@ -10,7 +10,8 @@ import {
   Segment,
   Container,
   Grid,
-  Menu
+  Menu,
+  Responsive
 } from 'semantic-ui-react';
 
 // import { Menu, Container } from 'semantic-ui-react';
@@ -112,7 +113,7 @@ export class App extends React.Component {
           id="version" style={{
             position: 'fixed',
             top: 0,
-            left: 0,
+            left: 140,
             background: 'red',
             zIndex: 111
           }}
@@ -126,21 +127,25 @@ export class App extends React.Component {
           ? <LoginPageConnected pageName="Anki" />
           : (
             <React.Fragment>
-              {isLeftSidebarOn && (
-                <Sidebar
-                  as={Menu}
-                  animation="push"
-                  inverted
-                  vertical
-                  visible
-                  width="thin"
-                  style={{
-                    width: 140,
-                  }}
-                >
-                  <LeftSidebarConnected />
-                </Sidebar>
-              )}
+              <Responsive
+                minWidth={450}
+                style={{
+                  width: 140,
+                }}
+              >
+                {isLeftSidebarOn && (
+                  <Sidebar
+                    as={Menu}
+                    animation="push"
+                    inverted
+                    vertical
+                    visible
+                    width="thin"
+                  >
+                    <LeftSidebarConnected />
+                  </Sidebar>
+                )}
+              </Responsive>
 
               {isRightSidebarOn && <RightSidebarConnected />}
 
@@ -178,18 +183,20 @@ export class App extends React.Component {
                 <SubHeaderConnected />
               </Menu>
 
-              <Grid style={{
-                width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
-                left: `${isLeftSidebarOn ? '140px' : 0}`,
-                position: 'absolute',
-                overflow: 'auto',
-                zIndex: 1,
-                height: 'calc(100vh - 80px)',
-                background: 'black',
-                color: 'white',
-                top: 80,
-                margin: 0
-              }}
+              <Responsive
+                as={Grid}
+                style={{
+                  width: `${isLeftSidebarOn && !window.isMobile ? 'calc(100% - 140px)' : '100%'}`,
+                  left: `${isLeftSidebarOn && !window.isMobile ? '140px' : 0}`,
+                  position: 'absolute',
+                  overflow: 'auto',
+                  zIndex: 1,
+                  height: 'calc(100vh - 80px)',
+                  background: 'black',
+                  color: 'white',
+                  top: 80,
+                  margin: 0
+                }}
               >
                 <Switch>
                   <Route
@@ -246,7 +253,7 @@ export class App extends React.Component {
                   <Redirect from="/housingPrices/*" to="/housingPrices" />
                   <Redirect from="/*" to="/" />
                 </Switch>
-              </Grid>
+              </Responsive>
 
               {/* <FooterConnected /> */}
               {/* <SettingsConnected /> */}

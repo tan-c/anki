@@ -7,9 +7,6 @@ import { Grid } from 'semantic-ui-react';
 import EventListConnected from './Events/List';
 import EventRecordsListConnected from './Events/EventRecords/List';
 
-import WorkoutListConnected from './Workouts/List';
-import WorkoutRecordsListConnected from './Workouts/WorkoutRecords/List';
-
 // import CaloriesListConnected from './Calories/List';
 import DailyMeasurementsListConnected from './Calories/DailyMeasurementsList';
 
@@ -31,19 +28,6 @@ export class SettingsPage extends React.Component {
 
               <section className="flex-1">
                 <EventRecordsListConnected />
-              </section>
-            </React.Fragment>
-          )
-        }
-
-        {edittingTarget === 'workouts'
-          && (
-            <React.Fragment>
-              <section className="flex-1">
-                <WorkoutListConnected />
-              </section>
-              <section className="flex-1 flex-container no-bg">
-                <WorkoutRecordsListConnected />
               </section>
             </React.Fragment>
           )

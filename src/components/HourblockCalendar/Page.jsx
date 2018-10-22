@@ -10,7 +10,6 @@ import MonthlyTasksListConnected from './MonthlyTasksList';
 import WeeklyTasksListConnected from './WeeklyTasksList';
 import DailyTasksListConnected from './DailyTasksList';
 
-
 export class RightAside extends React.Component {
   constructor(props, context) {
     super(props, context);

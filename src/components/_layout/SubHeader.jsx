@@ -52,6 +52,7 @@ export class SubHeader extends React.Component {
         >
           {filteredAnkis.size}
         </div> */}
+
         {location.pathname.indexOf('anki') > -1
           && (
             <React.Fragment>
@@ -85,10 +86,10 @@ export class SubHeader extends React.Component {
                 />
               </Menu.Item>
 
-              <Menu.Item>
-                <span role="menuitem" tabIndex="-1" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingRecurTask'], !updatingRecurTask)}>
-                  Set Recur Task
-                </span>
+              <Menu.Item
+                onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingRecurTask'], !updatingRecurTask)}
+              >
+                Set Recur Task
               </Menu.Item>
             </React.Fragment>
           )
@@ -97,20 +98,11 @@ export class SubHeader extends React.Component {
         {location.pathname.indexOf('setting') > -1
           && (
             <React.Fragment>
-
-
               <Menu.Item
                 className={`${edittingTarget === 'events' && 'active'}`}
                 onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'events')}
               >
                 Edit Events
-              </Menu.Item>
-
-              <Menu.Item
-                className={`${edittingTarget === 'workouts' && 'active'}`}
-                onClick={_ => this.props.UiActions.updateIn(['hourblock', 'settingsPage', 'edittingTarget'], 'workouts')}
-              >
-                Edit Workouts
               </Menu.Item>
 
               <Menu.Item

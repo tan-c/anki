@@ -5,11 +5,11 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 // import toastr from 'toastr';
 import SelectConnected from 'utility-react-component/Form/Select';
-
+import moment from 'moment';
 import {
-  Menu,
+  Menu, Icon
 } from 'semantic-ui-react';
-
+import { currentUserSelector } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
 import { todayTasksSelector } from 'utility-redux/task';
@@ -28,6 +28,44 @@ export class SubHeader extends React.Component {
   //   this.props.UserActions.update(currentUser.setIn(['config', 'recentApp'], newApp));
   //   this.props.loadOtherApp(newApp, currentUser);
   // }
+  // constructor(props, context) {
+  // super(props, context);
+  // }
+
+  state = {
+    showEyeTimeoutBlinking: false,
+    currentTime: moment()
+  };
+
+  componentDidMount() {
+    this.updateCurrentTime();
+
+    if (!window.isMobile) {
+      this.updateWeather();
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.updateTimeRunner);
+  }
+
+  updateCurrentTime = () => {
+    this.updateTimeRunner = setInterval(() => {
+      this.setState({
+        // eslint-disable-line react/no-set-state
+        showEyeTimeoutBlinking:
+          moment().minutes() % 30 >= 29 && moment().seconds() % 2 === 0,
+        currentTime: moment()
+      });
+    }, 3000);
+  };
+
+  updateWeather = () => {
+    this.props.updateWeather();
+    setInterval(() => {
+      this.props.updateWeather();
+    }, 1000 * 60 * 60);
+  }
 
   render() {
     const {
@@ -40,8 +78,17 @@ export class SubHeader extends React.Component {
       location,
       selectedProjectId,
       updatingRecurTask,
-      edittingTarget
+      edittingTarget,
+      isLeftSidebarOn,
+      isRightSidebarOn,
+      currentUser,
+      weatherInfo,
     } = this.props;
+
+    const { currentTime, showEyeTimeoutBlinking } = this.state;
+
+    const currentApp = currentUser.hasIn(['config', 'recentApp']) ? currentUser.getIn(['config', 'recentApp']) : '';
+
 
     return (
       <React.Fragment>
@@ -122,12 +169,83 @@ export class SubHeader extends React.Component {
           )
         }
 
+        <Menu.Item
+          position="right"
+          style={{
+            fontSize: 16,
+            height: 30,
+            lineHeight: 30,
+          }}
+        >
+          {parseInt(weatherInfo.getIn(['current', 'temp']), 10)}
+          {' '}
+          -
+          {parseInt(weatherInfo.getIn(['next', 'weather', 'temp']), 10)}
+          °C
+          {weatherInfo.getIn(['city', 'name'])}
+        </Menu.Item>
+
+        {/* <Menu.Item>
+          <img
+            alt="pic"
+            src={
+              currentUser.has('imageUrl')
+                ? currentUser.get('imageUrl')
+                : currentUserImageSrc
+            }
+            style={{
+              width: 36,
+              borderRadius: 1000,
+              height: 36,
+            }}
+          />
+        </Menu.Item> */}
+
+        {/* <Menu.Menu>
+            <Button
+              color="white"
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['isLeftSidebarOn'], !isLeftSidebarOn);
+              }}
+            >
+              Show Left Menu
+            </Button>
+          </Menu.Menu> */}
+
+        <Menu.Item
+          position="right"
+          style={{
+            fontSize: 16,
+            height: 30,
+            lineHeight: 30,
+          }}
+        >
+          {currentTime.format('HH:mm')}
+        </Menu.Item>
+
+        <Menu.Item position="right">
+          <Icon
+            id="right-aside-button"
+            color="yellow"
+            name="graduation cap"
+            onClick={(_) => {
+              this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
+            }}
+          />
+        </Menu.Item>
+
       </React.Fragment>
     );
   }
 }
 
 SubHeader.defaultProps = {
+  isLeftSidebarOn: true,
+  isRightSidebarOn: true,
+
+  currentUser: Map(),
+  weatherInfo: Map(),
+
   isTasksOn: false,
   selectedAnkiTagId: '',
   revisionAnkisTotal: 0,
@@ -141,6 +259,13 @@ SubHeader.defaultProps = {
 };
 
 SubHeader.propTypes = {
+  isLeftSidebarOn: PropTypes.bool,
+  isRightSidebarOn: PropTypes.bool,
+  currentUser: PropTypes.object,
+  // currentUserImageSrc: PropTypes.string.isRequired,
+  weatherInfo: PropTypes.object,
+  updateWeather: PropTypes.func.isRequired,
+
   isTasksOn: PropTypes.bool,
   revisionAnkisTotal: PropTypes.number,
   selectedAnkiTagId: PropTypes.string,
@@ -158,6 +283,13 @@ SubHeader.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    isLeftSidebarOn: state.ui.getIn(['isLeftSidebarOn']),
+    isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
+
+    currentUser: currentUserSelector(state),
+    // currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),
+    weatherInfo: state.ui.getIn(['common', 'api', 'weatherInfo']),
+
     isTasksOn: state.ui.getIn(['common', 'isTasksOn']),
     isAnkiModalOn: state.ui.getIn(['common', 'isAnkiModalOn']),
     selectedAnkiTagId: state.ui.get('selectedAnkiTagId'),
@@ -175,6 +307,14 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    removeCurrentUser: currentUser => dispatch({
+      type: 'DELETE_USER_SUCCESS',
+      user: currentUser,
+    }),
+    updateWeather: _ => dispatch({
+      type: 'SET_WEATHER_INFO',
+    }),
+
     AnkiTagActions: bindActionCreators(AnkiTagActions, dispatch),
     UiActions: bindActionCreators(UiActions, dispatch),
   };

@@ -16,6 +16,27 @@ $homepage-header-height: 60px;
 $homepage-photo-width: 400px;
 @import '~font-awesome/css/font-awesome.css';
 
+@mixin coverbg() {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
 #homepage {
   @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
   @import url(https://fonts.googleapis.com/css?family=Pacifico);
@@ -36,7 +57,7 @@ $homepage-photo-width: 400px;
   font-weight: 300;
   color: white;
   font-size: 14px;
-  background: url("./image/bg.png") no-repeat center center;
+  background: url("/abyssinian/bg.png") no-repeat center center;
   z-index: 2;
   width: 100vw;
   height: 100vh;
@@ -47,6 +68,7 @@ $homepage-photo-width: 400px;
     padding: 0;
     font-size: 14px;
     box-sizing: border-box;
+    color: white;
   }
 
   .fancy-font {
@@ -322,130 +344,111 @@ $homepage-photo-width: 400px;
   .subtitle {
     font-size: 18px;
   }
-}
-
-@mixin coverbg() {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-@mixin opacity($opacity) {
-  opacity: $opacity;
-  $opacity-ie: $opacity * 100;
-  filter: alpha(opacity=$opacity-ie); //IE8
-}
-
-@mixin transition($args...) {
-  -webkit-transition: $args;
-  -moz-transition: $args;
-  -ms-transition: $args;
-  -o-transition: $args;
-  transition: $args;
-}
 
 
-#portfolio-page {
 
-  // #portfolio-nav {
-  //   text-align: center;
-  //   a {
-  //     padding: 2px 5px;
-  //     margin: 0 5px;
-  //   }
-  // }
-  #portfolio-thumbnails {
-    width: 100%;
-    overflow: auto;
 
-    .portfolio-thumbnail {
-      position: relative;
-      width: calc(33.33% - 40px);
-      margin: 0 20px;
-      box-sizing: border-box;
-      float: left;
-      height: 200px;
-      border: white solid 3px;
 
-      img {
-        height: 100%;
-        width: 100%;
-      }
+  #portfolio-page {
 
-      .text {
-        position: absolute;
-        top: 0;
-        opacity: 0;
-        padding: 20px;
-        font-size: 14px;
-        display: block;
-        z-index: 2;
-      }
+    // #portfolio-nav {
+    //   text-align: center;
+    //   a {
+    //     padding: 2px 5px;
+    //     margin: 0 5px;
+    //   }
+    // }
+    #portfolio-thumbnails {
+      width: 100%;
+      overflow: auto;
 
-      .canvas {
-        opacity: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: black;
-      }
+      .portfolio-thumbnail {
+        position: relative;
+        width: calc(33.33% - 40px);
+        margin: 0 20px;
+        box-sizing: border-box;
+        float: left;
+        height: 200px;
+        border: white solid 3px;
 
-      &:hover {
-        background: black;
+        img {
+          height: 100%;
+          width: 100%;
+        }
 
         .text {
-          opacity: 1;
+          position: absolute;
+          top: 0;
+          opacity: 0;
+          padding: 20px;
+          font-size: 14px;
+          display: block;
+          z-index: 2;
         }
 
         .canvas {
-          opacity: 0.8;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: black;
+        }
+
+        &:hover {
+          background: black;
+
+          .text {
+            opacity: 1;
+          }
+
+          .canvas {
+            opacity: 0.8;
+          }
         }
       }
     }
   }
-}
 
 
-#profile-page {
-  min-height: 500px;
+  #profile-page {
+    min-height: 500px;
 
-  #tc-photo {
-    float: left;
-    position: absolute;
-    bottom: 0;
-  }
-
-  #profile-text {
-    margin-left: $homepage-photo-width;
-    display: block;
-  }
-}
-
-
-$homepage-testimonial-img-width: 120px;
-
-#testimonial-page {
-  .testimonial {
-    padding: 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: $homepage-testimonial-img-width;
-      height: $homepage-testimonial-img-width;
+    #tc-photo {
       float: left;
-      border-radius: 100px;
-      border: 2px solid white;
+      position: absolute;
+      bottom: 0;
     }
 
-    .text {
-      display: inline-block;
-      width: calc(#{$homepage-width} - #{$homepage-testimonial-img-width});
-      padding: 0 10px;
+    #profile-text {
+      margin-left: $homepage-photo-width;
+      display: block;
+    }
+  }
+
+  $homepage-testimonial-img-width: 120px;
+
+  #testimonial-page {
+    .testimonial {
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: $homepage-testimonial-img-width;
+        height: $homepage-testimonial-img-width;
+        float: left;
+        border-radius: 100px;
+        border: 2px solid white;
+      }
+
+      .text {
+        display: inline-block;
+        width: calc(#{$homepage-width} - #{$homepage-testimonial-img-width});
+        padding: 0 10px;
+      }
     }
   }
 }

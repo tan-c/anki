@@ -23,26 +23,6 @@ export class LoginPage extends React.Component {
     password: ''
   }
 
-  componentDidMount() {
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    if (new Date().getTime() < expiresAt * 1000) {
-      this.relogin(localStorage.getItem('access_token'));
-    }
-  }
-
-  relogin = (token) => {
-    this.props.UserActions.create({
-      token,
-    }).then((res) => {
-      if (res && res._id !== null) {
-        toastr.info('Successfully re-loggedin');
-        this.props.loggedIn(res);
-      } else {
-        toastr.error('No valid user');
-      }
-    });
-  }
-
   login = () => {
     const { email, password } = this.state;
 

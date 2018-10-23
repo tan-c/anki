@@ -30,7 +30,7 @@ import '../../node_modules/semantic-ui-less/semantic.less';
 // import toastr from 'toastr';
 
 import AbyssinianPageConnected from './components/Abyssinian/Page';
-import LoginPageConnected from './components/Login/Page';
+
 
 import HeaderConnected from './components/_layout/Header';
 import FooterConnected from './components/_layout/Footer';
@@ -101,7 +101,7 @@ export class App extends React.Component {
     const {
       currentUser,
       isLeftSidebarOn,
-      isRightSidebarOn
+      isRightSidebarOn,
     } = this.props;
 
     const eyeSaving = currentUser.hasIn(['config', 'eyeSaving'])
@@ -123,9 +123,6 @@ export class App extends React.Component {
             ? process.env.GIT_VERSION.slice(0, 6)
             : 'Undefined'}
         </div>
-
-
-        {/* <LoginPageConnected pageName="Anki" /> */}
 
         {!currentUser.has('_id') || currentUser.get('_id') === null
           ? <AbyssinianPageConnected />
@@ -257,7 +254,7 @@ export class App extends React.Component {
 App.defaultProps = {
   currentUser: Map(),
   isLeftSidebarOn: false,
-  isRightSidebarOn: true,
+  isRightSidebarOn: true
 };
 
 App.propTypes = {

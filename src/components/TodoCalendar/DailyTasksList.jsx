@@ -119,7 +119,7 @@ export class DailyTasksList extends React.Component {
               <Icon
                 className={`width-15 ${task.has('recur') && task.get('recur') !== 'none' && 'color-green'}`}
                 name="sync"
-                onClick={_ => this.props.TaskActions.update(task.set('recur', task.has('recur') ? 'none' : 'daily', task))}
+                onClick={_ => this.props.TaskActions.update(task.set('recur', task.get('recur') === 'daily' ? 'none' : 'daily', task))}
               />
 
               <i

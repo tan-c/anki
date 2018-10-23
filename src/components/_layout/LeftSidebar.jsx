@@ -100,12 +100,14 @@ export class SidebarComponent extends React.Component {
           to="/todo/calendar"
           active={location.pathname.indexOf('/todo') > -1}
         >
-          <Label
-            color={todayTasks.count() >= 3 ? 'orange' : 'green'}
-            size="tiny"
-          >
-            {todayTasks.count()}
-          </Label>
+          {todayTasks.count() && (
+            <Label
+              color={todayTasks.count() >= 3 ? 'orange' : 'green'}
+              size="tiny"
+            >
+              {todayTasks.count()}
+            </Label>
+          )}
           <Label
             color={thisWeekTasks.count() >= 6 ? 'orange' : 'green'}
             size="tiny"

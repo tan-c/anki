@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import {
   Icon, Menu,
-  Input,
   Image,
   Label
 } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 import {
   overduedTasksSelector,
-  todayTasksSelector,
   thisWeekTasksSelector
 } from 'utility-redux/task';
 import { todayMeasurementSelector } from 'utility-redux/dailyMeasurement';
@@ -21,7 +19,6 @@ export class SidebarComponent extends React.Component {
     const {
       location,
       overduedTasksCount,
-      todayTasks,
       thisWeekTasks,
       todayMeasurement
     } = this.props;
@@ -100,12 +97,12 @@ export class SidebarComponent extends React.Component {
           to="/todo/calendar"
           active={location.pathname.indexOf('/todo') > -1}
         >
-          {todayTasks.count() && (
+          {overduedTasksCount && (
             <Label
-              color={todayTasks.count() >= 3 ? 'orange' : 'green'}
+              color={overduedTasksCount >= 3 ? 'orange' : 'green'}
               size="tiny"
             >
-              {todayTasks.count()}
+              {overduedTasksCount}
             </Label>
           )}
           <Label
@@ -189,14 +186,12 @@ export class SidebarComponent extends React.Component {
 
 SidebarComponent.defaultProps = {
   overduedTasksCount: 0,
-  todayTasks: Map(),
   thisWeekTasks: Map(),
   todayMeasurement: Map(),
 };
 
 SidebarComponent.propTypes = {
   overduedTasksCount: PropTypes.number,
-  todayTasks: PropTypes.object,
   thisWeekTasks: PropTypes.object,
   todayMeasurement: PropTypes.object,
 };
@@ -204,7 +199,6 @@ SidebarComponent.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     overduedTasksCount: overduedTasksSelector(state),
-    todayTasks: todayTasksSelector(state),
     thisWeekTasks: thisWeekTasksSelector(state),
     todayMeasurement: todayMeasurementSelector(state),
   };

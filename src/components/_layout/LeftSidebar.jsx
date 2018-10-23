@@ -26,9 +26,6 @@ export class SidebarComponent extends React.Component {
       todayMeasurement
     } = this.props;
 
-    console.log('🔥🔥🔥🔥🔥 todayMeasurement.toJS() 🔥🔥🔥🔥🔥');
-    console.log(todayMeasurement.toJS());
-
     return (
       <React.Fragment>
         <Menu.Item>
@@ -47,9 +44,7 @@ export class SidebarComponent extends React.Component {
           Home
         </Menu.Item>
 
-        <Menu.Item
-          active={location.pathname === '/hourblock'}
-        >
+        <Menu.Item>
           <Icon name="calendar" />
           Hourblock
           <Menu.Menu>
@@ -82,7 +77,6 @@ export class SidebarComponent extends React.Component {
               active={location.pathname === '/hourblock/workout'}
             >
               Workout
-
               <Label
                 color={todayMeasurement.get('morningWeight') > 0 ? 'grey' : 'red'}
                 size="tiny"
@@ -98,14 +92,13 @@ export class SidebarComponent extends React.Component {
             >
               Settings
             </Menu.Item>
-
           </Menu.Menu>
         </Menu.Item>
 
         <Menu.Item
           as={Link}
-          to="/hourblock/calendar"
-          active={location.pathname === '/hourblock/calendar'}
+          to="/todo/calendar"
+          active={location.pathname.indexOf('/todo') > -1}
         >
           <Label
             color={todayTasks.count() >= 3 ? 'orange' : 'green'}
@@ -123,16 +116,16 @@ export class SidebarComponent extends React.Component {
           <Menu.Menu>
             <Menu.Item
               as={Link}
-              to="/hourblock/calendar"
-              active={location.pathname === '/hourblock/calendar'}
+              to="/todo/calendar"
+              active={location.pathname === '/todo/calendar'}
             >
               Calendar
             </Menu.Item>
 
             <Menu.Item
               as={Link}
-              to="/hourblock/task"
-              active={location.pathname === '/hourblock/task'}
+              to="/todo/task"
+              active={location.pathname === '/todo/task'}
             >
               Tasks
             </Menu.Item>

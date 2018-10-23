@@ -48,11 +48,11 @@ import AnkiPageConnected from './components/AnkiLearn/Page';
 import AnkiTagsPageConnected from './components/AnkiTags/Page';
 
 import HourblockPlanningPageConnected from './components/HourblockPlanning/Page';
-import HourblockTaskPageConnected from './components/HourblockTask/Page';
 import HourblockSettingPageConnected from './components/HourblockSettings/Page';
-import HourblockCalendarPageConnected from './components/HourblockCalendar/Page';
 import HourblockWorkoutPageConnected from './components/HourblockWorkout/Page';
 
+import TodoTaskPageConnected from './components/TodoTask/Page';
+import TodoCalendarPageConnected from './components/TodoCalendar/Page';
 
 import EyeModal from './components/_modal/Eye';
 import ErrorBoundary from './ErrorBoundary';
@@ -224,10 +224,6 @@ export class App extends React.Component {
                     component={HourblockConnected}
                   />
                   <Route
-                    path="/hourblock/calendar"
-                    component={HourblockCalendarPageConnected}
-                  />
-                  <Route
                     path="/hourblock/workout"
                     component={HourblockWorkoutPageConnected}
                   />
@@ -236,12 +232,16 @@ export class App extends React.Component {
                     component={HourblockPlanningPageConnected}
                   />
                   <Route
-                    path="/hourblock/task"
-                    component={HourblockTaskPageConnected}
-                  />
-                  <Route
                     path="/hourblock/setting"
                     component={HourblockSettingPageConnected}
+                  />
+                  <Route
+                    path="/todo/calendar"
+                    component={TodoCalendarPageConnected}
+                  />
+                  <Route
+                    path="/todo/task"
+                    component={TodoTaskPageConnected}
                   />
                   <Route
                     exact

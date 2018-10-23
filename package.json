@@ -26,7 +26,7 @@
     "test:e2e:docker:ci": "docker run --network docker-bridge -v /root/anki/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
     "start:dev": "nodemon -w app.dev.js app.dev.js --exec babel-node",
     "build": "rm -rf dist; cp -r ../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
-    "precommit:check:sensitive": "cp ../.githound.yml ./ && git hound sniff HEAD"
+    "check:sensitive": "cp ../.githound.yml ./ && git hound sniff HEAD"
   },
   "dependencies": {
     "babel-cli": "6.26.0",
@@ -45,7 +45,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged; npm run precommit:check:sensitive;",
+      "pre-commit": "lint-staged; npm run check:sensitive;",
       "pre-push": "npm test; snyk test --severity-threshold=high"
     }
   },

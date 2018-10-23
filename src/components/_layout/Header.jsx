@@ -122,6 +122,7 @@ export class Header extends React.Component {
 
         <Menu.Item position="right">
           <Icon
+            id="right-aside-button"
             color="yellow"
             name="graduation cap"
             onClick={(_) => {

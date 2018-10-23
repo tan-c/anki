@@ -51,7 +51,7 @@ jobs:
       - checkout
       - run:
           name: Copy project dir under js-base-image for testing
-          command: mkdir -p /js-base-image/project && cp -r . /js-base-image/project/
+          command: mkdir -p /js-base-image/project && cp -r . /js-base-image/anki/
       - run:
           name: Run test and save coverage result
           command: |
@@ -62,9 +62,9 @@ jobs:
             cd /js-base-image/project && /js-base-image/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
           no_output_timeout: 20m
       - store_test_results:
-          path: /js-base-image/project/coverage/
+          path: /js-base-image/anki/coverage/
       - store_artifacts:
-          path: /js-base-image/project/coverage/
+          path: /js-base-image/anki/coverage/
 
   test:e2e:
     docker:
@@ -105,7 +105,7 @@ jobs:
           command: |
             docker create -v /tests --name test-e2e-vol alpine:3.4 /bin/true
             # copy a config file into this volume
-            docker cp /root/project/test-e2e test-e2e-vol:/tests
+            docker cp /root/anki/test-e2e test-e2e-vol:/tests
             # start an application container using this volume
             docker run -e NODE_ENV=production -e TEST_EMAIL=$TEST_EMAIL -e TEST_PASSWORD=$TEST_PASSWORD --network docker-bridge --volumes-from test-e2e-vol testcafe/testcafe 'chromium:headless --no-sandbox' /tests # -r xunit:/tmp/test-results/res.xml if you want to save the artifact
 

@@ -16,15 +16,14 @@
   "url": "https://github.com/tan-c/anki-monorepo/issues",
   "email": "tanchen2014@gmail.com",
   "scripts": {
-    "test": "BABEL_ENV=test jest --config ./utility-test/jest.config.js project/",
-    "test:local": "BABEL_ENV=test jest --config ./utility-test/jest.config.js anki/",
+    "test": "BABEL_ENV=test jest --config ./utility-test/jest.config.js  anki/",
     "test:ci": "npm test --ci",
     "test:recent": "BABEL_ENV=test jest --changedSince=master || true ./utility-test/jest.confing.js",
     "test:watch": "npm run test:local --watch",
     "test:e2e": "testcafe 'chrome:headless --no-sandbox' ./test-e2e/",
     "test:e2e:browswer": "testcafe chrome ./test-e2e/",
     "test:e2e:docker:local": "docker run -it --network docker-bridge -v /Users/tanchen/Desktop/monorepo-js/anki/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests -r xunit:/tmp/test-results/res.xml",
-    "test:e2e:docker:ci": "docker run --network docker-bridge -v /root/project/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
+    "test:e2e:docker:ci": "docker run --network docker-bridge -v /root/anki/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
     "start:dev": "nodemon -w app.dev.js app.dev.js --exec babel-node",
     "build": "rm -rf dist; cp -r ../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
     "precommit:check:sensitive": "cp ../.githound.yml ./ && git hound sniff HEAD"

@@ -15,6 +15,7 @@ function setup() {
     selectedProjectId: '',
     edittingTarget: '',
 
+    updateWeather: () => { },
     UserActions: {},
     UiActions: {},
   };

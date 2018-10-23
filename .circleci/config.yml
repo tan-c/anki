@@ -104,7 +104,7 @@ jobs:
           command: |
             docker create -v /tests --name test-e2e-vol alpine:3.4 /bin/true
             # copy a config file into this volume
-            docker cp /root/anki/test-e2e test-e2e-vol:/tests
+            docker cp $CIRCLE_WORKING_DIRECTORY/test-e2e test-e2e-vol:/tests
             # start an application container using this volume
             docker run -e NODE_ENV=production -e TEST_EMAIL=$TEST_EMAIL -e TEST_PASSWORD=$TEST_PASSWORD --network docker-bridge --volumes-from test-e2e-vol testcafe/testcafe 'chromium:headless --no-sandbox' /tests # -r xunit:/tmp/test-results/res.xml if you want to save the artifact
 

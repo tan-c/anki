@@ -3,9 +3,9 @@ FROM 923942996254.dkr.ecr.ap-northeast-1.amazonaws.com/js-base-image:latest AS b
 # FROM js-base-image:latest AS build-deps
 LABEL maintainer="tanchen2014@gmail.com"
 
-RUN mkdir -p ./packages/anki
-COPY . ./packages/anki
-WORKDIR ./packages/anki
+RUN mkdir -p ./anki
+COPY . ./anki
+WORKDIR ./anki
 
 RUN npm install --only=production
 RUN npm run build
@@ -24,8 +24,8 @@ ARG nginx_dir=/usr/local/openresty
 COPY config/nginx.conf $nginx_dir/nginx/conf/nginx.conf
 
 WORKDIR /dist
-COPY --from=build-deps /js-base-image/packages/anki/dist /dist
-COPY --from=build-deps /js-base-image/packages/anki/resource/ /dist/
+COPY --from=build-deps /js-base-image/anki/dist /dist
+COPY --from=build-deps /js-base-image/anki/resource/ /dist/
 
 EXPOSE 80
 EXPOSE 9145

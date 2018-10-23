@@ -27,10 +27,6 @@ dist/
 coverage/*
 artifacts/
 
-# Sensitive data
-app.dev.js
-
-
 # For building webpacks
 common.webpack.js
 prod.build.js

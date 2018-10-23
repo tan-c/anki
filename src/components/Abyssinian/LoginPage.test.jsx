@@ -28,7 +28,7 @@ describe('LoginPage Unit Tests', () => {
   // });
 
   describe('', () => {
-    const ls = require('../../utility-test/setup/localStorage.js');
+    const ls = require('../../../utility-test/setup/localStorage.js');
     ls.setLocalStorage();
 
     // const wrapper = setup();

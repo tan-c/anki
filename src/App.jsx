@@ -173,10 +173,9 @@ export class App extends React.Component {
                   position: 'absolute',
                   overflow: 'auto',
                   zIndex: 1,
-                  height: 'calc(100vh - 30px)',
+                  height: 'calc(100vh)',
                   background: 'black',
                   // color: 'white',
-                  top: 30,
                   margin: 0
                 }}
               >

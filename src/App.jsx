@@ -36,7 +36,6 @@ import FooterConnected from './components/_layout/Footer';
 import LeftSidebarConnected from './components/_layout/LeftSidebar';
 import RightSidebarConnected from './components/_layout/RightSidebar';
 
-import SubHeaderConnected from './components/_layout/SubHeader';
 // import SettingsConnected from './components/_layout/Settings';
 import AnkiListConnected from './components/AnkiList/List';
 import IntelNotesConnected from './components/IntelNotes/Page';
@@ -154,7 +153,6 @@ export class App extends React.Component {
                 fixed="top"
                 inverted
                 color="blue"
-                // inverted
                 data-role="header"
                 style={{
                   height: 30,
@@ -167,24 +165,6 @@ export class App extends React.Component {
                 <HeaderConnected />
               </Menu>
 
-              <Menu
-                attached
-                inverted
-                data-role="subheader"
-                id="subheader"
-                style={{
-                  paddingLeft: 10,
-                  marginTop: 30,
-                  height: 30,
-                  width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
-                  marginLeft: `${isLeftSidebarOn ? '140px' : 0}`,
-                  zIndex: 100,
-                  position: 'absolute',
-                }}
-              >
-                <SubHeaderConnected />
-              </Menu>
-
               <Responsive
                 as={Grid}
                 style={{
@@ -193,10 +173,10 @@ export class App extends React.Component {
                   position: 'absolute',
                   overflow: 'auto',
                   zIndex: 1,
-                  height: 'calc(100vh - 60px)',
+                  height: 'calc(100vh - 30px)',
                   background: 'black',
-                  color: 'white',
-                  top: 60,
+                  // color: 'white',
+                  top: 30,
                   margin: 0
                 }}
               >

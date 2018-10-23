@@ -1,12 +1,12 @@
 $left-aside-width: 80px;
 $left-aside-width-mobile: 50px;
 $header-height: 50px;
-$subheader-height: 30px;
 $right-aside-width: 260px;
 @import '~animate.css/animate.min.css';
 @import '~font-awesome/css/font-awesome.css';
 @import '~toastr/build/toastr.min.css';
 @import '~react-table/react-table.css';
+@import '~highlight.js/styles/monokai-sublime.css';
 @import "utilities";
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
@@ -151,9 +151,9 @@ video {
 
   #canvas {
     position: fixed;
-    top : calc(#{$header-height} + #{$subheader-height});
+    top : calc(#{$header-height});
     left: 0;
-    height : calc(100vh - #{$header-height} - #{$subheader-height});
+    height : calc(100vh - #{$header-height});
     width: calc(100vw - 280px);
     background: $black-70;
     z-index: 9;
@@ -370,7 +370,6 @@ button {
 $left-aside-width: 120px;
 $left-aside-width-mobile: 50px;
 $header-height: 50px;
-$subheader-height: 30px;
 $right-aside-width: 300px;
 $footer-height: 16px;
 
@@ -467,18 +466,7 @@ $footer-height: 16px;
   }
 }
 
-$left-aside-width: 80px;
-$left-aside-width-mobile: 50px;
-$header-height: 50px;
-$subheader-height: 30px;
-$right-aside-width: 260px;
-@import '~animate.css/animate.min.css';
-@import '~font-awesome/css/font-awesome.css';
-@import '~toastr/build/toastr.min.css';
-@import '~react-quill/dist/quill.snow.css';
-@import '~highlight.js/styles/monokai-sublime.css';
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
-@import url(https://fonts.googleapis.com/css?family=Orbitron:400);
+
 
 .ql-editor img {
   max-width: 100% !important;

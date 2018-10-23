@@ -3,30 +3,32 @@ import { shallow } from 'enzyme';
 import expect from 'expect';
 import toJson from 'enzyme-to-json';
 
-import moment from 'moment';
-
 // import { Map } from 'immutable';
 
-import { Header } from './Header';
+import { SubHeader } from './Header';
 
 function setup() {
   const props = {
-    updateWeather: () => { },
+    location: {
+      pathname: '',
+    },
+    selectedProjectId: '',
+    edittingTarget: '',
 
-    UiActions: {}
+    UserActions: {},
+    UiActions: {},
   };
 
-  return shallow(<Header {...props} />);
+  return shallow(<SubHeader {...props} />);
 }
 
-describe('Header Unit Tests', () => {
+describe('SubHeader Unit Tests', () => {
   describe('when normally set up', () => {
     const wrapper = setup();
-    wrapper.setState({ currentTime: moment('2017-01-01') });
     it('renders correctly', () => {
       // const jsonOutput = toJson(wrapper);
       // // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("Menu[data-role='header']")).toHaveLength(0);
+      expect(wrapper.find("Menu[data-role='subheader']")).toHaveLength(0);
     });
   });
 });

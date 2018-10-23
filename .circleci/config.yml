@@ -150,8 +150,8 @@ workflows:
             - init
       - test:e2e:
           requires:
-            - init
+            - test
       - push-deploy:
           requires:
-            - test
+            # - test
             - test:e2e

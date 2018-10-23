@@ -43,7 +43,6 @@ export class LoginPage extends React.Component {
     });
   }
 
-
   login = () => {
     const { email, password } = this.state;
 

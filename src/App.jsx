@@ -29,7 +29,8 @@ import '../../node_modules/semantic-ui-less/semantic.less';
 // @import '~semantic-ui-css/semantic.min.css';
 // import toastr from 'toastr';
 
-import LoginPageConnected from 'utility-react-component/Page/LoginPage';
+import AbyssinianPageConnected from './components/Abyssinian/Page';
+import LoginPageConnected from './components/Login/Page';
 
 import HeaderConnected from './components/_layout/Header';
 import FooterConnected from './components/_layout/Footer';
@@ -123,8 +124,11 @@ export class App extends React.Component {
             : 'Undefined'}
         </div>
 
+
+        {/* <LoginPageConnected pageName="Anki" /> */}
+
         {!currentUser.has('_id') || currentUser.get('_id') === null
-          ? <LoginPageConnected pageName="Anki" />
+          ? <AbyssinianPageConnected />
           : (
             <React.Fragment>
               <Responsive

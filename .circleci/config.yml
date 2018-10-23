@@ -26,7 +26,8 @@ jobs:
     docker:
       - image: $DOCKER_ADD/js-base-image:latest
 
-    # working_directory: ~/repo # Needed to build docker as you use . # Default is /root/project
+    # working_directory: ~/repo
+    # Needed to build docker as you use . # Default is /root/project
 
     steps:
       - checkout
@@ -50,42 +51,26 @@ jobs:
       - checkout
       - run:
           name: Copy project dir under js-base-image for testing
-          command: mkdir -p /js-base-image/packages/project && cp -r . /js-base-image/packages/project/
-      - run:
-          name: Download code climate test-reporter
-          command: |
-            # download test reporter as a static binary
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > /root/project/cc-test-reporter
-            chmod +x /root/project/cc-test-reporter
+          command: mkdir -p /js-base-image/project && cp -r . /js-base-image/project/
       - run:
           name: Run test and save coverage result
           command: |
-            # notify Code Climate of a pending test report using `before-build`
-            cd /js-base-image/packages/project && npm ci --production
-            /root/project/cc-test-reporter before-build
-            cd /js-base-image/packages/project && npm run test:ci
+            cd /js-base-image/project && npm ci --production
+            /js-base-image/cc-test-reporter before-build
+            cd /js-base-image/project && npm run test:ci
             # upload test report to Code Climate using `after-build`
-            cd /js-base-image/packages/project && /root/project/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
+            cd /js-base-image/project && /js-base-image/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
           no_output_timeout: 20m
       - store_test_results:
-          path: /js-base-image/packages/project/coverage/
+          path: /js-base-image/project/coverage/
       - store_artifacts:
-          path: /js-base-image/packages/project/coverage/
+          path: /js-base-image/project/coverage/
 
   test:e2e:
     docker:
       - image: $DOCKER_ADD/js-base-image:latest
-      # - image: testcafe/testcafe
     steps:
       - checkout
-      # - run:
-      #     name: Copy project dir under js-base-image for testing
-      #     command: mkdir -p /js-base-image/packages/project && cp -r . /js-base-image/packages/project/
-      # - run: cd /js-base-image/packages/project && npm ci --production # for babel-node
-
-      # - run: pwd
-      # - run: ls -al /root/project/test-e2e
-
       - run:
           name: Install Docker client
           command: |
@@ -112,10 +97,6 @@ jobs:
           name: start service in bg
           command: docker run --network docker-bridge --ip 10.0.0.10 $REPO_NAME # Fixed at 10.0.0.10
           background: true
-
-      # - run: docker network list
-      # - run: docker network inspect docker-bridge
-      # - run: npm run test:e2e:docker:ci
 
       # -v wont work for remote docker, use cp instead => https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
       # create a dummy container which will hold a volume with config

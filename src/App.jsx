@@ -23,8 +23,8 @@ import {
 import { currentUserSelector } from 'utility-redux/user';
 // import { UiActions } from 'utility-redux/ui';
 
-import '../../../node_modules/toastr/toastr.less';
-import '../../../node_modules/semantic-ui-less/semantic.less';
+import '../../node_modules/toastr/toastr.less';
+import '../../node_modules/semantic-ui-less/semantic.less';
 
 // @import '~semantic-ui-css/semantic.min.css';
 // import toastr from 'toastr';

@@ -25,9 +25,8 @@ jobs:
     # working_directory: ~/repo
     docker:
       - image: $DOCKER_ADD/js-base-image:latest
-
     # working_directory: ~/repo
-    # Needed to build docker as you use . # Default is /root/project
+    # Needed to build docker as you use . # Default is /root/anki
 
     steps:
       - checkout
@@ -44,22 +43,22 @@ jobs:
 
   test:
     # working_directory: /js-base-image
-    # default is Default is /root/project
+    # default is Default is /root/anki
     docker:
       - image: $DOCKER_ADD/js-base-image:latest
     steps:
       - checkout
       - run:
           name: Copy project dir under js-base-image for testing
-          command: mkdir -p /js-base-image/project && cp -r . /js-base-image/anki/
+          command: mkdir -p /js-base-image/anki && cp -r . /js-base-image/anki/
       - run:
           name: Run test and save coverage result
           command: |
-            cd /js-base-image/project && npm ci --production
+            cd /js-base-image/anki && npm ci --production
             /js-base-image/cc-test-reporter before-build
-            cd /js-base-image/project && npm run test:ci
+            cd /js-base-image/anki && npm run test:ci
             # upload test report to Code Climate using `after-build`
-            cd /js-base-image/project && /js-base-image/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
+            cd /js-base-image/anki && /js-base-image/cc-test-reporter after-build --coverage-input-type lcov --exit-code $? # Providing this will prevent sending test coverage results for failed tests.
           no_output_timeout: 10m
       - store_test_results:
           path: /js-base-image/anki/coverage/

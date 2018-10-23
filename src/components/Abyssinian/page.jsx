@@ -58,6 +58,7 @@ export class AbyssinianPage extends React.Component {
         </div>
 
         <Button
+          id="show-login-page-button"
           basic
           content="Login"
           style={{

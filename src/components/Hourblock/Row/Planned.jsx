@@ -220,11 +220,11 @@ export class HourBlockRowPlanned extends React.Component {
               )}
 
               {isTodayPast
-              && (
-                <span className="width-80 border-right-white height-lineheight-30" style={{ backgroundColor: plannedPomo.getIn(['project', 'category', 'color']) }}>
-                  {plannedPomo.getIn(['project', 'name'])}
-                </span>
-              )
+                && (
+                  <span className="width-80 border-right-white height-lineheight-30" style={{ backgroundColor: plannedPomo.getIn(['project', 'category', 'color']) }}>
+                    {plannedPomo.getIn(['project', 'name'])}
+                  </span>
+                )
               }
 
               <div className="flex-1 flex-container-row">
@@ -242,6 +242,8 @@ export class HourBlockRowPlanned extends React.Component {
 }
 
 HourBlockRowPlanned.defaultProps = {
+  isToday: false,
+
   currentUser: Map(),
   currentSectionOfDay: 0,
   sectionOfDay: 0,
@@ -249,11 +251,14 @@ HourBlockRowPlanned.defaultProps = {
   plannedPomo: Map(),
   recordPomo: Map(),
   onChangePlannedPomo: () => { },
+
+  isUpdatingPlannedPomo: false,
+  allProjectTasksOrdered: Map(),
   // projectFirstTask: Map(),
 };
 
 HourBlockRowPlanned.propTypes = {
-  isToday: PropTypes.bool.isRequired,
+  isToday: PropTypes.bool,
   currentSectionOfDay: PropTypes.number,
   currentUser: PropTypes.object,
   sectionOfDay: PropTypes.number,
@@ -261,8 +266,8 @@ HourBlockRowPlanned.propTypes = {
   plannedPomo: PropTypes.object,
   recordPomo: PropTypes.object,
   onChangePlannedPomo: PropTypes.func,
-  isUpdatingPlannedPomo: PropTypes.bool.isRequired,
-  allProjectTasksOrdered: PropTypes.object.isRequired,
+  isUpdatingPlannedPomo: PropTypes.bool,
+  allProjectTasksOrdered: PropTypes.object,
   // projectFirstTask: PropTypes.object,
 };
 

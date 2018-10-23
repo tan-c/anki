@@ -11,7 +11,9 @@ import { Header } from './Header';
 
 function setup() {
   const props = {
-    updateWeather: () => { }
+    updateWeather: () => { },
+
+    UiActions: {}
   };
 
   return shallow(<Header {...props} />);

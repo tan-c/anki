@@ -58,7 +58,6 @@ export class Header extends React.Component {
       isRightSidebarOn,
       currentUser,
       weatherInfo,
-      currentUserImageSrc,
     } = this.props;
 
     const { currentTime, showEyeTimeoutBlinking } = this.state;
@@ -148,9 +147,8 @@ Header.propTypes = {
   isRightSidebarOn: PropTypes.bool,
 
   currentUser: PropTypes.object,
-  currentUserImageSrc: PropTypes.string.isRequired,
+  // currentUserImageSrc: PropTypes.string.isRequired,
   weatherInfo: PropTypes.object,
-
   updateWeather: PropTypes.func.isRequired,
 
   UiActions: PropTypes.object.isRequired,
@@ -162,7 +160,7 @@ function mapStateToProps(state, ownProps) {
     isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
 
     currentUser: currentUserSelector(state),
-    currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),
+    // currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),
     weatherInfo: state.ui.getIn(['common', 'api', 'weatherInfo']),
   };
 }

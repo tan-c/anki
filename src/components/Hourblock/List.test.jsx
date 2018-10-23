@@ -9,6 +9,10 @@ import { HourBlockList } from './List';
 
 function setup() {
   const props = {
+    location: {},
+    history: {},
+    isoWeekDay: 1,
+
     currentSectionOfDay: 0,
 
     PlannedPomoActions: {},

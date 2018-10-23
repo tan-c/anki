@@ -19,7 +19,7 @@
     "test": "BABEL_ENV=test jest --config ./utility-test/jest.config.js project/",
     "test:local": "BABEL_ENV=test jest --config ./utility-test/jest.config.js anki/",
     "test:ci": "npm test --ci",
-    "test:recent": "npx jest --changedSince=master || true ../../jest.confing.js",
+    "test:recent": "BABEL_ENV=test jest --changedSince=master || true ./utility-test/jest.confing.js",
     "test:watch": "npm run test:local --watch",
     "test:e2e": "testcafe 'chrome:headless --no-sandbox' ./test-e2e/",
     "test:e2e:browswer": "testcafe chrome ./test-e2e/",

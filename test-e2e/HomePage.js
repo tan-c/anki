@@ -27,9 +27,6 @@ const testUserPassword = process.env.NODE_ENV === 'production' ? process.env.TES
 
 const wrongTestUser = Role(url, async (t) => {
   await t
-    .click(showLoginPageButton)
-    .expect(loginForm.count)
-    .eql(1)
     .typeText('#login-email', 'test@gmail.com')
     .typeText('#login-password', 'test123456')
     .click(loginButton);
@@ -125,6 +122,9 @@ test('Test that testUser can login then refresh but no need login', async (t) =>
 
 test('Test that wrongTestUser cannot login then refresh still cannot login', async (t) => {
   await t
+    .click(showLoginPageButton)
+    .expect(loginForm.count)
+    .eql(1)
     .useRole(wrongTestUser)
     .expect(loginForm.count)
     .eql(1);

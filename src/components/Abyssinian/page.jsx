@@ -21,7 +21,7 @@ import './main.scss';
 
 import LoginPageConnected from './LoginPage';
 
-export class AbyssinianPage extends React.Component {
+class AbyssinianPage extends React.Component {
   componentDidMount() {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     if (new Date().getTime() < expiresAt * 1000) {

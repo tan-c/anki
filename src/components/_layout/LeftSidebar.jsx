@@ -97,21 +97,8 @@ export class SidebarComponent extends React.Component {
         <Menu.Item
           active={location.pathname.indexOf('/todo') > -1}
         >
-          {overduedTasksCount && (
-            <Label
-              color={overduedTasksCount >= 3 ? 'orange' : 'green'}
-              size="tiny"
-            >
-              {overduedTasksCount}
-            </Label>
-          )}
-          <Label
-            color={thisWeekTasks.count() >= 6 ? 'orange' : 'green'}
-            size="tiny"
-          >
-            {thisWeekTasks.count()}
-          </Label>
           Todo
+          <Icon name="list" />
           <Menu.Menu>
             <Menu.Item
               as={Link}
@@ -119,6 +106,20 @@ export class SidebarComponent extends React.Component {
               active={location.pathname === '/todo/calendar'}
             >
               Calendar
+              {overduedTasksCount && (
+                <Label
+                  color={overduedTasksCount >= 3 ? 'orange' : 'green'}
+                  size="tiny"
+                >
+                  {overduedTasksCount}
+                </Label>
+              )}
+              {/* <Label
+                color={thisWeekTasks.count() >= 6 ? 'orange' : 'green'}
+                size="tiny"
+              >
+                {thisWeekTasks.count()}
+              </Label> */}
             </Menu.Item>
 
             <Menu.Item

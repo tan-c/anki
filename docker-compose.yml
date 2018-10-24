@@ -10,7 +10,7 @@ services:
     #   - /apiapp/node_modules
     build:          .
     image:          "anki"
-
+    # image:          "923942996254.dkr.ecr.ap-northeast-1.amazonaws.com/anki:latest"
     ports:
       - "8090:80"
       - "9145:9145"

@@ -118,20 +118,20 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
-      # - run:
-          # name: Docker login
-          # command: |
-          #   sudo apt-get install python-dev
-          #   sudo pip install awscli
-          #   eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
+      - run:
+          name: Docker login
+          command: |
+            sudo apt-get install python-dev
+            sudo pip install awscli
+            eval "$(aws ecr get-login --no-include-email --region ap-northeast-1)"
 
       - run:
           name: Building the image and push to ecr
           command: | # Need | to run line by line
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             TAG=latest
             docker build -t $REPO_NAME .
             docker tag $REPO_NAME:$TAG $DOCKER_USERNAME/$REPO_NAME:$TAG
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
             docker push $DOCKER_USERNAME/$REPO_NAME:$TAG
 
       - run:

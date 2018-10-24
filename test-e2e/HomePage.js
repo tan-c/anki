@@ -61,7 +61,6 @@ test('Test that testUser can login then logout', async (t) => {
   // .useRole(testUser)
   // .navigateTo('/')
   // .wait(10000);
-
   // const errors = await t.getBrowserConsoleMessages();
 
   await t.expect(loginForm.count)
@@ -122,10 +121,14 @@ test('Test that testUser can login then refresh but no need login', async (t) =>
 
 test('Test that wrongTestUser cannot login then refresh still cannot login', async (t) => {
   await t
+    .expect(loginForm.count).eql(0)
+    .expect(showLoginPageButton.count).eql(1)
     .click(showLoginPageButton)
     .expect(loginForm.count)
     .eql(1)
-    .useRole(wrongTestUser)
+    // .useRole(wrongTestUser)
+    .typeText('#login-email', testUserEmail)
+    .typeText('#login-password', testUserPassword)
     .expect(loginForm.count)
     .eql(1);
 

@@ -149,10 +149,10 @@ workflows:
       # - test:
       #     requires:
       #       - init
-      # - test:e2e:
+      - test:e2e
       #     requires:
       #       - test
-      - push-deploy
-          # requires:
+      - push-deploy:
+          requires:
           #   # - test
-          #   - test:e2e
+            - test:e2e

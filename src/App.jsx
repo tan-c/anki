@@ -176,7 +176,7 @@ export class App extends React.Component {
                   zIndex: 1,
                   height: 'calc(100vh)',
                   background: 'black',
-                  // color: 'white',
+                  color: 'white',
                   margin: 0
                 }}
               >

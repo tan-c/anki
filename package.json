@@ -46,7 +46,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged; npm run check:sensitive;",
-      "pre-push": "npm test; snyk test --severity-threshold=high"
+      "pre-push": "npm test; npm run test:e2e:browser; snyk test --severity-threshold=high"
     }
   },
   "lint-staged": {

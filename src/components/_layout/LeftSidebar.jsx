@@ -41,7 +41,9 @@ export class SidebarComponent extends React.Component {
           Home
         </Menu.Item>
 
-        <Menu.Item>
+        <Menu.Item
+          active={location.pathname.indexOf('/hourblock') > -1}
+        >
           <Icon name="calendar" />
           Hourblock
           <Menu.Menu>
@@ -93,8 +95,6 @@ export class SidebarComponent extends React.Component {
         </Menu.Item>
 
         <Menu.Item
-          as={Link}
-          to="/todo/calendar"
           active={location.pathname.indexOf('/todo') > -1}
         >
           {overduedTasksCount && (

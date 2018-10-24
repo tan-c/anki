@@ -16,6 +16,7 @@
   "url": "https://github.com/tan-c/anki-monorepo/issues",
   "email": "tanchen2014@gmail.com",
   "scripts": {
+    "start": "nodemon -w app.dev.js app.dev.js --exec babel-node",
     "test": "BABEL_ENV=test jest --config ./utility-test/jest.config.js  anki/",
     "test:ci": "npm test --ci",
     "test:recent": "BABEL_ENV=test jest --changedSince=master || true ./utility-test/jest.confing.js",
@@ -24,7 +25,6 @@
     "test:e2e:browser": "testcafe chrome ./test-e2e/",
     "test:e2e:docker:local": "docker run -it --network docker-bridge -v /Users/tanchen/Desktop/monorepo-js/anki/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests -r xunit:/tmp/test-results/res.xml",
     "test:e2e:docker:ci": "docker run --network docker-bridge -v /root/anki/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
-    "start:dev": "nodemon -w app.dev.js app.dev.js --exec babel-node",
     "build": "rm -rf dist; cp -r ../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
     "check:sensitive": "cp ../.githound.yml ./ && git hound sniff HEAD"
   },
@@ -45,7 +45,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged; npm run check:sensitive;",
+      "pre-commit": "lint-staged && npm run check:sensitive;",
       "pre-push": "npm test && npm run test:e2e:browser && snyk test --severity-threshold=high"
     }
   },

@@ -83,15 +83,8 @@ test('Test that testUser can login then logout', async (t) => {
 
 
 test('Test that testUser can login then refresh but no need login', async (t) => {
-  await t.expect(header.count)
-    .eql(0)
-    .expect(rightAsideButton.count).eql(0)
-    .expect(logoutButton.count)
-    .eql(0);
-
   await t
     .expect(loginForm.count).eql(0)
-    .expect(showLoginPageButton.count).eql(1)
     .click(showLoginPageButton)
     .expect(loginForm.count)
     .eql(1)
@@ -122,13 +115,13 @@ test('Test that testUser can login then refresh but no need login', async (t) =>
 test('Test that wrongTestUser cannot login then refresh still cannot login', async (t) => {
   await t
     .expect(loginForm.count).eql(0)
-    .expect(showLoginPageButton.count).eql(1)
     .click(showLoginPageButton)
     .expect(loginForm.count)
     .eql(1)
     // .useRole(wrongTestUser)
-    .typeText('#login-email', testUserEmail)
-    .typeText('#login-password', testUserPassword)
+    .typeText('#login-email', 'test@gmail.com')
+    .typeText('#login-password', 'test123456')
+    .click(loginButton)
     .expect(loginForm.count)
     .eql(1);
 

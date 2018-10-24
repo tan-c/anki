@@ -172,9 +172,10 @@ export class SubHeader extends React.Component {
         <Menu.Item
           position="right"
           style={{
-            fontSize: 16,
-            height: 30,
-            lineHeight: 30,
+            fontSize: 24,
+            height: 40,
+            lineHeight: '40px',
+            padding: 0
           }}
         >
           {parseInt(weatherInfo.getIn(['current', 'temp']), 10)}
@@ -212,17 +213,6 @@ export class SubHeader extends React.Component {
             </Button>
           </Menu.Menu> */}
 
-        <Menu.Item
-          position="right"
-          style={{
-            fontSize: 16,
-            height: 30,
-            lineHeight: 30,
-          }}
-        >
-          {currentTime.format('HH:mm')}
-        </Menu.Item>
-
         <Menu.Item position="right">
           <Icon
             id="right-aside-button"
@@ -234,6 +224,18 @@ export class SubHeader extends React.Component {
           />
         </Menu.Item>
 
+        <Menu.Item
+          position="right"
+          style={{
+            fontSize: 24,
+            height: 40,
+            lineHeight: '40px',
+            padding: 0,
+            paddingRight: 20
+          }}
+        >
+          {currentTime.format('HH:mm')}
+        </Menu.Item>
       </React.Fragment>
     );
   }

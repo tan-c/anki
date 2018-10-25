@@ -59,6 +59,8 @@ export function* loadAllDataSaga() {
   //   });
   // }
 
+  window.isMobile = Math.min(document.documentElement.clientWidth, screen.width) <= 450; // P9 is 424
+
   yield* getAll('category');
   yield* getAll('project');
 

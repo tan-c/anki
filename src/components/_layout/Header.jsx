@@ -39,10 +39,7 @@ export class SubHeader extends React.Component {
 
   componentDidMount() {
     this.updateCurrentTime();
-
-    if (!window.isMobile) {
-      this.updateWeather();
-    }
+    this.updateWeather();
   }
 
   componentWillUnmount() {
@@ -79,7 +76,6 @@ export class SubHeader extends React.Component {
       selectedProjectId,
       updatingRecurTask,
       edittingTarget,
-      isLeftSidebarOn,
       isRightSidebarOn,
       currentUser,
       weatherInfo,
@@ -202,17 +198,6 @@ export class SubHeader extends React.Component {
           />
         </Menu.Item> */}
 
-        {/* <Menu.Menu>
-            <Button
-              color="white"
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['isLeftSidebarOn'], !isLeftSidebarOn);
-              }}
-            >
-              Show Left Menu
-            </Button>
-          </Menu.Menu> */}
-
         <Menu.Item position="right">
           <Icon
             id="right-aside-button"
@@ -242,7 +227,6 @@ export class SubHeader extends React.Component {
 }
 
 SubHeader.defaultProps = {
-  isLeftSidebarOn: true,
   isRightSidebarOn: true,
 
   currentUser: Map(),
@@ -261,7 +245,6 @@ SubHeader.defaultProps = {
 };
 
 SubHeader.propTypes = {
-  isLeftSidebarOn: PropTypes.bool,
   isRightSidebarOn: PropTypes.bool,
   currentUser: PropTypes.object,
   // currentUserImageSrc: PropTypes.string.isRequired,
@@ -285,7 +268,6 @@ SubHeader.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    isLeftSidebarOn: state.ui.getIn(['isLeftSidebarOn']),
     isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
 
     currentUser: currentUserSelector(state),

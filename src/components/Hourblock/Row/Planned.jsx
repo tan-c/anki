@@ -53,7 +53,7 @@ export class HourBlockRowPlanned extends React.Component {
         {!isTodayPast && taskFromPomo}
       </span>
 
-      {/* {!window.isMobile && showMinorTask &&
+      {/* {showMinorTask &&
         <span
           className={`${isTodayPast ? 'bg-white-10' : ''} flex-2 border-right-white padding-horizontal-5 text-left`}
         >
@@ -138,7 +138,7 @@ export class HourBlockRowPlanned extends React.Component {
     return (
       <input
         type="text"
-        className={`${isTodayPast ? 'bg-black' : ''} ${window.isMobile ? 'flex-1' : 'width-200'} border-right-white`}
+        className={`${isTodayPast ? 'bg-black' : ''} width-200 border-right-white`}
         name="tasks.recur"
         disabled={!enableChangeRecur || isTodayPast}
         ref={(ref) => { this.hourblockPlannedRecurInput = ref; }}
@@ -177,65 +177,34 @@ export class HourBlockRowPlanned extends React.Component {
 
     return (
       <React.Fragment>
-        {window.isMobile
+        <span className="border-right-white width-50 height-lineheight-30">
+          {sectionName}
+        </span>
+
+        {!isTodayPast && (
+          <ProjectSelectConnected
+            className="width-80 border-right-white height-lineheight-30"
+            value={plannedPomo.getIn(['project', '_id'])}
+            onChangeEvent={event => onChangePlannedPomo(sectionOfDay, plannedPomo, event)}
+            color={plannedPomo.getIn(['project', 'category', 'color'])}
+          />
+        )}
+
+        {isTodayPast
           && (
-            <div className="flex-container flex-1">
-              <div className="flex-container-row flex-1">
-                <span className="border-right-white height-lineheight-30 width-50">
-                  {sectionName}
-                </span>
-
-                {disableMainTaskInput === true && this.renderTasks(isTodayPast, taskContent, minorTask)}
-
-                {disableMainTaskInput !== true && this.renderMainTaskInput(mainTask, isTodayPast)}
-              </div>
-
-              <div className="flex-container-row flex-1">
-                <ProjectSelectConnected
-                  className="width-30 border-right-white"
-                  value={plannedPomo.getIn(['project', '_id'])}
-                  onChangeEvent={event => onChangePlannedPomo(sectionOfDay, plannedPomo, event)}
-                  color={plannedPomo.getIn(['project', 'category', 'color'])}
-                />
-                {this.renderRecurTaskInput(isTodayPast)}
-              </div>
-            </div>
+            <span className="width-80 border-right-white height-lineheight-30" style={{ backgroundColor: plannedPomo.getIn(['project', 'category', 'color']) }}>
+              {plannedPomo.getIn(['project', 'name'])}
+            </span>
           )
         }
 
-        {!window.isMobile
-          && (
-            <React.Fragment>
-              <span className="border-right-white width-50 height-lineheight-30">
-                {sectionName}
-              </span>
+        <div className="flex-1 flex-container-row">
+          {/* {this.renderTasks(isTodayPast, taskContent)} */}
+          {this.renderMainTaskInput(mainTask, isTodayPast)}
+          {showMinorTask && this.renderMinorTaskInput(minorTask, isTodayPast)}
+          {this.renderRecurTaskInput(isTodayPast)}
+        </div>
 
-              {!isTodayPast && (
-                <ProjectSelectConnected
-                  className="width-80 border-right-white height-lineheight-30"
-                  value={plannedPomo.getIn(['project', '_id'])}
-                  onChangeEvent={event => onChangePlannedPomo(sectionOfDay, plannedPomo, event)}
-                  color={plannedPomo.getIn(['project', 'category', 'color'])}
-                />
-              )}
-
-              {isTodayPast
-                && (
-                  <span className="width-80 border-right-white height-lineheight-30" style={{ backgroundColor: plannedPomo.getIn(['project', 'category', 'color']) }}>
-                    {plannedPomo.getIn(['project', 'name'])}
-                  </span>
-                )
-              }
-
-              <div className="flex-1 flex-container-row">
-                {/* {this.renderTasks(isTodayPast, taskContent)} */}
-                {this.renderMainTaskInput(mainTask, isTodayPast)}
-                {showMinorTask && this.renderMinorTaskInput(minorTask, isTodayPast)}
-                {this.renderRecurTaskInput(isTodayPast)}
-              </div>
-            </React.Fragment>
-          )
-        }
       </React.Fragment>
     );
   }

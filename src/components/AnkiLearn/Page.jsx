@@ -129,7 +129,6 @@ export class AnkiPage extends React.Component {
         <Card
           fluid
           // id="modal-anki"
-          className={`${window.isMobile && 'mobile'}`}
           data-role="modal-anki"
           style={{
             minHeight: 300
@@ -145,22 +144,18 @@ export class AnkiPage extends React.Component {
                       {revisionAnkisTotal}
                     </span>
 
-                    {!window.isMobile && (
-                      <React.Fragment>
-                        <span className="pull-right bg-green label">
-                          {'Created: '}
-                          {createdElapsedDays}
-                          {'d Ago'}
-                        </span>
+                    <span className="pull-right bg-green label">
+                      {'Created: '}
+                      {createdElapsedDays}
+                      {'d Ago'}
+                    </span>
 
-                        <span className="pull-right bg-green label">
-                          {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
-                            'revision',
-                            'round'
-                          ])}/${currentAnki.getIn(['revision', 'passing'])}`}
-                        </span>
-                      </React.Fragment>
-                    )}
+                    <span className="pull-right bg-green label">
+                      {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
+                        'revision',
+                        'round'
+                      ])}/${currentAnki.getIn(['revision', 'passing'])}`}
+                    </span>
 
                     {currentAnki.has('tags') && currentAnki.get('tags').map((tag, index) => (
                       <span

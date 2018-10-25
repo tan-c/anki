@@ -91,11 +91,11 @@ export class HourBlockPage extends React.Component {
       }}
       >
         <Grid.Row>
-          {!window.isMobile && <DailyRecordsChartConnected />}
+          <DailyRecordsChartConnected />
         </Grid.Row>
 
         <Grid.Row>
-          {!window.isMobile && <EventDetailsConnected />}
+          <EventDetailsConnected />
         </Grid.Row>
 
         <Grid.Row>
@@ -116,22 +116,6 @@ export class HourBlockPage extends React.Component {
   }
 
   render() {
-    if (window.isMobile) {
-      return (
-        <div
-          className="flex-container page"
-        >
-          <section className="flex-container flex-1 no-bg">
-            {this.renderRightSection()}
-          </section>
-
-          <section className="flex-1">
-            {this.renderHourBlockList()}
-          </section>
-        </div>
-      );
-    }
-
     return (
       <React.Fragment>
         <Grid.Row

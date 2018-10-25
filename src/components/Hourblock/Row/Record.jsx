@@ -58,16 +58,16 @@ export class HourBlockRowRecord extends React.Component {
                   tabIndex="-1"
                   className="fa fa-fw fa-check flex-1 height-lineheight-30"
                   onClick={(_) => {
-                  // Also remove the task
-                  // If can update main means the task is not shown...
-                  // if (currentPlannedPomoTask.count()) {
-                  //   const task = currentPlannedPomoTask.get('task');
-                  //   if (currentPlannedPomoTask.get('subTaskId') !== null) {
-                  //     this.props.TaskActions.update(task.deleteIn(['subTasks', currentPlannedPomoTask.get('subTaskId').toString()]), task);
-                  //   } else {
-                  //     this.props.TaskActions.deleteRecord(task);
-                  //   }
-                  // }
+                    // Also remove the task
+                    // If can update main means the task is not shown...
+                    // if (currentPlannedPomoTask.count()) {
+                    //   const task = currentPlannedPomoTask.get('task');
+                    //   if (currentPlannedPomoTask.get('subTaskId') !== null) {
+                    //     this.props.TaskActions.update(task.deleteIn(['subTasks', currentPlannedPomoTask.get('subTaskId').toString()]), task);
+                    //   } else {
+                    //     this.props.TaskActions.deleteRecord(task);
+                    //   }
+                    // }
 
                     addPomoRecord({
                       target: {
@@ -107,7 +107,7 @@ export class HourBlockRowRecord extends React.Component {
           }
         </span>
 
-        {!window.isMobile && showEventsInPomo
+        {showEventsInPomo
           && (
             <React.Fragment>
               <span className="flex-2 text-left border-right">
@@ -124,22 +124,22 @@ export class HourBlockRowRecord extends React.Component {
 
               <span className="text-left width-40">
                 {recordPomo.size > 0
-                && (
-                  <select
-                    type="text"
-                    name="project"
-                    onChange={event => addEventToRecord(event, sectionOfDay)}
-                  >
-                    <option value="" />
-                    {events.valueSeq().map((event, index) => (
-                      <option key={event.get('_id')} value={event.get('_id')}>
-                        {event.get('project') !== null ? event.getIn(['project', 'name']) : 'General'}
-                        {' '}
--
-                        {event.get('name')}
-                      </option>))}
-                  </select>
-                )}
+                  && (
+                    <select
+                      type="text"
+                      name="project"
+                      onChange={event => addEventToRecord(event, sectionOfDay)}
+                    >
+                      <option value="" />
+                      {events.valueSeq().map((event, index) => (
+                        <option key={event.get('_id')} value={event.get('_id')}>
+                          {event.get('project') !== null ? event.getIn(['project', 'name']) : 'General'}
+                          {' '}
+                          -
+                          {event.get('name')}
+                        </option>))}
+                    </select>
+                  )}
               </span>
             </React.Fragment>
           )

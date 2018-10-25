@@ -251,15 +251,11 @@ export class NoteEditor extends React.Component {
               </div>
 
               <div id="note-editor-main" className={`flex-container-row ${isSavingNote && 'border-red'}`}>
-                {!window.isMobile
-                  && (
-                    <div id="note-editor-left" className="padding-5 border-right-black">
-                      <div id="heading-tags" className="border-green-2px padding-horizontal-5">
-                        {activeNote.has('subtitles') && activeNote.get('subtitles').map(subtitle => <div role="menuitem" tabIndex="-1" className="border-bottom-black-20" key={subtitle} value={subtitle} onClick={() => this.scrollToTitle(subtitle)}>{subtitle}</div>)}
-                      </div>
-                    </div>
-                  )
-                }
+                <div id="note-editor-left" className="padding-5 border-right-black">
+                  <div id="heading-tags" className="border-green-2px padding-horizontal-5">
+                    {activeNote.has('subtitles') && activeNote.get('subtitles').map(subtitle => <div role="menuitem" tabIndex="-1" className="border-bottom-black-20" key={subtitle} value={subtitle} onClick={() => this.scrollToTitle(subtitle)}>{subtitle}</div>)}
+                  </div>
+                </div>
 
                 <div className="flex-1 quill-editor" id="quill-1">
                   <CustomToolbar index={1} />

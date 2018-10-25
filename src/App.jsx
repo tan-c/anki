@@ -61,7 +61,7 @@ import './index.scss';
 // import { callbackify } from 'util';
 // import { subscribeUser } from './helper/notification';
 
-window.isMobile = Math.min(document.documentElement.clientWidth, screen.width) <= 450; // P9 is 424
+// window.isMobile = Math.min(document.documentElement.clientWidth, screen.width) <= 450; // P9 is 424
 
 export class App extends React.Component {
   constructor(props) {
@@ -71,6 +71,10 @@ export class App extends React.Component {
     document.addEventListener('touchmove', (event) => {
       event.preventDefault();
     });
+  }
+
+  state = {
+    viewGreaterThan450: true
   }
 
   // componentWillReceiveProps(nextProps) {
@@ -91,6 +95,11 @@ export class App extends React.Component {
   //   // }
   // }
 
+  handleOnUpdate = () => {
+    this.setState({
+      viewGreaterThan450: Math.min(document.documentElement.clientWidth, screen.width) >= 450
+    });
+  }
 
   @keydown('esc')
   dismissAllModel() {
@@ -100,9 +109,13 @@ export class App extends React.Component {
   render() {
     const {
       currentUser,
-      isLeftSidebarOn,
       isRightSidebarOn,
     } = this.props;
+
+    const { viewGreaterThan450 } = this.state;
+
+    console.log('🔥🔥🔥🔥🔥 viewGreaterThan450 🔥🔥🔥🔥🔥');
+    console.log(viewGreaterThan450);
 
     const eyeSaving = currentUser.hasIn(['config', 'eyeSaving'])
       && currentUser.getIn(['config', 'eyeSaving']);
@@ -130,47 +143,45 @@ export class App extends React.Component {
             <React.Fragment>
               <Responsive
                 minWidth={450}
-                style={{
-                  width: 140,
-                }}
               >
-                {isLeftSidebarOn && (
-                  <Sidebar
-                    as={Menu}
-                    animation="push"
-                    inverted
-                    vertical
-                    visible
-                    width="thin"
-                  >
-                    <LeftSidebarConnected />
-                  </Sidebar>
-                )}
+                <Sidebar
+                  as={Menu}
+                  animation="push"
+                  inverted
+                  vertical
+                  visible
+                  width="thin"
+                >
+                  <LeftSidebarConnected />
+                </Sidebar>
               </Responsive>
 
               {isRightSidebarOn && <RightSidebarConnected />}
 
-              <Menu
+              <Responsive
+                onUpdate={this.handleOnUpdate}
+                as={Menu}
                 fixed="top"
                 inverted
                 color="blue"
                 data-role="header"
                 style={{
                   height: 30,
-                  width: `${isLeftSidebarOn ? 'calc(100% - 140px)' : '100%'}`,
-                  left: `${isLeftSidebarOn ? '140px' : 0}`,
+                  width: `${viewGreaterThan450 ? 'calc(100% - 140px)' : '100%'}`,
+                  left: `${viewGreaterThan450 ? '140px' : 0}`,
                   zIndex: 100,
                   position: 'absolute'
                 }}
               >
                 <HeaderConnected />
-              </Menu>
+              </Responsive>
 
               <Responsive
+                onUpdate={this.handleOnUpdate}
                 as={Grid}
                 style={{
-                  width: `${isLeftSidebarOn && !window.isMobile ? 'calc(100% - 140px)' : '100%'}`,
-                  left: `${isLeftSidebarOn && !window.isMobile ? '140px' : 0}`,
+                  width: `${viewGreaterThan450 ? 'calc(100% - 140px)' : '100%'}`,
+                  left: `${viewGreaterThan450 ? '140px' : 0}`,
                   position: 'absolute',
                   overflow: 'auto',
                   zIndex: 1,
@@ -253,12 +264,10 @@ export class App extends React.Component {
 
 App.defaultProps = {
   currentUser: Map(),
-  isLeftSidebarOn: false,
   isRightSidebarOn: true
 };
 
 App.propTypes = {
-  isLeftSidebarOn: PropTypes.bool,
   isRightSidebarOn: PropTypes.bool,
   // history: PropTypes.object.isRequired,
 
@@ -267,7 +276,6 @@ App.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    isLeftSidebarOn: state.ui.getIn(['isLeftSidebarOn']),
     isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
 
     showModal: state.ui.getIn(['showModal']),

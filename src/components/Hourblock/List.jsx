@@ -196,7 +196,7 @@ export class HourBlockList extends React.Component {
               />
             </div>
 
-            <div className={`${window.isMobile ? 'width-60' : 'width-60'} flex-container-row ${currentSectionOfDay === item.sectionOfDay && 'bg-bright-green'}`}>
+            <div className={`width-60 flex-container-row ${currentSectionOfDay === item.sectionOfDay && 'bg-bright-green'}`}>
               <HourBlockRowRecordConnected
                 sectionOfDay={item.sectionOfDay}
                 recordPomo={currentDayRecord.getIn(['pomo', (item.sectionOfDay).toString()]) || defaultProps}

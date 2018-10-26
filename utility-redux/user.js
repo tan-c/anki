@@ -1,8 +1,16 @@
-import { Map } from 'immutable';
+import {
+  Map
+} from 'immutable';
 
-import { createSelector } from 'reselect';
-import { actionCreate } from './_base/actionCreate';
-import { reducerCreate } from './_base/reducerCreate';
+import {
+  createSelector
+} from 'reselect';
+import {
+  actionCreate
+} from './_base/actionCreate';
+import {
+  reducerCreate
+} from './_base/reducerCreate';
 
 export default reducerCreate('user');
 export const {
@@ -19,7 +27,12 @@ export const currentUserSelector = createSelector(
   users => users.valueSeq().get('0'),
 );
 
-export const currentUserRecentNoteSelector = createSelector(
+export const currentUserRecentNoteIdSelector = createSelector(
   [currentUserSelector],
-  currentUser => (currentUser.hasIn(['config', 'hima', 'recentNote', 'title']) ? currentUser.getIn(['config', 'hima', 'recentNote']) : Map()),
+  currentUser => (currentUser.hasIn(['config', 'hima', 'recentNote']) ? currentUser.getIn(['config', 'hima', 'recentNote']) : '')
+);
+
+export const currentUserRecentNotebookIdSelector = createSelector(
+  [currentUserSelector],
+  currentUser => (currentUser.hasIn(['config', 'hima', 'recentNotebook']) ? currentUser.getIn(['config', 'hima', 'recentNotebook']) : '')
 );

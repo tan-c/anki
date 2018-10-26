@@ -66,8 +66,6 @@ export class ModalSearch extends React.Component {
     this.props.UiActions.updateIn(['himalayan', 'showModal'], '');
 
     const { currentUser } = this.props;
-    this.props.UiActions.updateIn(['himalayan', 'activeNoteId'], noteId);
-    this.props.UiActions.updateIn(['himalayan', 'activeNotebookId'], notebookId);
     this.props.UserActions.update(currentUser.setIn(['config', 'hima', 'recentNote'], noteId));
   }
 
@@ -118,9 +116,9 @@ export class ModalSearch extends React.Component {
           />
 
           <div id="search-results">
-            { notes.size === 0 && <div>Loading Notes ...</div> }
+            {notes.size === 0 && <div>Loading Notes ...</div>}
 
-            { notes.size > 0 && searchContent.length > 0 && notes.valueSeq().filter(note => this.isSearchResult(note, searchContent)).map((note, index) => (
+            {notes.size > 0 && searchContent.length > 0 && notes.valueSeq().filter(note => this.isSearchResult(note, searchContent)).map((note, index) => (
               <div
                 key={note.get('_id')}
                 role="button"
@@ -137,7 +135,7 @@ export class ModalSearch extends React.Component {
                   {note.get('subtitles').map(subtitle => (
                     <span key={subtitle}>
                       {subtitle}
-,
+                      ,
                       {' '}
                     </span>
                   ))}

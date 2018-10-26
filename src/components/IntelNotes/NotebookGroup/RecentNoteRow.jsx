@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
 import { UiActions } from 'utility-redux/ui';
-import { currentUserRecentNoteSelector } from 'utility-redux/user';
+import { currentUserRecentNoteIdSelector } from 'utility-redux/user';
 
 export class RecentNoteRow extends React.Component {
   // constructor(props, context) {
@@ -28,11 +28,11 @@ export class RecentNoteRow extends React.Component {
         className="border-bottom-white flex-container-row typical-setup overflow-hidden"
       >
         <i className="fa fa-fw fa-eye wdith-20" />
-        {recentNote.size > 0
-        && <div className="flex-1" role="menuitem" tabIndex="-1" />
+        {recentNote.length > 0
+          && <div className="flex-1" role="menuitem" tabIndex="-1" />
         }
 
-        {recentNote.size === 0
+        {recentNote.length === 0
           && <div className="flex-1"> No Recent</div>
         }
       </div>
@@ -41,16 +41,16 @@ export class RecentNoteRow extends React.Component {
 }
 
 RecentNoteRow.defaultProps = {
-  recentNote: Map(),
+  recentNote: '',
 };
 
 RecentNoteRow.propTypes = {
-  recentNote: PropTypes.object,
+  recentNote: PropTypes.string,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    recentNote: currentUserRecentNoteSelector(state),
+    recentNote: currentUserRecentNoteIdSelector(state),
   };
 }
 

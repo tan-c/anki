@@ -116,12 +116,8 @@ export class NoteEditor extends React.Component {
   //   }
   // }
 
-  miemie() {
-    console.log('🔥🔥🔥🔥🔥 11 🔥🔥🔥🔥🔥');
-    console.log(11);
-  }
 
-  @keydown('1')
+  @keydown('1', '2', '3')
   lalala() {
     console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
     console.log(111);
@@ -242,9 +238,6 @@ export class NoteEditor extends React.Component {
       quillModules1, quillModules2, isSavingNote, activeNoteContent, activeNoteContent2,
     } = this.state;
 
-    console.log('🔥🔥🔥🔥🔥 activeNoteContent 🔥🔥🔥🔥🔥');
-    console.log(activeNoteContent);
-
     const {
       activeNote,
     } = this.props;
@@ -292,15 +285,15 @@ export class NoteEditor extends React.Component {
                     onChange={value => this.setState({
                       activeNoteContent2: value,
                     })}
-                    onKeyPress={(event) => {
-                      console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
-                    }}
-                    onKeyDown={(event) => {
-                      console.log('🔥🔥🔥🔥🔥 222 🔥🔥🔥🔥🔥');
-                    }}
-                    onKeyUp={(event) => {
-                      console.log('🔥🔥🔥🔥🔥 333 🔥🔥🔥🔥🔥');
-                    }}
+                    // onKeyPress={(event) => {
+                    //   console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
+                    // }}
+                    // onKeyDown={(event) => {
+                    //   console.log('🔥🔥🔥🔥🔥 222 🔥🔥🔥🔥🔥');
+                    // }}
+                    // onKeyUp={(event) => {
+                    //   console.log('🔥🔥🔥🔥🔥 333 🔥🔥🔥🔥🔥');
+                    // }}
                     modules={quillModules2}
                     ref={(el) => { this.reactQuillRef2 = el; }}
                   />

@@ -135,17 +135,14 @@ export class AnkiList extends React.Component {
 
 AnkiList.defaultProps = {
   activeAnki: Map(),
-  // activeNote: Map(),
   ankisSorted: Map(),
   selectedAnkiTagId: ''
 };
 
 AnkiList.propTypes = {
-  // activeNote: PropTypes.object,
   activeAnki: PropTypes.object,
   ankisSorted: PropTypes.object,
   selectedAnkiTagId: PropTypes.string,
-  // activeNoteVariousAnkis: PropTypes.object,
 
   AnkiActions: PropTypes.object.isRequired,
   UiActions: PropTypes.object.isRequired,
@@ -154,10 +151,8 @@ AnkiList.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     activeAnki: activeAnkiSelector(state),
-    // activeNote: activeNoteSelector(state),
     ankisSorted: ankisSortedSelector(state),
     selectedAnkiTagId: state.ui.getIn(['selectedAnkiTagId']),
-    // activeNoteVariousAnkis: activeNoteVariousAnkisSelector(state),
   };
 }
 

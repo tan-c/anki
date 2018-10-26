@@ -66,8 +66,6 @@ export class ModalFile extends React.Component {
     // this.props.UiActions.updateIn(['himalayan', 'showModal'], '');
     //
     // const { currentUser } = this.props;
-    // this.props.UiActions.updateIn(['himalayan', 'activeNoteId'], noteId);
-    // this.props.UiActions.updateIn(['himalayan', 'activeNotebookId'], notebookId);
     // this.props.UserActions.update(currentUser.setIn(['config', 'hima', 'recentNote'], noteId));
   }
 
@@ -119,8 +117,8 @@ export class ModalFile extends React.Component {
           />
 
           <div id="search-results">
-            { files.size === 0 && <div>Loading files ...</div> }
-            { files.size > 0 && files.valueSeq().map((file, index) => (
+            {files.size === 0 && <div>Loading files ...</div>}
+            {files.size > 0 && files.valueSeq().map((file, index) => (
               <div
                 key={file.get('id')}
                 role="button"

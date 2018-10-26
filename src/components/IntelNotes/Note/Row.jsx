@@ -7,8 +7,13 @@ import { bindActionCreators } from 'redux';
 // import toastr from 'toastr';
 
 import { NoteActions } from 'utility-redux/note';
-import { UiActions } from 'utility-redux/ui';
-import { UserActions, currentUserSelector } from 'utility-redux/user';
+// import { UiActions } from 'utility-redux/ui';
+import {
+  UserActions,
+  currentUserSelector,
+  currentUserRecentNoteIdSelector,
+  currentUserRecentNotebookIdSelector
+} from 'utility-redux/user';
 
 export class NoteRow extends React.Component {
   onDragOver = (event) => {
@@ -28,10 +33,7 @@ export class NoteRow extends React.Component {
 
   onClickNote = () => {
     const { note, currentUser } = this.props;
-    const noteId = note.get('_id');
-
-    this.props.UiActions.updateIn(['himalayan', 'activeNoteId'], noteId);
-    this.props.UserActions.update(currentUser.setIn(['config', 'hima', 'recentNote'], noteId));
+    this.props.UserActions.update(currentUser.setIn(['config', 'hima', 'recentNote'], note.get('_id')));
   }
 
   updateDeletedFlagNote = (event) => {
@@ -100,11 +102,10 @@ NoteRow.defaultProps = {
 NoteRow.propTypes = {
   currentUser: PropTypes.object.isRequired,
   note: PropTypes.object.isRequired,
-  activeNotebookId: PropTypes.string.isRequired,
   activeNoteId: PropTypes.string,
+  activeNotebookId: PropTypes.string.isRequired,
 
   NoteActions: PropTypes.object.isRequired,
-  UiActions: PropTypes.object.isRequired,
   UserActions: PropTypes.object.isRequired,
 };
 
@@ -112,8 +113,8 @@ function mapStateToProps(state, ownProps) {
   return {
     note: ownProps.note,
     currentUser: currentUserSelector(state),
-    activeNotebookId: state.ui.getIn(['himalayan', 'activeNotebookId']),
-    activeNoteId: state.ui.getIn(['himalayan', 'activeNoteId']),
+    activeNoteId: currentUserRecentNoteIdSelector(state),
+    activeNotebookId: currentUserRecentNotebookIdSelector(state),
   };
 }
 
@@ -121,7 +122,6 @@ function mapDispatchToProps(dispatch) {
   return {
     UserActions: bindActionCreators(UserActions, dispatch),
     NoteActions: bindActionCreators(NoteActions, dispatch),
-    UiActions: bindActionCreators(UiActions, dispatch),
   };
 }
 

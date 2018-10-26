@@ -1,6 +1,11 @@
 import expect from 'expect';
-import { fromJS } from 'immutable';
-import { activeNotebookNotesSortedSelector, activeNoteSelector } from './note';
+import {
+  fromJS
+} from 'immutable';
+import {
+  activeNotebookNotesSortedSelector,
+  activeNoteSelector
+} from './note';
 
 const setUpInitialState = (activeNotebookId, activeNoteId = '1') => ({
   notes: fromJS({
@@ -40,10 +45,7 @@ const setUpInitialState = (activeNotebookId, activeNoteId = '1') => ({
   }),
 
   ui: fromJS({
-    himalayan: {
-      activeNotebookId,
-      activeNoteId,
-    },
+    himalayan: {},
   }),
 });
 

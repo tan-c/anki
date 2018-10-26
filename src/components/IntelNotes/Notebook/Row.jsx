@@ -7,7 +7,12 @@ import { Map } from 'immutable';
 
 import { NotebookActions } from 'utility-redux/notebook';
 import { NoteActions } from 'utility-redux/note';
-import { UiActions } from 'utility-redux/ui';
+import {
+  UserActions,
+  currentUserSelector,
+  currentUserRecentNotebookIdSelector
+} from 'utility-redux/user';
+// import { UiActions } from 'utility-redux/ui';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 
 export class NotebookRow extends React.Component {
@@ -81,7 +86,7 @@ export class NotebookRow extends React.Component {
 
   render() {
     const {
-      notebook, activeNotebookId, notes,
+      notebook, activeNotebookId, notes, currentUser
     } = this.props;
 
     const { editMode } = this.state;
@@ -89,8 +94,15 @@ export class NotebookRow extends React.Component {
     return (
       <div
         data-role="notebook-row"
-        role="menuitem" tabIndex="-1" draggable="true" onDragStart={event => this.dragStart(event, notebook)} onDragOver={this.dragOver} onDrop={this.drop} className={`flex-container-row typical-setup ${notebook.get('_id') === activeNotebookId && 'bg-red'}`} onClick={() => {
-          this.props.UiActions.updateIn(['himalayan', 'activeNotebookId'], notebook.get('_id'));
+        role="menuitem"
+        tabIndex="-1"
+        draggable="true"
+        onDragStart={event => this.dragStart(event, notebook)}
+        onDragOver={this.dragOver}
+        onDrop={this.drop}
+        className={`flex-container-row typical-setup ${notebook.get('_id') === activeNotebookId && 'bg-red'}`}
+        onClick={() => {
+          this.props.UserActions.update(currentUser.setIn(['config', 'hima', 'recentNotebook'], notebook.get('_id')));
         }}
       >
         <span data-test="notebook-title" className="flex-3">
@@ -103,7 +115,7 @@ export class NotebookRow extends React.Component {
           )}
         </span>
 
-        { notes.filter(note => note.getIn(['notebook', '_id']) === notebook.get('_id')).count() === 0
+        {notes.filter(note => note.getIn(['notebook', '_id']) === notebook.get('_id')).count() === 0
           && <i role="menuitem" tabIndex="-1" className="fa fa-fw fa-close font-14" onClick={this.deleteNotebook} />
         }
 
@@ -124,32 +136,35 @@ NotebookRow.defaultProps = {
 
   NotebookActions: {},
   NoteActions: {},
-  UiActions: {},
 };
 
 NotebookRow.propTypes = {
+  currentUser: PropTypes.object.isRequired,
   notes: PropTypes.object,
   notebook: PropTypes.object,
   activeNotebookId: PropTypes.string,
 
   NotebookActions: PropTypes.object,
   NoteActions: PropTypes.object,
-  UiActions: PropTypes.object,
+  // UiActions: PropTypes.object,
+  UserActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     notes: state.notes,
     notebook: ownProps.notebook,
-    activeNotebookId: state.ui.getIn(['himalayan', 'activeNotebookId']),
+    activeNotebookId: currentUserRecentNotebookIdSelector(state),
+    currentUser: currentUserSelector(state),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    UserActions: bindActionCreators(UserActions, dispatch),
     NotebookActions: bindActionCreators(NotebookActions, dispatch),
     NoteActions: bindActionCreators(NoteActions, dispatch),
-    UiActions: bindActionCreators(UiActions, dispatch),
+    // UiActions: bindActionCreators(UiActions, dispatch),
   };
 }
 

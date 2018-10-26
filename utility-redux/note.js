@@ -1,6 +1,12 @@
-import { createSelector } from 'reselect';
-import { actionCreate } from './_base/actionCreate';
-import { reducerCreate } from './_base/reducerCreate';
+import {
+  createSelector
+} from 'reselect';
+import {
+  actionCreate
+} from './_base/actionCreate';
+import {
+  reducerCreate
+} from './_base/reducerCreate';
 
 export default reducerCreate('note');
 export const {
@@ -8,8 +14,22 @@ export const {
 } = actionCreate('note');
 
 const getNotes = state => state.notes;
-const getActiveNotebookId = state => state.ui.getIn(['himalayan', 'activeNotebookId']);
-const getActiveNoteId = state => state.ui.getIn(['himalayan', 'activeNoteId']);
+
+const getUsers = state => state.users;
+const currentUserSelector = createSelector(
+  [getUsers],
+  users => users.valueSeq().get('0'),
+);
+
+const getActiveNoteId = createSelector(
+  [currentUserSelector],
+  currentUser => (currentUser.hasIn(['config', 'hima', 'recentNote']) ? currentUser.getIn(['config', 'hima', 'recentNote']) : '')
+);
+
+const getActiveNotebookId = createSelector(
+  [currentUserSelector],
+  currentUser => (currentUser.hasIn(['config', 'hima', 'recentNotebook']) ? currentUser.getIn(['config', 'hima', 'recentNotebook']) : '')
+);
 
 export const activeNotebookNotesSortedSelector = createSelector(
   [getNotes, getActiveNotebookId],

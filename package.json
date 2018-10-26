@@ -26,10 +26,10 @@
     "test:e2e:docker:local": "docker run -it --network docker-bridge -v /Users/tanchen/Desktop/monorepo-js/anki/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests -r xunit:/tmp/test-results/res.xml",
     "test:e2e:docker:ci": "docker run --network docker-bridge -v /root/anki/test-e2e:/tests testcafe/testcafe 'chromium:headless --no-sandbox' /tests",
     "build": "rm -rf dist; cp -r ../utility-webpack/* ./; NODE_ENV=production babel-node prod.build.js",
-    "check:sensitive": "cp ../.githound.yml ./ && git hound sniff HEAD"
+    "check:sensitive": "cp ../.githound.yml ./ && git hound sniff HEAD",
+    "flow": "flow"
   },
   "dependencies": {
-    "babel-cli": "^6.26.0",
     "babel-jest": "^23.6.0",
     "highlight.js": "^9.13.1",
     "jest": "^23.6.0",
@@ -40,6 +40,9 @@
     "utility-redux": "file:utility-redux"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.84.0",
     "husky": "1.0.0-rc.6",
     "jest-cli": "^23.6.0",
     "lint-staged": "7.1.0"

@@ -5,7 +5,8 @@ import {
 } from 'immutable';
 import {
   currentUserSelector,
-  currentUserRecentNoteSelector
+  currentUserRecentNoteIdSelector,
+  // currentUserRecentNotebookIdSelector
 } from './user';
 
 function setup(currentUserId) {
@@ -15,9 +16,7 @@ function setup(currentUserId) {
         name: 'user 1',
         config: {
           hima: {
-            recentNote: {
-              title: 'note 1',
-            },
+            recentNote: '1',
           },
         },
       },
@@ -47,9 +46,7 @@ describe('User Selectors', () => {
         name: 'user 1',
         config: {
           hima: {
-            recentNote: {
-              title: 'note 1',
-            },
+            recentNote: '1',
           },
         },
       });
@@ -57,25 +54,13 @@ describe('User Selectors', () => {
     });
   });
 
-  describe('currentUserRecentNoteSelector', () => {
+  describe('currentUserRecentNoteIdSelector', () => {
     it('should get current user recent notes', () => {
       const {
         testState
       } = setup('1');
-      const expected = fromJS({
-        title: 'note 1',
-      });
-      expect(currentUserRecentNoteSelector(testState)).toEqual(expected);
-    });
-
-    it('should return map() if user has no recent notes', () => {
-      const {
-        testState
-      } = setup('2');
-      const expected = Map({
-        title: 'note 1'
-      });
-      expect(currentUserRecentNoteSelector(testState)).toEqual(expected);
+      const expected = '1';
+      expect(currentUserRecentNoteIdSelector(testState)).toEqual(expected);
     });
   });
 });

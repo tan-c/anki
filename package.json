@@ -17,7 +17,7 @@
   "email": "tanchen2014@gmail.com",
   "scripts": {
     "start": "nodemon -w app.dev.js app.dev.js --exec babel-node",
-    "test": "BABEL_ENV=test jest --config ./utility-test/jest.config.js  anki/",
+    "test": "BABEL_ENV=test jest --config ./utility-test/jest.config.js anki/",
     "test:ci": "npm test --ci",
     "test:recent": "BABEL_ENV=test jest --changedSince=master || true ./utility-test/jest.confing.js",
     "test:watch": "npm run test:local --watch",
@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "husky": "1.0.0-rc.6",
+    "jest-cli": "^23.6.0",
     "lint-staged": "7.1.0"
   },
   "husky": {

@@ -44,9 +44,14 @@ const setUpInitialState = (activeNotebookId, activeNoteId = '1') => ({
     },
   }),
 
-  ui: fromJS({
-    himalayan: {},
-  }),
+  users: fromJS([{
+    config: {
+      hima: {
+        recentNotebook: activeNotebookId,
+        recentNote: activeNoteId
+      }
+    }
+  }])
 });
 
 describe('Note Selectors', () => {

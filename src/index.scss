@@ -505,6 +505,7 @@ $note-list-width: 180px;
     height: 100%;
     width: 120px;
     overflow: auto;
+    color: black;
 
     * {
       font-size: 12px;
@@ -530,8 +531,7 @@ $note-list-width: 180px;
     }
 
     .quill {
-      height: calc(100% - 30px);
-
+      height: calc(100% - 20px);
     }
 
     .ql-container {

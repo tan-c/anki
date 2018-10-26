@@ -94,13 +94,14 @@ export class NoteRow extends React.Component {
 }
 
 NoteRow.defaultProps = {
+  activeNoteId: ''
 };
 
 NoteRow.propTypes = {
   currentUser: PropTypes.object.isRequired,
   note: PropTypes.object.isRequired,
   activeNotebookId: PropTypes.string.isRequired,
-  activeNoteId: PropTypes.string.isRequired,
+  activeNoteId: PropTypes.string,
 
   NoteActions: PropTypes.object.isRequired,
   UiActions: PropTypes.object.isRequired,

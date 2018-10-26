@@ -98,19 +98,6 @@ export class NoteEditor extends React.Component {
     this.attachQuillRefs();
   }
 
-  updteActiveNoteContent(activeNote) {
-    if (activeNote.size) {
-      if (activeNote.has('content')) {
-        this.setState({
-          activeNoteContent: activeNote.get('content'),
-          activeNoteContent2: activeNote.get('content2'),
-        });
-      } else {
-        this.props.NoteActions.get(activeNote);
-      }
-    }
-  }
-
   attachQuillRefs = () => {
     if (this.reactQuillRef === null || typeof this.reactQuillRef.getEditor !== 'function' || this.reactQuillRef2 === null || typeof this.reactQuillRef2.getEditor !== 'function') return;
     this.quillRef = this.reactQuillRef.getEditor();
@@ -129,8 +116,21 @@ export class NoteEditor extends React.Component {
   //   }
   // }
 
+  miemie() {
+    console.log('🔥🔥🔥🔥🔥 11 🔥🔥🔥🔥🔥');
+    console.log(11);
+  }
+
+  @keydown('1')
+  lalala() {
+    console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
+    console.log(111);
+  }
+
   @keydown('command+enter')
   saveNoteContentOnKeydown() {
+    console.log('🔥🔥🔥🔥🔥 1 🔥🔥🔥🔥🔥');
+    console.log(1);
     this.setState({
       isSavingNote: true,
     });
@@ -197,6 +197,18 @@ export class NoteEditor extends React.Component {
     });
   }
 
+  updteActiveNoteContent(activeNote) {
+    if (activeNote.size) {
+      if (activeNote.has('content')) {
+        this.setState({
+          activeNoteContent: activeNote.get('content'),
+          activeNoteContent2: activeNote.get('content2'),
+        });
+      } else {
+        this.props.NoteActions.get(activeNote);
+      }
+    }
+  }
   // readFile = (event) => {
   //   const file = event.target.files[0]; // name, type, size etc
   //   const reader = new FileReader();
@@ -229,6 +241,10 @@ export class NoteEditor extends React.Component {
     const {
       quillModules1, quillModules2, isSavingNote, activeNoteContent, activeNoteContent2,
     } = this.state;
+
+    console.log('🔥🔥🔥🔥🔥 activeNoteContent 🔥🔥🔥🔥🔥');
+    console.log(activeNoteContent);
+
     const {
       activeNote,
     } = this.props;
@@ -276,6 +292,15 @@ export class NoteEditor extends React.Component {
                     onChange={value => this.setState({
                       activeNoteContent2: value,
                     })}
+                    onKeyPress={(event) => {
+                      console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
+                    }}
+                    onKeyDown={(event) => {
+                      console.log('🔥🔥🔥🔥🔥 222 🔥🔥🔥🔥🔥');
+                    }}
+                    onKeyUp={(event) => {
+                      console.log('🔥🔥🔥🔥🔥 333 🔥🔥🔥🔥🔥');
+                    }}
                     modules={quillModules2}
                     ref={(el) => { this.reactQuillRef2 = el; }}
                   />

@@ -114,9 +114,6 @@ export class App extends React.Component {
 
     const { viewGreaterThan450 } = this.state;
 
-    console.log('🔥🔥🔥🔥🔥 viewGreaterThan450 🔥🔥🔥🔥🔥');
-    console.log(viewGreaterThan450);
-
     const eyeSaving = currentUser.hasIn(['config', 'eyeSaving'])
       && currentUser.getIn(['config', 'eyeSaving']);
 

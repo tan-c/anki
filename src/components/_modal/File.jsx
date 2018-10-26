@@ -119,8 +119,16 @@ export class ModalFile extends React.Component {
           />
 
         </Modal.Header>
-        <Modal.Content>
-          <Modal.Description>
+        <Modal.Content style={{
+          maxHeight: 300,
+          overflow: 'auto'
+        }}
+        >
+          <Modal.Description
+            style={{
+              color: 'black'
+            }}
+          >
             {files.size === 0 && <div>Loading files ...</div>}
             {files.size > 0 && files.valueSeq().map((file, index) => (
               <div

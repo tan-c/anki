@@ -66,7 +66,7 @@ export class NoteRow extends React.Component {
         draggable="true"
         onDragStart={this.onDragStart}
         onClick={this.onClickNote}
-        className={`flex-container-row typical-setup ${note.get('_id') === activeNoteId ? 'bg-red' : 'bg-orange-light'} 'border-right-orange-light-5px'`}
+        className={`flex-container-row typical-setup ${note.get('_id') === activeNoteId ? 'bg-red' : ''}`}
       >
         <span className="flex-1">
           {note.get('title')}

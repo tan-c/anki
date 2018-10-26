@@ -118,8 +118,16 @@ export class ModalSearch extends React.Component {
             onKeyDown={this.searchInputKeydown}
           />
         </Modal.Header>
-        <Modal.Content>
-          <Modal.Description>
+        <Modal.Content style={{
+          maxHeight: 300,
+          overflow: 'auto'
+        }}
+        >
+          <Modal.Description
+            style={{
+              color: 'black'
+            }}
+          >
             {/* <Header>Default Profile Image</Header> */}
             {notes.size === 0 && <div>Loading Notes ...</div>}
 

@@ -11,6 +11,7 @@ import InputControlledConnected from 'utility-react-component/Form/Input/Control
 import { NoteActions, activeNoteSelector } from 'utility-redux/note';
 import { FileActions } from 'utility-redux/file';
 
+import { loadavg } from 'os';
 import { ImageDrop } from '../_vendor/ImageDrop';
 
 /* eslint-disable react/no-multi-comp */
@@ -62,28 +63,31 @@ export class NoteEditor extends React.Component {
     hljs.configure({ // optionally configure hljs
       languages: ['javascript', 'ruby', 'python', 'java', 'scala', 'bash', 'json', 'html', 'sql'],
     });
-
-    this.state = {
-      quillModules1: {
-        syntax: true,
-        imageDrop: true,
-        toolbar: {
-          container: '#toolbar1',
-        },
-      },
-      quillModules2: {
-        syntax: true,
-        imageDrop: true,
-        toolbar: {
-          container: '#toolbar2',
-        },
-      },
-      activeNoteContent: '',
-      activeNoteContent2: '',
-      // noteTemplates: [],
-      isSavingNote: false,
-    };
   }
+
+  state = {
+    quillModules1: {
+      syntax: true,
+      imageDrop: true,
+      toolbar: {
+        container: '#toolbar1',
+      },
+    },
+    quillModules2: {
+      syntax: true,
+      imageDrop: true,
+      toolbar: {
+        container: '#toolbar2',
+      },
+    },
+    activeNoteContent: '',
+    activeNoteContent2: '',
+    // noteTemplates: [],
+    isSavingNote: false,
+
+    isEnterDown: false,
+    isCommandDown: false,
+  };
 
   componentDidMount() {
     this.attachQuillRefs();
@@ -116,17 +120,67 @@ export class NoteEditor extends React.Component {
   //   }
   // }
 
+  scrollToTitle = (title) => {
+    const titleNodes = document.querySelectorAll('#quill-1 .ql-editor h2');
+    const el = document.getElementsByClassName('ql-editor')[0];
+    let hasAnswer = false;
+    titleNodes.forEach((t) => {
+      if (t.innerText === title) {
+        el.scrollTop = t.offsetTop;
+        hasAnswer = true;
+      }
+    });
 
-  @keydown('1', '2', '3')
-  lalala() {
-    console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
-    console.log(111);
+    if (hasAnswer) return;
+
+    const titleNodes2 = document.querySelectorAll('#quill-2 .ql-editor h2');
+    const el2 = document.getElementsByClassName('ql-editor')[1];
+    titleNodes2.forEach((t) => {
+      if (t.innerText === title) {
+        el2.scrollTop = t.offsetTop;
+      }
+    });
   }
 
-  @keydown('command+enter')
+  updateKeysUp(event) {
+    if (event.keyCode === 91) {
+      this.setState({
+        isCommandDown: false,
+      });
+    }
+
+    if (event.keyCode === 13) {
+      this.setState({
+        isEnterDown: false,
+      });
+    }
+  }
+
+  updateKeysDown(event) {
+    const { isCommandDown, isEnterDown } = this.state;
+
+    if (event.keyCode === 91) {
+      this.setState({
+        isCommandDown: true,
+      });
+
+      if (isEnterDown) {
+        this.saveNoteContentOnKeydown();
+      }
+    }
+
+    if (event.keyCode === 13) {
+      this.setState({
+        isEnterDown: true,
+      });
+
+      if (isCommandDown) {
+        this.saveNoteContentOnKeydown();
+      }
+    }
+  }
+
   saveNoteContentOnKeydown() {
-    console.log('🔥🔥🔥🔥🔥 1 🔥🔥🔥🔥🔥');
-    console.log(1);
     this.setState({
       isSavingNote: true,
     });
@@ -168,28 +222,6 @@ export class NoteEditor extends React.Component {
       });
     }).catch((error) => {
       toastr.error(error);
-    });
-  }
-
-  scrollToTitle = (title) => {
-    const titleNodes = document.querySelectorAll('#quill-1 .ql-editor h2');
-    const el = document.getElementsByClassName('ql-editor')[0];
-    let hasAnswer = false;
-    titleNodes.forEach((t) => {
-      if (t.innerText === title) {
-        el.scrollTop = t.offsetTop;
-        hasAnswer = true;
-      }
-    });
-
-    if (hasAnswer) return;
-
-    const titleNodes2 = document.querySelectorAll('#quill-2 .ql-editor h2');
-    const el2 = document.getElementsByClassName('ql-editor')[1];
-    titleNodes2.forEach((t) => {
-      if (t.innerText === title) {
-        el2.scrollTop = t.offsetTop;
-      }
     });
   }
 
@@ -266,7 +298,14 @@ export class NoteEditor extends React.Component {
                   </div>
                 </div>
 
-                <div className="flex-1 quill-editor" id="quill-1">
+                <div
+                  className="flex-1 quill-editor"
+                  id="quill-1"
+                  role="button"
+                  tabIndex="0"
+                  onKeyDown={event => this.updateKeysDown(event)}
+                  onKeyUp={event => this.updateKeysUp(event)}
+                >
                   <CustomToolbar index={1} />
                   <ReactQuill
                     value={activeNoteContent}
@@ -278,22 +317,20 @@ export class NoteEditor extends React.Component {
                   />
                 </div>
 
-                <div className="flex-1 quill-editor" id="quill-2">
+                <div
+                  className="flex-1 quill-editor"
+                  id="quill-2"
+                  role="button"
+                  tabIndex="0"
+                  onKeyDown={event => this.updateKeysDown(event)}
+                  onKeyUp={event => this.updateKeysUp(event)}
+                >
                   <CustomToolbar index={2} />
                   <ReactQuill
                     value={activeNoteContent2}
                     onChange={value => this.setState({
                       activeNoteContent2: value,
                     })}
-                    // onKeyPress={(event) => {
-                    //   console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
-                    // }}
-                    // onKeyDown={(event) => {
-                    //   console.log('🔥🔥🔥🔥🔥 222 🔥🔥🔥🔥🔥');
-                    // }}
-                    // onKeyUp={(event) => {
-                    //   console.log('🔥🔥🔥🔥🔥 333 🔥🔥🔥🔥🔥');
-                    // }}
                     modules={quillModules2}
                     ref={(el) => { this.reactQuillRef2 = el; }}
                   />

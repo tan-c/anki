@@ -50,7 +50,7 @@ export class IntelNotePage extends React.Component {
             style={{
               overflow: 'auto',
               background: 'white',
-              border: '1px solid red'
+              // border: '1px solid red'
             }}
           >
             <NoteEditorConnected />

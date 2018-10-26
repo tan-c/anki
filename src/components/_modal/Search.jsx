@@ -8,6 +8,10 @@ import { Map } from 'immutable';
 import { UiActions } from 'utility-redux/ui';
 import { UserActions, currentUserSelector } from 'utility-redux/user';
 
+import {
+  Button, Header, Image, Modal
+} from 'semantic-ui-react';
+
 export class ModalSearch extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -63,10 +67,11 @@ export class ModalSearch extends React.Component {
   selectNote = (note) => {
     const noteId = note.get('_id');
     const notebookId = note.getIn(['notebook', '_id']);
-    this.props.UiActions.updateIn(['himalayan', 'showModal'], '');
 
     const { currentUser } = this.props;
+    this.props.UiActions.updateIn(['himalayan', 'showModal'], '');
     this.props.UserActions.update(currentUser.setIn(['config', 'hima', 'recentNote'], noteId));
+    this.props.UserActions.update(currentUser.setIn(['config', 'hima', 'recentNotebook'], notebookId));
   }
 
   updateSearch = (event) => {
@@ -101,10 +106,8 @@ export class ModalSearch extends React.Component {
     const { notes } = this.props;
 
     return (
-      <div id="modal" data-role="modal-search">
-        <div id="canvas" />
-
-        <div id="search-box">
+      <React.Fragment>
+        <Modal.Header>
           <input
             id="search-content"
             type="text"
@@ -114,8 +117,10 @@ export class ModalSearch extends React.Component {
             onChange={this.updateSearch}
             onKeyDown={this.searchInputKeydown}
           />
-
-          <div id="search-results">
+        </Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            {/* <Header>Default Profile Image</Header> */}
             {notes.size === 0 && <div>Loading Notes ...</div>}
 
             {notes.size > 0 && searchContent.length > 0 && notes.valueSeq().filter(note => this.isSearchResult(note, searchContent)).map((note, index) => (
@@ -128,7 +133,11 @@ export class ModalSearch extends React.Component {
               >
                 <span className="padding-horizontal-5 flex-1 border-right-black-20 bg-grey">{note.getIn(['notebook', 'notebookGroup', 'title'])}</span>
                 <span className={`padding-horizontal-5 flex-2 border-right-black-20 ${note.get('title').toLowerCase().indexOf(searchContent) > -1 ? 'color-orange font-600' : ''}`}>{note.get('title')}</span>
-                <span className={`padding-horizontal-5 flex-2 border-right-black-20 ${note.getIn(['notebook', 'title']).toLowerCase().indexOf(searchContent) > -1 ? 'color-orange font-600' : ''}`}>{note.getIn(['notebook', 'title'])}</span>
+                <span
+                  className={`padding-horizontal-5 flex-2 border-right-black-20 ${note.getIn(['notebook', 'title']).toLowerCase().indexOf(searchContent) > -1 ? 'color-orange font-600' : ''}`}
+                >
+                  {note.getIn(['notebook', 'title'])}
+                </span>
                 <span
                   className={`padding-horizontal-5 flex-5 ${note.get('subtitles').toString().toLowerCase().indexOf(searchContent) > -1 ? 'color-orange font-600' : ''}`}
                 >
@@ -142,9 +151,9 @@ export class ModalSearch extends React.Component {
                 </span>
               </div>))
             }
-          </div>
-        </div>
-      </div>
+          </Modal.Description>
+        </Modal.Content>
+      </React.Fragment>
     );
   }
 }

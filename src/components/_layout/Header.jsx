@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import SelectConnected from 'utility-react-component/Form/Select';
 import moment from 'moment';
 import {
-  Menu, Icon
+  Menu, Icon, Modal, Button
 } from 'semantic-ui-react';
 import { currentUserSelector } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';
@@ -20,6 +20,7 @@ import {
   filteredAnkisSelector
 } from 'utility-redux/anki';
 import { Map } from 'immutable';
+import SearchModal from '../_modal/Search';
 // import { Button } from 'semantic-ui-react';
 
 export class SubHeader extends React.Component {
@@ -79,6 +80,7 @@ export class SubHeader extends React.Component {
       isRightSidebarOn,
       currentUser,
       weatherInfo,
+      showModal
     } = this.props;
 
     const { currentTime, showEyeTimeoutBlinking } = this.state;
@@ -111,9 +113,7 @@ export class SubHeader extends React.Component {
               </Menu.Item>
 
               <Menu.Item>
-                {filteredAnkis.size}
-                {'/'}
-                {revisionAnkisTotal}
+                {`${filteredAnkis.size}}/${revisionAnkisTotal}`}
               </Menu.Item>
             </React.Fragment>
           )}
@@ -137,6 +137,38 @@ export class SubHeader extends React.Component {
             </React.Fragment>
           )
         }
+
+        {location.pathname.indexOf('notes') > -1
+          && (
+            <React.Fragment>
+              <Menu.Item
+                onClick={_ => this.props.UiActions.updateIn(['himalayan', 'showModal'], 'file')}
+              >
+                File Modal
+              </Menu.Item>
+              <Menu.Item>
+                <Modal
+                  trigger={(
+                    <Button onClick={_ => this.props.UiActions.updateIn(['himalayan', 'showModal'], 'search')}>
+                      Show File Search
+                    </Button>
+                  )}
+                  open={showModal === 'search'}
+                  onClose={() => {
+                    this.props.UiActions.updateIn(['himalayan', 'showModal'], '');
+                  }}
+                  basic
+                  size="small"
+                  style={{
+                    background: 'white',
+                    height: 400
+                  }}
+                >
+                  <SearchModal />
+                </Modal>
+              </Menu.Item>
+            </React.Fragment>
+          )}
 
         {location.pathname.indexOf('setting') > -1
           && (
@@ -227,6 +259,7 @@ export class SubHeader extends React.Component {
 }
 
 SubHeader.defaultProps = {
+  showModal: '',
   isRightSidebarOn: true,
 
   currentUser: Map(),
@@ -245,6 +278,7 @@ SubHeader.defaultProps = {
 };
 
 SubHeader.propTypes = {
+  showModal: PropTypes.string,
   isRightSidebarOn: PropTypes.bool,
   currentUser: PropTypes.object,
   // currentUserImageSrc: PropTypes.string.isRequired,
@@ -268,6 +302,7 @@ SubHeader.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    showModal: state.ui.getIn(['himalayan', 'showModal']),
     isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
 
     currentUser: currentUserSelector(state),

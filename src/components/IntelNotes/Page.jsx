@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Grid } from 'semantic-ui-react';
-import SearchModal from '../_modal/Search';
 import FileModal from '../_modal/File';
 
 import NoteEditorConnected from './NoteEditor/NoteEditor';
@@ -16,7 +15,6 @@ export class IntelNotePage extends React.Component {
 
     return (
       <React.Fragment>
-        {showModal === 'search' && <SearchModal />}
         {showModal === 'file' && <FileModal />}
 
         <Grid.Row

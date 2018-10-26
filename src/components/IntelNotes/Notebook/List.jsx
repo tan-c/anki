@@ -24,7 +24,15 @@ export class NotebookList extends React.Component {
 
     return (
       <React.Fragment>
-        { notebookGroupNotebooks.valueSeq().map(notebook => <NotebookListRowConnected key={notebook.get('_id')} notebook={notebook} />)}
+        {notebookGroupNotebooks.valueSeq().map(
+          notebook => (
+            <NotebookListRowConnected
+              key={notebook.get('_id')}
+              notebook={notebook}
+            />
+          )
+        )
+        }
       </React.Fragment>
     );
   }

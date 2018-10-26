@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
+import { Button } from 'semantic-ui-react';
 
 import {
+  NoteActions,
+  activeNotebookIdSelector,
   activeNotebookNotesSortedSelector
 } from 'utility-redux/note';
 
@@ -11,34 +14,64 @@ import NoteRowConnected from './Row';
 
 export class NoteList extends React.Component {
   render() {
-    const { notes } = this.props;
+    const {
+      activeNotebookNotes,
+      activeNotebookId
+    } = this.props;
 
     return (
       <React.Fragment>
         <div className="text-center border-bottom-black">
-          Notes:
-          {' '}
-          {notes.size}
+          {`Notes: ${activeNotebookNotes.size} - - `}
+
+          {activeNotebookId.length && (
+            <Button
+              size="tiny"
+              onClick={(_) => {
+                this.props.NoteActions.create({
+                  notebook: activeNotebookId,
+                  title: 'new note'
+                });
+              }}
+            >
+              Create New
+            </Button>
+          )}
         </div>
 
-        {notes.valueSeq().map(note => (
-          <NoteRowConnected
-            key={note.get('_id')}
-            note={note}
-          />
-        ))}
+        {
+          activeNotebookNotes.valueSeq().map(note => (
+            <NoteRowConnected
+              key={note.get('_id')}
+              note={note}
+            />
+          ))
+        }
       </React.Fragment>);
   }
 }
 
+NoteList.defaultProps = {
+  activeNotebookId: '',
+};
+
 NoteList.propTypes = {
-  notes: PropTypes.object.isRequired,
+  activeNotebookId: PropTypes.string,
+  activeNotebookNotes: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    notes: activeNotebookNotesSortedSelector(state),
+    activeNotebookId: activeNotebookIdSelector(state),
+    activeNotebookNotes: activeNotebookNotesSortedSelector(state),
   };
 }
 
-export default connect(mapStateToProps)(NoteList);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    NoteActions: bindActionCreators(NoteActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteList);

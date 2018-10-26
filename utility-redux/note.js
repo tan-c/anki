@@ -21,18 +21,18 @@ const currentUserSelector = createSelector(
   users => users.valueSeq().get('0'),
 );
 
-const getActiveNoteId = createSelector(
+export const activeNoteIdSelector = createSelector(
   [currentUserSelector],
   currentUser => (currentUser.hasIn(['config', 'hima', 'recentNote']) ? currentUser.getIn(['config', 'hima', 'recentNote']) : '')
 );
 
-const getActiveNotebookId = createSelector(
+export const activeNotebookIdSelector = createSelector(
   [currentUserSelector],
   currentUser => (currentUser.hasIn(['config', 'hima', 'recentNotebook']) ? currentUser.getIn(['config', 'hima', 'recentNotebook']) : '')
 );
 
 export const activeNotebookNotesSortedSelector = createSelector(
-  [getNotes, getActiveNotebookId],
+  [getNotes, activeNotebookIdSelector],
   (notes, activeNotebookId) => notes.filter((note) => {
     if (activeNotebookId === 'deleted') {
       return note.get('isDeleted') === true;
@@ -42,6 +42,6 @@ export const activeNotebookNotesSortedSelector = createSelector(
 );
 
 export const activeNoteSelector = createSelector(
-  [getNotes, getActiveNoteId],
+  [getNotes, activeNoteIdSelector],
   (notes, activeNoteId) => notes.find(note => note.get('_id') === activeNoteId),
 );

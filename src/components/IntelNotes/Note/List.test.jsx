@@ -10,6 +10,7 @@ import { NoteList } from './List';
 function setup() {
   const props = {
     notes: Map(),
+    activeNotebookNotes: Map(),
   };
 
   return shallow(<NoteList {...props} />);

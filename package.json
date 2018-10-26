@@ -30,6 +30,7 @@
     "flow": "flow"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "babel-jest": "^23.6.0",
     "highlight.js": "^9.13.1",
     "jest": "^23.6.0",
@@ -40,7 +41,6 @@
     "utility-redux": "file:utility-redux"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
     "flow-bin": "^0.84.0",
     "husky": "1.0.0-rc.6",

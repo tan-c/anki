@@ -91,77 +91,6 @@ video {
   }
 }
 
-
-
-#modal {
-  @extend .flex-component-center;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: calc(100vw - 280px);
-  position: absolute;
-  background: $black-70;
-
-  %box {
-    background: white;
-    border-radius: 2px;
-    z-index: 10;
-    position: relative;
-  }
-
-  &.mobile {
-    width: 100%;
-
-    #canvas {
-      width: 100%;
-      overflow: hidden;
-    }
-  }
-
-  $search-box-height : 500px;
-  $search-box-width : 1000px;
-
-  #search-box {
-    @extend %box;
-    width: $search-box-width;
-    height: $search-box-height;
-  }
-
-  $search-content-height: 40px;
-
-  #search-content {
-    font-size: 20px;
-    line-height: 30px;
-    padding: 5px;
-    height : calc(#{$search-content-height});
-    box-sizing: border-box;
-    border-bottom: 1px solid $black-70;
-  }
-
-  #search-results {
-    height : calc(#{$search-box-height} - #{$search-content-height}) !important;
-    overflow: auto;
-
-    .search-results-record {
-      color: black;
-
-      &:hover {
-        background: $black-20;
-      }
-    }
-  }
-
-  #canvas {
-    position: fixed;
-    top : calc(#{$header-height});
-    left: 0;
-    height : calc(100vh - #{$header-height});
-    width: calc(100vw - 280px);
-    background: $black-70;
-    z-index: 9;
-  }
-}
-
 label {
   height: 30px;
   line-height: 30px;
@@ -467,8 +396,6 @@ $footer-height: 16px;
     }
   }
 }
-
-
 
 .ql-editor img {
   max-width: 100% !important;

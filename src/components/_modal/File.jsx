@@ -8,6 +8,10 @@ import { Map } from 'immutable';
 import { UiActions } from 'utility-redux/ui';
 import { UserActions, currentUserSelector } from 'utility-redux/user';
 
+import {
+  Button, Header, Image, Modal
+} from 'semantic-ui-react';
+
 export class ModalFile extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -102,10 +106,8 @@ export class ModalFile extends React.Component {
     const { files } = this.props;
 
     return (
-      <div id="modal" data-role="modal-search">
-        <div id="canvas" />
-
-        <div id="search-box">
+      <React.Fragment>
+        <Modal.Header>
           <input
             id="search-content"
             type="text"
@@ -116,7 +118,9 @@ export class ModalFile extends React.Component {
             onKeyDown={this.searchInputKeydown}
           />
 
-          <div id="search-results">
+        </Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
             {files.size === 0 && <div>Loading files ...</div>}
             {files.size > 0 && files.valueSeq().map((file, index) => (
               <div
@@ -139,9 +143,9 @@ export class ModalFile extends React.Component {
                 </span>
               </div>))
             }
-          </div>
-        </div>
-      </div>
+          </Modal.Description>
+        </Modal.Content>
+      </React.Fragment>
     );
   }
 }

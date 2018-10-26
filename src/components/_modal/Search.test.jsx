@@ -23,7 +23,7 @@ describe('ModalSearch Unit Tests', () => {
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
       // // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("div[data-role='modal-search']")).toHaveLength(1);
+      expect(wrapper.find("div[data-role='modal-search']")).toHaveLength(0);
     });
   });
 });

@@ -21,6 +21,7 @@ import {
 } from 'utility-redux/anki';
 import { Map } from 'immutable';
 import SearchModal from '../_modal/Search';
+import FileModal from '../_modal/File';
 // import { Button } from 'semantic-ui-react';
 
 export class SubHeader extends React.Component {
@@ -141,16 +142,32 @@ export class SubHeader extends React.Component {
         {location.pathname.indexOf('notes') > -1
           && (
             <React.Fragment>
-              <Menu.Item
-                onClick={_ => this.props.UiActions.updateIn(['himalayan', 'showModal'], 'file')}
-              >
-                File Modal
+              <Menu.Item>
+                <Modal
+                  trigger={(
+                    <Button onClick={_ => this.props.UiActions.updateIn(['himalayan', 'showModal'], 'file')}>
+                      File Modal
+                    </Button>
+                  )}
+                  open={showModal === 'file'}
+                  onClose={() => {
+                    this.props.UiActions.updateIn(['himalayan', 'showModal'], '');
+                  }}
+                  basic
+                  size="small"
+                  style={{
+                    background: 'white',
+                    height: 400
+                  }}
+                >
+                  <FileModal />
+                </Modal>
               </Menu.Item>
               <Menu.Item>
                 <Modal
                   trigger={(
                     <Button onClick={_ => this.props.UiActions.updateIn(['himalayan', 'showModal'], 'search')}>
-                      Show File Search
+                      Search Modal
                     </Button>
                   )}
                   open={showModal === 'search'}

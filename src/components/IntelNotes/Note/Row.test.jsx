@@ -36,7 +36,7 @@ describe('NoteRow Unit Tests', () => {
 
     it('should not be highlighted before clicking', () => {
       expect(wrapper.find('.bg-red')).toHaveLength(0);
-      expect(wrapper.find('.bg-orange-light')).toHaveLength(1);
+      expect(wrapper.find('.bg-orange-light')).toHaveLength(0);
     });
 
     it('should display the right title for the note', () => {

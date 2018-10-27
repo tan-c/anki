@@ -82,7 +82,7 @@ describe('NoteRow Unit Tests', () => {
 
     it('should not be in bg red', () => {
       expect(wrapper.find('.bg-red')).toHaveLength(0);
-      expect(wrapper.find('.bg-orange-light')).toHaveLength(1);
+      expect(wrapper.find('.bg-orange-light')).toHaveLength(0);
     });
   });
 });

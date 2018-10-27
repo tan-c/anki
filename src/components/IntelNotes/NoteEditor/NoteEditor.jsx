@@ -142,20 +142,6 @@ export class NoteEditor extends React.Component {
     });
   }
 
-  updateKeysUp(event) {
-    if (event.keyCode === 91) {
-      this.setState({
-        isCommandDown: false,
-      });
-    }
-
-    if (event.keyCode === 13) {
-      this.setState({
-        isEnterDown: false,
-      });
-    }
-  }
-
   updateKeysDown(event) {
     const { isCommandDown, isEnterDown } = this.state;
 
@@ -219,6 +205,8 @@ export class NoteEditor extends React.Component {
       // this.titleInput.blur();
       this.setState({
         isSavingNote: false,
+        isEnterDown: false,
+        isCommandDown: false,
       });
     }).catch((error) => {
       toastr.error(error);
@@ -304,7 +292,6 @@ export class NoteEditor extends React.Component {
                   role="button"
                   tabIndex="0"
                   onKeyDown={event => this.updateKeysDown(event)}
-                  onKeyUp={event => this.updateKeysUp(event)}
                 >
                   <CustomToolbar index={1} />
                   <ReactQuill

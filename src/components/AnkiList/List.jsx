@@ -111,22 +111,20 @@ export class AnkiList extends React.Component {
         </Grid.Row>
 
         <Grid.Row>
-          <Grid.Column>
-            <Grid
-              divided="vertically"
-              style={{
-                overflow: 'auto',
-                maxHeight: 'calc(100vh - 300px)'
-              }}
-            >
-              {ankisSorted.valueSeq().map(anki => (
-                <AnkiRowConnected
-                  anki={anki}
-                  key={anki.get('_id')}
-                />
-              ))}
-            </Grid>
-          </Grid.Column>
+          <Grid
+            divided="vertically"
+            style={{
+              overflow: 'auto',
+              maxHeight: 'calc(100vh - 300px)'
+            }}
+          >
+            {ankisSorted.valueSeq().map(anki => (
+              <AnkiRowConnected
+                anki={anki}
+                key={anki.get('_id')}
+              />
+            ))}
+          </Grid>
         </Grid.Row>
       </React.Fragment>
     );

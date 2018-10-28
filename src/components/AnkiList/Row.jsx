@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Map } from 'immutable';
-import { Grid, Icon } from 'semantic-ui-react';
+import {
+  Grid, Icon, Label
+} from 'semantic-ui-react';
 
 import { AnkiActions, activeAnkiSelector } from 'utility-redux/anki';
 import { UiActions } from 'utility-redux/ui';
@@ -17,32 +19,42 @@ export class AnkiRow extends React.Component {
       <Grid.Row
         style={{
           padding: 0,
-          minHeight: 30
+          minHeight: 30,
+          borderBottom: '1px solid white'
         }}
       >
         <Grid.Column
           width={1}
         >
-          {`${anki.getIn(['revision', 'round'])}/${anki.getIn(['revision', 'passing'])} - `}
         </Grid.Column>
 
         <Grid.Column
-          width={12}
+          width={11}
           textAlign="left"
         >
+          <Label
+            style={{
+              width: 50,
+              background: 'orange',
+              color: 'white',
+              textAlign: 'center'
+            }}
+          >
+            {`${anki.getIn(['revision', 'round'])}/${anki.getIn(['revision', 'passing'])}`}
+          </Label>
           {anki.get('question')}
         </Grid.Column>
 
         <Grid.Column
-          width={3}
+          width={4}
           textAlign="center"
         >
-          <span style={{
+          <Label style={{
             width: 20
           }}
           >
             {anki.has('tags') ? anki.get('tags').size : 0}
-          </span>
+          </Label>
 
           <Icon
             name="close"

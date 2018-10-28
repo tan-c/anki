@@ -35,8 +35,12 @@ export class HourBlockRowRecord extends React.Component {
       addEventToRecord, deleteEvent,
       showEventsInPomo,
       // allProjectTasksOrdered,
-      isUpdatingPlannedPomo
+      isUpdatingPlannedPomo,
+
+      isToday, currentSectionOfDay
     } = this.props;
+
+    const isTodayFuture = isToday && currentSectionOfDay < sectionOfDay;
 
     // const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
 
@@ -53,32 +57,34 @@ export class HourBlockRowRecord extends React.Component {
           {(plannedPomo.hasIn(['project', '_id']) && !recordPomo.hasIn(['project', '_id']))
             ? (
               <React.Fragment>
-                <i
-                  role="button"
-                  tabIndex="-1"
-                  className="fa fa-fw fa-check flex-1 height-lineheight-30"
-                  onClick={(_) => {
-                    // Also remove the task
-                    // If can update main means the task is not shown...
-                    // if (currentPlannedPomoTask.count()) {
-                    //   const task = currentPlannedPomoTask.get('task');
-                    //   if (currentPlannedPomoTask.get('subTaskId') !== null) {
-                    //     this.props.TaskActions.update(task.deleteIn(['subTasks', currentPlannedPomoTask.get('subTaskId').toString()]), task);
-                    //   } else {
-                    //     this.props.TaskActions.deleteRecord(task);
-                    //   }
-                    // }
+                {!isTodayFuture && (
+                  <i
+                    role="button"
+                    tabIndex="-1"
+                    className="fa fa-fw fa-check flex-1 height-lineheight-30"
+                    onClick={(_) => {
+                      // Also remove the task
+                      // If can update main means the task is not shown...
+                      // if (currentPlannedPomoTask.count()) {
+                      //   const task = currentPlannedPomoTask.get('task');
+                      //   if (currentPlannedPomoTask.get('subTaskId') !== null) {
+                      //     this.props.TaskActions.update(task.deleteIn(['subTasks', currentPlannedPomoTask.get('subTaskId').toString()]), task);
+                      //   } else {
+                      //     this.props.TaskActions.deleteRecord(task);
+                      //   }
+                      // }
 
-                    addPomoRecord({
-                      target: {
-                        value: plannedPomo.getIn(['project', '_id']),
-                        isCompliant: true,
-                        content: `${plannedPomo.getIn(['tasks', 'main'])} ${plannedPomo.hasIn(['tasks', 'recur']) ? plannedPomo.getIn(['tasks', 'recur']) : ''}`
-                      },
-                    }, sectionOfDay);
-                  }
-                  }
-                />
+                      addPomoRecord({
+                        target: {
+                          value: plannedPomo.getIn(['project', '_id']),
+                          isCompliant: true,
+                          content: `${plannedPomo.getIn(['tasks', 'main'])} ${plannedPomo.hasIn(['tasks', 'recur']) ? plannedPomo.getIn(['tasks', 'recur']) : ''}`
+                        },
+                      }, sectionOfDay);
+                    }
+                    }
+                  />
+                )}
 
                 <i
                   role="button"
@@ -151,6 +157,9 @@ export class HourBlockRowRecord extends React.Component {
 }
 
 HourBlockRowRecord.defaultProps = {
+  isToday: false,
+  currentSectionOfDay: 0,
+
   showEventsInPomo: false,
   isUpdatingPlannedPomo: false,
 
@@ -165,10 +174,13 @@ HourBlockRowRecord.defaultProps = {
 };
 
 HourBlockRowRecord.propTypes = {
+  isToday: PropTypes.bool,
+  currentSectionOfDay: PropTypes.number,
+  sectionOfDay: PropTypes.number,
+
   showEventsInPomo: PropTypes.bool,
 
   isUpdatingPlannedPomo: PropTypes.bool,
-  sectionOfDay: PropTypes.number,
   plannedPomo: PropTypes.object,
   recordPomo: PropTypes.object,
   addPomoRecord: PropTypes.func,
@@ -184,10 +196,13 @@ HourBlockRowRecord.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    isToday: ownProps.isToday,
+    currentSectionOfDay: ownProps.currentSectionOfDay,
+    sectionOfDay: ownProps.sectionOfDay,
+
     showEventsInPomo: currentUserSelector(state).hasIn(['config', 'showEventsInPomo']) && currentUserSelector(state).getIn(['config', 'showEventsInPomo']),
 
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
-    sectionOfDay: ownProps.sectionOfDay,
     plannedPomo: ownProps.plannedPomo,
     recordPomo: ownProps.recordPomo,
     addPomoRecord: ownProps.addPomoRecord,

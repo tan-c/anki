@@ -199,6 +199,8 @@ export class HourBlockList extends React.Component {
             <div className={`width-60 flex-container-row ${currentSectionOfDay === item.sectionOfDay && 'bg-bright-green'}`}>
               <HourBlockRowRecordConnected
                 sectionOfDay={item.sectionOfDay}
+                isToday={isoWeekDay === moment().isoWeekday()}
+                currentSectionOfDay={currentSectionOfDay}
                 recordPomo={currentDayRecord.getIn(['pomo', (item.sectionOfDay).toString()]) || defaultProps}
                 addPomoRecord={this.addPomoRecord}
                 addEventToRecord={this.addEventToRecord}

@@ -39,6 +39,7 @@ const initialState = {
     },
   },
 
+  isHeaderNextPomoOn: true,
   isShowingLoginPage: false,
   isRightSidebarOn: false,
 };

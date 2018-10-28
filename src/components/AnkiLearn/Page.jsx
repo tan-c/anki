@@ -177,9 +177,9 @@ export class AnkiPage extends React.Component {
 
           {showAnswer
             && (
-              <Container text textAlign="center">
+              <Header as="h4" textAlign="center">
                 {currentAnki.get('answer')}
-              </Container>
+              </Header>
             )
           }
 

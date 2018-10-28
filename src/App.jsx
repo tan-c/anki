@@ -43,7 +43,7 @@ import HousingPricesConnected from './components/HousingPrices/Page';
 import HourblockRecordConnected from './components/HourblockRecord/Page';
 
 import NoteConnected from './components/UserNote';
-import AnkiPageConnected from './components/AnkiLearn/Page';
+import AnkiLearnPageConnected from './components/AnkiLearn/Page';
 import AnkiTagsPageConnected from './components/AnkiTags/Page';
 
 import HourblockPlanningPageConnected from './components/HourblockPlanning/Page';
@@ -239,11 +239,11 @@ export class App extends React.Component {
                   />
                   <Route
                     path="/anki/list"
-                    component={AnkiPageConnected}
+                    component={AnkiListConnected}
                   />
                   <Route
                     path="/anki/learn"
-                    component={AnkiListConnected}
+                    component={AnkiLearnPageConnected}
                   />
                   <Route
                     path="/anki/tag"

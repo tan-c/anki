@@ -24,10 +24,10 @@ export class Footer extends React.Component {
         data-role="footer"
         style={{
           height: 16,
-          position: 'fixed',
-          width: '100vw',
-          borderTop: '1px solid white',
-          background: 'white',
+          position: 'absolute',
+          width: '100%',
+          borderTop: '1px solid rgba(255, 255, 255, 0.7)',
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
           zIndex: 100,
           bottom: 0,
           left: 0,

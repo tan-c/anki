@@ -23,9 +23,6 @@ export class SidebarComponent extends React.Component {
       todayMeasurement
     } = this.props;
 
-    console.log('🔥🔥🔥🔥🔥 todayMeasurement 🔥🔥🔥🔥🔥');
-    console.log(todayMeasurement.toJS());
-
     return (
       <React.Fragment>
         <Menu.Item>

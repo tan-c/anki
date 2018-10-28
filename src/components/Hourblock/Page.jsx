@@ -155,9 +155,7 @@ export class HourBlockPage extends React.Component {
           </Grid.Column>
         </Grid.Row>
 
-        <Grid.Row>
-          <FooterConnected />
-        </Grid.Row>
+        <FooterConnected />
       </React.Fragment>
     );
   }

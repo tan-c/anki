@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import SelectConnected from 'utility-react-component/Form/Select';
 import moment from 'moment';
 import {
-  Menu, Icon, Modal, Button
+  Menu, Icon, Modal, Button, Segment
 } from 'semantic-ui-react';
 import { currentUserSelector } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';
@@ -24,7 +24,7 @@ import SearchModal from '../_modal/Search';
 import FileModal from '../_modal/File';
 // import { Button } from 'semantic-ui-react';
 
-export class SubHeader extends React.Component {
+export class Header extends React.Component {
   // switchApp = (newApp) => {
   //   const { currentUser } = this.props;
   //   this.props.UserActions.update(currentUser.setIn(['config', 'recentApp'], newApp));
@@ -41,7 +41,7 @@ export class SubHeader extends React.Component {
 
   componentDidMount() {
     this.updateCurrentTime();
-    this.updateWeather();
+    // this.updateWeather();
   }
 
   componentWillUnmount() {
@@ -80,14 +80,11 @@ export class SubHeader extends React.Component {
       edittingTarget,
       isRightSidebarOn,
       currentUser,
-      weatherInfo,
-      showModal
+      // weatherInfo,
+      showModal,
     } = this.props;
 
     const { currentTime, showEyeTimeoutBlinking } = this.state;
-
-    const currentApp = currentUser.hasIn(['config', 'recentApp']) ? currentUser.getIn(['config', 'recentApp']) : '';
-
 
     return (
       <React.Fragment>
@@ -98,6 +95,9 @@ export class SubHeader extends React.Component {
         >
           {filteredAnkis.size}
         </div> */}
+        {/* <Menu.Item>
+          This Should Be Next Pomo and Not Menu...
+        </Menu.Item> */}
 
         {location.pathname.indexOf('anki') > -1
           && (
@@ -163,6 +163,7 @@ export class SubHeader extends React.Component {
                   <FileModal />
                 </Modal>
               </Menu.Item>
+
               <Menu.Item>
                 <Modal
                   trigger={(
@@ -214,7 +215,7 @@ export class SubHeader extends React.Component {
           )
         }
 
-        <Menu.Item
+        {/* <Menu.Item
           position="right"
           style={{
             fontSize: 24,
@@ -229,7 +230,7 @@ export class SubHeader extends React.Component {
           {parseInt(weatherInfo.getIn(['next', 'weather', 'temp']), 10)}
           °C
           {weatherInfo.getIn(['city', 'name'])}
-        </Menu.Item>
+        </Menu.Item> */}
 
         {/* <Menu.Item>
           <img
@@ -275,12 +276,12 @@ export class SubHeader extends React.Component {
   }
 }
 
-SubHeader.defaultProps = {
+Header.defaultProps = {
   showModal: '',
   isRightSidebarOn: true,
 
   currentUser: Map(),
-  weatherInfo: Map(),
+  // weatherInfo: Map(),
 
   isTasksOn: false,
   selectedAnkiTagId: '',
@@ -294,12 +295,12 @@ SubHeader.defaultProps = {
   updatingRecurTask: false,
 };
 
-SubHeader.propTypes = {
+Header.propTypes = {
   showModal: PropTypes.string,
   isRightSidebarOn: PropTypes.bool,
   currentUser: PropTypes.object,
   // currentUserImageSrc: PropTypes.string.isRequired,
-  weatherInfo: PropTypes.object,
+  // weatherInfo: PropTypes.object,
   updateWeather: PropTypes.func.isRequired,
 
   isTasksOn: PropTypes.bool,
@@ -324,7 +325,7 @@ function mapStateToProps(state, ownProps) {
 
     currentUser: currentUserSelector(state),
     // currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),
-    weatherInfo: state.ui.getIn(['common', 'api', 'weatherInfo']),
+    // weatherInfo: state.ui.getIn(['common', 'api', 'weatherInfo']),
 
     isTasksOn: state.ui.getIn(['common', 'isTasksOn']),
     isAnkiModalOn: state.ui.getIn(['common', 'isAnkiModalOn']),
@@ -356,4 +357,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SubHeader));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

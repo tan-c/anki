@@ -2,7 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { PlannedPomoActions, nextTwoPlannedPomosSelector, todayPlannedPomosSelector } from 'utility-redux/plannedPomo';
+import {
+  PlannedPomoActions,
+  nextTwoPlannedPomosSelector,
+  todayPlannedPomosSelector
+} from 'utility-redux/plannedPomo';
 import {
   DailyRecordActions,
   todayDailyRecordSelector,
@@ -76,7 +80,7 @@ export class Footer extends React.Component {
       }}
     >
       <Grid.Column
-        width={2}
+        width={1}
         textAlign="center"
       >
         {moment().tz('Asia/Tokyo').startOf('day').add(sectionOfDay / 2, 'hour')
@@ -84,7 +88,7 @@ export class Footer extends React.Component {
       </Grid.Column>
 
       <Grid.Column
-        width={3}
+        width={2}
         textAlign="center"
         style={{
           backgroundColor: `${nextPlannedPomo.getIn(['project', 'category', 'color'])}`,
@@ -94,8 +98,10 @@ export class Footer extends React.Component {
         {nextPlannedPomo.hasIn(['project', 'category']) ? nextPlannedPomo.getIn(['project', 'name']) : ''}
       </Grid.Column>
 
-      <Grid.Column width={10}>
+      <Grid.Column width={12}>
+        {'主要: '}
         {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'main'])}` : 'No Main'}
+        {'  次要: '}
         {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'recur'])}` : 'No Recur'}
       </Grid.Column>
 
@@ -128,7 +134,6 @@ export class Footer extends React.Component {
         />
       </Grid.Column>
     </Grid.Row>
-
   )
 
   render() {
@@ -136,16 +141,8 @@ export class Footer extends React.Component {
     const { currentSectionOfDay } = this.state;
 
     return (
-      <Grid style={{
-        position: 'fixed',
-        bottom: 0,
-        height: 120,
-        borderTop: '1px solid black',
-        background: 'white',
-        zIndex: 1111,
-      }}
-      >
-        {isTasksOn && todayTasks.count() > 0 && todayTasks.map(task => (
+      <React.Fragment>
+        {/* {isTasksOn && todayTasks.count() > 0 && todayTasks.map(task => (
           <Grid.Row
             key={task.get('_id')}
           >
@@ -196,18 +193,17 @@ export class Footer extends React.Component {
               }}
             />
           </Grid.Row>
-        ))}
+        ))} */}
 
         {!isTasksOn && (
           <Fragment>
             {this.renderPlannedPomoRow(currentSectionOfDay, this.getPomo(todayPlannedPomos, currentSectionOfDay))}
-            {this.renderPlannedPomoRow((currentSectionOfDay + 1) % 48, this.getPomo(todayPlannedPomos, (currentSectionOfDay + 1) % 48))}
+            {/* {this.renderPlannedPomoRow((currentSectionOfDay + 1) % 48, this.getPomo(todayPlannedPomos, (currentSectionOfDay + 1) % 48))}
             {this.renderPlannedPomoRow((currentSectionOfDay + 2) % 48, this.getPomo(todayPlannedPomos, (currentSectionOfDay + 2) % 48))}
-            {this.renderPlannedPomoRow((currentSectionOfDay + 3) % 48, this.getPomo(todayPlannedPomos, (currentSectionOfDay + 3) % 48))}
+            {this.renderPlannedPomoRow((currentSectionOfDay + 3) % 48, this.getPomo(todayPlannedPomos, (currentSectionOfDay + 3) % 48))} */}
           </Fragment>
         )}
-
-      </Grid>
+      </React.Fragment>
     );
   }
 }

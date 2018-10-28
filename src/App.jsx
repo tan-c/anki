@@ -33,11 +33,10 @@ import AbyssinianPageConnected from './components/Abyssinian/Page';
 
 
 import HeaderConnected from './components/_layout/Header';
-import FooterConnected from './components/_layout/Footer';
+import HeaderNextPomoConnected from './components/_layout/HeaderNextPomo';
 import LeftSidebarConnected from './components/_layout/LeftSidebar';
 import RightSidebarConnected from './components/_layout/RightSidebar';
 
-// import SettingsConnected from './components/_layout/Settings';
 import AnkiListConnected from './components/AnkiList/List';
 import IntelNotesConnected from './components/IntelNotes/Page';
 import HousingPricesConnected from './components/HousingPrices/Page';
@@ -155,6 +154,24 @@ export class App extends React.Component {
 
               {isRightSidebarOn && <RightSidebarConnected />}
 
+              <Grid style={{
+                position: 'fixed',
+                top: 0,
+                left: '10%',
+                width: '80%',
+                height: 30,
+                lineHeight: '30px',
+                borderBottom: '1px solid black',
+                background: 'rgba(255, 255, 255, 0.8)',
+                zIndex: 1000,
+                padding: 0,
+                margin: 0
+              }}
+              >
+                <HeaderNextPomoConnected />
+              </Grid>
+
+
               <Responsive
                 onUpdate={this.handleOnUpdate}
                 as={Menu}
@@ -173,6 +190,7 @@ export class App extends React.Component {
                 <HeaderConnected />
               </Responsive>
 
+
               <Responsive
                 onUpdate={this.handleOnUpdate}
                 as={Grid}
@@ -185,7 +203,8 @@ export class App extends React.Component {
                   height: 'calc(100vh)',
                   background: 'black',
                   color: 'white',
-                  margin: 0
+                  margin: 0,
+                  // top: 60,
                 }}
               >
                 <Switch>
@@ -244,9 +263,6 @@ export class App extends React.Component {
                   <Redirect from="/*" to="/" />
                 </Switch>
               </Responsive>
-
-              {/* <FooterConnected /> */}
-              {/* <SettingsConnected /> */}
 
               {eyeSaving && <EyeModal />}
               {/* </Sidebar.Pusher>

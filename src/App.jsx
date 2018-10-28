@@ -179,11 +179,11 @@ export class App extends React.Component {
               {isHeaderNextPomoOn && (
                 <Grid style={{
                   position: 'fixed',
-                  top: 0,
+                  bottom: 0,
                   left: '10%',
                   width: '80%',
-                  height: 30,
-                  lineHeight: '30px',
+                  height: 20,
+                  lineHeight: '20px',
                   border: '1px solid black',
                   background: 'rgba(255, 255, 255, 0.8)',
                   zIndex: 1000,

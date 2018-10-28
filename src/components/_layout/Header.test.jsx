@@ -5,7 +5,7 @@ import toJson from 'enzyme-to-json';
 
 // import { Map } from 'immutable';
 
-import { SubHeader } from './Header';
+import { Header } from './Header';
 
 function setup() {
   const props = {
@@ -20,7 +20,7 @@ function setup() {
     UiActions: {},
   };
 
-  return shallow(<SubHeader {...props} />);
+  return shallow(<Header {...props} />);
 }
 
 describe('SubHeader Unit Tests', () => {
@@ -29,7 +29,7 @@ describe('SubHeader Unit Tests', () => {
     it('renders correctly', () => {
       // const jsonOutput = toJson(wrapper);
       // // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("Menu[data-role='subheader']")).toHaveLength(0);
+      expect(wrapper.find("Menu[data-role='header']")).toHaveLength(0);
     });
   });
 });

@@ -282,7 +282,7 @@ export class Header extends React.Component {
           </Menu.Item>
 
           <Responsive
-            minWidth={450}
+            {...Responsive.onlyMobile}
             as={Menu.Item}
           >
             <Dropdown

@@ -10,6 +10,9 @@ import EventRecordsListConnected from './Events/EventRecords/List';
 import SelectedProjectDetailsConnected from './Projects/SelectedProjectDetails';
 import CategoriesListConnected from './Projects/Categories/List';
 
+import CategoryInsightsConnected from '../Hourblock/LeftAside/CategoryInsights';
+import WeeklyInsightsConnected from '../Hourblock/LeftAside/WeeklyInsights';
+
 import DailyPomoCountConnected from './DailyPomoCount';
 
 export class SettingsPage extends React.Component {
@@ -18,14 +21,31 @@ export class SettingsPage extends React.Component {
 
     return (
       <Grid.Row>
+        <Grid.Column
+          width={2}
+          className="left-aside"
+          style={{
+            overflow: 'auto'
+          }}
+        >
+          <CategoryInsightsConnected />
+          <WeeklyInsightsConnected />
+        </Grid.Column>
+
         {edittingTarget === 'events'
           && (
             <React.Fragment>
-              <EventListConnected />
+              <Grid.Column
+                width={9}
+              >
+                <EventListConnected />
+              </Grid.Column>
 
-              <section className="flex-1">
+              <Grid.Column
+                width={5}
+              >
                 <EventRecordsListConnected />
-              </section>
+              </Grid.Column>
             </React.Fragment>
           )
         }
@@ -33,19 +53,26 @@ export class SettingsPage extends React.Component {
         {edittingTarget === 'projects'
           && (
             <React.Fragment>
-              <section className="flex-2">
+              <Grid.Column
+                width={9}
+              >
                 <CategoriesListConnected />
-              </section>
-              <section className="flex-1">
+              </Grid.Column>
+
+              <Grid.Column
+                width={5}
+              >
                 <SelectedProjectDetailsConnected />
-              </section>
+              </Grid.Column>
             </React.Fragment>
           )
         }
 
         {edittingTarget === 'dailyPomoCount'
           && (
-            <DailyPomoCountConnected />
+            <Grid.Column width={14}>
+              <DailyPomoCountConnected />
+            </Grid.Column>
           )
         }
       </Grid.Row>

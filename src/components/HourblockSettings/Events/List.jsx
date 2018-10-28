@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { EventActions, eventsSortedByProjectThenCategorySelector } from 'utility-redux/event';
+import {
+  EventActions,
+  eventsSortedByProjectThenCategorySelector
+} from 'utility-redux/event';
 import { UiActions } from 'utility-redux/ui';
 
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
@@ -88,7 +91,7 @@ export class EventsList extends React.Component {
 
         <section className="flex-1 border-white">
           <div className="section-header">
-Details -
+            Details -
             {eventsSorted.getIn([selectedEventId, 'name'])}
           </div>
           {selectedEventId.length && ['duration', 'venue', 'spending', 'value', 'comment'].map(field => (

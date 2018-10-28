@@ -310,7 +310,6 @@ export class NoteEditor extends React.Component {
                   role="button"
                   tabIndex="0"
                   onKeyDown={event => this.updateKeysDown(event)}
-                  onKeyUp={event => this.updateKeysUp(event)}
                 >
                   <CustomToolbar index={2} />
                   <ReactQuill

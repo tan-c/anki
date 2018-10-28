@@ -68,7 +68,6 @@ export class PlanningPage extends React.Component {
     return (
       <React.Fragment>
         <Grid.Row>
-
           <Grid.Column
             width={2}
             className="left-aside"
@@ -87,13 +86,15 @@ export class PlanningPage extends React.Component {
             }}
           >
 
-            <Grid.Row>
-              <span className="flex-1 border-right" />
+            {/* <Grid columns={3}>
+            </Grid> */}
+            <Grid columns={8}>
+              <Grid.Column></Grid.Column>
               {plannedPomos.keySeq().map((key, index) => (
-                <span className="flex-4 border-right" key={key}>
+                <Grid.Column key={key}>
                   {parseInt(key, 10) + 1}
-                </span>))}
-            </Grid.Row>
+                </Grid.Column>))}
+            </Grid>
 
             {this.getHourblocks().map(hourblock => (
               <Grid.Row

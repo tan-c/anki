@@ -21,7 +21,7 @@ export class DailyMeasurements extends React.Component {
     const items = [{
       id: 'morningWeight',
       name: 'Weight',
-      type: 'daily',
+      type: 'gym',
     }, {
       id: 'weight',
       name: 'Weight Post Gym',
@@ -56,7 +56,10 @@ export class DailyMeasurements extends React.Component {
           && (
             <React.Fragment>
               {items.filter(i => i.type === showingItemType).map(item => (
-                <span key={item.id} className={`flex-container-row typical-setup ${(item.id === 'morningWeight') && (!currentDayMeasurementRecord.has(item.id) || currentDayMeasurementRecord.get(item.id) === 0) && 'bg-red'}`}>
+                <span
+                  key={item.id}
+                  className={`flex-container-row typical-setup ${(item.id === 'morningWeight') && (!currentDayMeasurementRecord.has(item.id) || currentDayMeasurementRecord.get(item.id) === 0) && 'bg-red'}`}
+                >
                   <span className="flex-1">{item.name}</span>
                   <InputUncontrolledConnected
                     inputName={item.id}

@@ -115,7 +115,7 @@ export class Header extends React.Component {
               </Menu.Item>
 
               <Menu.Item>
-                {`${filteredAnkis.size}}/${revisionAnkisTotal}`}
+                {`${filteredAnkis.size}/${revisionAnkisTotal}`}
               </Menu.Item>
             </React.Fragment>
           )}

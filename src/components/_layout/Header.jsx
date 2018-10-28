@@ -262,7 +262,6 @@ export class Header extends React.Component {
 
           <Menu.Item>
             <Icon
-              id="right-aside-button"
               color={`${isHeaderNextPomoOn ? 'green' : 'black'}`}
               name="eye"
               onClick={(_) => {

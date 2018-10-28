@@ -15,7 +15,8 @@ import {
   Icon,
   Menu,
   Sidebar,
-  Button
+  Button,
+  Label
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
@@ -59,22 +60,13 @@ export class RightSidebarComponent extends React.Component {
     }];
 
     return (
-      <Sidebar
-        as={Menu}
-        animation="overlay"
-        direction="right"
-        inverted
-        vertical
-        visible
-        width="thin"
-        style={{
-          // width: 140,
-        }}
-      >
+      <React.Fragment>
         <Menu.Item>
           <Button
             color="blue"
             id="logout-button"
+            fluid
+            size="small"
             onClick={this.logout}
           >
             Logout
@@ -90,75 +82,67 @@ export class RightSidebarComponent extends React.Component {
           <span className="height-25 font-12">{currentUser.get('email')}</span>
         </Menu.Item>
 
-        <Menu.Item
+        {/* <Menu.Item
           as={Link}
           to="/housingPrices"
           active={location.href.indexOf('/housingPrices') > -1}
         >
           <Icon name="building" />
           Toshigo
-        </Menu.Item>
+        </Menu.Item> */}
 
         {configs.map(configType => (
-          <div key={configType.type}>
-            <div className="flex-container-row typical-setup border-bottom-white">
-              {configType.type}
-            </div>
+          <Menu.Item key={configType.type}>
+            {configType.type}
 
-            {configType.items.map(config => (
-              <div key={config.name} className="flex-container-row typical-setup">
-                <span className="flex-1">
-                  {config.displayName}
-                  {config.value}
-                </span>
-                <span
-                  className={`width-40 border-white text-center ${config.value ? 'bg-green' : 'bg-red'}`} tabIndex={-1} role="button" onClick={() => {
+            <Menu.Menu>
+              {configType.items.map(config => (
+                <Menu.Item
+                  key={config.name}
+                  onClick={() => {
                     this.props.UserActions.update(currentUser.setIn(['config', config.name], !config.value));
                   }}
                 >
-                  {config.value ? 'ON' : 'OFF'}
-                </span>
-              </div>
-            ))}
-
-          </div>
+                  {config.displayName}
+                  <Label
+                    color={`${config.value ? 'green' : 'red'}`}
+                  >
+                    {config.value ? 'ON' : 'OFF'}
+                  </Label>
+                </Menu.Item>
+              ))}
+            </Menu.Menu>
+          </Menu.Item>
         ))}
 
-
-        <div>
-          <div className="border-bottom-white">
-            AnkiTags
-          </div>
-
+        <Menu.Item>
           <InputNewComponent
             inputName="name"
             inputClassNames="flex-1"
             actions={this.props.AnkiTagActions}
           />
+        </Menu.Item>
 
-          {ankiTags.valueSeq().map(tag => (
-            <div
-              className="flex-container-row"
-              key={tag.get('_id')}
-            >
-              <span className="flex-1">
+        <Menu.Item>
+          <Icon name="graduation cap" />
+          AnkiTags
+          <Menu.Menu>
+            {ankiTags.valueSeq().map(tag => (
+              <Menu.Item
+                key={tag.get('_id')}
+              >
                 {tag.get('name')}
-              </span>
-              <span className="width-20">
-                <i
-                  role="button"
-                  tabIndex="-1"
-                  className="line-height-30 width-20 fa fa-fw fa-close"
+                <Icon
+                  name="close"
                   onClick={(_) => {
                     this.props.AnkiTagActions.deleteRecord(tag);
                   }}
                 />
-              </span>
-
-            </div>
-          ))}
-        </div>
-      </Sidebar>
+              </Menu.Item>
+            ))}
+          </Menu.Menu>
+        </Menu.Item>
+      </React.Fragment>
     );
   }
 }

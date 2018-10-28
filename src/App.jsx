@@ -152,7 +152,22 @@ export class App extends React.Component {
                 </Sidebar>
               </Responsive>
 
-              {isRightSidebarOn && <RightSidebarConnected />}
+              {isRightSidebarOn && (
+                <Sidebar
+                  as={Menu}
+                  animation="overlay"
+                  direction="right"
+                  // inverted
+                  vertical
+                  visible
+                  width="thin"
+                  style={{
+                    // width: 140,
+                  }}
+                >
+                  <RightSidebarConnected />
+                </Sidebar>
+              )}
 
               <Grid style={{
                 position: 'fixed',

@@ -82,6 +82,7 @@ export class Header extends React.Component {
       currentUser,
       // weatherInfo,
       showModal,
+      isHeaderNextPomoOn,
     } = this.props;
 
     const { currentTime, showEyeTimeoutBlinking } = this.state;
@@ -262,6 +263,17 @@ export class Header extends React.Component {
           <Menu.Item>
             <Icon
               id="right-aside-button"
+              color={`${isHeaderNextPomoOn ? 'green' : 'black'}`}
+              name="eye"
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['isHeaderNextPomoOn'], !isHeaderNextPomoOn);
+              }}
+            />
+          </Menu.Item>
+
+          <Menu.Item>
+            <Icon
+              id="right-aside-button"
               color="black"
               name="cog"
               onClick={(_) => {
@@ -278,6 +290,7 @@ export class Header extends React.Component {
 Header.defaultProps = {
   showModal: '',
   isRightSidebarOn: true,
+  isHeaderNextPomoOn: true,
 
   currentUser: Map(),
   // weatherInfo: Map(),
@@ -297,6 +310,8 @@ Header.defaultProps = {
 Header.propTypes = {
   showModal: PropTypes.string,
   isRightSidebarOn: PropTypes.bool,
+  isHeaderNextPomoOn: PropTypes.bool,
+
   currentUser: PropTypes.object,
   // currentUserImageSrc: PropTypes.string.isRequired,
   // weatherInfo: PropTypes.object,
@@ -321,6 +336,7 @@ function mapStateToProps(state, ownProps) {
   return {
     showModal: state.ui.getIn(['himalayan', 'showModal']),
     isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
+    isHeaderNextPomoOn: state.ui.getIn(['isHeaderNextPomoOn']),
 
     currentUser: currentUserSelector(state),
     // currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),

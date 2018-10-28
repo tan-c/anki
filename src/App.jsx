@@ -109,9 +109,12 @@ export class App extends React.Component {
     const {
       currentUser,
       isRightSidebarOn,
+      isHeaderNextPomoOn
     } = this.props;
 
-    const { viewGreaterThan450 } = this.state;
+    const {
+      viewGreaterThan450
+    } = this.state;
 
     const eyeSaving = currentUser.hasIn(['config', 'eyeSaving'])
       && currentUser.getIn(['config', 'eyeSaving']);
@@ -169,22 +172,24 @@ export class App extends React.Component {
                 </Sidebar>
               )}
 
-              <Grid style={{
-                position: 'fixed',
-                top: 0,
-                left: '10%',
-                width: '80%',
-                height: 30,
-                lineHeight: '30px',
-                border: '1px solid black',
-                background: 'rgba(255, 255, 255, 0.8)',
-                zIndex: 1000,
-                padding: 0,
-                margin: 0
-              }}
-              >
-                <HeaderNextPomoConnected />
-              </Grid>
+              {isHeaderNextPomoOn && (
+                <Grid style={{
+                  position: 'fixed',
+                  top: 0,
+                  left: '10%',
+                  width: '80%',
+                  height: 30,
+                  lineHeight: '30px',
+                  border: '1px solid black',
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  zIndex: 1000,
+                  padding: 0,
+                  margin: 0
+                }}
+                >
+                  <HeaderNextPomoConnected />
+                </Grid>
+              )}
 
 
               <Responsive
@@ -292,11 +297,13 @@ export class App extends React.Component {
 
 App.defaultProps = {
   currentUser: Map(),
-  isRightSidebarOn: true
+  isRightSidebarOn: true,
+  isHeaderNextPomoOn: true,
 };
 
 App.propTypes = {
   isRightSidebarOn: PropTypes.bool,
+  isHeaderNextPomoOn: PropTypes.bool,
   // history: PropTypes.object.isRequired,
 
   currentUser: PropTypes.object,
@@ -305,6 +312,7 @@ App.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
+    isHeaderNextPomoOn: state.ui.getIn(['isHeaderNextPomoOn']),
 
     showModal: state.ui.getIn(['showModal']),
     currentUser: currentUserSelector(state),

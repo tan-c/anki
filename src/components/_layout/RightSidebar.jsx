@@ -89,8 +89,7 @@ export class RightSidebarComponent extends React.Component {
 
         <Menu.Item>
           <span className="height-25">
-            欢迎回来,
-            {currentUser.get('userName')}
+            {`欢迎回来, ${currentUser.get('userName')}`}
           </span>
           <br />
           <span className="height-25 font-12">{currentUser.get('email')}</span>

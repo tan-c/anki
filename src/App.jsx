@@ -41,7 +41,7 @@ import RightSidebarConnected from './components/_layout/RightSidebar';
 import AnkiListConnected from './components/AnkiList/List';
 import IntelNotesConnected from './components/IntelNotes/Page';
 import HousingPricesConnected from './components/HousingPrices/Page';
-import HourblockConnected from './components/Hourblock/Page';
+import HourblockRecordConnected from './components/HourblockRecord/Page';
 
 import NoteConnected from './components/UserNote';
 import AnkiPageConnected from './components/AnkiLearn/Page';
@@ -208,8 +208,8 @@ export class App extends React.Component {
                   />
                   <Route
                     exact
-                    path="/hourblock"
-                    component={HourblockConnected}
+                    path="/hourblock/record"
+                    component={HourblockRecordConnected}
                   />
                   <Route
                     path="/hourblock/workout"

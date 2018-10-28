@@ -49,8 +49,8 @@ export class SidebarComponent extends React.Component {
           <Menu.Menu>
             <Menu.Item
               as={Link}
-              to="/hourblock"
-              active={location.pathname === '/hourblock'}
+              to="/hourblock/record"
+              active={location.pathname === '/hourblock/record'}
             >
               Dashboard
             </Menu.Item>

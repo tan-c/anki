@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 // import toastr from 'toastr';
 import SelectConnected from 'utility-react-component/Form/Select';
 import moment from 'moment';
 import {
-  Menu, Icon, Modal, Button, Segment
+  Menu, Icon, Modal, Button, Responsive, Dropdown
 } from 'semantic-ui-react';
 import { currentUserSelector } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';
@@ -280,6 +280,41 @@ export class Header extends React.Component {
               }}
             />
           </Menu.Item>
+
+          <Responsive
+            minWidth={450}
+            as={Menu.Item}
+          >
+            <Dropdown
+              item
+              color="black"
+              icon="mobile"
+            >
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  as={Link}
+                  to="/anki/learn"
+                >
+                  Anki Learn
+                </Dropdown.Item>
+                <Dropdown.Item
+                  as={Link}
+                  to="/anki/list"
+                >
+                  Anki List
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+
+            {/* <Icon
+              id="right-aside-button"
+              color="black"
+              name="mobile"
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
+              }}
+            /> */}
+          </Responsive>
         </Menu.Menu>
       </React.Fragment>
     );

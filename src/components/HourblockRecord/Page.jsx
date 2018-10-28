@@ -17,8 +17,8 @@ import EventDetailsConnected from './ExtraSection/Event/Details';
 import DailyCalorieDetailsConnected from './ExtraSection/Daily/CalorieDetails';
 import DailySleepDetailsConnected from './ExtraSection/Daily/SleepDetails';
 import DailyMeasurementsConnected from './ExtraSection/Daily/Measurements';
-import CategoryInsightsConnected from './LeftAside/CategoryInsights';
-import WeeklyInsightsConnected from './LeftAside/WeeklyInsights';
+import CategoryInsightsConnected from '../Hourblock/LeftAside/CategoryInsights';
+import WeeklyInsightsConnected from '../Hourblock/LeftAside/WeeklyInsights';
 
 import FooterConnected from './Footer';
 
@@ -120,7 +120,6 @@ export class HourBlockPage extends React.Component {
       <React.Fragment>
         <Grid.Row
           data-role="hourblock-page"
-          id="hourblock"
           style={{
             height: '100%'
           }}

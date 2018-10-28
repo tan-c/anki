@@ -26,9 +26,11 @@ export class WeeklyInsights extends React.Component {
     const {
       todayTotal,
       yearlyAverage,
-      thisWeekTotal, lastWeekTotal,
+      thisWeekTotal,
+      lastWeekTotal,
       thisWeekTotalCalorie,
-      calorieWeeklyMaintain, calorieWeeklyWeightLoss,
+      calorieWeeklyMaintain,
+      calorieWeeklyWeightLoss,
     } = this.props;
 
     return (

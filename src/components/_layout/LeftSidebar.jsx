@@ -52,7 +52,7 @@ export class SidebarComponent extends React.Component {
               to="/hourblock/record"
               active={location.pathname === '/hourblock/record'}
             >
-              Dashboard
+              Record
             </Menu.Item>
 
             <Menu.Item

@@ -9,6 +9,8 @@ import { Grid } from 'semantic-ui-react';
 import { UiActions } from 'utility-redux/ui';
 import { PlannedPomoActions, plannedPomoByDayOfWeekSelector } from 'utility-redux/plannedPomo';
 import PlanningItemConnected from './Item';
+import CategoryInsightsConnected from '../Hourblock/LeftAside/CategoryInsights';
+import WeeklyInsightsConnected from '../Hourblock/LeftAside/WeeklyInsights';
 
 export class PlanningPage extends React.Component {
   // constructor(props, context) {
@@ -65,35 +67,57 @@ export class PlanningPage extends React.Component {
 
     return (
       <React.Fragment>
-        <Grid.Row data-role="planning-page">
-          <span className="flex-1 border-right" />
-          {plannedPomos.keySeq().map((key, index) => (
-            <span className="flex-4 border-right" key={key}>
-              {parseInt(key, 10) + 1}
-            </span>))}
-        </Grid.Row>
+        <Grid.Row>
 
-        {this.getHourblocks().map(hourblock => (
-          <Grid.Row
-            className={`flex-container-row typical-setup border-bottom ${hourblock % 2 === 0 && 'border-top'} ${hourblock % 4 === 0 && 'border-top-white'}`}
-            key={hourblock}
+          <Grid.Column
+            width={2}
+            className="left-aside"
+            style={{
+              overflow: 'auto'
+            }}
           >
-            <span className="width-50">
-              {moment().tz('Asia/Tokyo').startOf('day').add(hourblock / 2, 'hour')
-                .format('HH:mm')}
-            </span>
+            <CategoryInsightsConnected />
+            <WeeklyInsightsConnected />
+          </Grid.Column>
 
-            {[0, 1, 2, 3, 4, 5, 6].map(day => (
-              <PlanningItemConnected
-                key={day}
-                hourblock={hourblock}
-                day={day}
-                plannedPomo={plannedPomos.getIn([day.toString(), 'plannedPomos', hourblock.toString()]) || Map()}
-                updatePlannedPomo={this.updatePlannedPomo}
-                updateRecurTask={this.updateRecurTask}
-              />
-            ))}
-          </Grid.Row>))}
+          <Grid.Column
+            width={14}
+            style={{
+              overflow: 'auto'
+            }}
+          >
+
+            <Grid.Row>
+              <span className="flex-1 border-right" />
+              {plannedPomos.keySeq().map((key, index) => (
+                <span className="flex-4 border-right" key={key}>
+                  {parseInt(key, 10) + 1}
+                </span>))}
+            </Grid.Row>
+
+            {this.getHourblocks().map(hourblock => (
+              <Grid.Row
+                className={`flex-container-row typical-setup border-bottom ${hourblock % 2 === 0 && 'border-top'} ${hourblock % 4 === 0 && 'border-top-white'}`}
+                key={hourblock}
+              >
+                <span className="width-50">
+                  {moment().tz('Asia/Tokyo').startOf('day').add(hourblock / 2, 'hour')
+                    .format('HH:mm')}
+                </span>
+
+                {[0, 1, 2, 3, 4, 5, 6].map(day => (
+                  <PlanningItemConnected
+                    key={day}
+                    hourblock={hourblock}
+                    day={day}
+                    plannedPomo={plannedPomos.getIn([day.toString(), 'plannedPomos', hourblock.toString()]) || Map()}
+                    updatePlannedPomo={this.updatePlannedPomo}
+                    updateRecurTask={this.updateRecurTask}
+                  />
+                ))}
+              </Grid.Row>))}
+          </Grid.Column>
+        </Grid.Row>
       </React.Fragment>
     );
   }

@@ -94,6 +94,10 @@ export class App extends React.Component {
   //   // }
   // }
 
+  componentDidMount() {
+    this.handleOnUpdate();
+  }
+
   handleOnUpdate = () => {
     this.setState({
       viewGreaterThan450: Math.min(document.documentElement.clientWidth, screen.width) >= 450

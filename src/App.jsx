@@ -176,7 +176,7 @@ export class App extends React.Component {
                 width: '80%',
                 height: 30,
                 lineHeight: '30px',
-                borderBottom: '1px solid black',
+                border: '1px solid black',
                 background: 'rgba(255, 255, 255, 0.8)',
                 zIndex: 1000,
                 padding: 0,

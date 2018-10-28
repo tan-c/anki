@@ -6,6 +6,7 @@ import toastr from 'toastr';
 
 import { Map } from 'immutable';
 
+import { UiActions } from 'utility-redux/ui';
 import { UserActions, currentUserSelector } from 'utility-redux/user';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
 import InputNewComponent from 'utility-react-component/Form/Input/New';
@@ -61,6 +62,19 @@ export class RightSidebarComponent extends React.Component {
 
     return (
       <React.Fragment>
+        <Menu.Item>
+          <Button>
+            <Icon
+              id="right-aside-button"
+              color="black"
+              name="cog"
+              onClick={(_) => {
+                this.props.UiActions.updateIn(['isRightSidebarOn'], false);
+              }}
+            />
+          </Button>
+        </Menu.Item>
+
         <Menu.Item>
           <Button
             color="blue"
@@ -175,6 +189,7 @@ function mapDispatchToProps(dispatch) {
       user: currentUser,
     }),
     UserActions: bindActionCreators(UserActions, dispatch),
+    UiActions: bindActionCreators(UiActions, dispatch),
     AnkiTagActions: bindActionCreators(AnkiTagActions, dispatch),
   };
 }

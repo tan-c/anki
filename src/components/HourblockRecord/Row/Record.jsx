@@ -40,7 +40,7 @@ export class HourBlockRowRecord extends React.Component {
       isToday, currentSectionOfDay
     } = this.props;
 
-    const isTodayFuture = isToday && currentSectionOfDay < sectionOfDay;
+    const isTodayFuture = isToday && currentSectionOfDay <= sectionOfDay;
 
     // const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
 

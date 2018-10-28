@@ -58,9 +58,19 @@ export class WeeklyInsights extends React.Component {
           height: 40
         }}
         >
-          {`${todayTotal}/${yearlyAverage.toFixed(1)}`}
-          <br />
-          {`${thisWeekTotal}/${lastWeekTotal}`}
+          <div style={{
+            left: 0,
+            bottom: 0,
+            position: 'absolute',
+            textAlign: 'center',
+            width: '100%',
+          }}
+          >
+            {`${todayTotal}/${yearlyAverage.toFixed(1)}`}
+            <br />
+            {`${thisWeekTotal}/${lastWeekTotal}`}
+          </div>
+
           <div
             className="bg-orange" style={{
               width: `${todayTotal <= yearlyAverage ? (todayTotal * 100) / yearlyAverage : 100}%`,

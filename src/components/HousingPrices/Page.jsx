@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Grid } from 'semantic-ui-react';
 // import { bindActionCreators } from 'redux';
 // import { fromJS } from 'immutable';
 import ReactTable from 'react-table';
@@ -29,7 +30,11 @@ class HousingPricesPage extends React.Component {
     // ];
 
     return (
-      <React.Fragment>
+      <Grid.Row style={{
+        background: 'white',
+        color: 'black',
+      }}
+      >
         {housingPrices.count() > 0 ? (
           <ReactTable
             data={housingPrices.valueSeq().toJS()}
@@ -46,7 +51,7 @@ class HousingPricesPage extends React.Component {
         ) : (
           <div> Nothing yet...</div>
         )}
-      </React.Fragment>
+      </Grid.Row>
     );
   }
 }

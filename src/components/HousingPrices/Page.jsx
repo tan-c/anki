@@ -30,9 +30,10 @@ class HousingPricesPage extends React.Component {
     // ];
 
     return (
-      <Grid.Row style={{
+      <Grid.Column style={{
         background: 'white',
         color: 'black',
+        height: '100%',
       }}
       >
         {housingPrices.count() > 0 ? (
@@ -49,9 +50,9 @@ class HousingPricesPage extends React.Component {
             ]}
           />
         ) : (
-          <div> Nothing yet...</div>
+          <span> Nothing yet...</span>
         )}
-      </Grid.Row>
+      </Grid.Column>
     );
   }
 }

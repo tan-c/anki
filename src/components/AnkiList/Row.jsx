@@ -24,17 +24,12 @@ export class AnkiRow extends React.Component {
         }}
       >
         <Grid.Column
-          width={1}
-        >
-        </Grid.Column>
-
-        <Grid.Column
-          width={11}
+          width={12}
           textAlign="left"
         >
           <Label
             style={{
-              width: 50,
+              width: 40,
               background: 'orange',
               color: 'white',
               textAlign: 'center'
@@ -49,10 +44,7 @@ export class AnkiRow extends React.Component {
           width={4}
           textAlign="center"
         >
-          <Label style={{
-            width: 20
-          }}
-          >
+          <Label>
             {anki.has('tags') ? anki.get('tags').size : 0}
           </Label>
 

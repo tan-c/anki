@@ -39,7 +39,11 @@ class HousingDataPage extends React.Component {
 
 
   render() {
-    const { houseList, landList } = this.props;
+    const {
+      houseList,
+      landList,
+      mansionList
+    } = this.props;
 
     const panes = [
       {
@@ -74,6 +78,22 @@ class HousingDataPage extends React.Component {
           </Tab.Pane>
         )
       },
+      {
+        menuItem: (
+          <Menu.Item key="Mansion">
+            Mansion
+            <Label>
+              {mansionList.length}
+            </Label>
+          </Menu.Item>),
+        render: () => (
+          <Tab.Pane
+            attached={false}
+          >
+            {this.getPaneData(mansionList)}
+          </Tab.Pane>
+        )
+      }
     ];
 
 
@@ -99,18 +119,21 @@ class HousingDataPage extends React.Component {
 
 HousingDataPage.defaultProps = {
   houseList: [],
-  landList: []
+  landList: [],
+  mansionList: []
 };
 
 HousingDataPage.propTypes = {
   houseList: PropTypes.array,
   landList: PropTypes.array,
+  mansionList: PropTypes.array,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     houseList: housingDataByTypeIntoJSListSelector(state, 'house'),
     landList: housingDataByTypeIntoJSListSelector(state, 'land'),
+    mansionList: housingDataByTypeIntoJSListSelector(state, 'mansion'),
   };
 }
 

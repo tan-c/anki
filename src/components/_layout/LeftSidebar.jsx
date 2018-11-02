@@ -174,8 +174,8 @@ export class SidebarComponent extends React.Component {
 
         <Menu.Item
           as={Link}
-          to="/housingPrices"
-          active={location.pathname === '/housingPrices'}
+          to="/housingDatas"
+          active={location.pathname === '/housingDatas'}
         >
           <Icon name="building" />
           Toshigo

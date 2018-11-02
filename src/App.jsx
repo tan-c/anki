@@ -39,7 +39,7 @@ import RightSidebarConnected from './components/_layout/RightSidebar';
 
 import AnkiListConnected from './components/AnkiList/List';
 import IntelNotesConnected from './components/IntelNotes/Page';
-import HousingPricesConnected from './components/HousingPrices/Page';
+import HousingDataConnected from './components/HousingData/Page';
 import HourblockRecordConnected from './components/HourblockRecord/Page';
 
 import NoteConnected from './components/UserNote';
@@ -280,10 +280,10 @@ export class App extends React.Component {
                     component={IntelNotesConnected}
                   />
                   <Route
-                    path="/housingPrices"
-                    component={HousingPricesConnected}
+                    path="/housingDatas"
+                    component={HousingDataConnected}
                   />
-                  <Redirect from="/housingPrices/*" to="/housingPrices" />
+                  <Redirect from="/housingDatas/*" to="/housingDatas" />
                   <Redirect from="/*" to="/" />
                 </Switch>
               </Responsive>

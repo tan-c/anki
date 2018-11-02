@@ -82,7 +82,7 @@ export function* loadAllDataSaga() {
     // yield* getAll('calorie');
   }
 
-  yield* getAll('housing_price', {}, {
+  yield* getAll('housing_data', {}, {
     acceptHeader: 'application/octet-stream'
   });
 

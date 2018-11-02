@@ -56,7 +56,7 @@ export function* getAll(apiNameSnake, params = {
 
   if (acceptHeader !== 'application/json') {
     // Decode the thing
-    // const { err, root } = yield call(protobuf.load, '../toshigo/housingPrice.proto');
+    // const { err, root } = yield call(protobuf.load, '../toshigo/housingData.proto');
 
     const {
       err,

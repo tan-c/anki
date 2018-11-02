@@ -97,8 +97,8 @@ export class RightSidebarComponent extends React.Component {
 
         {/* <Menu.Item
           as={Link}
-          to="/housingPrices"
-          active={location.href.indexOf('/housingPrices') > -1}
+          to="/housingDatas"
+          active={location.href.indexOf('/housingDatas') > -1}
         >
           <Icon name="building" />
           Toshigo

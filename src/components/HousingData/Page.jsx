@@ -7,9 +7,9 @@ import { Grid } from 'semantic-ui-react';
 import ReactTable from 'react-table';
 import ListColumns from './ListColumns';
 
-class HousingPricesPage extends React.Component {
+class HousingDataPage extends React.Component {
   render() {
-    const { housingPrices } = this.props;
+    const { housingDatas } = this.props;
 
     // ['PRICE', 'GROSS', 'PLACE', 'LINE', 'BUILT_TIME', 'ROOM_SIZE', 'UNIT_NUMBER', 'LAND_SIZE', 'FLOOR', 'MATERIAL'].forEach((field) => {
     //   columns.push({
@@ -36,9 +36,9 @@ class HousingPricesPage extends React.Component {
         height: '100%',
       }}
       >
-        {housingPrices.count() > 0 ? (
+        {housingDatas.count() > 0 ? (
           <ReactTable
-            data={housingPrices.valueSeq().toJS()}
+            data={housingDatas.valueSeq().toJS()}
             columns={ListColumns}
             defaultPageSize={100}
             filterable
@@ -57,17 +57,17 @@ class HousingPricesPage extends React.Component {
   }
 }
 
-HousingPricesPage.defaultProps = {
-  housingPrices: []
+HousingDataPage.defaultProps = {
+  housingDatas: []
 };
 
-HousingPricesPage.propTypes = {
-  housingPrices: PropTypes.any // Should be object, but default reduceCreate pass in Map() at the beginning
+HousingDataPage.propTypes = {
+  housingDatas: PropTypes.any // Should be object, but default reduceCreate pass in Map() at the beginning
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    housingPrices: state.housingPrices
+    housingDatas: state.housingDatas
   };
 }
 
@@ -78,4 +78,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HousingPricesPage);
+)(HousingDataPage);

@@ -1,6 +1,6 @@
 import ankis from 'utility-redux/anki';
 import ankiTags from 'utility-redux/ankiTag';
-import housingPrices from 'utility-redux/housingPrice';
+import housingDatas from 'utility-redux/housingData';
 import notes from 'utility-redux/note';
 import notebooks from 'utility-redux/notebook';
 import notebookGroups from 'utility-redux/notebookGroup';
@@ -28,7 +28,7 @@ export default {
   notebooks,
   notebookGroups,
   files,
-  housingPrices,
+  housingDatas,
 
   categories,
   dailyRecords,

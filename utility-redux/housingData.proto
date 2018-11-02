@@ -1,0 +1,41 @@
+syntax = "proto3";
+package anki;
+import "google/protobuf/any.proto";
+// import "google/protobuf/wrappers.proto";
+
+message HousingData {
+  repeated OneRecord records = 1;
+
+  message OneRecord {
+    string _id = 99;
+    string itemType = 1;
+    string location = 2;
+    string metroLine = 3;
+    string station = 4;
+    int32 stationDistance = 5;
+
+    float landSize = 6;
+    string landSizeType = 7;
+    float houseSize = 8;
+    string houseSizeType = 9;
+    string builtYear = 10;
+
+    string layout = 11;
+    int32 buildingCoverageRate = 12;
+    int32 floorAreaRatio = 13;
+    string utilization = 14;
+    string infoSource = 15;
+
+    // oneof Floor {
+      // int32 FloorInt = 40;
+      // google.protobuf.Any FloorNull = 41;
+    // };
+
+    repeated OnePriceRecord priceRecords = 51;
+    message OnePriceRecord {
+      int32 price = 52;
+      string link = 53;
+      string insertAt = 54;
+    }
+  }
+}

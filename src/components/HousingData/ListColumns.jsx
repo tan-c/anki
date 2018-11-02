@@ -54,25 +54,21 @@ const ListColumns = [
     accessor: 'Price',
     width: 160,
     // sortMethod: numericSortSmallerFirst,
-    Cell: (row) => {
-      console.log('🔥🔥🔥🔥🔥 row 🔥🔥🔥🔥🔥');
-      console.log(row.original);
-      return (
-        <div>
-          {row.original.priceRecords.map(rec => (
-            <Popup
-              key={rec.link}
-              trigger={(
-                <a href={rec.link} className="">
-                  {`${rec.price}, `}
-                </a>
-              )}
-              content={moment(rec.insertAt).format('YYYY-MM-DD hh:mm:ss')}
-            />
+    Cell: row => (
+      <div>
+        {row.original.priceRecords.map(rec => (
+          <Popup
+            key={rec.link}
+            trigger={(
+              <a href={rec.link} className="">
+                {`${rec.price}, `}
+              </a>
+            )}
+            content={moment(rec.insertAt).format('YYYY-MM-DD hh:mm:ss')}
+          />
 
-          ))}
-        </div>);
-    },
+        ))}
+      </div>),
   },
   // {
   //   Header: 'Gross (%)',

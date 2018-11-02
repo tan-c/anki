@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Grid,
-  Tab
+  Tab,
+  Label, Menu
 } from 'semantic-ui-react';
 // import { bindActionCreators } from 'redux';
 // import { fromJS } from 'immutable';
 import ReactTable from 'react-table';
+import { housingDataByTypeIntoJSListSelector } from 'utility-redux/housingData';
 import ListColumns from './ListColumns';
 
+
 class HousingDataPage extends React.Component {
-  getPaneData = (housingDatas, itemType) => (
+  getPaneData = data => (
     <ReactTable
-      data={housingDatas.valueSeq().filter(rec => rec.get('itemType') === itemType).toJS()}
+      data={data}
       columns={ListColumns}
       style={{
         height: 'calc(100vh - 150px)',
@@ -36,43 +39,38 @@ class HousingDataPage extends React.Component {
 
 
   render() {
-    const { housingDatas } = this.props;
+    const { houseList, landList } = this.props;
 
-    // ['PRICE', 'GROSS', 'PLACE', 'LINE', 'BUILT_TIME', 'ROOM_SIZE', 'UNIT_NUMBER', 'LAND_SIZE', 'FLOOR', 'MATERIAL'].forEach((field) => {
-    //   columns.push({
-    //     Header: field,
-    //     accessor: field,
-
-    //   });
-    // });
-
-    // {
-    //   id: 'friendName', // Required because our accessor is not a string
-    //   Header: 'Friend Name',
-    //   accessor: d => d.friend.name, // Custom value accessors!
-    // }, {
-    //   Header: props => <span>Friend Age</span>, // Custom header components!
-    //   accessor: 'friend.age',
-    // }
-    // ];
     const panes = [
       {
-        menuItem: 'House',
+        menuItem: (
+          <Menu.Item key="House">
+            House
+            <Label>
+              {houseList.length}
+            </Label>
+          </Menu.Item>),
         render: () => (
           <Tab.Pane
             attached={false}
           >
-            {this.getPaneData(housingDatas, 'house')}
+            {this.getPaneData(houseList)}
           </Tab.Pane>
         )
       },
       {
-        menuItem: 'Land',
+        menuItem: (
+          <Menu.Item key="Land">
+            Land
+            <Label>
+              {landList.length}
+            </Label>
+          </Menu.Item>),
         render: () => (
           <Tab.Pane
             attached={false}
           >
-            {this.getPaneData(housingDatas, 'land')}
+            {this.getPaneData(landList)}
           </Tab.Pane>
         )
       },
@@ -86,7 +84,7 @@ class HousingDataPage extends React.Component {
         height: '100%',
       }}
       >
-        {housingDatas.count() > 0 ? (
+        {houseList.length > 0 ? (
           <Tab
             menu={{ secondary: true, pointing: true }}
             panes={panes}
@@ -100,21 +98,26 @@ class HousingDataPage extends React.Component {
 }
 
 HousingDataPage.defaultProps = {
-  housingDatas: []
+  houseList: [],
+  landList: []
 };
 
 HousingDataPage.propTypes = {
-  housingDatas: PropTypes.any // Should be object, but default reduceCreate pass in Map() at the beginning
+  houseList: PropTypes.array,
+  landList: PropTypes.array,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    housingDatas: state.housingDatas
+    houseList: housingDataByTypeIntoJSListSelector(state, 'house'),
+    landList: housingDataByTypeIntoJSListSelector(state, 'land'),
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+
+  };
 }
 
 export default connect(

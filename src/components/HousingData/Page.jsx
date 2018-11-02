@@ -1,13 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Grid } from 'semantic-ui-react';
+import {
+  Grid,
+  Tab
+} from 'semantic-ui-react';
 // import { bindActionCreators } from 'redux';
 // import { fromJS } from 'immutable';
 import ReactTable from 'react-table';
 import ListColumns from './ListColumns';
 
 class HousingDataPage extends React.Component {
+  getPaneData = (housingDatas, itemType) => (
+    <ReactTable
+      data={housingDatas.valueSeq().filter(rec => rec.get('itemType') === itemType).toJS()}
+      columns={ListColumns}
+      style={{
+        height: 'calc(100vh - 150px)',
+        overflow: 'auto'
+      }}
+      // defaultPageSize={30}
+      filterable
+      defaultSorted={[
+        {
+          id: 'itemType',
+          desc: true
+        },
+        {
+          id: 'price',
+          desc: true
+        }
+      ]}
+    />
+  )
+
+
   render() {
     const { housingDatas } = this.props;
 
@@ -28,6 +55,29 @@ class HousingDataPage extends React.Component {
     //   accessor: 'friend.age',
     // }
     // ];
+    const panes = [
+      {
+        menuItem: 'House',
+        render: () => (
+          <Tab.Pane
+            attached={false}
+          >
+            {this.getPaneData(housingDatas, 'house')}
+          </Tab.Pane>
+        )
+      },
+      {
+        menuItem: 'Land',
+        render: () => (
+          <Tab.Pane
+            attached={false}
+          >
+            {this.getPaneData(housingDatas, 'land')}
+          </Tab.Pane>
+        )
+      },
+    ];
+
 
     return (
       <Grid.Column style={{
@@ -37,21 +87,9 @@ class HousingDataPage extends React.Component {
       }}
       >
         {housingDatas.count() > 0 ? (
-          <ReactTable
-            data={housingDatas.valueSeq().toJS()}
-            columns={ListColumns}
-            defaultPageSize={30}
-            filterable
-            defaultSorted={[
-              {
-                id: 'itemType',
-                desc: true
-              },
-              {
-                id: 'price',
-                desc: true
-              }
-            ]}
+          <Tab
+            menu={{ secondary: true, pointing: true }}
+            panes={panes}
           />
         ) : (
           <span> Nothing yet...</span>

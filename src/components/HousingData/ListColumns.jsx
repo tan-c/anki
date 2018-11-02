@@ -5,6 +5,7 @@ import moment from 'moment';
 
 const isValidField = field => field !== null && field !== undefined; // Default all invalid data will be null, but predictedPrice might be undefined (no data)
 const numericSortSmallerFirst = (a, b) => a - b;
+
 const ListColumns = [
   {
     Header: 'delta %',
@@ -48,6 +49,7 @@ const ListColumns = [
     sortMethod: numericSortSmallerFirst
   },
   {
+    id: 'price',
     Header: 'Price (万円)',
     accessor: 'Price',
     width: 160,
@@ -72,18 +74,6 @@ const ListColumns = [
         </div>);
     },
   },
-
-  // {
-  //   Header: 'Link',
-  //   accessor: 'link',
-  //   Cell: props => (
-  //     <a href={props.value} className="">
-  //       LINK
-  //     </a>
-  //   ),
-  //   width: 80
-  // }
-
   // {
   //   Header: 'Gross (%)',
   //   accessor: 'Gross',
@@ -91,6 +81,7 @@ const ListColumns = [
   //   sortMethod: numericSortSmallerFirst
   // },
   {
+    id: 'itemType',
     Header: 'Type',
     accessor: 'itemType',
     width: 100
@@ -122,13 +113,23 @@ const ListColumns = [
     Header: 'House Size(㎡)',
     accessor: 'houseSize',
     width: 80,
-    sortMethod: numericSortSmallerFirst
+    sortMethod: numericSortSmallerFirst,
+    Cell: row => (
+      <div>
+        {`${row.value === undefined ? '' : row.value.toFixed(2)}`}
+      </div>
+    ),
   },
   {
     Header: 'Land Size(㎡)',
     accessor: 'landSize',
     width: 80,
-    sortMethod: numericSortSmallerFirst
+    sortMethod: numericSortSmallerFirst,
+    Cell: row => (
+      <div>
+        {`${row.value === undefined ? '' : row.value.toFixed(2)}`}
+      </div>
+    ),
   },
   // {
   //   Header: 'Units(戸)',

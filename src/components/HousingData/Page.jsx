@@ -40,11 +40,15 @@ class HousingDataPage extends React.Component {
           <ReactTable
             data={housingDatas.valueSeq().toJS()}
             columns={ListColumns}
-            defaultPageSize={100}
+            defaultPageSize={30}
             filterable
             defaultSorted={[
               {
-                id: 'diffPerc',
+                id: 'itemType',
+                desc: true
+              },
+              {
+                id: 'price',
                 desc: true
               }
             ]}

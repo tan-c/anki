@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Popup } from 'semantic-ui-react';
+import moment from 'moment';
 
 const isValidField = field => field !== null && field !== undefined; // Default all invalid data will be null, but predictedPrice might be undefined (no data)
 const numericSortSmallerFirst = (a, b) => a - b;
@@ -36,80 +38,113 @@ const ListColumns = [
         }
       };
     },
-    width: 120,
+    width: 80,
     sortMethod: numericSortSmallerFirst
   },
   {
     Header: 'Predicted (万円)',
     accessor: 'PredictedPrice',
-    width: 120,
+    width: 80,
     sortMethod: numericSortSmallerFirst
   },
   {
     Header: 'Price (万円)',
     accessor: 'Price',
-    width: 100,
-    sortMethod: numericSortSmallerFirst
+    width: 160,
+    // sortMethod: numericSortSmallerFirst,
+    Cell: (row) => {
+      console.log('🔥🔥🔥🔥🔥 row 🔥🔥🔥🔥🔥');
+      console.log(row.original);
+      return (
+        <div>
+          {row.original.priceRecords.map(rec => (
+            <Popup
+              key={rec.link}
+              trigger={(
+                <a href={rec.link} className="">
+                  {`${rec.price}, `}
+                </a>
+              )}
+              content={moment(rec.insertAt).format('YYYY-MM-DD hh:mm:ss')}
+            />
+
+          ))}
+        </div>);
+    },
+  },
+
+  // {
+  //   Header: 'Link',
+  //   accessor: 'link',
+  //   Cell: props => (
+  //     <a href={props.value} className="">
+  //       LINK
+  //     </a>
+  //   ),
+  //   width: 80
+  // }
+
+  // {
+  //   Header: 'Gross (%)',
+  //   accessor: 'Gross',
+  //   width: 40,
+  //   sortMethod: numericSortSmallerFirst
+  // },
+  {
+    Header: 'Type',
+    accessor: 'itemType',
+    width: 100
   },
   {
-    Header: 'Gross (%)',
-    accessor: 'Gross',
-    width: 80,
-    sortMethod: numericSortSmallerFirst
-  },
-  {
-    Header: 'Place',
-    accessor: 'Place',
-    minWidth: 300,
+    Header: 'Location',
+    accessor: 'location',
+    minWidth: 120,
     sortable: false
   },
   {
+    id: 'lineInfo',
     Header: 'Line',
-    accessor: 'Line',
-    minWidth: 300,
+    accessor: 'metroLine', // Can be anything
+    Cell: row => (
+      <div>
+        {`${row.original.metroLine}-${row.original.station}-${row.original.stationDistance}`}
+      </div>
+    ),
+    minWidth: 100,
     sortable: false
   },
   {
     Header: 'Built',
-    accessor: 'BuiltTime',
+    accessor: 'builtYear',
     width: 100
   },
   {
-    Header: 'Room Size(㎡)',
-    accessor: 'RoomSize',
+    Header: 'House Size(㎡)',
+    accessor: 'houseSize',
     width: 80,
     sortMethod: numericSortSmallerFirst
   },
   {
-    Header: 'Units(戸)',
-    accessor: 'UnitNumber',
+    Header: 'Land Size(㎡)',
+    accessor: 'landSize',
     width: 80,
     sortMethod: numericSortSmallerFirst
   },
-  {
-    Header: 'Floor',
-    accessor: 'Floor',
-    width: 80,
-    sortable: false
-  },
+  // {
+  //   Header: 'Units(戸)',
+  //   accessor: 'UnitNumber',
+  //   width: 80,
+  //   sortMethod: numericSortSmallerFirst
+  // },
+  // {
+  //   Header: 'Floor',
+  //   accessor: 'Floor',
+  //   width: 80,
+  //   sortable: false
+  // },
   {
     Header: 'Material',
     accessor: 'Material',
-    width: 80
-  },
-  {
-    Header: 'Type',
-    accessor: 'Type',
-    width: 120
-  },
-  {
-    Header: 'Link',
-    accessor: 'Link',
-    Cell: props => (
-      <a href={props.value} className="">
-        LINK
-      </a>
-    ),
     width: 80
   }
 ];

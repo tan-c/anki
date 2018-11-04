@@ -20,7 +20,7 @@ const initialState = {
       selectedYearlyTaskId: '', // this is actually the relative index in the array
     },
     settingsPage: {
-      edittingTarget: 'dailyPomoCount',
+      edittingTarget: 'projects',
       selectedEventId: '',
       selectedWorkoutId: '',
     },

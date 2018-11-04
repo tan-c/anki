@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment';
+import { Button } from 'semantic-ui-react';
 
 import { selectedProjectDailyRecordPomosSelector } from 'utility-redux/dailyRecord';
 import { selectedProjectPlannedPomosSelector } from 'utility-redux/plannedPomo';
@@ -65,9 +66,7 @@ export class SelectedProjectDetails extends React.Component {
             key={ind}
           >
             <span className="flex-1">
-              {rec.day}
-              {' '}
-              {rec.sectionOfDay}
+              {`${rec.day} - ${rec.sectionOfDay}`}
             </span>
           </div>
         ))}
@@ -94,18 +93,18 @@ export class SelectedProjectDetails extends React.Component {
         ))}
 
         <div className="spacing" />
+
         {selectedProject.has('_id')
           && selectedProjectTasks.size === 0
           && selectedProjectEvents.size === 0
-          && selectedProjectPlannedPomos.length === 0
-          && selectedProjectDailyRecordPomos.length === 0 && (
-          <button
-            type="button"
-            className="bg-red flex-1 width-100p"
+          && selectedProjectPlannedPomos.length === 0 && (
+          <Button
+            fluid
+            negative
             onClick={this.deleteProject}
           >
               Delete Project
-          </button>
+          </Button>
         )}
       </React.Fragment>
     );

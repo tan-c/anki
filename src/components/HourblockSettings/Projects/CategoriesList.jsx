@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Map } from 'immutable';
-import { Header } from 'semantic-ui-react';
+import {
+  Header, Icon
+} from 'semantic-ui-react';
 
 import { UiActions } from 'utility-redux/ui';
 import { CategoryActions, categoriesSortedSelector } from 'utility-redux/category';
@@ -33,6 +35,10 @@ export class CategoriesList extends React.Component {
       projectsByCategoryId,
       selectedProject
     } = this.props;
+
+
+    console.log('🔥🔥🔥🔥🔥 selectedProject.toJS() 🔥🔥🔥🔥🔥');
+    console.log(selectedProject.toJS());
 
     return (
       <React.Fragment>
@@ -100,7 +106,25 @@ export class CategoriesList extends React.Component {
                       className="fa fa-fw fa-eye"
                       onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'selectedProjectId'], proj.get('_id'))}
                     />
+
+                    <Icon
+                      color={proj.has('isShortTerm') && proj.get('isShortTerm') ? 'green' : 'white'}
+                      name="list alternate"
+                      onClick={_ => this.props.ProjectActions.update(proj.set('isShortTerm', !proj.get('isShortTerm')))}
+                    />
+                    {/* <Icon.Group size="small">
+                      <Icon
+                        color="white"
+                        name="dont"
+                        size="big"
+                      />
+                      <Icon
+                        color="white"
+                        name="user"
+                      />
+                    </Icon.Group> */}
                   </span>
+
                 </div>))}
 
               <div className="flex-container-row border-top">

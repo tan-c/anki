@@ -33,7 +33,12 @@ export class DailyRecordsChart extends React.Component {
     this.wakeData = [];
     this.restData = [];
 
-    const { dailyRecordByDayOfYearSortedRecency, categories, projects } = this.props;
+    const {
+      dailyRecordByDayOfYearSortedRecency,
+      categories,
+      projects
+    } = this.props;
+
     if (categories.size && dailyRecordByDayOfYearSortedRecency.size) {
       categories.valueSeq().forEach((category, index) => {
         this.categoryCount[category.get('_id')] = 0;
@@ -57,12 +62,19 @@ export class DailyRecordsChart extends React.Component {
           dailyRecord.get('pomo').forEach((pomo) => {
             if (pomo !== null) {
               let categoryId = '';
-              if (pomo.hasIn(['project', '_id'])) { // Populated Record
+              if (pomo.has('category') && pomo.get('category') !== null) {
+                categoryId = pomo.get('category');
+              } else if (pomo.hasIn(['project', '_id'])) { // Populated Record
                 categoryId = pomo.getIn(['project', 'category', '_id']);
-              } else {
+              } else if (projects.hasIn([pomo.get('project'), 'category', '_id'])) {
                 categoryId = projects.getIn([pomo.get('project'), 'category', '_id']);
+              } else { // The ProjectId for the pomo has been deleted
+                // FIXME: do nothing for now.
               }
-              this.categoryCount[categoryId] += 1;
+
+              if (categoryId.length) {
+                this.categoryCount[categoryId] += 1;
+              }
             }
           });
 

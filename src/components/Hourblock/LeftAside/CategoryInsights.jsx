@@ -75,61 +75,66 @@ export class CategoryInsights extends React.Component {
                 position: 'relative',
               }}
             >
-              {projectsByCategoryId.has(cat.get('_id')) && projectsByCategoryId.get(cat.get('_id')).valueSeq().map(proj => (
-                <div
-                  key={proj.get('_id')}
-                  style={{
-                    display: 'flex',
-                    position: 'relative',
-                    // overflow: 'hidden',
-                    height: 15,
-                    lineHeight: '15px',
-                  }}
-                >
-                  <span style={{
-                    textAlign: 'left',
-                    fontSize: 12,
-                    flex: 1
-                  }}
+              {
+                projectsByCategoryId.has(cat.get('_id'))
+                && projectsByCategoryId.get(cat.get('_id')).valueSeq().map(proj => (
+                  <div
+                    key={proj.get('_id')}
+                    style={{
+                      display: 'flex',
+                      position: 'relative',
+                      // overflow: 'hidden',
+                      height: 15,
+                      lineHeight: '15px',
+                      color: proj.get('isShortTerm') ? '#e67e22' : 'white'
+                    }}
                   >
-                    {`${proj.get('name')}`}
-                  </span>
+                    <span style={{
+                      textAlign: 'left',
+                      fontSize: 12,
+                      flex: 1
+                    }}
+                    >
+                      {`${proj.get('name')}`}
+                    </span>
 
-                  <span style={{
-                    fontSize: 12,
-                    // width: 40,
-                    // textAlign: "center"
-                  }}
-                  >
-                    {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}
-                    /
-                    {projectPlannedTotal[proj.get('_id')] !== undefined ? projectPlannedTotal[proj.get('_id')] : 0}
-                    {/* { proj.get('estimatedHour') } */}
-                  </span>
+                    <span style={{
+                      fontSize: 12,
+                      // width: 40,
+                      // textAlign: "center"
+                    }}
+                    >
+                      {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}
+                      /
+                      {projectPlannedTotal[proj.get('_id')] !== undefined ? projectPlannedTotal[proj.get('_id')] : 0}
+                      {/* { proj.get('estimatedHour') } */}
+                    </span>
 
 
-                  {proj.get('estimatedHour') > 0 && projectTotal.has(proj.get('_id')) && projectTotal.get(proj.get('_id')) >= proj.get('estimatedHour')
-                    && <i className="fa fa-fw fa-check color-green" />
-                  }
+                    {proj.get('estimatedHour') > 0
+                      && projectTotal.has(proj.get('_id'))
+                      && projectTotal.get(proj.get('_id')) >= proj.get('estimatedHour')
+                      && <i className="fa fa-fw fa-check color-green" />
+                    }
 
-                  {proj.get('estimatedHour') > 0
-                    && projectTotal.has(proj.get('_id'))
-                    && projectTotal.get(proj.get('_id')) < proj.get('estimatedHour')
-                    && (
-                      <div
-                        style={{
-                          backgroundColor: cat.get('color'),
-                          width: `${(projectTotal.get(proj.get('_id')) / proj.get('estimatedHour')) * 100}%`,
-                          position: 'absolute',
-                          height: 3,
-                          zIndex: -1,
-                          left: 0,
-                          top: 6,
-                        }}
-                      />
-                    )
-                  }
-                </div>))
+                    {proj.get('estimatedHour') > 0
+                      && projectTotal.has(proj.get('_id'))
+                      && projectTotal.get(proj.get('_id')) < proj.get('estimatedHour')
+                      && (
+                        <div
+                          style={{
+                            backgroundColor: cat.get('color'),
+                            width: `${(projectTotal.get(proj.get('_id')) / proj.get('estimatedHour')) * 100}%`,
+                            position: 'absolute',
+                            height: 3,
+                            zIndex: -1,
+                            left: 0,
+                            top: 6,
+                          }}
+                        />
+                      )
+                    }
+                  </div>))
               }
             </div>
           </div>))

@@ -45,29 +45,30 @@ export class HourBlockList extends React.Component {
     this.updateCurrentSection();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { location, history, plannedPomos } = this.props;
+  // TODO: bring back saving pomo from SW in the future
+  // componentWillReceiveProps(nextProps) {
+  //   const { location, history, plannedPomos } = this.props;
 
-    // This is for the trigger from clicking the notification
-    const keyAction = 'swAction=applyPomo';
-    if (location.search.indexOf(keyAction) === -1 && nextProps.location.search.indexOf(keyAction) > -1) {
-      const pomoIndex = nextProps.location.search.split('pomoIndex=')[1]; // .split("&")[1]
+  //   // This is for the trigger from clicking the notification
+  //   const keyAction = 'swAction=applyPomo';
+  //   if (location.search.indexOf(keyAction) === -1 && nextProps.location.search.indexOf(keyAction) > -1) {
+  //     const pomoIndex = nextProps.location.search.split('pomoIndex=')[1]; // .split("&")[1]
 
-      const plannedPomo = plannedPomos.getIn(['plannedPomos', pomoIndex.toString()]);
-      if (!plannedPomo.hasIn(['project', '_id'])) {
-        toastr.error('This Pomo Has No Project Set');
-        return;
-      }
+  //     const plannedPomo = plannedPomos.getIn(['plannedPomos', pomoIndex.toString()]);
+  //     if (!plannedPomo.hasIn(['project', '_id'])) {
+  //       toastr.error('This Pomo Has No Project Set');
+  //       return;
+  //     }
 
-      this.addPomoRecord({
-        target: {
-          value: plannedPomo.getIn(['project', '_id']),
-        },
-      }, pomoIndex);
+  //     this.addPomoRecord({
+  //       target: {
+  //         value: plannedPomo.getIn(['project', '_id']),
+  //       },
+  //     }, pomoIndex);
 
-      history.push({ search: '' });
-    }
-  }
+  //     history.push({ search: '' });
+  //   }
+  // }
 
   onChangePlannedPomo = (sectionOfDay, plannedPomo, event, extraField) => {
     this.setState({
@@ -104,14 +105,23 @@ export class HourBlockList extends React.Component {
   }
 
   addPomoRecord = (event, sectionOfDay) => {
-    const { currentDayRecord, plannedPomos } = this.props;
+    const {
+      currentDayRecord,
+      plannedPomos,
+      projects
+    } = this.props;
     const plannedPomo = plannedPomos.getIn(['plannedPomos', sectionOfDay.toString()]);
     // const mainTask = plannedPomo !== undefined && plannedPomo.hasIn(['tasks', 'main']) ? plannedPomo.getIn(['tasks', 'main']) : '';
+
+
+    console.log('🔥🔥🔥🔥🔥 projects.toJS() 🔥🔥🔥🔥🔥');
+    console.log(projects.toJS());
 
     const newDailyRecord = currentDayRecord.setIn(['pomo', (sectionOfDay).toString()], {
       sectionOfDay,
       content: event.target.content === undefined ? '' : event.target.content,
-      project: event.target.value, // (event.target.value !== '5a407cddb2d1ea74acc223c0' && !mainTask.length) ? '5a080c8597ae233e973d5399' : event.target.value,
+      project: event.target.value,
+      category: projects.getIn([event.target.value, 'category', '_id']),
       isCompliant: event.target.isCompliant,
     });
     this.props.DailyRecordActions.update(newDailyRecord);
@@ -125,11 +135,6 @@ export class HourBlockList extends React.Component {
         value: '',
       },
     });
-    // {
-    //   name: 'mainTaskLocked',
-    //   value: false,
-    // }
-    // }
   };
 
   addEventToRecord = (event, sectionOfDay) => {
@@ -218,6 +223,7 @@ export class HourBlockList extends React.Component {
 }
 
 HourBlockList.defaultProps = {
+  projects: Map(),
   currentDayRecord: Map(),
   plannedPomos: Map(),
   currentSectionOfDay: 0,
@@ -225,8 +231,10 @@ HourBlockList.defaultProps = {
 };
 
 HourBlockList.propTypes = {
-  location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  projects: PropTypes.object,
+
+  // location: PropTypes.object.isRequired,
+  // history: PropTypes.object.isRequired,
 
   isoWeekDay: PropTypes.number.isRequired,
   currentSectionOfDay: PropTypes.number,
@@ -242,6 +250,8 @@ HourBlockList.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    projects: state.projects,
+
     isoWeekDay: ownProps.dayMomentObject.isoWeekday(),
     // projectsById: state.projects,
     currentSectionOfDay: state.ui.getIn(['hourblock', 'hourblockPage', 'currentSectionOfDay']),

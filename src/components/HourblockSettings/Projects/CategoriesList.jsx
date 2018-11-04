@@ -36,10 +36,6 @@ export class CategoriesList extends React.Component {
       selectedProject
     } = this.props;
 
-
-    console.log('🔥🔥🔥🔥🔥 selectedProject.toJS() 🔥🔥🔥🔥🔥');
-    console.log(selectedProject.toJS());
-
     return (
       <React.Fragment>
         <Header
@@ -58,9 +54,17 @@ export class CategoriesList extends React.Component {
           </span>
 
           {categories.valueSeq().map(cat => (
-            <div key={cat.get('_id')}>
+            <div
+              key={cat.get('_id')}
+              style={{
+                marginBottom: 30
+              }}
+            >
               <div className="flex-container-row border-top-white typical-setup">
-                <span className="flex-1" style={{ background: cat.get('color') }}>
+                <span
+                  className="flex-1"
+                  style={{ background: cat.get('color') }}
+                >
                   <Input
                     inputName="color"
                     record={cat}
@@ -108,7 +112,7 @@ export class CategoriesList extends React.Component {
                     />
 
                     <Icon
-                      color={proj.has('isShortTerm') && proj.get('isShortTerm') ? 'green' : 'white'}
+                      color={proj.has('isShortTerm') && proj.get('isShortTerm') ? 'green' : 'grey'}
                       name="list alternate"
                       onClick={_ => this.props.ProjectActions.update(proj.set('isShortTerm', !proj.get('isShortTerm')))}
                     />

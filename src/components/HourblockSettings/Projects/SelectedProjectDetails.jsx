@@ -45,66 +45,69 @@ export class SelectedProjectDetails extends React.Component {
 
     return (
       <React.Fragment>
-        <span className="flex-container-row typical-setup">
-          <span className="flex-2">Tasks</span>
-          <span className="flex-1">{selectedProjectTasks.size}</span>
-        </span>
-
-        <span className="flex-container-row typical-setup border-top-white">
-          <span className="flex-2">Events</span>
-          <span className="flex-1">{selectedProjectEvents.size}</span>
-        </span>
-
-        <span className="flex-container-row typical-setup border-top-white">
-          <span className="flex-2">Planned Pomos</span>
-          <span className="flex-1">{selectedProjectPlannedPomos.length}</span>
-        </span>
-
-        {selectedProjectPlannedPomos.map((rec, ind) => (
-          <div
-            className="flex-container-row typical-setup border-top"
-            key={ind}
-          >
-            <span className="flex-1">
-              {`${rec.day} - ${rec.sectionOfDay}`}
+        {selectedProject.has('_id') && (
+          <React.Fragment>
+            <span className="flex-container-row typical-setup">
+              <span className="flex-2">Tasks</span>
+              <span className="flex-1">{selectedProjectTasks.size}</span>
             </span>
-          </div>
-        ))}
 
-        <span className="flex-container-row typical-setup border-top-white">
-          <span className="flex-2">Daily Record Pomos</span>
-          <span className="flex-1">
-            {selectedProjectDailyRecordPomos.length}
-          </span>
-        </span>
-
-        {selectedProjectDailyRecordPomos.map((rec, ind) => (
-          <div
-            className="flex-container-row typical-setup border-top"
-            key={ind}
-          >
-            <span className="flex-1">
-              {moment(rec.createdAt)
-                .startOf('day')
-                .add(rec.sectionOfDay / 2, 'hour')
-                .format('YYYY-MM-DD HH:mm')}
+            <span className="flex-container-row typical-setup border-top-white">
+              <span className="flex-2">Events</span>
+              <span className="flex-1">{selectedProjectEvents.size}</span>
             </span>
-          </div>
-        ))}
 
-        <div className="spacing" />
+            <span className="flex-container-row typical-setup border-top-white">
+              <span className="flex-2">Planned Pomos</span>
+              <span className="flex-1">{selectedProjectPlannedPomos.length}</span>
+            </span>
 
-        {selectedProject.has('_id')
-          && selectedProjectTasks.size === 0
-          && selectedProjectEvents.size === 0
-          && selectedProjectPlannedPomos.length === 0 && (
-          <Button
-            fluid
-            negative
-            onClick={this.deleteProject}
-          >
-              Delete Project
-          </Button>
+            {selectedProjectPlannedPomos.map((rec, ind) => (
+              <div
+                className="flex-container-row typical-setup border-top"
+                key={ind}
+              >
+                <span className="flex-1">
+                  {`${rec.day} - ${rec.sectionOfDay}`}
+                </span>
+              </div>
+            ))}
+
+            <span className="flex-container-row typical-setup border-top-white">
+              <span className="flex-2">Daily Record Pomos</span>
+              <span className="flex-1">
+                {selectedProjectDailyRecordPomos.length}
+              </span>
+            </span>
+
+            {selectedProjectDailyRecordPomos.map((rec, ind) => (
+              <div
+                className="flex-container-row typical-setup border-top"
+                key={ind}
+              >
+                <span className="flex-1">
+                  {moment(rec.createdAt)
+                    .startOf('day')
+                    .add(rec.sectionOfDay / 2, 'hour')
+                    .format('YYYY-MM-DD HH:mm')}
+                </span>
+              </div>
+            ))}
+
+            <div className="spacing" />
+
+            {selectedProjectTasks.size === 0
+              && selectedProjectEvents.size === 0
+              && selectedProjectPlannedPomos.length === 0 && (
+              <Button
+                fluid
+                negative
+                onClick={this.deleteProject}
+              >
+                  Delete Project
+              </Button>
+            )}
+          </React.Fragment>
         )}
       </React.Fragment>
     );

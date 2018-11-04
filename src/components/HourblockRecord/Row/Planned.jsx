@@ -59,22 +59,26 @@ export class HourBlockRowPlanned extends React.Component {
     const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
 
     return (
-      <span className="flex-4 border-right-white padding-horizontal-5 text-left">
-        {
-          currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
-        }
+      <span className="flex-4 border-right-white text-left flex-container-row">
+        <span className="flex-1">
+          {
+            currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
+          }
+        </span>
 
-        {currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() && (
-          <Icon
-            // color="blue"
-            name="close"
-            onClick={(_) => {
-              this.props.TaskActions.update(currentPlannedPomoTask.get('task').deleteIn(['subTasks', '0']), currentPlannedPomoTask.get('task'));
-            }}
-            style={{
-              float: 'right'
-            }}
-          />
+        {currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() > 0 && (
+          <span className="width-20">
+            <Icon
+              // color="blue"
+              name="close"
+              onClick={(_) => {
+                this.props.TaskActions.update(currentPlannedPomoTask.get('task').deleteIn(['subTasks', '0']), currentPlannedPomoTask.get('task'));
+              }}
+              style={{
+                float: 'right'
+              }}
+            />
+          </span>
         )}
       </span>
     );

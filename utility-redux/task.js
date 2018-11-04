@@ -138,12 +138,12 @@ export const selectedProjectTasksSelector = createSelector(
   (tasks, selectedProjectId) => tasks.get(selectedProjectId),
 );
 
-const getSelectedPomoProjectId = (state, ownProps) => (ownProps.plannedPomo.hasIn(['project', '_id']) ? ownProps.plannedPomo.getIn(['project', '_id']) : '');
+// const getSelectedPomoProjectId = (state, ownProps) => (ownProps.plannedPomo.hasIn(['project', '_id']) ? ownProps.plannedPomo.getIn(['project', '_id']) : '');
 
-export const projectFirstTaskSelector = createSelector(
-  [projectTasksSelector, getSelectedPomoProjectId],
-  (tasks, selectedProjectId) => (tasks.hasIn([selectedProjectId, 0]) ? tasks.getIn([selectedProjectId, 0]) : Map()),
-);
+// export const projectFirstTaskSelector = createSelector(
+//   [projectTasksSelector, getSelectedPomoProjectId],
+//   (tasks, selectedProjectId) => (tasks.hasIn([selectedProjectId, 0]) ? tasks.getIn([selectedProjectId, 0]) : Map()),
+// );
 
 // const getTodayPomos = (state) => {
 //   const todayPlannedPomos = state.plannedPomos.valueSeq().find(plannedPomo => plannedPomo.get('dayOfWeek') === moment().isoWeekday() - 1);
@@ -165,7 +165,7 @@ export const allProjectTasksOrderedSelector = createSelector(
             allTasksOrdered[projectId].push({
               task,
               subTaskId: index,
-              taskName: `${taskName} - ${subTask}`,
+              taskName: `${taskName} => ${subTask}`,
             });
           });
         } else {

@@ -77,7 +77,7 @@ export class RightAside extends React.Component {
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
               <div
                 key={month}
-                role="button" tabIndex="-1"
+                role="buttomonthlyTasksn" tabIndex="-1"
                 className={`flex-1 ${activeMonth === month - 1 && 'color-orange font-400'}`}
                 onClick={_ => this.setState({
                   activeMonth: month - 1,
@@ -87,7 +87,7 @@ export class RightAside extends React.Component {
               </div>))}
           </span>
 
-          <MonthlyTasksListConnected />
+          <MonthlyTasksListConmonthlyTasksnected />
         </Grid.Column> */}
 
         <Grid.Column style={{

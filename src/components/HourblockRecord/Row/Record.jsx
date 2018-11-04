@@ -63,6 +63,7 @@ export class HourBlockRowRecord extends React.Component {
                     tabIndex="-1"
                     className="fa fa-fw fa-check flex-1 height-lineheight-30"
                     onClick={(_) => {
+                      // Close the main subtask
                       addPomoRecord({
                         target: {
                           value: plannedPomo.getIn(['project', '_id']),
@@ -111,8 +112,15 @@ export class HourBlockRowRecord extends React.Component {
                     role="button" tabIndex="-1" className="margin-right-5" key={rec.get('_id')}
                     onClick={_ => this.props.UiActions.updateIn(['hourblock', 'hourblockPage', 'selectedEventRecordId'], rec)}
                   >
-                    <span>{eventRecords.getIn([rec, 'event', 'name'])}</span>
-                    <i role="button" tabIndex="-1" className="fa fa-fw fa-close" onClick={_ => deleteEvent(rec, sectionOfDay)} />
+                    <span>
+                      {eventRecords.getIn([rec, 'event', 'name'])}
+                    </span>
+                    <i
+                      role="button"
+                      tabIndex="-1"
+                      className="fa fa-fw fa-close"
+                      onClick={_ => deleteEvent(rec, sectionOfDay)}
+                    />
                   </span>
                 ))}
               </span>
@@ -127,7 +135,10 @@ export class HourBlockRowRecord extends React.Component {
                     >
                       <option value="" />
                       {events.valueSeq().map((event, index) => (
-                        <option key={event.get('_id')} value={event.get('_id')}>
+                        <option
+                          key={event.get('_id')}
+                          value={event.get('_id')}
+                        >
                           {event.get('project') !== null ? event.getIn(['project', 'name']) : 'General'}
                           {' '}
                           -

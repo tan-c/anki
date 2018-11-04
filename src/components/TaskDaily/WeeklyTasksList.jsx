@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Map, isImmutable } from 'immutable';
+import { Map } from 'immutable';
 import moment from 'moment';
 
 import task, { TaskActions, weeklyTasksSelector } from 'utility-redux/task';

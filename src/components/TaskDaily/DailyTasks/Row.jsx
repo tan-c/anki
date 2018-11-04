@@ -16,7 +16,7 @@ import InputNewConnected from 'utility-react-component/Form/Input/New';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
 import {
-  Icon
+  Header, Icon
 } from 'semantic-ui-react';
 
 class DailyTasksRow extends React.Component {

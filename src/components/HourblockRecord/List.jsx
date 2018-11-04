@@ -113,10 +113,6 @@ export class HourBlockList extends React.Component {
     const plannedPomo = plannedPomos.getIn(['plannedPomos', sectionOfDay.toString()]);
     // const mainTask = plannedPomo !== undefined && plannedPomo.hasIn(['tasks', 'main']) ? plannedPomo.getIn(['tasks', 'main']) : '';
 
-
-    console.log('🔥🔥🔥🔥🔥 projects.toJS() 🔥🔥🔥🔥🔥');
-    console.log(projects.toJS());
-
     const newDailyRecord = currentDayRecord.setIn(['pomo', (sectionOfDay).toString()], {
       sectionOfDay,
       content: event.target.content === undefined ? '' : event.target.content,
@@ -126,9 +122,6 @@ export class HourBlockList extends React.Component {
     });
     this.props.DailyRecordActions.update(newDailyRecord);
 
-    // if (event.target.value !== '5a407cddb2d1ea74acc223c0' && !mainTask.length) {
-    // toastr.warning('Notice', 'Default to Misc As No Main Task');
-    // } else {
     this.onChangePlannedPomo(sectionOfDay, plannedPomo, {
       target: {
         name: 'tasks.main',

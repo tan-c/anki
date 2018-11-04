@@ -4,9 +4,12 @@ import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { currentUserSelector } from 'utility-redux/user';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
+import { TaskActions } from 'utility-redux/task';
+import { bindActionCreators } from 'redux';
 
-// import { projectFirstTaskSelector } from 'utility-redux/task';
-
+import {
+  Icon
+} from 'semantic-ui-react';
 // FIXME: should be using the input controlled here but keydown event is different
 // import InputControlled from 'utility-react-component/Form/Input/Controlled';
 
@@ -47,20 +50,35 @@ export class HourBlockRowPlanned extends React.Component {
     return shouldUpdate;
   }
 
-  renderTasks = (isTodayPast, taskFromPomo) => (
-    <React.Fragment>
-      <span className="flex-3 border-right-white padding-horizontal-5 text-left">
-        {!isTodayPast && taskFromPomo}
-      </span>
+  renderProjectTask = () => {
+    const {
+      allProjectTasksOrdered,
+      plannedPomo
+    } = this.props;
 
-      {/* {showMinorTask &&
-        <span
-          className={`${isTodayPast ? 'bg-white-10' : ''} flex-2 border-right-white padding-horizontal-5 text-left`}
-        >
-          {minorTask}
-        </span>} */}
-    </React.Fragment>
-  )
+    const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
+
+    return (
+      <span className="flex-3 border-right-white padding-horizontal-5 text-left">
+        {
+          currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
+        }
+
+        {currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() && (
+          <Icon
+            // color="blue"
+            name="close"
+            onClick={(_) => {
+              this.props.TaskActions.update(currentPlannedPomoTask.get('task').deleteIn(['subTasks', '0']), currentPlannedPomoTask.get('task'));
+            }}
+            style={{
+              float: 'right'
+            }}
+          />
+        )}
+      </span>
+    );
+  }
 
   renderMainTaskInput = (mainTask, isTodayPast) => {
     const {
@@ -162,7 +180,6 @@ export class HourBlockRowPlanned extends React.Component {
       isToday,
       allProjectTasksOrdered,
       recordPomo,
-      // projectFirstTask,
     } = this.props;
 
     // const mainTaskLocked = plannedPomo.has('mainTaskLocked') && plannedPomo.get('mainTaskLocked');
@@ -170,9 +187,7 @@ export class HourBlockRowPlanned extends React.Component {
     const disableMainTaskInput = isToday && currentSectionOfDay > sectionOfDay;
 
     const showMinorTask = currentUser.hasIn(['config', 'showMinorTask']) && currentUser.getIn(['config', 'showMinorTask']);
-    const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
 
-    const taskContent = currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : '';
     // const isUnFinished = !recordPomo.hasIn(['project', '_id']) && isTodayPast;
 
     return (
@@ -204,7 +219,7 @@ export class HourBlockRowPlanned extends React.Component {
         } */}
 
         <div className="flex-1 flex-container-row">
-          {/* {this.renderTasks(isTodayPast, taskContent)} */}
+          {this.renderProjectTask()}
           {this.renderMainTaskInput(mainTask, isTodayPast)}
           {showMinorTask && this.renderMinorTaskInput(minorTask, isTodayPast)}
           {this.renderRecurTaskInput(isTodayPast)}
@@ -228,7 +243,6 @@ HourBlockRowPlanned.defaultProps = {
 
   isUpdatingPlannedPomo: false,
   allProjectTasksOrdered: Map(),
-  // projectFirstTask: Map(),
 };
 
 HourBlockRowPlanned.propTypes = {
@@ -242,7 +256,6 @@ HourBlockRowPlanned.propTypes = {
   onChangePlannedPomo: PropTypes.func,
   isUpdatingPlannedPomo: PropTypes.bool,
   allProjectTasksOrdered: PropTypes.object,
-  // projectFirstTask: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -257,8 +270,16 @@ function mapStateToProps(state, ownProps) {
     allProjectTasksOrdered: ownProps.allProjectTasksOrdered,
     currentUser: currentUserSelector(state),
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
-    // projectFirstTask: projectFirstTaskSelector(state, ownProps),
   };
 }
 
-export default connect(mapStateToProps)(HourBlockRowPlanned);
+function mapDispatchToProps(dispatch) {
+  return {
+    TaskActions: bindActionCreators(TaskActions, dispatch),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HourBlockRowPlanned);

@@ -86,6 +86,7 @@ export class HourBlockList extends React.Component {
 
     const { plannedPomos } = this.props;
     const newPlannedPomos = plannedPomos.setIn(['plannedPomos', sectionOfDay.toString()], newPlannedPomo);
+
     this.props.PlannedPomoActions.update(newPlannedPomos).then((_) => {
       this.setState({
         isUpdatingPlannedPomo: false,
@@ -185,6 +186,7 @@ export class HourBlockList extends React.Component {
                 sectionOfDay={item.sectionOfDay}
                 isToday={isoWeekDay === moment().isoWeekday()}
                 sectionName={item.sectionName}
+                currentDayRecord={currentDayRecord}
                 currentSectionOfDay={currentSectionOfDay}
                 onChangePlannedPomo={this.onChangePlannedPomo}
                 isUpdatingPlannedPomo={isUpdatingPlannedPomo}

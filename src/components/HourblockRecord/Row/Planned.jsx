@@ -6,10 +6,13 @@ import { currentUserSelector } from 'utility-redux/user';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 import { TaskActions } from 'utility-redux/task';
 import { bindActionCreators } from 'redux';
+import toastr from 'toastr';
 
 import {
   Icon
 } from 'semantic-ui-react';
+
+import { DailyRecordActions } from 'utility-redux/dailyRecord';
 // FIXME: should be using the input controlled here but keydown event is different
 // import InputControlled from 'utility-react-component/Form/Input/Controlled';
 
@@ -52,35 +55,63 @@ export class HourBlockRowPlanned extends React.Component {
 
   renderProjectTask = () => {
     const {
+      sectionOfDay,
       allProjectTasksOrdered,
-      plannedPomo
+      plannedPomo,
+      currentDayRecord,
+      recordPomo
     } = this.props;
 
     const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
 
     return (
-      <span className="flex-4 border-right-white text-left flex-container-row">
-        <span className="flex-1">
-          {
-            currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
-          }
-        </span>
-
-        {currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() > 0 && (
-          <span className="width-20">
-            <Icon
-              // color="blue"
-              name="close"
-              onClick={(_) => {
-                this.props.TaskActions.update(currentPlannedPomoTask.get('task').deleteIn(['subTasks', '0']), currentPlannedPomoTask.get('task'));
-              }}
-              style={{
-                float: 'right'
-              }}
-            />
+      <React.Fragment>
+        {recordPomo.has('completedTask') ? (
+          <span
+            className="flex-4 border-right-white text-left flex-container-row color-grey"
+            style={{
+              textDecoration: 'line-through'
+            }}
+          >
+            {recordPomo.get('completedTask')}
           </span>
-        )}
-      </span>
+        )
+          : (
+            <span className="flex-4 border-right-white text-left flex-container-row">
+              <span className="flex-1">
+                {
+                  currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
+                }
+              </span>
+
+              {currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() > 0 && (
+                <span className="width-20">
+                  <Icon
+                    // color="blue"
+                    disabled={!recordPomo.has('_id')}
+                    name="close"
+                    onClick={(_) => {
+                      if (recordPomo.has('_id')) {
+                        this.props.TaskActions.update(currentPlannedPomoTask.get('task').deleteIn(['subTasks', '0']), currentPlannedPomoTask.get('task'));
+
+                        // Also update the saved tasks
+                        const newCurrentDayRecord = currentDayRecord.setIn(['pomo', (sectionOfDay).toString(), 'completedTask'], currentPlannedPomoTask.get('taskName'));
+
+                        this.props.DailyRecordActions.update(newCurrentDayRecord);
+                      } else {
+                        toastr.warning('Adding record first');
+                      }
+                    }}
+                    style={{
+                      float: 'right'
+                    }}
+                  />
+                </span>
+              )}
+            </span>
+          )
+        }
+      </React.Fragment>
     );
   }
 
@@ -247,6 +278,7 @@ export class HourBlockRowPlanned extends React.Component {
 HourBlockRowPlanned.defaultProps = {
   isToday: false,
 
+  currentDayRecord: Map(),
   currentUser: Map(),
   currentSectionOfDay: 0,
   sectionOfDay: 0,
@@ -262,6 +294,7 @@ HourBlockRowPlanned.defaultProps = {
 HourBlockRowPlanned.propTypes = {
   isToday: PropTypes.bool,
   currentSectionOfDay: PropTypes.number,
+  currentDayRecord: PropTypes.object,
   currentUser: PropTypes.object,
   sectionOfDay: PropTypes.number,
   sectionName: PropTypes.string,
@@ -270,10 +303,13 @@ HourBlockRowPlanned.propTypes = {
   onChangePlannedPomo: PropTypes.func,
   isUpdatingPlannedPomo: PropTypes.bool,
   allProjectTasksOrdered: PropTypes.object,
+
+  DailyRecordActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
+    currentDayRecord: ownProps.currentDayRecord,
     isToday: ownProps.isToday,
     currentSectionOfDay: ownProps.currentSectionOfDay,
     sectionOfDay: ownProps.sectionOfDay,
@@ -290,6 +326,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     TaskActions: bindActionCreators(TaskActions, dispatch),
+    DailyRecordActions: bindActionCreators(DailyRecordActions, dispatch),
   };
 }
 

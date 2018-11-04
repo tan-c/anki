@@ -156,7 +156,8 @@ export class HourBlockRowPlanned extends React.Component {
         type="text"
         className={`${isTodayPast ? 'bg-black' : ''} width-120 border-right-white`}
         name="tasks.recur"
-        disabled={!enableChangeRecur || isTodayPast}
+        disabled
+        // disabled== {!enableChangeRecur || isTodayPast}
         ref={(ref) => { this.hourblockPlannedRecurInput = ref; }}
         placeholder={plannedPomo.getIn(['tasks', 'recur'])}
         onKeyDown={(event) => {

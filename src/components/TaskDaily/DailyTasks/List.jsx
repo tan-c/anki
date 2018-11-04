@@ -5,7 +5,10 @@ import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
-import { selectedYearlyTaskSelector } from 'utility-redux/task';
+import {
+  selectedYearlyTaskSelector,
+  dailyTasksSelector
+} from 'utility-redux/task';
 
 
 import DailyTasksRow from './Row';
@@ -35,7 +38,6 @@ export class DailyTasksList extends React.Component {
 
     this.state = {
       activeMonth: moment().month(),
-      showPast: false,
     };
   }
 
@@ -45,15 +47,21 @@ export class DailyTasksList extends React.Component {
   // }
 
   render() {
-    const { selectedYearlyTask } = this.props;
-    const { activeMonth, showPast } = this.state;
+    const {
+      selectedYearlyTask,
+      dailyTasks
+    } = this.props;
+    const { activeMonth } = this.state;
 
     return (
       <React.Fragment>
         <span className="flex-container-row">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
             <div
-              className={`flex-1 ${activeMonth === month - 1 && 'color-orange font-400'}`} key={month} role="button" tabIndex="-1"
+              className={`flex-1 ${activeMonth === month - 1 && 'color-orange font-400'}`}
+              key={month}
+              role="button"
+              tabIndex="-1"
               onClick={_ => this.setState({
                 activeMonth: month - 1,
               })}
@@ -62,7 +70,7 @@ export class DailyTasksList extends React.Component {
             </div>))}
         </span>
 
-        {this.monthList[activeMonth].filter(dayVal => dayVal.isPast === showPast).map(dayVal => (
+        {this.monthList[activeMonth].filter(dayVal => !dayVal.isPast || (dailyTasks.has(dayVal.dayOfYearString) && dailyTasks.get(dayVal.dayOfYearString).size)).map(dayVal => (
           <DailyTasksRow
             key={dayVal.dayMomentObject.unix()}
             dayVal={dayVal}
@@ -76,14 +84,17 @@ export class DailyTasksList extends React.Component {
 
 DailyTasksList.defaultProps = {
   selectedYearlyTask: Map(),
+  dailyTasks: Map(),
 };
 
 DailyTasksList.propTypes = {
+  dailyTasks: PropTypes.object,
   selectedYearlyTask: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
+    dailyTasks: dailyTasksSelector(state),
     selectedYearlyTask: selectedYearlyTaskSelector(state),
   };
 }

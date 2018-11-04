@@ -89,7 +89,7 @@ export class ProjectTasksList extends React.Component {
                     <List divided inverted>
                       {task.get('subTasks').map((subTask, index) => (
                         <List.Item
-                          key={subTask}
+                          key={index} // eslint-disable-line
                         >
                           {`${index + 1}. ${subTask}`}
                           <List.Content floated="right">

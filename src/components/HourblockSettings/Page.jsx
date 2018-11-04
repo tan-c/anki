@@ -8,7 +8,7 @@ import EventListConnected from './Events/List';
 import EventRecordsListConnected from './Events/EventRecords/List';
 
 import SelectedProjectDetailsConnected from './Projects/SelectedProjectDetails';
-import CategoriesListConnected from './Projects/Categories/List';
+import CategoriesListConnected from './Projects/CategoriesList';
 
 import CategoryInsightsConnected from '../Hourblock/LeftAside/CategoryInsights';
 import WeeklyInsightsConnected from '../Hourblock/LeftAside/WeeklyInsights';

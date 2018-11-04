@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Map } from 'immutable';
+import { Header } from 'semantic-ui-react';
 
 import { UiActions } from 'utility-redux/ui';
 import { CategoryActions, categoriesSortedSelector } from 'utility-redux/category';
-import { ProjectActions, projectsByCategoryIdSelector } from 'utility-redux/project';
+import {
+  ProjectActions,
+  projectsByCategoryIdSelector,
+  selectedProjectSelector
+} from 'utility-redux/project';
 
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
@@ -23,11 +28,21 @@ export class CategoriesList extends React.Component {
   // }
 
   render() {
-    const { categories, projectsByCategoryId } = this.props;
+    const {
+      categories,
+      projectsByCategoryId,
+      selectedProject
+    } = this.props;
 
     return (
       <React.Fragment>
-        <div className="section-header">Category Management</div>
+        <Header
+          as="h2"
+          inverted
+          content="Category Management"
+          subheader="Edit categories and projects"
+        />
+
         <div className="section-content list-with-pinned-bottom">
           <span className="flex-container-row font-400">
             <span className="flex-1 border-right">Color</span>
@@ -58,7 +73,10 @@ export class CategoriesList extends React.Component {
               </div>
 
               {projectsByCategoryId.get(cat.get('_id')) && projectsByCategoryId.get(cat.get('_id')).valueSeq().map(proj => (
-                <div key={proj.get('_id')} className="flex-container-row typical-setup">
+                <div
+                  key={proj.get('_id')}
+                  className={`flex-container-row typical-setup ${selectedProject.get('_id') === proj.get('_id') && 'bg-orange'}`}
+                >
                   <span className="flex-1" />
 
                   <Input
@@ -76,7 +94,12 @@ export class CategoriesList extends React.Component {
                   />
 
                   <span className="flex-1">
-                    <i role="button" tabIndex="-1" className="fa fa-fw fa-eye" onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'selectedProjectId'], proj.get('_id'))} />
+                    <i
+                      role="button"
+                      tabIndex="-1"
+                      className="fa fa-fw fa-eye"
+                      onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'selectedProjectId'], proj.get('_id'))}
+                    />
                   </span>
                 </div>))}
 
@@ -97,11 +120,15 @@ export class CategoriesList extends React.Component {
 }
 
 CategoriesList.defaultProps = {
+  selectedProject: Map(),
+
   categories: Map(),
   projectsByCategoryId: Map(),
 };
 
 CategoriesList.propTypes = {
+  selectedProject: PropTypes.object,
+
   categories: PropTypes.object,
   projectsByCategoryId: PropTypes.object,
 
@@ -112,6 +139,8 @@ CategoriesList.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    selectedProject: selectedProjectSelector(state),
+
     categories: categoriesSortedSelector(state),
     projectsByCategoryId: projectsByCategoryIdSelector(state),
   };

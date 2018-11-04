@@ -5,7 +5,7 @@ import toJson from 'enzyme-to-json';
 
 import { Map } from 'immutable';
 
-import { CategoriesList } from './List';
+import { CategoriesList } from './CategoriesList';
 
 function setup() {
   const props = {

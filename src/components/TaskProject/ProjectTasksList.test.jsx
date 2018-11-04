@@ -5,17 +5,17 @@ import toJson from 'enzyme-to-json';
 
 // import { Map } from 'immutable';
 
-import { FocusedProjectTaskList } from './FocusedProjectTaskList';
+import { ProjectTasksList } from './ProjectTasksList';
 
 function setup() {
   const props = {
     TaskActions: {},
   };
 
-  return shallow(<FocusedProjectTaskList {...props} />);
+  return shallow(<ProjectTasksList {...props} />);
 }
 
-describe('FocusedProjectTaskList Unit Tests', () => {
+describe('ProjectTasksList Unit Tests', () => {
   describe('when normally set up', () => {
     const wrapper = setup();
     it('renders correctly', () => {

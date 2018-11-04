@@ -63,17 +63,6 @@ export class HourBlockRowRecord extends React.Component {
                     tabIndex="-1"
                     className="fa fa-fw fa-check flex-1 height-lineheight-30"
                     onClick={(_) => {
-                      // Also remove the task
-                      // If can update main means the task is not shown...
-                      // if (currentPlannedPomoTask.count()) {
-                      //   const task = currentPlannedPomoTask.get('task');
-                      //   if (currentPlannedPomoTask.get('subTaskId') !== null) {
-                      //     this.props.TaskActions.update(task.deleteIn(['subTasks', currentPlannedPomoTask.get('subTaskId').toString()]), task);
-                      //   } else {
-                      //     this.props.TaskActions.deleteRecord(task);
-                      //   }
-                      // }
-
                       addPomoRecord({
                         target: {
                           value: plannedPomo.getIn(['project', '_id']),

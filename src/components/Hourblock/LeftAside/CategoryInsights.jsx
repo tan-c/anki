@@ -110,25 +110,14 @@ export class CategoryInsights extends React.Component {
                       {/* { proj.get('estimatedHour') } */}
                     </span>
 
-
-                    {proj.get('estimatedHour') > 0
+                    {projectPlannedTotal[proj.get('_id')]
                       && projectTotal.has(proj.get('_id'))
-                      && projectTotal.get(proj.get('_id')) >= proj.get('estimatedHour')
-                      && (
-                        <i
-                          className="fa fa-fw fa-check color-green"
-                        />
-                      )
-                    }
-
-                    {proj.get('estimatedHour') > 0
-                      && projectTotal.has(proj.get('_id'))
-                      && projectTotal.get(proj.get('_id')) < proj.get('estimatedHour')
+                      && projectTotal.get(proj.get('_id')) <= projectPlannedTotal[proj.get('_id')]
                       && (
                         <div
                           style={{
                             backgroundColor: cat.get('color'),
-                            width: `${(projectTotal.get(proj.get('_id')) / proj.get('estimatedHour')) * 100}%`,
+                            width: `${(projectTotal.get(proj.get('_id')) / projectPlannedTotal[proj.get('_id')]) * 100}%`,
                             position: 'absolute',
                             height: 3,
                             zIndex: -1,

@@ -7,13 +7,14 @@ import { Link, withRouter } from 'react-router-dom';
 import SelectConnected from 'utility-react-component/Form/Select';
 import moment from 'moment';
 import {
-  Menu, Icon, Modal, Button, Responsive, Dropdown
+  Menu, Icon, Modal, Button, Responsive, Dropdown, Label
 } from 'semantic-ui-react';
-import { currentUserSelector } from 'utility-redux/user';
+import { currentUserSelector, UserActions } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
 import { todayTasksSelector } from 'utility-redux/task';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
+import toastr from 'toastr';
 
 import {
   revisionAnkisTotalSelector,
@@ -85,7 +86,10 @@ export class Header extends React.Component {
       isHeaderNextPomoOn,
     } = this.props;
 
-    const { currentTime, showEyeTimeoutBlinking } = this.state;
+    const {
+      currentTime,
+      showEyeTimeoutBlinking
+    } = this.state;
 
     return (
       <React.Fragment>
@@ -260,6 +264,25 @@ export class Header extends React.Component {
             {currentTime.format('HH:mm')}
           </Menu.Item>
 
+
+          <Menu.Item>
+            <Label
+              color={`${!currentUser.hasIn(['config', 'planning', 'nextUnlockTime']) || new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) <= currentTime.toDate().getTime() ? 'green' : 'red'}`}
+              onClick={() => {
+                if (new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) <= currentTime.toDate().getTime()) {
+                  this.props.UserActions.update(currentUser.setIn(['config', 'planning', 'nextUnlockTime'], moment().add(currentUser.getIn(['config', 'planning', 'lockInterval']), 'days').toDate()));
+                } else {
+                  toastr.info('Not ready yet');
+                }
+              }}
+            >
+              <Icon
+                name="lock"
+              />
+              {`${parseInt((new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) - currentTime.toDate().getTime()) / 1000 / 60 / 60 / 24, 10)}D${parseInt((new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) - currentTime.toDate().getTime()) / 1000 / 60 / 60 % 24, 10)}H`}
+            </Label>
+          </Menu.Item>
+
           <Menu.Item>
             <Icon
               color={`${isHeaderNextPomoOn ? 'green' : 'black'}`}
@@ -364,6 +387,7 @@ Header.propTypes = {
   edittingTarget: PropTypes.string,
 
   UiActions: PropTypes.object.isRequired,
+  UserActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -403,6 +427,7 @@ function mapDispatchToProps(dispatch) {
 
     AnkiTagActions: bindActionCreators(AnkiTagActions, dispatch),
     UiActions: bindActionCreators(UiActions, dispatch),
+    UserActions: bindActionCreators(UserActions, dispatch),
   };
 }
 

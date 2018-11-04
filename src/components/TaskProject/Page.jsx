@@ -1,102 +1,103 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
 
+import { Grid, } from 'semantic-ui-react';
+
 import {
   TaskActions,
-  currentYearlyTasksSortedSelector,
+  projectTasksSelector,
   totalProjectTasksCountSelector
 } from 'utility-redux/task';
-
-import Input from 'utility-react-component/Form/Input/Uncontrolled';
-import InputNewConnected from 'utility-react-component/Form/Input/New';
-import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
-
+import { todayPlannedPomosSelector } from 'utility-redux/plannedPomo';
 import { UiActions } from 'utility-redux/ui';
-
-import { Grid, } from 'semantic-ui-react';
-import MonthlyTasksListConnected from './MonthlyTasks/List';
-import DailyTaskPlanningConnected from './DailyTasks/List';
-import ProjectTaskListConnected from './ProjectTaskList';
 import FocusedProjectTaskListConnected from './FocusedProjectTaskList';
 
-
-export class TasksPage extends React.Component {
+export class ProjectTaskList extends React.Component {
+  state = {
+    nextPomo: Map(),
+  }
   // constructor(props, context) {
   //   super(props, context);
   // }
   //
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //   });
-  // }
+
+
+  componentDidMount() {
+    setInterval(() => {
+      this.getNextPomo(this.props.todayPlannedPomos);
+    }, 1000 * 60 * 10);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.nextPomo.size) {
+      this.getNextPomo(nextProps.todayPlannedPomos);
+    }
+  }
+
+  getNextPomo = (todayPlannedPomos) => {
+    const currentSectionOfDay = moment().tz('Asia/Tokyo').hour() * 2 + parseInt(moment().minute() / 30, 10);
+    const nextSectionOfDay = (currentSectionOfDay + 1) % 48; // 1-indexed
+    const nextPomo = todayPlannedPomos.hasIn(['plannedPomos', nextSectionOfDay]) ? todayPlannedPomos.getIn(['plannedPomos', nextSectionOfDay]) : Map();
+
+    this.props.UiActions.updateIn(['hourblock', 'hourblockPage', 'focusedProjectId'], nextPomo.getIn(['project', '_id']));
+    this.setState({ nextPomo });
+  }
+
+  updateTask = (event, task) => {
+    if (event.which === 13) {
+      const { value } = event.target;
+      this.props.TaskActions.update(task.set('content', value), task);
+    }
+  }
 
   render() {
-    const { currentYearlyTasksSorted, totalProjectTasksCount } = this.props;
+    const {
+      projectTasks,
+      focusedProjectId,
+      projects,
+      totalProjectTasksCount
+    } = this.props;
+
+    const { nextPomo } = this.state;
 
     return (
       <Grid.Row
-        columns={4}
+        columns={3}
         style={{
           height: '100%'
         }}
       >
+
         <Grid.Column
           style={{
             overflow: 'auto'
           }}
         >
           {`Task - ${totalProjectTasksCount}`}
-          <ProjectTaskListConnected />
-          <FocusedProjectTaskListConnected />
-        </Grid.Column>
-
-        <Grid.Column
-          style={{
-            overflow: 'auto'
-          }}
-        >
-          <div className="section-header">2018 Tasks</div>
-          <div className="section-content">
-            <div className="list-with-pinned-bottom">
-              {currentYearlyTasksSorted.size > 0 && currentYearlyTasksSorted.map(task => (
-                <div key={task.get('_id')} className="flex-container-row typical-setup">
-                  <span className="flex-1">
-                    <ProjectSelectConnected
-                      onChangeEvent={event => this.props.TaskActions.update(task.set('project', event.target.value), task)}
-                      value={task.getIn(['project', '_id'])}
-                      color={task.getIn(['project', 'category', 'color'])}
-                    />
-                  </span>
-                  <Input
-                    inputName="content"
-                    inputClassNames="flex-2"
-                    record={task}
-                    actions={this.props.TaskActions}
-                  />
-                  <i
-                    className="fa fa-fw fa-eye"
-                    role="button"
-                    tabIndex="-1"
-                    onClick={_ => this.props.UiActions.updateIn(['hourblock', 'taskPage', 'selectedYearlyTaskId'], task.get('_id'))}
-                  />
-                </div>))}
-            </div>
-
-            <div className="flex-container-row pinned-bottom border-top">
-              <InputNewConnected
-                inputName="content"
-                newRecord={{
-                  targetCompletion: moment().tz('Asia/Tokyo').startOf('year'),
-                  type: 'yearly',
+          {projects.valueSeq().sort((a, b) => a.getIn(['category', 'naturalId']) - b.getIn(['category', 'naturalId'])).map(project => (
+            <div
+              role="menuItem"
+              tabIndex="-1"
+              key={project.get('_id')}
+              className={`flex-container-row typical-setup overflow-hidden ${focusedProjectId === project.get('_id') && 'border-orange'} ${nextPomo.getIn(['project', '_id']) === project.get('_id') && 'bg-orange'}`}
+              onClick={_ => this.props.UiActions.updateIn(['hourblock', 'hourblockPage', 'focusedProjectId'], project.get('_id'))}
+            >
+              <span
+                className="width-60" style={{
+                  backgroundColor: project.getIn(['category', 'color']),
                 }}
-                actions={this.props.TaskActions}
-              />
-            </div>
-          </div>
+              >
+                {project.get('name')}
+              </span>
+
+              <span className="flex-3 text-left border-bottom-white-20">
+                {projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).sort((a, b) => b.get('priority') - a.get('priority')).getIn([0, 'content'])}
+              </span>
+            </div>))}
         </Grid.Column>
 
         <Grid.Column
@@ -104,28 +105,27 @@ export class TasksPage extends React.Component {
             overflow: 'auto'
           }}
         >
-          <MonthlyTasksListConnected />
-        </Grid.Column>
-
-        <Grid.Column
-          style={{
-            overflow: 'auto'
-          }}
-        >
-          <DailyTaskPlanningConnected />
+          <FocusedProjectTaskListConnected />
         </Grid.Column>
       </Grid.Row>
     );
   }
 }
 
-TasksPage.defaultProps = {
-  currentYearlyTasksSorted: Map(),
+ProjectTaskList.defaultProps = {
+  projectTasks: Map(),
+  projects: Map(),
+  todayPlannedPomos: Map(),
+  focusedProjectId: '',
   totalProjectTasksCount: 0
 };
 
-TasksPage.propTypes = {
-  currentYearlyTasksSorted: PropTypes.object,
+ProjectTaskList.propTypes = {
+  projectTasks: PropTypes.object,
+  projects: PropTypes.object,
+  todayPlannedPomos: PropTypes.object,
+  focusedProjectId: PropTypes.string,
+
   totalProjectTasksCount: PropTypes.number,
 
   TaskActions: PropTypes.object.isRequired,
@@ -135,8 +135,10 @@ TasksPage.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     totalProjectTasksCount: totalProjectTasksCountSelector(state),
-
-    currentYearlyTasksSorted: currentYearlyTasksSortedSelector(state),
+    focusedProjectId: state.ui.getIn(['hourblock', 'hourblockPage', 'focusedProjectId']),
+    projectTasks: projectTasksSelector(state),
+    todayPlannedPomos: todayPlannedPomosSelector(state),
+    projects: state.projects,
   };
 }
 
@@ -147,4 +149,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TasksPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectTaskList);

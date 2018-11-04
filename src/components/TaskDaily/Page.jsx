@@ -6,16 +6,17 @@ import React from 'react';
 import moment from 'moment-timezone';
 
 import { Grid } from 'semantic-ui-react';
-import MonthlyTasksListConnected from './MonthlyTasksList';
 import WeeklyTasksListConnected from './WeeklyTasksList';
-import DailyTasksListConnected from './DailyTasksList';
+import YearlyTasksListConnected from './YearlyTasksList';
+import MonthlyTasksListConnected from './MonthlyTasks/List';
+import DailyTaskPlanningConnected from './DailyTasks/List';
 
 export class RightAside extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      activeMonth: moment().tz('Asia/Tokyo').month(),
+      // activeMonth: moment().tz('Asia/Tokyo').month(),
       todayMoment: moment().tz('Asia/Tokyo').startOf('day'),
     };
   }
@@ -51,12 +52,27 @@ export class RightAside extends React.Component {
   }
 
   render() {
-    const { activeMonth } = this.state;
     const monthList = this.createMonthlyList();
 
     return (
-      <Grid.Row columns={3}>
-        <Grid.Column>
+      <Grid.Row columns={4}>
+        <Grid.Column style={{
+          overflow: 'auto'
+        }}
+        >
+          <YearlyTasksListConnected />
+        </Grid.Column>
+
+
+        <Grid.Column
+          style={{
+            overflow: 'auto'
+          }}
+        >
+          <MonthlyTasksListConnected />
+        </Grid.Column>
+
+        {/* <Grid.Column>
           <span className="flex-container-row">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
               <div
@@ -71,8 +87,8 @@ export class RightAside extends React.Component {
               </div>))}
           </span>
 
-          <MonthlyTasksListConnected activeMonth={activeMonth} />
-        </Grid.Column>
+          <MonthlyTasksListConnected />
+        </Grid.Column> */}
 
         <Grid.Column style={{
           overflow: 'auto'
@@ -81,16 +97,12 @@ export class RightAside extends React.Component {
           <WeeklyTasksListConnected />
         </Grid.Column>
 
-        <Grid.Column style={{
-          overflow: 'auto'
-        }}
+        <Grid.Column
+          style={{
+            overflow: 'auto'
+          }}
         >
-          {monthList[activeMonth].map(dayVal => (
-            <DailyTasksListConnected
-              key={dayVal.dayMomentObject.unix()}
-              dayVal={dayVal}
-            />
-          ))}
+          <DailyTaskPlanningConnected />
         </Grid.Column>
       </Grid.Row>
     );

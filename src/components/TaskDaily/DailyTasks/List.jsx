@@ -50,44 +50,25 @@ export class DailyTasksList extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="section-header flex-container-row" style={{ background: selectedYearlyTask.getIn(['project', 'category', 'color']) }}>
-          <span className="flex-1">
-            {selectedYearlyTask.get('content')}
-            {' '}
-            Details
-          </span>
-          <span className="widdth-20">
-            <i
-              className="fa fa-fw fa-eye color-black"
-              role="button"
-              tabIndex="-1"
-              onClick={_ => this.setState(previousState => ({
-                showPast: previousState.showPast,
-              }))}
-            />
-          </span>
-        </div>
-        <div className="section-content">
-          <span className="flex-container-row">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
-              <div
-                className={`flex-1 ${activeMonth === month - 1 && 'color-orange font-400'}`} key={month} role="button" tabIndex="-1"
-                onClick={_ => this.setState({
-                  activeMonth: month - 1,
-                })}
-              >
-                {month}
-              </div>))}
-          </span>
+        <span className="flex-container-row">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
+            <div
+              className={`flex-1 ${activeMonth === month - 1 && 'color-orange font-400'}`} key={month} role="button" tabIndex="-1"
+              onClick={_ => this.setState({
+                activeMonth: month - 1,
+              })}
+            >
+              {month}
+            </div>))}
+        </span>
 
-          {selectedYearlyTask.size && this.monthList[activeMonth].filter(dayVal => dayVal.isPast === showPast).map(dayVal => (
-            <DailyTasksRow
-              key={dayVal.dayMomentObject.unix()}
-              dayVal={dayVal}
-              selectedYearlyTask={selectedYearlyTask}
-            />
-          ))}
-        </div>
+        {this.monthList[activeMonth].filter(dayVal => dayVal.isPast === showPast).map(dayVal => (
+          <DailyTasksRow
+            key={dayVal.dayMomentObject.unix()}
+            dayVal={dayVal}
+            selectedYearlyTask={selectedYearlyTask}
+          />
+        ))}
       </React.Fragment>
     );
   }

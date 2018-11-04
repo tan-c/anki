@@ -5,7 +5,7 @@ import toJson from 'enzyme-to-json';
 
 // import { Map } from 'immutable';
 
-import { TasksPage } from './Page';
+import { ProjectTaskList } from './Page';
 
 function setup() {
   const props = {
@@ -13,16 +13,16 @@ function setup() {
     UiActions: {},
   };
 
-  return shallow(<TasksPage {...props} />);
+  return shallow(<ProjectTaskList {...props} />);
 }
 
-describe('TasksPage Unit Tests', () => {
+describe('ProjectTaskList Unit Tests', () => {
   describe('when normally set up', () => {
     const wrapper = setup();
     it('renders correctly', () => {
       const jsonOutput = toJson(wrapper);
-      // expect(jsonOutput).toMatchSnapshot();
-      expect(wrapper.find("div[data-role='task-page']")).toHaveLength(0);
+      // // expect(jsonOutput).toMatchSnapshot();
+      // expect(wrapper.find("div[data-role='']")).toHaveLength(1);
     });
   });
 });

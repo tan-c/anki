@@ -106,7 +106,18 @@ export class CategoryInsights extends React.Component {
                     >
                       {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}
                       /
-                      {projectPlannedTotal[proj.get('_id')] !== undefined ? projectPlannedTotal[proj.get('_id')] : 0}
+                      {projectPlannedTotal[proj.get('_id')] !== undefined
+                        ? projectPlannedTotal[proj.get('_id')] : (
+                          <span style={{
+                            color: 'red',
+                            fontWeight: 'bold'
+                          }}
+                          >
+                            0
+                          </span>
+                        )
+                      }
+
                       {/* { proj.get('estimatedHour') } */}
                     </span>
 

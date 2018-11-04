@@ -144,7 +144,7 @@ export class Header extends React.Component {
               </Menu.Item>
 
               <Menu.Item>
-                {`Locked: ${totalLockedPlanned / 2} Hours`}
+                {`Locked: ${totalLockedPlanned / 2} (${(totalLockedPlanned / 2 / 24 / 7 * 100).toFixed(0)} %) Hours`}
               </Menu.Item>
             </React.Fragment>
           )

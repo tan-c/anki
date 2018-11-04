@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
+import {
+  Icon
+} from 'semantic-ui-react';
+import { bindActionCreators } from 'redux';
+// import { PlannedPomoActions } from 'utility-redux/plannedPomo';
 
 export class PlanningItem extends React.Component {
   render() {
     const {
-      day, hourblock, plannedPomo, updatingRecurTask, updatingPlannedPomo,
+      day,
+      hourblock,
+      plannedPomo,
+      updatingRecurTask,
+      updatingPlannedPomo,
       updatePlannedPomo,
       updateRecurTask,
     } = this.props;
@@ -30,33 +38,42 @@ export class PlanningItem extends React.Component {
                 {plannedPomo.getIn(['project', 'name'])}
               </span>
               {plannedPomo.hasIn(['project', 'name']) && (
-                <i
-                  className="fa fa-fw fa-close line-height-25"
-                  role="button"
-                  tabIndex="-1"
-                  onClick={_ => updatePlannedPomo(hourblock, day, true)}
-                />
+                <React.Fragment>
+                  <i
+                    className="fa fa-fw fa-close line-height-25"
+                    role="button"
+                    tabIndex="-1"
+                    onClick={_ => updatePlannedPomo(hourblock, day, true)}
+                  />
+                  <Icon
+                    name="lock"
+                    color={plannedPomo.get('isLocked') ? 'red' : 'green'}
+                    onClick={_ => updatePlannedPomo(hourblock, day, false, {
+                      isUpdatedLocked: true
+                    })}
+                  />
+                </React.Fragment>
               )}
             </React.Fragment>
           )
         }
 
         {updatingRecurTask
-        && (
-          <input
-            className="white-placeholder"
-            type="text"
-            name="tasks.recur"
-            ref={(ref) => { this.ref = ref; }}
-            placeholder={plannedPomo.getIn(['tasks', 'recur']) || ''}
-            onKeyDown={(event) => {
-              updateRecurTask(event, day, hourblock);
-              if (event.which === 13) {
-                this.ref.value = '';
-              }
-            }}
-          />
-        )
+          && (
+            <input
+              className="white-placeholder"
+              type="text"
+              name="tasks.recur"
+              ref={(ref) => { this.ref = ref; }}
+              placeholder={plannedPomo.getIn(['tasks', 'recur']) || ''}
+              onKeyDown={(event) => {
+                updateRecurTask(event, day, hourblock);
+                if (event.which === 13) {
+                  this.ref.value = '';
+                }
+              }}
+            />
+          )
         }
       </div>);
   }
@@ -68,8 +85,8 @@ PlanningItem.defaultProps = {
   updatingRecurTask: false,
   updatingPlannedPomo: false,
 
-  updatePlannedPomo: () => {},
-  updateRecurTask: () => {},
+  updatePlannedPomo: () => { },
+  updateRecurTask: () => { },
 };
 
 PlanningItem.propTypes = {
@@ -81,6 +98,7 @@ PlanningItem.propTypes = {
 
   updatePlannedPomo: PropTypes.func,
   updateRecurTask: PropTypes.func,
+  // PlannedPomoActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -96,9 +114,13 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    // PlannedPomoActions: bindActionCreators(PlannedPomoActions, dispatch),
+  };
+}
 
-export default connect(mapStateToProps)(PlanningItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PlanningItem);

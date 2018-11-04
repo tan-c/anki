@@ -25,12 +25,17 @@ export class PlanningPage extends React.Component {
     return hourblocks;
   }
 
-  updatePlannedPomo = (hourblock, day, isDeleting = false) => {
+  updatePlannedPomo = (hourblock, day, isDeleting = false, options = {
+    isUpdatedLocked: false
+  }) => {
+    const { isUpdatedLocked } = options;
     const { plannedPomos, selectedProjectId } = this.props;
     const dayPlannedPomo = plannedPomos.get(day.toString());
     let newDayPlannedPomo = null;
 
-    if (isDeleting) {
+    if (isUpdatedLocked) {
+      newDayPlannedPomo = dayPlannedPomo.setIn(['plannedPomos', hourblock.toString(), 'isLocked'], !dayPlannedPomo.getIn(['plannedPomos', hourblock.toString(), 'isLocked']));
+    } else if (isDeleting) {
       this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingPlannedPomo'], true);
       newDayPlannedPomo = dayPlannedPomo.setIn(['plannedPomos', hourblock.toString(), 'project'], null);
     } else {
@@ -49,7 +54,9 @@ export class PlanningPage extends React.Component {
     }
 
     this.props.PlannedPomoActions.update(newDayPlannedPomo).then((res) => {
-      this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingPlannedPomo'], false);
+      this.props.UiActions.updateIn([
+        'hourblock', 'planningPage', 'updatingPlannedPomo'
+      ], false);
     });
   }
 

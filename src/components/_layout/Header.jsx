@@ -279,7 +279,7 @@ export class Header extends React.Component {
               <Icon
                 name="lock"
               />
-              {`${parseInt((new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) - currentTime.toDate().getTime()) / 1000 / 60 / 60 / 24, 10)}D${parseInt((new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) - currentTime.toDate().getTime()) / 1000 / 60 / 60 % 24, 10)}H`}
+              {`${((new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) - currentTime.toDate().getTime()) / 1000 / 60 / 60 / 24).toFixed(1)} Days`}
             </Label>
           </Menu.Item>
 

@@ -59,7 +59,7 @@ export class HourBlockRowPlanned extends React.Component {
     const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
 
     return (
-      <span className="flex-3 border-right-white padding-horizontal-5 text-left">
+      <span className="flex-4 border-right-white padding-horizontal-5 text-left">
         {
           currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
         }
@@ -86,34 +86,32 @@ export class HourBlockRowPlanned extends React.Component {
       isUpdatingPlannedPomo, recordPomo
     } = this.props;
 
-    if (recordPomo.has('content')) {
-      return (
-        <span className="text-left flex-3 border-right-white-20 padding-left-5">
-          {recordPomo.get('content')}
-        </span>
-      );
-    }
-
     return (
-      <input
-        type="text"
-        className={`flex-3 border-right-white-20 ${isTodayPast && 'bg-black'}`}
-        name="tasks.main"
-        ref={(ref) => { this.hourblockPlanneMainInput = ref; }}
-        value={mainTask}
-        disabled={isUpdatingPlannedPomo || isTodayPast}
-        onChange={(event) => {
-          this.setState({
-            mainTask: event.target.value,
-          });
-        }}
-        onKeyDown={(event) => {
-          if (event.keyCode === 13) {
-            onChangePlannedPomo(sectionOfDay, plannedPomo, event);
-            this.hourblockPlanneMainInput.value = '';
-          }
-        }}
-      />
+      <span className="text-left flex-2 border-right-white-20 padding-left-5">
+        {recordPomo.has('content') ? recordPomo.get('content')
+          : (
+            <input
+              type="text"
+              className={`flex-2 border-right-white-20 ${isTodayPast && 'bg-black'}`}
+              name="tasks.main"
+              ref={(ref) => { this.hourblockPlanneMainInput = ref; }}
+              value={mainTask}
+              disabled={isUpdatingPlannedPomo || isTodayPast}
+              onChange={(event) => {
+                this.setState({
+                  mainTask: event.target.value,
+                });
+              }}
+              onKeyDown={(event) => {
+                if (event.keyCode === 13) {
+                  onChangePlannedPomo(sectionOfDay, plannedPomo, event);
+                  this.hourblockPlanneMainInput.value = '';
+                }
+              }}
+            />
+          )
+        }
+      </span>
     );
   }
 
@@ -126,7 +124,7 @@ export class HourBlockRowPlanned extends React.Component {
     return (
       <input
         type="text"
-        className={`flex-2 border-right-white-20 ${isTodayPast && 'bg-black'}`}
+        className={`flex-1 border-right-white-20 ${isTodayPast && 'bg-black'}`}
         name="tasks.minor"
         ref={(ref) => { this.hourblockPlanneMinorInput = ref; }}
         value={minorTask}
@@ -156,7 +154,7 @@ export class HourBlockRowPlanned extends React.Component {
     return (
       <input
         type="text"
-        className={`${isTodayPast ? 'bg-black' : ''} width-200 border-right-white`}
+        className={`${isTodayPast ? 'bg-black' : ''} width-120 border-right-white`}
         name="tasks.recur"
         disabled={!enableChangeRecur || isTodayPast}
         ref={(ref) => { this.hourblockPlannedRecurInput = ref; }}

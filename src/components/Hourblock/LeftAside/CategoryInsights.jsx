@@ -77,7 +77,7 @@ export class CategoryInsights extends React.Component {
             >
               {
                 projectsByCategoryId.has(cat.get('_id'))
-                && projectsByCategoryId.get(cat.get('_id')).valueSeq().map(proj => (
+                && projectsByCategoryId.get(cat.get('_id')).valueSeq().sort((a, b) => (a.get('name') > b.get('name') ? 1 : -1)).map(proj => (
                   <div
                     key={proj.get('_id')}
                     style={{

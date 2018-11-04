@@ -97,6 +97,8 @@ export class CategoryInsights extends React.Component {
 
                   <span style={{
                     fontSize: 12,
+                    // width: 40,
+                    // textAlign: "center"
                   }}
                   >
                     {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}

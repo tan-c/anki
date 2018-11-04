@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import { Map } from 'immutable';
+import {
+  Icon, Label, Menu, Table
+} from 'semantic-ui-react';
 
 import { dailyRecordPomoCountByDayOfYearSelector } from 'utility-redux/dailyRecord';
 
@@ -12,25 +15,36 @@ class DailyPomoCount extends React.Component {
     const { dailyRecordPomoCountByDayOfYear } = this.props;
 
     return (
-      <section className="flex-1">
-        {dailyRecordPomoCountByDayOfYear.valueSeq().sort((a, b) => moment(a.get('startedAt')).unix() - moment(b.get('startedAt')).unix()).map(item => (
-          <div className="flex-container-row typical-setup border-bottom-white-20" key={item.get('_id')}>
-            <span className="flex-1">
-              {moment(item.get('startedAt')).format('MM-DD')}
-              {' '}
--
-              <span className={`${moment(item.get('startedAt')).isoWeekday() > 5 && 'color-orange'}`}>
-                {moment(item.get('startedAt')).isoWeekday()}
-              </span>
-            </span>
-            <span className="flex-1">
-              {item.get('pomoCount')}
-            </span>
-            <span className="flex-1">
-              {item.get('totalPomoCount')}
-            </span>
-          </div>))}
-      </section>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Date</Table.HeaderCell>
+            <Table.HeaderCell>Valid Pomo Count</Table.HeaderCell>
+            <Table.HeaderCell>Total Pomo</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {dailyRecordPomoCountByDayOfYear.valueSeq().sort((a, b) => moment(a.get('startedAt')).unix() - moment(b.get('startedAt')).unix()).map(item => (
+            <Table.Row
+              key={item.get('_id')}
+            >
+              <Table.Cell
+                className={`${moment(item.get('startedAt')).isoWeekday() > 5 && 'color-orange'}`}
+              >
+                {moment(item.get('startedAt')).format('YYYY-MM-DD, dddd')}
+              </Table.Cell>
+
+              <Table.Cell>
+                {item.get('pomoCount')}
+              </Table.Cell>
+
+              <Table.Cell>
+                {item.get('totalPomoCount')}
+              </Table.Cell>
+            </Table.Row>))}
+        </Table.Body>
+      </Table>
     );
   }
 }

@@ -98,3 +98,19 @@ export const projectBasedPlannedPomoTotalSelector = createSelector(
     return projectBasedPlannedPomoTotal;
   },
 );
+
+export const totalLockedPlannedPomoSelector = createSelector(
+  [getPlannedPomos],
+  (plannedPomos) => {
+    let totalLockedPlanned = 0;
+
+    plannedPomos.valueSeq().forEach((plannedPomosDay) => {
+      plannedPomosDay.get('plannedPomos').forEach((pomo, index) => {
+        if (pomo !== null) {
+          totalLockedPlanned += pomo.get('isLocked') ? 1 : 0;
+        }
+      });
+    });
+    return totalLockedPlanned;
+  }
+);

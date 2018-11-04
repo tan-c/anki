@@ -10,6 +10,7 @@ import {
   Menu, Icon, Modal, Button, Responsive, Dropdown, Label
 } from 'semantic-ui-react';
 import { currentUserSelector, UserActions } from 'utility-redux/user';
+import { totalLockedPlannedPomoSelector } from 'utility-redux/plannedPomo';
 import { UiActions } from 'utility-redux/ui';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
 import { todayTasksSelector } from 'utility-redux/task';
@@ -84,6 +85,7 @@ export class Header extends React.Component {
       // weatherInfo,
       showModal,
       isHeaderNextPomoOn,
+      totalLockedPlanned
     } = this.props;
 
     const {
@@ -139,6 +141,10 @@ export class Header extends React.Component {
                 onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingRecurTask'], !updatingRecurTask)}
               >
                 Set Recur Task
+              </Menu.Item>
+
+              <Menu.Item>
+                {`Locked: ${totalLockedPlanned / 2} Hours`}
               </Menu.Item>
             </React.Fragment>
           )
@@ -264,7 +270,6 @@ export class Header extends React.Component {
             {currentTime.format('HH:mm')}
           </Menu.Item>
 
-
           <Menu.Item>
             <Label
               color={`${!currentUser.hasIn(['config', 'planning', 'nextUnlockTime']) || new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) <= currentTime.toDate().getTime() ? 'green' : 'red'}`}
@@ -362,6 +367,8 @@ Header.defaultProps = {
   selectedProjectId: '',
   edittingTarget: 'events',
   updatingRecurTask: false,
+
+  totalLockedPlanned: 0
 };
 
 Header.propTypes = {
@@ -385,6 +392,8 @@ Header.propTypes = {
   updatingRecurTask: PropTypes.bool,
   selectedProjectId: PropTypes.string,
   edittingTarget: PropTypes.string,
+
+  totalLockedPlanned: PropTypes.number,
 
   UiActions: PropTypes.object.isRequired,
   UserActions: PropTypes.object.isRequired,
@@ -412,6 +421,8 @@ function mapStateToProps(state, ownProps) {
     selectedProjectId: state.ui.getIn(['hourblock', 'planningPage', 'selectedProjectId']),
     updatingRecurTask: state.ui.getIn(['hourblock', 'planningPage', 'updatingRecurTask']),
     edittingTarget: state.ui.getIn(['hourblock', 'settingsPage', 'edittingTarget']),
+
+    totalLockedPlanned: totalLockedPlannedPomoSelector(state)
   };
 }
 

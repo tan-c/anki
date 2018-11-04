@@ -25,10 +25,11 @@ export class PlanningPage extends React.Component {
     return hourblocks;
   }
 
-  updatePlannedPomo = (hourblock, day, isDeleting = false, options = {
+  updatePlannedPomo = (hourblock, day, options = {
+    isDeleting: false,
     isUpdatedLocked: false
   }) => {
-    const { isUpdatedLocked } = options;
+    const { isUpdatedLocked, isDeleting } = options;
     const { plannedPomos, selectedProjectId } = this.props;
     const dayPlannedPomo = plannedPomos.get(day.toString());
     let newDayPlannedPomo = null;

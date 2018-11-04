@@ -6,6 +6,9 @@ import {
 } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 // import { PlannedPomoActions } from 'utility-redux/plannedPomo';
+import { currentUserSelector } from 'utility-redux/user';
+import { Map } from 'immutable';
+import toastr from 'toastr';
 
 export class PlanningItem extends React.Component {
   render() {
@@ -17,7 +20,12 @@ export class PlanningItem extends React.Component {
       updatingPlannedPomo,
       updatePlannedPomo,
       updateRecurTask,
+      currentUser
     } = this.props;
+
+    // When the item is locked and unlock is in the future
+    // This item should not be editable
+    const isDisabledDueToLock = currentUser.hasIn(['config', 'planning', 'nextUnlockTime']) && new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) > new Date().getTime() && plannedPomo.get('isLocked');
 
     return (
       <div
@@ -33,24 +41,48 @@ export class PlanningItem extends React.Component {
                 tabIndex="-1"
                 className="flex-1"
                 disabled={updatingPlannedPomo}
-                onClick={_ => updatePlannedPomo(hourblock, day)}
+                onClick={(_) => {
+                  if (!isDisabledDueToLock) {
+                    updatePlannedPomo(hourblock, day);
+                  } else {
+                    toastr.info('You can only unlock when the lock has expired');
+                  }
+                }}
               >
                 {plannedPomo.getIn(['project', 'name'])}
               </span>
+
               {plannedPomo.hasIn(['project', 'name']) && (
                 <React.Fragment>
-                  <i
-                    className="fa fa-fw fa-close line-height-25"
-                    role="button"
-                    tabIndex="-1"
-                    onClick={_ => updatePlannedPomo(hourblock, day, true)}
+                  <Icon
+                    name="close"
+                    onClick={(_) => {
+                      if (!isDisabledDueToLock) {
+                        updatePlannedPomo(hourblock, day, {
+                          isDeleting: true
+                        });
+                      } else {
+                        toastr.info('You can only unlock when the lock has expired');
+                      }
+                    }}
                   />
                   <Icon
                     name="lock"
-                    color={plannedPomo.get('isLocked') ? 'red' : 'green'}
-                    onClick={_ => updatePlannedPomo(hourblock, day, false, {
-                      isUpdatedLocked: true
-                    })}
+                    style={{
+                      // opacity: isDisabledDueToLock ? 0.5 : 1,
+                      color: plannedPomo.get('isLocked') ? 'red' : 'white'
+                    }}
+                    onClick={(_) => {
+                      // You can only unlock when you have not locked
+                      if (!plannedPomo.get('isLocked') || !isDisabledDueToLock) {
+                        updatePlannedPomo(hourblock, day, {
+                          isUpdatedLocked: true
+                        });
+                      } else {
+                        toastr.info('You can only unlock when the lock has expired');
+                      }
+                    }
+                    }
                   />
                 </React.Fragment>
               )}
@@ -80,6 +112,7 @@ export class PlanningItem extends React.Component {
 }
 
 PlanningItem.defaultProps = {
+  currentUser: Map(),
   day: 0,
   hourblock: 0,
   updatingRecurTask: false,
@@ -90,6 +123,7 @@ PlanningItem.defaultProps = {
 };
 
 PlanningItem.propTypes = {
+  currentUser: PropTypes.object,
   day: PropTypes.number,
   hourblock: PropTypes.number,
   plannedPomo: PropTypes.object.isRequired,
@@ -103,6 +137,8 @@ PlanningItem.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    currentUser: currentUserSelector(state),
+
     day: ownProps.day,
     hourblock: ownProps.hourblock,
     plannedPomo: ownProps.plannedPomo,

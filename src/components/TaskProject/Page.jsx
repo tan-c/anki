@@ -95,14 +95,17 @@ export class ProjectTaskList extends React.Component {
                 className={`${focusedProjectId === project.get('_id') && 'border-orange'} ${nextPomo.getIn(['project', '_id']) === project.get('_id') && 'bg-orange'}`}
                 onClick={_ => this.props.UiActions.updateIn(['hourblock', 'hourblockPage', 'focusedProjectId'], project.get('_id'))}
               >
-                <span
-                  className="width-60"
+                <Label
                   style={{
+                    width: 80,
+                    overflow: 'hidden',
                     backgroundColor: project.getIn(['category', 'color']),
+                    color: 'white',
+                    textAlign: 'center',
                   }}
                 >
                   {project.get('name')}
-                </span>
+                </Label>
 
                 {projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).sort((a, b) => b.get('priority') - a.get('priority')).getIn([0, 'content'])}
 

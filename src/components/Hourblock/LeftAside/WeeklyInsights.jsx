@@ -34,7 +34,10 @@ export class WeeklyInsights extends React.Component {
     } = this.props;
 
     return (
-      <div data-role="weekly-insights">
+      <div style={{
+        marginTop: 20
+      }}
+      >
         <span className="text-center">
           {(thisWeekTotalCalorie / 1000).toFixed(1)}
           K/

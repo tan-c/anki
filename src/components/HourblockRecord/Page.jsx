@@ -52,17 +52,19 @@ export class HourBlockPage extends React.Component {
     const { dayMomentObject } = this.state;
     return (
       <Fragment>
-        <div id="bg-white-20 height-40 flex-container-row">
-          <span
-            className={`flex-1 text-left height-40 line-height-40 font-400 font-24 margin-left-10 ${dayMomentObject.dayOfYear() === moment().dayOfYear() ? 'color-green' : ''}`}
+        <Grid>
+          <Grid.Column
+            width={10}
+            className={`text-left height-40 line-height-40 font-400 font-24 margin-left-10 ${dayMomentObject.dayOfYear() === moment().dayOfYear() ? 'color-green' : ''}`}
           >
             {dayMomentObject.format('YYYY-MM-DD ddd')}
             {' '}
             - W
             {dayMomentObject.isoWeek()}
-          </span>
+          </Grid.Column>
 
-          <div
+          <Grid.Column
+            width={6}
             className="flex-1 text-right margin-right-10"
           >
             <div className="font-400 color-green height-20 line-height-20">QUICK LINK</div>
@@ -74,8 +76,8 @@ export class HourBlockPage extends React.Component {
               <span>|</span>
               <span role="button" tabIndex="-1" onClick={_ => this.updateDayMomentObject(1)}>Next Day</span>
             </div>
-          </div>
-        </div>
+          </Grid.Column>
+        </Grid>
 
         <HourBlockListConnected dayMomentObject={dayMomentObject} />
       </Fragment>
@@ -121,7 +123,8 @@ export class HourBlockPage extends React.Component {
         <Grid.Row
           data-role="hourblock-page"
           style={{
-            height: '100%'
+            height: '100%',
+            // padding: 0
           }}
         >
           <Grid.Column

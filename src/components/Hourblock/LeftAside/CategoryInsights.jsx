@@ -79,19 +79,32 @@ export class CategoryInsights extends React.Component {
                 <div
                   key={proj.get('_id')}
                   style={{
-                    fontSize: 12,
-                    display: 'block',
+                    display: 'flex',
                     position: 'relative',
                     // overflow: 'hidden',
                     height: 15,
                     lineHeight: '15px',
                   }}
                 >
-                  {`${proj.get('name')} -`}
-                  {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}
-                  /
-                  {projectPlannedTotal[proj.get('_id')] !== undefined ? projectPlannedTotal[proj.get('_id')] : 0}
-                  {/* { proj.get('estimatedHour') } */}
+                  <span style={{
+                    textAlign: 'left',
+                    fontSize: 12,
+                    flex: 1
+                  }}
+                  >
+                    {`${proj.get('name')}`}
+                  </span>
+
+                  <span style={{
+                    fontSize: 12,
+                  }}
+                  >
+                    {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}
+                    /
+                    {projectPlannedTotal[proj.get('_id')] !== undefined ? projectPlannedTotal[proj.get('_id')] : 0}
+                    {/* { proj.get('estimatedHour') } */}
+                  </span>
+
 
                   {proj.get('estimatedHour') > 0 && projectTotal.has(proj.get('_id')) && projectTotal.get(proj.get('_id')) >= proj.get('estimatedHour')
                     && <i className="fa fa-fw fa-check color-green" />

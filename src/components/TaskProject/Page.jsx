@@ -55,6 +55,24 @@ export class ProjectTaskList extends React.Component {
     }
   }
 
+  getTotalProjectTasksHours = (project) => {
+    const {
+      projectTasks,
+    } = this.props;
+
+    let totalProjectTasksHours = 0;
+    // { !projectTasks.has(project.get('_id')) && 0 }
+    if (projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).size === 1) {
+      totalProjectTasksHours = projectTasks.getIn([project.get('_id'), '0', 'subTasks']).count() / 2;
+    }
+
+    if (projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).size > 1) {
+      totalProjectTasksHours = projectTasks.get(project.get('_id')).reduce((currentSum, b) => (isImmutable(currentSum) ? currentSum.get('subTasks').count() : currentSum) + b.get('subTasks').count()) / 2;
+    }
+
+    return totalProjectTasksHours;
+  }
+
   render() {
     const {
       projectTasks,
@@ -63,6 +81,7 @@ export class ProjectTaskList extends React.Component {
     } = this.props;
 
     const { nextPomo } = this.state;
+
 
     return (
       <Grid.Row
@@ -110,11 +129,13 @@ export class ProjectTaskList extends React.Component {
                 {projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).sort((a, b) => b.get('priority') - a.get('priority')).getIn([0, 'content'])}
 
                 <List.Content floated="right">
-                  {/* List sum of estimated time for this project */}
-                  {!projectTasks.has(project.get('_id')) && 0}
-                  {projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).size === 1 && projectTasks.getIn([project.get('_id'), '0', 'subTasks']).count() / 2}
-                  {projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).size > 1 && projectTasks.get(project.get('_id')).reduce((currentSum, b) => (isImmutable(currentSum) ? currentSum.get('subTasks').count() : currentSum) + b.get('subTasks').count()) / 2}
-                  {'H'}
+
+                  {this.getTotalProjectTasksHours(project) ? `${this.getTotalProjectTasksHours(project)}H`
+                    : (
+                      <Label color="red">
+                        0H
+                      </Label>
+                    )}
                 </List.Content>
               </List.Item>))}
           </List>

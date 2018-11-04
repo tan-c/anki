@@ -114,7 +114,11 @@ export class CategoryInsights extends React.Component {
                     {proj.get('estimatedHour') > 0
                       && projectTotal.has(proj.get('_id'))
                       && projectTotal.get(proj.get('_id')) >= proj.get('estimatedHour')
-                      && <i className="fa fa-fw fa-check color-green" />
+                      && (
+                        <i
+                          className="fa fa-fw fa-check color-green"
+                        />
+                      )
                     }
 
                     {proj.get('estimatedHour') > 0

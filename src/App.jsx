@@ -50,8 +50,8 @@ import HourblockPlanningPageConnected from './components/HourblockPlanning/Page'
 import HourblockSettingPageConnected from './components/HourblockSettings/Page';
 import HourblockWorkoutPageConnected from './components/HourblockWorkout/Page';
 
-import TodoTaskPageConnected from './components/TodoTask/Page';
-import TodoCalendarPageConnected from './components/TodoCalendar/Page';
+import TaskProjectPageConnected from './components/TaskProject/Page';
+import TaskDailyPageConnected from './components/TaskDaily/Page';
 
 import EyeModal from './components/_modal/Eye';
 import ErrorBoundary from './ErrorBoundary';
@@ -267,12 +267,12 @@ export class App extends React.Component {
                     component={HourblockSettingPageConnected}
                   />
                   <Route
-                    path="/todo/calendar"
-                    component={TodoCalendarPageConnected}
+                    path="/task/daily"
+                    component={TaskDailyPageConnected}
                   />
                   <Route
-                    path="/todo/task"
-                    component={TodoTaskPageConnected}
+                    path="/task/project"
+                    component={TaskProjectPageConnected}
                   />
                   <Route
                     exact

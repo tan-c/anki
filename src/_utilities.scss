@@ -450,10 +450,6 @@ a {
   box-sizing: border-box;
 }
 
-.border-left-orange {
-  border-left: 3px $orange solid;
-}
-
 .border-top {
   border-top: 1px solid $white-30;
 }
@@ -476,14 +472,6 @@ a {
 
 small {
   font-size: 10px;
-}
-
-.pull-right {
-  float: right;
-}
-
-.pull-left {
-  float: left;
 }
 
 .no-bg {

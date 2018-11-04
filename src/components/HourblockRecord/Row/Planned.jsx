@@ -190,10 +190,21 @@ export class HourBlockRowPlanned extends React.Component {
 
     return (
       <React.Fragment>
-        <span className="border-right-white width-50 height-lineheight-30">
+        <span
+          className={'width-50 height-lineheight-30}'}
+        >
           {sectionName}
         </span>
 
+        <span
+          className="width-20"
+        >
+          <Icon
+            name="lock" style={{
+              color: plannedPomo.get('isLocked') ? 'red' : 'grey'
+            }}
+          />
+        </span>
         {/* {!isTodayPast && (
           <ProjectSelectConnected
             className="width-80 border-right-white height-lineheight-30"

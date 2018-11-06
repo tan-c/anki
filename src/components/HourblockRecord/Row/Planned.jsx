@@ -84,7 +84,8 @@ export class HourBlockRowPlanned extends React.Component {
                 }
               </span>
 
-              {currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() > 0 && (
+
+              {currentPlannedPomoTask.hasIn(['task', '_id']) && (
                 <span className="width-20">
                   <Icon
                     // color="blue"
@@ -92,9 +93,14 @@ export class HourBlockRowPlanned extends React.Component {
                     name="close"
                     onClick={(_) => {
                       if (recordPomo.has('_id')) {
-                        this.props.TaskActions.update(currentPlannedPomoTask.get('task').deleteIn(['subTasks', '0']), currentPlannedPomoTask.get('task'));
+                        if (currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() > 0) {
+                          // Delete the subtask
+                          this.props.TaskActions.update(currentPlannedPomoTask.get('task').deleteIn(['subTasks', '0']), currentPlannedPomoTask.get('task'));
+                        } else {
+                          // Delete the task
+                          this.props.TaskActions.deleteRecord(currentPlannedPomoTask.get('task'));
+                        }
 
-                        // Also update the saved tasks
                         const newCurrentDayRecord = currentDayRecord.setIn(['pomo', (sectionOfDay).toString(), 'completedTask'], currentPlannedPomoTask.get('taskName'));
 
                         this.props.DailyRecordActions.update(newCurrentDayRecord);

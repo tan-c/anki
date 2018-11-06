@@ -7,6 +7,14 @@ import { Map, List } from 'immutable';
 import { AnkiActions } from 'utility-redux/anki';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
 // import { UiActions } from 'utility-redux/ui';
+import ReactTable from 'react-table';
+
+import {
+  Form, TextArea, Grid, Segment,
+  Menu,
+  Icon,
+  Header
+} from 'semantic-ui-react';
 
 export class AnkiTagsPage extends React.Component {
   // constructor(props, context) {
@@ -16,6 +24,10 @@ export class AnkiTagsPage extends React.Component {
   //     tagFilter: '',
   //   };
   // }
+
+  state = {
+    selectedAnkiTagId: '',
+  }
 
   componentWillReceiveProps = (nextProps) => {
     // if (nextProps.ankis.length) {
@@ -87,12 +99,12 @@ export class AnkiTagsPage extends React.Component {
   };
 
   addTagToAnki = (anki) => {
-    const { selectedAnkiTagId } = this.props;
+    const { selectedAnkiTagId } = this.state;
 
     if (
       anki.has('tags')
       && anki.get('tags').find(a => a.get('_id') === selectedAnkiTagId)
-        === undefined
+      === undefined
     ) {
       this.props.AnkiActions.update(
         anki.update('tags', tags => tags.push(selectedAnkiTagId))
@@ -102,105 +114,165 @@ export class AnkiTagsPage extends React.Component {
 
   render() {
     const {
-      ankis, ankiTags, notebookGroups, selectedAnkiTagId
+      ankis, ankiTags, notebookGroups
     } = this.props;
 
+    const { selectedAnkiTagId } = this.state;
+
+    console.log('🔥🔥🔥🔥🔥 ankis.valueSeq() 🔥🔥🔥🔥🔥');
+    console.log(ankis.valueSeq().toJS());
     return (
-      <div className="flex-horizontal-center ">
-        <div className="flex-1 border-right-black">
-          <span>Tags</span>
-          <hr />
-          {ankiTags.valueSeq().map(tag => (
-            <span
-              className="label bg-bright-green flex-container-row"
-              key={tag.get('_id')}
-            >
-              {tag.get('name')}
-            </span>
-          ))}
-          <hr />
+      <Grid.Row>
+        <Grid.Column width={2}>
+          <Header as="h3" inverted>
+            Tags
+          </Header>
+
+          <Menu.Menu>
+            {ankiTags.valueSeq().map(tag => (
+              <Menu.Item
+                key={tag.get('_id')}
+              >
+                {tag.get('name')}
+                <Icon
+                  name="close"
+                  onClick={(_) => {
+                    this.props.AnkiTagActions.deleteRecord(tag);
+                  }}
+                />
+              </Menu.Item>
+            ))}
+          </Menu.Menu>
           <input
             type="text"
             className="border-green margin-top-10"
             onKeyDown={this.createAnkiTagKeydown}
             placeholder="new anki"
           />
-        </div>
+        </Grid.Column>
 
-        <div className="flex-6" style={{ overflow: 'auto' }}>
-          <div className="flex-horizontal-center border-bottom-black-30 height-30">
-            <div className="flex-1">
-              <select
-                onChange={event => this.filterAnki(event, 'notebookGroups')}
-                className="form-control"
-              >
-                <option key="" value="">
-                  Select Notebook
-                </option>
-                {notebookGroups.valueSeq().map(nbg => (
-                  <option key={nbg.get('_id')} value={nbg.get('_id')}>
-                    {nbg.get('title')}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="flex-1" />
-            <div className="flex-6" />
-          </div>
+        <Grid.Column width={12}>
+          <select
+            onChange={event => this.filterAnki(event, 'notebookGroups')}
+            className="form-control"
+          >
+            <option key="" value="">
+              Select Notebook
+            </option>
+            {notebookGroups.valueSeq().map(nbg => (
+              <option key={nbg.get('_id')} value={nbg.get('_id')}>
+                {nbg.get('title')}
+              </option>
+            ))}
+          </select>
 
-          {ankis.valueSeq().map(anki => (
+          <ReactTable
+            data={ankis.valueSeq().toJS()}
+            style={{
+              height: 'calc(100vh - 150px)',
+              overflow: 'auto',
+              background: 'white',
+              color: 'black'
+            }}
+            columns={[
+              {
+                Header: 'Type',
+                accessor: 'type',
+                width: 80
+              },
+              {
+                Header: 'Created',
+                accessor: 'createdAt',
+                width: 150
+              },
+              {
+                Header: 'Question',
+                accessor: 'question',
+                width: 120
+              }, {
+                Header: 'Tags',
+                accessor: 'tags',
+                width: 80,
+                // sortMethod: numericSortSmallerFirst,
+                Cell: row => (
+                  <div>
+                    {row.tags && row.tags.map(tag => (
+                      <span
+                        key={tag.get('_id')}
+                        className="bg-green color-white margin-right-5 padding-vertical-5"
+                      >
+                        {tag.name}
+                      </span>
+                    ))}
+                  </div>
+                )
+              },
+              {
+                Header: 'Add Tag',
+                accessor: 'add Tags',
+                width: 80,
+                // sortMethod: numericSortSmallerFirst,
+                Cell: row => (
+                  <div>
+                    {selectedAnkiTagId.length > 0 && (
+                      <button
+                        className="bg-green margin-right-10"
+                      // FIXME: actions not right
+                      // onClick={(_) => {
+                      //   this.addTagToAnki(row);
+                      // }}
+                      >
+                        Add Tag
+                      </button>
+                    )}
+
+                    <button
+                      className="bg-red"
+                    // FIXME: actions not right
+                    // onClick={(_) => {
+                    //   this.props.AnkiActions.update(row.set('tags', List()));
+                    // }}
+                    >
+                      Clear Tag
+                    </button>
+                  </div>
+                ),
+              } // {
+              //   Header: 'Answer',
+              //   accessor: 'answer',
+              //   width: 120
+              // }
+            ]}
+
+            // defaultPageSize={30}
+            filterable
+            defaultSorted={[
+              // {
+              //   id: 'itemType',
+              //   desc: true
+              // },
+              // {
+              //   id: 'price',
+              //   desc: true
+              // }
+            ]}
+          />
+
+          {/* {ankis.valueSeq().map(anki => (
             <div
               key={anki.get('_id')}
               className="flex-container-row border-bottom-black"
             >
               <span className="flex-1 border-right-black-20">
-                {anki.getIn(['note', 'notebook', 'title'])}
-              </span>
-              <span className="flex-1 border-right-black-20">
-                {anki.get('type')}
-              </span>
-              <span className="flex-1 border-right-black-20">
-                {anki.get('createdAt')}
-              </span>
-              <span className="flex-1 border-right-black-20">
-                {anki.get('question')}
-              </span>
-              <span className="flex-1 border-right-black-20">
-                {anki.has('tags')
-                  && anki.get('tags').map(tag => (
-                    <span
-                      key={tag.get('_id')}
-                      className="bg-green color-white margin-right-5 padding-vertical-5"
-                    >
-                      {tag.get('name')}
-                    </span>
-                  ))}
+
               </span>
               <span className="flex-1">
-                {selectedAnkiTagId.length > 0 && (
-                  <button
-                    className="bg-green margin-right-10"
-                    onClick={(_) => {
-                      this.addTagToAnki(anki);
-                    }}
-                  >
-                    Add Tag
-                  </button>
-                )}
 
-                <button
-                  className="bg-red"
-                  onClick={(_) => {
-                    this.props.AnkiActions.update(anki.set('tags', List()));
-                  }}
-                >
-                  Clear Tag
-                </button>
               </span>
             </div>
-          ))}
-        </div>
-      </div>
+          ))} */}
+        </Grid.Column>
+      </Grid.Row>
     );
   }
 }
@@ -214,7 +286,7 @@ AnkiTagsPage.propTypes = {
   ankis: PropTypes.object,
   ankiTags: PropTypes.object,
   notebookGroups: PropTypes.object.isRequired,
-  selectedAnkiTagId: PropTypes.string.isRequired,
+  // selectedAnkiTagId: PropTypes.string.isRequired,
 
   AnkiActions: PropTypes.object.isRequired,
   AnkiTagActions: PropTypes.object.isRequired
@@ -225,7 +297,7 @@ function mapStateToProps(state, ownProps) {
     ankis: state.ankis,
     ankiTags: state.ankiTags,
     notebookGroups: state.notebookGroups,
-    selectedAnkiTagId: state.ui.getIn(['selectedAnkiTagId'])
+    // selectedAnkiTagId: state.ui.getIn(['selectedAnkiTagId'])
   };
 }
 

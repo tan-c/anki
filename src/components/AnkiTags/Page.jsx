@@ -119,8 +119,6 @@ export class AnkiTagsPage extends React.Component {
 
     const { selectedAnkiTagId } = this.state;
 
-    console.log('🔥🔥🔥🔥🔥 ankis.valueSeq() 🔥🔥🔥🔥🔥');
-    console.log(ankis.valueSeq().toJS());
     return (
       <Grid.Row>
         <Grid.Column width={2}>

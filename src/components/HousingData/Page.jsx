@@ -26,7 +26,7 @@ class HousingDataPage extends React.Component {
       filterable
       defaultSorted={[
         {
-          id: 'itemType',
+          id: 'updatedAt',
           desc: true
         },
         {

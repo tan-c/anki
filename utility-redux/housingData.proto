@@ -25,6 +25,7 @@ message HousingData {
     int32 floorAreaRatio = 13;
     string utilization = 14;
     string infoSource = 15;
+    string updatedAt = 16;
 
     // oneof Floor {
       // int32 FloorInt = 40;

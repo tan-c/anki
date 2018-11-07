@@ -77,6 +77,16 @@ const ListColumns = [
   //   sortMethod: numericSortSmallerFirst
   // },
   {
+    id: 'updatedAt',
+    Header: 'Updated At',
+    accessor: 'updatedAt',
+    width: 100,
+    Cell: row => (
+      <div>
+        {moment(row.original.updatedAt).format('YYYY-MM-DD')}
+      </div>)
+  },
+  {
     id: 'itemType',
     Header: 'Type',
     accessor: 'itemType',

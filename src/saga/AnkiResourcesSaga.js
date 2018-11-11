@@ -65,7 +65,12 @@ export function* loadAllDataSaga() {
   yield* getAll('project');
 
   yield* getAll('daily_record', {
-    limit: window.isMobile ? 1 : 28,
+    limit: window.isMobile ? 1 : 28, // Probably only need 7 after that
+    populate: 1, // To speed things up, but Today should be populated
+  });
+
+  yield* getAll('pomo_record', {
+    limit: window.isMobile ? 1 : 24 * 28,
     populate: 1, // To speed things up // Today should be populated
   });
 
@@ -78,13 +83,10 @@ export function* loadAllDataSaga() {
     yield* getAll('task');
     yield* getAll('event');
     yield* getAll('event_record');
-
     // yield* getAll('calorie');
   }
 
   yield* getAll('housing_data', {}, {
     acceptHeader: 'application/octet-stream'
   });
-
-  // }
 }

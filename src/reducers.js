@@ -7,6 +7,8 @@ import notebookGroups from 'utility-redux/notebookGroup';
 import files from 'utility-redux/file';
 
 import dailyRecords from 'utility-redux/dailyRecord';
+import pomoRecords from 'utility-redux/pomoRecord';
+
 import tasks from 'utility-redux/task';
 import categories from 'utility-redux/category';
 import dailyMeasurements from 'utility-redux/dailyMeasurement';
@@ -32,6 +34,7 @@ export default {
 
   categories,
   dailyRecords,
+  pomoRecords,
   dailyMeasurements,
   plannedPomos,
   projects,

@@ -4,12 +4,15 @@ import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { currentUserSelector } from 'utility-redux/user';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
-import { TaskActions } from 'utility-redux/task';
+import { TaskActions, projectTasksSelector } from 'utility-redux/task';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
+import InputNewConnected from 'utility-react-component/Form/Input/New';
 
 import {
-  Icon
+  Icon,
+  Popup,
+  List,
 } from 'semantic-ui-react';
 
 import { DailyRecordActions } from 'utility-redux/dailyRecord';
@@ -53,6 +56,81 @@ export class HourBlockRowPlanned extends React.Component {
     return shouldUpdate;
   }
 
+  renderPomoTasksList = () => {
+    const { pomoProjectTasks } = this.props;
+
+    console.log('🔥🔥🔥🔥🔥 currentPlannedPomoTasks.toJS() 🔥🔥🔥🔥🔥');
+    console.log(pomoProjectTasks.toJS());
+
+    console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
+    console.log(111);
+
+    return (
+      <List celled>
+        {pomoProjectTasks.size > 0 && pomoProjectTasks.sort((a, b) => b.get('priority') - a.get('priority')).map((task, taskIndex) => (
+          <React.Fragment key={task.get('id')}>
+            <List.Item>
+              <List.Content style={{
+                display: 'flex'
+              }}
+              >
+                <span className="flex-1">
+                  {task.get('content')}
+                </span>
+
+                <input
+                  className="flex-1"
+                  ref={(ref) => { this.newTaskInput = ref; }}
+                  placeholder={`add new to ${task.get('content')}`}
+                  onKeyDown={(event) => {
+                    if (event.which === 13) {
+                      this.props.TaskActions.update(task.update('subTasks', subTasks => subTasks.push(event.target.value)), task).then((_) => {
+                        this.newTaskInput.value = '';
+                      });
+                    }
+                  }}
+                  style={{
+                    color: 'black'
+                  }}
+                />
+
+                <i
+                  role="button"
+                  tabIndex="-1"
+                  className="fa fa-fw fa-close"
+                  onClick={_ => this.props.TaskActions.deleteRecord(task)}
+                />
+              </List.Content>
+            </List.Item>
+            {task.get('subTasks').count() > 0
+              && (
+                <List.Item>
+                  <List divided inverted>
+                    {task.get('subTasks').map((subTask, index) => (
+                      <List.Item
+                        key={index} // eslint-disable-line
+                      >
+                        {`${index + 1}. ${subTask}`}
+                        <List.Content floated="right">
+                          <i
+                            role="button"
+                            tabIndex="-1"
+                            className="fa fa-fw fa-close"
+                            onClick={_ => this.props.TaskActions.update(task.deleteIn(['subTasks', index.toString()]), task)}
+                          />
+                        </List.Content>
+                      </List.Item>))
+                    }
+                  </List>
+                </List.Item>
+              )
+            }
+          </React.Fragment>
+        ))}
+      </List>
+    );
+  }
+
   renderProjectTask = () => {
     const {
       sectionOfDay,
@@ -86,7 +164,41 @@ export class HourBlockRowPlanned extends React.Component {
 
 
               {currentPlannedPomoTask.hasIn(['task', '_id']) && (
-                <span className="width-40">
+                <span className="width-60">
+                  <Popup
+                    trigger={(
+                      <Icon
+                        name="plus"
+                        style={{
+                          width: 15,
+                          opacity: 0.5,
+                          color: 'green'
+                        }}
+                      />
+                    )}
+                    content="Hide the popup on any scroll event"
+                    on="click"
+                    wide="very"
+                  // hideOnScroll
+                  >
+                    {this.renderPomoTasksList()}
+
+                    <div
+                      className="flex-container-row pinned-bottom border-top"
+                    >
+                      <InputNewConnected
+                        inputName="content"
+                        inputClassNames="flex-5"
+                        newRecord={{
+                          type: 'project',
+                          project: plannedPomo.getIn(['project', '_id']),
+                        }}
+                        actions={this.props.TaskActions}
+                        inputClassNames="color-black"
+                      />
+                    </div>
+                  </Popup>
+
                   <Icon
                     name="close"
                     style={{
@@ -311,6 +423,7 @@ HourBlockRowPlanned.defaultProps = {
 
   isUpdatingPlannedPomo: false,
   allProjectTasksOrdered: Map(),
+  pomoProjectTasks: Map(),
 };
 
 HourBlockRowPlanned.propTypes = {
@@ -325,6 +438,7 @@ HourBlockRowPlanned.propTypes = {
   onChangePlannedPomo: PropTypes.func,
   isUpdatingPlannedPomo: PropTypes.bool,
   allProjectTasksOrdered: PropTypes.object,
+  pomoProjectTasks: PropTypes.object,
 
   DailyRecordActions: PropTypes.object.isRequired,
 };
@@ -342,6 +456,8 @@ function mapStateToProps(state, ownProps) {
     allProjectTasksOrdered: ownProps.allProjectTasksOrdered,
     currentUser: currentUserSelector(state),
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
+
+    pomoProjectTasks: projectTasksSelector(state).get(ownProps.plannedPomo.getIn(['project', '_id'])),
   };
 }
 

@@ -139,7 +139,7 @@ export class HourBlockPage extends React.Component {
           </Grid.Column>
 
           <Grid.Column
-            width={10}
+            width={11}
             style={{
               overflow: 'auto'
             }}
@@ -148,7 +148,7 @@ export class HourBlockPage extends React.Component {
           </Grid.Column>
 
           <Grid.Column
-            width={4}
+            width={3}
             style={{
               overflow: 'auto'
             }}

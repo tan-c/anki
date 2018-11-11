@@ -63,6 +63,9 @@ export class HourBlockRowRecord extends React.Component {
                     tabIndex="-1"
                     className="fa fa-fw fa-check flex-1 height-lineheight-30"
                     onClick={(_) => {
+                      // Also be adding the plannedPomo
+
+
                       // Close the main subtask
                       addPomoRecord({
                         target: {

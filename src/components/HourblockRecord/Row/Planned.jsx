@@ -89,8 +89,10 @@ export class HourBlockRowPlanned extends React.Component {
                 <span className="width-40">
                   <Icon
                     name="close"
-                    stype={{
-                      width: 15
+                    style={{
+                      width: 15,
+                      opacity: 0.5,
+                      color: 'red'
                     }}
                     onClick={(_) => {
                       const res = confirm('Deleting this task');

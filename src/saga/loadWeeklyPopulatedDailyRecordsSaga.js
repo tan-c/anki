@@ -18,6 +18,7 @@ export function* loadWeeklyPopulatedDailyRecordsSaga() {
   // If today is monday, load yday as well
   // Alternatively you could "lazy-load" only when you click "Last Day" or "Next Day"
   const startOfDayMoment = moment().tz('Asia/Tokyo').startOf('day');
+
   const weeklyRecords = dailyRecords.filter(dailyRecord => moment(dailyRecord.startedAt).tz('Asia/Tokyo').isoWeek() === startOfDayMoment.isoWeek() || moment(dailyRecord.startedAt).add(1, 'days').unix() === startOfDayMoment.unix());
 
   let todayRecord = weeklyRecords.find(dailyRecord => moment(dailyRecord.startedAt).unix() === startOfDayMoment.unix());

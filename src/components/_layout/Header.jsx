@@ -284,7 +284,7 @@ export class Header extends React.Component {
               <Icon
                 name="lock"
               />
-              {`${((new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) - currentTime.toDate().getTime()) / 1000 / 60 / 60 / 24).toFixed(1)} Days`}
+              {`${((new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) - currentTime.toDate().getTime()) / 1000 / 60 / 60 / 24).toFixed(1)}/${currentUser.getIn(['config', 'planning', 'lockInterval'])} D`}
             </Label>
           </Menu.Item>
 

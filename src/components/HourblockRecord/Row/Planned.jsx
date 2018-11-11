@@ -222,6 +222,10 @@ export class HourBlockRowPlanned extends React.Component {
                 content="Hide the popup on any scroll event"
                 on="click"
                 wide="very"
+                style={{
+                  maxHeight: 400,
+                  overflow: 'auto'
+                }}
               // hideOnScroll
               >
                 {this.renderPomoTasksList()}

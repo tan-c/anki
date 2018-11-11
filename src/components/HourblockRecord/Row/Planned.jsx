@@ -86,11 +86,24 @@ export class HourBlockRowPlanned extends React.Component {
 
 
               {currentPlannedPomoTask.hasIn(['task', '_id']) && (
-                <span className="width-20">
+                <span className="width-40">
+                  <Icon
+                    name="close"
+                    stype={{
+                      width: 15
+                    }}
+                    onClick={(_) => {
+                      const res = confirm('Deleting this task');
+
+                      if (res) {
+                        this.props.TaskActions.deleteRecord(currentPlannedPomoTask.get('task'));
+                      }
+                    }}
+                  />
                   <Icon
                     // color="blue"
                     disabled={!recordPomo.has('_id')}
-                    name="close"
+                    name="check"
                     onClick={(_) => {
                       if (recordPomo.has('_id')) {
                         if (currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() > 0) {
@@ -109,7 +122,8 @@ export class HourBlockRowPlanned extends React.Component {
                       }
                     }}
                     style={{
-                      float: 'right'
+                      // float: 'right',
+                      width: 15
                     }}
                   />
                 </span>

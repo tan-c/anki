@@ -162,43 +162,8 @@ export class HourBlockRowPlanned extends React.Component {
                 }
               </span>
 
-
               {currentPlannedPomoTask.hasIn(['task', '_id']) && (
-                <span className="width-60">
-                  <Popup
-                    trigger={(
-                      <Icon
-                        name="plus"
-                        style={{
-                          width: 15,
-                          opacity: 0.5,
-                          color: 'green'
-                        }}
-                      />
-                    )}
-                    content="Hide the popup on any scroll event"
-                    on="click"
-                    wide="very"
-                  // hideOnScroll
-                  >
-                    {this.renderPomoTasksList()}
-
-                    <div
-                      className="flex-container-row pinned-bottom border-top"
-                    >
-                      <InputNewConnected
-                        inputName="content"
-                        inputClassNames="flex-5"
-                        newRecord={{
-                          type: 'project',
-                          project: plannedPomo.getIn(['project', '_id']),
-                        }}
-                        actions={this.props.TaskActions}
-                        inputClassNames="color-black"
-                      />
-                    </div>
-                  </Popup>
-
+                <span className="width-40">
                   <Icon
                     name="close"
                     style={{
@@ -242,6 +207,40 @@ export class HourBlockRowPlanned extends React.Component {
                   />
                 </span>
               )}
+
+              <Popup
+                trigger={(
+                  <Icon
+                    name="plus"
+                    style={{
+                      width: 15,
+                      opacity: 0.5,
+                      color: 'green'
+                    }}
+                  />
+                )}
+                content="Hide the popup on any scroll event"
+                on="click"
+                wide="very"
+              // hideOnScroll
+              >
+                {this.renderPomoTasksList()}
+
+                <div
+                  className="flex-container-row pinned-bottom border-top"
+                >
+                  <InputNewConnected
+                    inputName="content"
+                    inputClassNames="flex-5"
+                    newRecord={{
+                      type: 'project',
+                      project: plannedPomo.getIn(['project', '_id']),
+                    }}
+                    actions={this.props.TaskActions}
+                    inputClassNames="color-black"
+                  />
+                </div>
+              </Popup>
             </span>
           )
         }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
+import { Segment } from 'semantic-ui-react';
 
 import { DailyMeasurementActions, currentDayMeasurementSelector } from 'utility-redux/dailyMeasurement';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
@@ -54,21 +55,24 @@ export class DailyMeasurements extends React.Component {
         }
         {currentDayMeasurementRecord.size > 0
           && (
-            <React.Fragment>
+            <Segment.Group>
               {items.filter(i => i.type === showingItemType).map(item => (
-                <span
+                <div
                   key={item.id}
                   className={`flex-container-row typical-setup ${(item.id === 'morningWeight') && (!currentDayMeasurementRecord.has(item.id) || currentDayMeasurementRecord.get(item.id) === 0) && 'bg-red'}`}
                 >
-                  <span className="flex-1">{item.name}</span>
+                  <span className="flex-1">
+                    {item.name}
+                  </span>
+
                   <InputUncontrolledConnected
                     inputName={item.id}
                     inputClassNames="flex-1"
                     record={currentDayMeasurementRecord}
                     actions={this.props.DailyMeasurementActions}
                   />
-                </span>))}
-            </React.Fragment>
+                </div>))}
+            </Segment.Group>
           )
         }
       </React.Fragment>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
+import { Segment } from 'semantic-ui-react';
 import { DailyRecordActions, currentDailyRecordSelector } from 'utility-redux/dailyRecord';
 import InputUncontrolledConnected from 'utility-react-component/Form/Input/Uncontrolled';
 
@@ -20,7 +21,7 @@ export class DailySleepDetails extends React.Component {
   render() {
     const { currentDailyRecord } = this.props;
     return (
-      <React.Fragment>
+      <Segment.Group>
         {['wake', 'rest'].map(field => (
           <span key={field} className="flex-container-row typical-setup">
             <span className="flex-1">{field}</span>
@@ -34,7 +35,7 @@ export class DailySleepDetails extends React.Component {
                 actions={this.props.DailyRecordActions}
               />))}
           </span>))}
-      </React.Fragment>
+      </Segment.Group>
     );
   }
 }

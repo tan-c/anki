@@ -6,14 +6,14 @@ import moment from 'moment-timezone';
 // import { Map } from 'immutable';
 import { currentUserSelector } from 'utility-redux/user';
 import { Grid } from 'semantic-ui-react';
-import DailyRecordsChartConnected from './DailyRecordsChart';
+
 // import { UiActions } from 'utility-redux/ui';
 
 
 import HourBlockListConnected from './List';
 
-import EventDetailsConnected from './ExtraSection/Event/Details';
-
+import EventDetailsConnected from './ExtraSection/EventDetails';
+import DailyRecordsChartConnected from './ExtraSection/DailyRecordsChart';
 import DailyCalorieDetailsConnected from './ExtraSection/Daily/CalorieDetails';
 import DailySleepDetailsConnected from './ExtraSection/Daily/SleepDetails';
 import DailyMeasurementsConnected from './ExtraSection/Daily/Measurements';
@@ -93,10 +93,6 @@ export class HourBlockPage extends React.Component {
       }}
       >
         <Grid.Row>
-          <DailyRecordsChartConnected />
-        </Grid.Row>
-
-        <Grid.Row>
           <EventDetailsConnected />
         </Grid.Row>
 
@@ -112,6 +108,10 @@ export class HourBlockPage extends React.Component {
           <DailyCalorieDetailsConnected
             dayMomentObject={dayMomentObject}
           />
+        </Grid.Row>
+
+        <Grid.Row>
+          <DailyRecordsChartConnected />
         </Grid.Row>
       </Grid>
     );

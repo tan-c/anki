@@ -5,7 +5,7 @@ import toJson from 'enzyme-to-json';
 
 // import { Map } from 'immutable';
 
-import { EventDetails } from './Details';
+import { EventDetails } from './EventDetails';
 
 function setup() {
   const props = {

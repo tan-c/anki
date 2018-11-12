@@ -98,7 +98,13 @@ export class HourBlockRowPlanned extends React.Component {
                   role="button"
                   tabIndex="-1"
                   className="fa fa-fw fa-close"
-                  onClick={_ => this.props.TaskActions.deleteRecord(task)}
+                  onClick={(_) => {
+                    const res = confirm('Deleting this task');
+
+                    if (res) {
+                      this.props.TaskActions.deleteRecord(task);
+                    }
+                  }}
                 />
               </List.Content>
             </List.Item>

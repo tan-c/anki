@@ -18,7 +18,7 @@ export class SidebarComponent extends React.Component {
   render() {
     const {
       location,
-      overduedTasksCount,
+      overduedTasksList,
       thisWeekTasks,
       todayMeasurement
     } = this.props;
@@ -106,12 +106,12 @@ export class SidebarComponent extends React.Component {
               active={location.pathname === '/task/daily'}
             >
               Daily
-              {overduedTasksCount && (
+              {overduedTasksList.size && (
                 <Label
-                  color={overduedTasksCount >= 3 ? 'orange' : 'green'}
+                  color={overduedTasksList.size >= 3 ? 'orange' : 'green'}
                   size="tiny"
                 >
-                  {overduedTasksCount}
+                  {overduedTasksList.size}
                 </Label>
               )}
               {/* <Label
@@ -186,20 +186,20 @@ export class SidebarComponent extends React.Component {
 }
 
 SidebarComponent.defaultProps = {
-  overduedTasksCount: 0,
+  overduedTasksList: 0,
   thisWeekTasks: Map(),
   todayMeasurement: Map(),
 };
 
 SidebarComponent.propTypes = {
-  overduedTasksCount: PropTypes.number,
+  overduedTasksList: PropTypes.number,
   thisWeekTasks: PropTypes.object,
   todayMeasurement: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    overduedTasksCount: overduedTasksSelector(state),
+    overduedTasksList: overduedTasksSelector(state),
     thisWeekTasks: thisWeekTasksSelector(state),
     todayMeasurement: todayMeasurementSelector(state),
   };

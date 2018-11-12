@@ -74,17 +74,24 @@ export const todayTasksSelector = createSelector(
 export const overduedTasksSelector = createSelector(
   [dailyTasksSelector],
   (tasks) => {
+    let overdueTasksList = [];
+
     const dayOfYear = moment().tz('Asia/Tokyo').dayOfYear();
 
-    let overduedTasksCount = 0;
+    // let overduedTasksCount = 0;
 
     tasks.entrySeq().forEach((entry) => {
       if (parseInt(entry[0], 10) <= dayOfYear) {
-        overduedTasksCount += entry[1].size;
+        // overduedTasksCount += entry[1].size;
+        overdueTasksList = overdueTasksList.concat(entry[1].toJS());
       }
     });
 
-    return overduedTasksCount;
+    console.log('🔥🔥🔥🔥🔥 overdueTasksList 🔥🔥🔥🔥🔥');
+    console.log(overdueTasksList);
+
+    return fromJS(overdueTasksList);
+    // return tasks.entrySeq().filter(entry => parseInt(entry[0], 10) <= dayOfYear);
   }
 );
 

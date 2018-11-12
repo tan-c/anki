@@ -59,12 +59,6 @@ export class HourBlockRowPlanned extends React.Component {
   renderPomoTasksList = () => {
     const { pomoProjectTasks } = this.props;
 
-    console.log('🔥🔥🔥🔥🔥 currentPlannedPomoTasks.toJS() 🔥🔥🔥🔥🔥');
-    console.log(pomoProjectTasks.toJS());
-
-    console.log('🔥🔥🔥🔥🔥 111 🔥🔥🔥🔥🔥');
-    console.log(111);
-
     return (
       <List celled>
         {pomoProjectTasks.size > 0 && pomoProjectTasks.sort((a, b) => b.get('priority') - a.get('priority')).map((task, taskIndex) => (
@@ -225,7 +219,6 @@ export class HourBlockRowPlanned extends React.Component {
                     }}
                   />
                 )}
-                content="Hide the popup on any scroll event"
                 on="click"
                 wide="very"
                 style={{

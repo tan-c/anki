@@ -123,11 +123,16 @@ export class HourBlockList extends React.Component {
     });
     this.props.DailyRecordActions.update(newDailyRecord);
 
+    // Also reset the selected project if not locked
+
     this.onChangePlannedPomo(sectionOfDay, plannedPomo, {
       target: {
         name: 'tasks.main',
         value: '',
       },
+    }, {
+      name: 'project',
+      value: !plannedPomo.get('isLocked') ? null : plannedPomo.get('project'),
     });
   };
 

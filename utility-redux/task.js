@@ -87,9 +87,6 @@ export const overduedTasksSelector = createSelector(
       }
     });
 
-    console.log('🔥🔥🔥🔥🔥 overdueTasksList 🔥🔥🔥🔥🔥');
-    console.log(overdueTasksList);
-
     return fromJS(overdueTasksList);
     // return tasks.entrySeq().filter(entry => parseInt(entry[0], 10) <= dayOfYear);
   }

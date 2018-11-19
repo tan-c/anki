@@ -1,8 +1,16 @@
-import { createSelector } from 'reselect';
-import { fromJS } from 'immutable';
+import {
+  createSelector
+} from 'reselect';
+import {
+  fromJS
+} from 'immutable';
 
-import { actionCreate } from './_base/actionCreate';
-import { reducerCreate } from './_base/reducerCreate';
+import {
+  actionCreate
+} from './_base/actionCreate';
+import {
+  reducerCreate
+} from './_base/reducerCreate';
 
 export default reducerCreate('project');
 export const {
@@ -44,4 +52,15 @@ const getSelectedProjectId = state => state.ui.getIn(['hourblock', 'planningPage
 export const selectedProjectSelector = createSelector(
   [getProjects, getSelectedProjectId],
   (projects, selectedProjectId) => projects.get(selectedProjectId),
+);
+
+export const projectsTotalEstimatedHoursSelector = createSelector(
+  [getProjects],
+  (projects) => {
+    let total = 0;
+    projects.forEach((project) => {
+      total += project.has('estimatedHour') ? project.get('estimatedHour') : 0;
+    });
+    return total;
+  }
 );

@@ -6,7 +6,10 @@ import { Map } from 'immutable';
 
 import { thisWeekMetricsSelector } from 'utility-redux/dailyRecord';
 import { categoriesSortedSelector } from 'utility-redux/category';
-import { projectsByCategoryIdSelector } from 'utility-redux/project';
+import {
+  projectsByCategoryIdSelector,
+  projectsTotalEstimatedHoursSelector
+} from 'utility-redux/project';
 import { projectBasedPlannedPomoTotalSelector } from 'utility-redux/plannedPomo';
 
 export class CategoryInsights extends React.Component {
@@ -23,11 +26,28 @@ export class CategoryInsights extends React.Component {
     const {
       categories, projectTotal,
       categoryTotal, projectsByCategoryId,
-      projectPlannedTotal
+      projectPlannedTotal,
+      projectsTotalEstimatedHours
     } = this.props;
 
     return (
       <React.Fragment>
+        <div style={{
+          textAlign: 'center',
+          position: 'relative'
+        }}
+        >
+          {`${projectsTotalEstimatedHours}/144 - ${(projectsTotalEstimatedHours * 100 / 144).toFixed(0)}%`}
+          <span style={{
+            background: `${projectsTotalEstimatedHours > 130 ? 'red' : 'green'}`,
+            width: `${projectsTotalEstimatedHours * 100 / 144}%`,
+            position: 'absolute',
+            height: 2,
+            left: 0
+          }}
+          />
+        </div>
+
         {categories.valueSeq().map(cat => (
           <div
             key={cat.get('_id')}
@@ -51,7 +71,7 @@ export class CategoryInsights extends React.Component {
               }}
             >
               {`${cat.get('name')}  `}
-              {categoryTotal.get(cat.get('_id')) === undefined ? 0 : categoryTotal.get(cat.get('_id'))}
+              {/* {categoryTotal.get(cat.get('_id')) === undefined ? 0 : categoryTotal.get(cat.get('_id'))} */}
             </div>
 
             <div
@@ -106,7 +126,7 @@ export class CategoryInsights extends React.Component {
                     >
                       {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}
                       /
-                      {projectPlannedTotal[proj.get('_id')] !== undefined
+                      {/* {projectPlannedTotal[proj.get('_id')] !== undefined
                         ? projectPlannedTotal[proj.get('_id')] : (
                           <span style={{
                             color: 'red',
@@ -116,19 +136,27 @@ export class CategoryInsights extends React.Component {
                             0
                           </span>
                         )
+                      } */}
+                      {proj.get('estimatedHour') > 0
+                        ? proj.get('estimatedHour') : (
+                          <span style={{
+                            color: 'red',
+                            fontWeight: 'bold'
+                          }}
+                          >
+                            0
+                          </span>
+                        )
                       }
-
-                      {/* { proj.get('estimatedHour') } */}
                     </span>
 
-                    {projectPlannedTotal[proj.get('_id')]
-                      && projectTotal.has(proj.get('_id'))
-                      && projectTotal.get(proj.get('_id')) <= projectPlannedTotal[proj.get('_id')]
+                    {projectTotal.has(proj.get('_id'))
+                      && projectTotal.get(proj.get('_id')) <= proj.get('estimatedHour')
                       && (
                         <div
                           style={{
                             backgroundColor: cat.get('color'),
-                            width: `${(projectTotal.get(proj.get('_id')) / projectPlannedTotal[proj.get('_id')]) * 100}%`,
+                            width: `${(projectTotal.get(proj.get('_id')) / proj.get('estimatedHour')) * 100}%`,
                             position: 'absolute',
                             height: 3,
                             zIndex: -1,
@@ -151,7 +179,7 @@ export class CategoryInsights extends React.Component {
 CategoryInsights.defaultProps = {
   categories: Map(),
   projectsByCategoryId: Map(),
-
+  projectsTotalEstimatedHours: 0,
   projectPlannedTotal: Map(),
   projectTotal: Map(),
   categoryTotal: Map(),
@@ -160,7 +188,7 @@ CategoryInsights.defaultProps = {
 CategoryInsights.propTypes = {
   categories: PropTypes.object,
   projectsByCategoryId: PropTypes.object,
-
+  projectsTotalEstimatedHours: PropTypes.number,
   projectPlannedTotal: PropTypes.object,
   projectTotal: PropTypes.object,
   categoryTotal: PropTypes.object,
@@ -170,7 +198,7 @@ function mapStateToProps(state, ownProps) {
   return {
     categories: categoriesSortedSelector(state),
     projectsByCategoryId: projectsByCategoryIdSelector(state),
-
+    projectsTotalEstimatedHours: projectsTotalEstimatedHoursSelector(state),
     projectPlannedTotal: projectBasedPlannedPomoTotalSelector(state),
     projectTotal: thisWeekMetricsSelector(state)[1],
     categoryTotal: thisWeekMetricsSelector(state)[2],

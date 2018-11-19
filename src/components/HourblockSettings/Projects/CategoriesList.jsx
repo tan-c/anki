@@ -9,11 +9,15 @@ import {
 } from 'semantic-ui-react';
 
 import { UiActions } from 'utility-redux/ui';
-import { CategoryActions, categoriesSortedSelector } from 'utility-redux/category';
+import {
+  CategoryActions,
+  categoriesSortedSelector
+} from 'utility-redux/category';
 import {
   ProjectActions,
   projectsByCategoryIdSelector,
-  selectedProjectSelector
+  selectedProjectSelector,
+  projectsTotalEstimatedHoursSelector
 } from 'utility-redux/project';
 
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
@@ -33,7 +37,8 @@ export class CategoriesList extends React.Component {
     const {
       categories,
       projectsByCategoryId,
-      selectedProject
+      selectedProject,
+      projectsTotalEstimatedHours
     } = this.props;
 
     return (
@@ -42,7 +47,7 @@ export class CategoriesList extends React.Component {
           as="h2"
           inverted
           content="Category Management"
-          subheader="Edit categories and projects"
+          subheader={`Edit categories and projects, currently at ${projectsTotalEstimatedHours}/144`}
         />
 
         <div className="section-content list-with-pinned-bottom">
@@ -149,6 +154,7 @@ export class CategoriesList extends React.Component {
 
 CategoriesList.defaultProps = {
   selectedProject: Map(),
+  projectsTotalEstimatedHours: 0,
 
   categories: Map(),
   projectsByCategoryId: Map(),
@@ -159,6 +165,7 @@ CategoriesList.propTypes = {
 
   categories: PropTypes.object,
   projectsByCategoryId: PropTypes.object,
+  projectsTotalEstimatedHours: PropTypes.number,
 
   CategoryActions: PropTypes.object.isRequired,
   ProjectActions: PropTypes.object.isRequired,
@@ -169,6 +176,7 @@ function mapStateToProps(state, ownProps) {
   return {
     selectedProject: selectedProjectSelector(state),
 
+    projectsTotalEstimatedHours: projectsTotalEstimatedHoursSelector(state),
     categories: categoriesSortedSelector(state),
     projectsByCategoryId: projectsByCategoryIdSelector(state),
   };

@@ -377,27 +377,24 @@ export class HourBlockRowPlanned extends React.Component {
             }}
           />
         </span>
-        {/* {!isTodayPast && (
-          <ProjectSelectConnected
-            className="width-80 border-right-white height-lineheight-30"
-            value={plannedPomo.getIn(['project', '_id'])}
-            onChangeEvent={event => onChangePlannedPomo(sectionOfDay, plannedPomo, event)}
-            color={plannedPomo.getIn(['project', 'category', 'color'])}
-          />
-        )} */}
 
-        {/* {isTodayPast
-          && ( */}
+
         <span
           className="width-80 border-right-white height-lineheight-30" style={{
             backgroundColor: plannedPomo.getIn(['project', 'category', 'color']),
             textAlign: 'center'
           }}
         >
-          {plannedPomo.getIn(['project', 'name'])}
+          {!plannedPomo.get('isLocked') ? (
+            <ProjectSelectConnected
+              className="width-80 border-right-white height-lineheight-30"
+              value={plannedPomo.getIn(['project', '_id'])}
+              onChangeEvent={event => onChangePlannedPomo(sectionOfDay, plannedPomo, event)}
+              color={plannedPomo.getIn(['project', 'category', 'color'])}
+            />
+          ) : plannedPomo.getIn(['project', 'name'])
+          }
         </span>
-        {/* )
-        } */}
 
         <div className="flex-1 flex-container-row">
           {this.renderProjectTask()}

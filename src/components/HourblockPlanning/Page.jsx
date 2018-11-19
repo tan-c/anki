@@ -38,7 +38,7 @@ export class PlanningPage extends React.Component {
       newDayPlannedPomo = dayPlannedPomo.setIn(['plannedPomos', hourblock.toString(), 'isLocked'], !dayPlannedPomo.getIn(['plannedPomos', hourblock.toString(), 'isLocked']));
     } else if (isDeleting) {
       this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingPlannedPomo'], true);
-      newDayPlannedPomo = dayPlannedPomo.setIn(['plannedPomos', hourblock.toString(), 'project'], null);
+      newDayPlannedPomo = dayPlannedPomo.setIn(['plannedPomos', hourblock.toString(), 'project'], null).setIn(['plannedPomos', hourblock.toString(), 'isLocked'], false);
     } else {
       if (!selectedProjectId.length) {
         return;

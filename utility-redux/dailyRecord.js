@@ -1,12 +1,18 @@
-import { createSelector } from 'reselect';
+import {
+  createSelector
+} from 'reselect';
 import {
   fromJS,
   // isImmutable
 } from 'immutable';
 import moment from 'moment-timezone';
 
-import { actionCreate } from './_base/actionCreate';
-import { reducerCreate } from './_base/reducerCreate';
+import {
+  actionCreate
+} from './_base/actionCreate';
+import {
+  reducerCreate
+} from './_base/reducerCreate';
 
 export default reducerCreate('daily_record');
 export const {
@@ -91,7 +97,7 @@ export const todayTotalSelector = createSelector(
 
     if (record !== undefined) {
       record.get('pomo').forEach((p) => {
-        if (p !== null && p.getIn(['project', 'category', 'isPomo'])) {
+        if (p !== null && p.getIn(['category', 'isPomo'])) {
           todayTotal += 0.5;
         }
       });

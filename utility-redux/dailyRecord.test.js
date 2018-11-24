@@ -38,6 +38,9 @@ const initialState = {
               isPomo: false
             }
           },
+          category: {
+            isPomo: false
+          },
           _id: '1'
         }, // TodayRecords are populated
         {
@@ -45,6 +48,9 @@ const initialState = {
             category: {
               isPomo: true
             }
+          },
+          category: {
+            isPomo: true
           },
           _id: '2'
         },
@@ -54,6 +60,9 @@ const initialState = {
               isPomo: true
             }
           },
+          category: {
+            isPomo: true
+          },
           _id: '3'
         },
         {
@@ -61,6 +70,9 @@ const initialState = {
             category: {
               isPomo: true
             }
+          },
+          category: {
+            isPomo: true
           },
           _id: '4'
         },
@@ -77,6 +89,9 @@ const initialState = {
             isPomo: false
           }
         },
+        category: {
+          isPomo: false
+        },
         _id: '5'
       }, // TodayRecords are populated
       {
@@ -84,6 +99,9 @@ const initialState = {
           category: {
             isPomo: true
           }
+        },
+        category: {
+          isPomo: true
         },
         _id: '6'
       },

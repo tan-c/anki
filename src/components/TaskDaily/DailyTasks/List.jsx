@@ -21,7 +21,7 @@ export class DailyTasksList extends React.Component {
     this.monthList = {};
 
     // Using from last 3 months onwards
-    for (let i = -1; i < 5; i += 1) {
+    for (let i = -2; i < 8; i += 1) {
       const currentMonth = [];
       for (let j = 0; j < moment().tz('Asia/Tokyo').startOf('month').add(i, 'month')
         .daysInMonth(); j += 1) {
@@ -55,7 +55,7 @@ export class DailyTasksList extends React.Component {
     return (
       <React.Fragment>
         <span className="flex-container-row">
-          {[-2, -1, 0, 1, 2, 3, 4].map(monthIndex => (
+          {[-2, -1, 0, 1, 2, 3, 4, 5, 6].map(monthIndex => (
             <div
               className={`flex-1 ${activeMonthIndex === monthIndex && 'color-orange font-400'}`}
               key={monthIndex}

@@ -18,13 +18,16 @@ export class DailyTasksList extends React.Component {
     super(props, context);
 
     // Note you cannot just add [] as the would be the same object by reference
-    this.monthList = [];
-    for (let i = 0; i < 12; i += 1) {
+    this.monthList = {};
+
+    // Using from last 3 months onwards
+    for (let i = -1; i < 5; i += 1) {
       const currentMonth = [];
-      for (let j = 0; j < moment().tz('Asia/Tokyo').startOf('year').add(i, 'month')
+      for (let j = 0; j < moment().tz('Asia/Tokyo').startOf('month').add(i, 'month')
         .daysInMonth(); j += 1) {
-        const dayMomentObject = moment().tz('Asia/Tokyo').startOf('year').add(i, 'month')
+        const dayMomentObject = moment().tz('Asia/Tokyo').startOf('month').add(i, 'month')
           .add(j, 'day');
+
         currentMonth.push({
           dayMomentObject,
           dayOfYearString: dayMomentObject.dayOfYear().toString(),
@@ -33,44 +36,40 @@ export class DailyTasksList extends React.Component {
           isWeekend: dayMomentObject.day() === 0 || dayMomentObject.day() === 6,
         });
       }
-      this.monthList.push(currentMonth);
+      this.monthList[i] = currentMonth;
     }
-
-    this.state = {
-      activeMonth: moment().month(),
-    };
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //  this.setState({
-  //   });
-  // }
+  state = {
+    activeMonthIndex: 0,
+  };
+
 
   render() {
     const {
       selectedYearlyTask,
       dailyTasks
     } = this.props;
-    const { activeMonth } = this.state;
+    const { activeMonthIndex } = this.state;
 
     return (
       <React.Fragment>
         <span className="flex-container-row">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
+          {[-2, -1, 0, 1, 2, 3, 4].map(monthIndex => (
             <div
-              className={`flex-1 ${activeMonth === month - 1 && 'color-orange font-400'}`}
-              key={month}
+              className={`flex-1 ${activeMonthIndex === monthIndex && 'color-orange font-400'}`}
+              key={monthIndex}
               role="button"
               tabIndex="-1"
               onClick={_ => this.setState({
-                activeMonth: month - 1,
+                activeMonthIndex: monthIndex,
               })}
             >
-              {month}
+              {(moment().tz('Asia/Tokyo').month() + 1 + 12 + monthIndex) % 12}
             </div>))}
         </span>
 
-        {this.monthList[activeMonth].filter(dayVal => !dayVal.isPast || (dailyTasks.has(dayVal.dayOfYearString) && dailyTasks.get(dayVal.dayOfYearString).size)).map(dayVal => (
+        {this.monthList[activeMonthIndex].filter(dayVal => !dayVal.isPast || (dailyTasks.has(dayVal.dayOfYearString) && dailyTasks.get(dayVal.dayOfYearString).size)).map(dayVal => (
           <DailyTasksRow
             key={dayVal.dayMomentObject.unix()}
             dayVal={dayVal}

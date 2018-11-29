@@ -137,7 +137,11 @@ export class Footer extends React.Component {
   )
 
   render() {
-    const { todayPlannedPomos, isTasksOn, todayTasks } = this.props;
+    const {
+      todayPlannedPomos,
+      isTasksOn,
+      todayTasks
+    } = this.props;
     const { currentSectionOfDay } = this.state;
 
     return (

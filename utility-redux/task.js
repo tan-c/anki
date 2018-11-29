@@ -76,12 +76,9 @@ export const overduedTasksSelector = createSelector(
   (tasks) => {
     let overdueTasksList = [];
 
-    const dayOfYear = moment().tz('Asia/Tokyo').dayOfYear();
-
-    // let overduedTasksCount = 0;
-
+    // const dayOfYear = moment().tz('Asia/Tokyo').dayOfYear();
     tasks.entrySeq().forEach((entry) => {
-      if (parseInt(entry[0], 10) <= dayOfYear) {
+      if (entry[1].has('0') && new Date(entry[1].getIn(['0', 'targetCompletion'])) <= new Date().getTime()) {
         // overduedTasksCount += entry[1].size;
         overdueTasksList = overdueTasksList.concat(entry[1].toJS());
       }

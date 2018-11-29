@@ -13,9 +13,10 @@ import {
   Icon,
   Popup,
   List,
+  Input
 } from 'semantic-ui-react';
 
-import { DailyRecordActions } from 'utility-redux/dailyRecord';
+// import { DailyRecordActions } from 'utility-redux/dailyRecord';
 // FIXME: should be using the input controlled here but keydown event is different
 // import InputControlled from 'utility-react-component/Form/Input/Controlled';
 
@@ -60,7 +61,12 @@ export class HourBlockRowPlanned extends React.Component {
     const { pomoProjectTasks } = this.props;
 
     return (
-      <List celled>
+      <List
+        celled
+        style={{
+          minWidth: 400
+        }}
+      >
         {pomoProjectTasks.size > 0 && pomoProjectTasks.sort((a, b) => b.get('priority') - a.get('priority')).map((task, taskIndex) => (
           <React.Fragment
             key={task.get('id')}
@@ -68,7 +74,8 @@ export class HourBlockRowPlanned extends React.Component {
             <List.Item>
               <List.Content
                 style={{
-                  display: 'flex'
+                  display: 'flex',
+                  backgroundColor: 'whitesmoke'
                 }}
               >
                 <span className="flex-1">
@@ -77,6 +84,7 @@ export class HourBlockRowPlanned extends React.Component {
 
                 <input
                   className="flex-1"
+                  autoComplete="off"
                   ref={(ref) => { this.newTaskInput = ref; }}
                   placeholder={`add new to ${task.get('content')}`}
                   onKeyDown={(event) => {
@@ -168,7 +176,7 @@ export class HourBlockRowPlanned extends React.Component {
                 }
               </span>
 
-              {currentPlannedPomoTask.hasIn(['task', '_id']) && (
+              {/* {currentPlannedPomoTask.hasIn(['task', '_id']) && (
                 <span className="width-40">
                   <Icon
                     name="close"
@@ -185,6 +193,7 @@ export class HourBlockRowPlanned extends React.Component {
                       }
                     }}
                   />
+
                   <Icon
                     // color="blue"
                     disabled={!recordPomo.has('_id')}
@@ -212,44 +221,7 @@ export class HourBlockRowPlanned extends React.Component {
                     }}
                   />
                 </span>
-              )}
-
-              <Popup
-                trigger={(
-                  <Icon
-                    name="plus"
-                    style={{
-                      width: 15,
-                      opacity: 0.5,
-                      color: 'green'
-                    }}
-                  />
-                )}
-                on="click"
-                wide="very"
-                style={{
-                  maxHeight: 400,
-                  overflow: 'auto'
-                }}
-              // hideOnScroll
-              >
-                {this.renderPomoTasksList()}
-
-                <div
-                  className="flex-container-row pinned-bottom border-top"
-                >
-                  <InputNewConnected
-                    inputName="content"
-                    inputClassNames="flex-5"
-                    newRecord={{
-                      type: 'project',
-                      project: plannedPomo.getIn(['project', '_id']),
-                    }}
-                    actions={this.props.TaskActions}
-                    inputClassNames="color-black"
-                  />
-                </div>
-              </Popup>
+              )} */}
             </span>
           )
         }
@@ -267,25 +239,54 @@ export class HourBlockRowPlanned extends React.Component {
       <span className="text-left flex-2 border-right-white-20 padding-left-5">
         {recordPomo.has('content') ? recordPomo.get('content')
           : (
-            <input
-              type="text"
-              className={`flex-2 border-right-white-20 ${isTodayPast && 'bg-black'}`}
-              name="tasks.main"
-              ref={(ref) => { this.hourblockPlanneMainInput = ref; }}
-              value={mainTask}
-              disabled={isUpdatingPlannedPomo || isTodayPast}
-              onChange={(event) => {
-                this.setState({
-                  mainTask: event.target.value,
-                });
+            <Popup
+              trigger={(
+                <input
+                  type="text"
+                  autoComplete="off"
+                  className={`flex-2 border-right-white-20 ${isTodayPast && 'bg-black'}`}
+                  name="tasks.main"
+                  ref={(ref) => { this.hourblockPlanneMainInput = ref; }}
+                  value={mainTask}
+                  disabled={isUpdatingPlannedPomo || isTodayPast}
+                  onChange={(event) => {
+                    this.setState({
+                      mainTask: event.target.value,
+                    });
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.keyCode === 13) {
+                      onChangePlannedPomo(sectionOfDay, plannedPomo, event);
+                      this.hourblockPlanneMainInput.value = '';
+                    }
+                  }}
+                />
+              )}
+              on="focus"
+              wide="very"
+              style={{
+                maxHeight: 400,
+                overflow: 'auto'
               }}
-              onKeyDown={(event) => {
-                if (event.keyCode === 13) {
-                  onChangePlannedPomo(sectionOfDay, plannedPomo, event);
-                  this.hourblockPlanneMainInput.value = '';
-                }
-              }}
-            />
+            // hideOnScroll
+            >
+              {this.renderPomoTasksList()}
+
+              <div
+                className="flex-container-row pinned-bottom border-top"
+              >
+                <InputNewConnected
+                  inputName="content"
+                  inputClassNames="flex-5"
+                  newRecord={{
+                    type: 'project',
+                    project: plannedPomo.getIn(['project', '_id']),
+                  }}
+                  actions={this.props.TaskActions}
+                  inputClassNames="color-black"
+                />
+              </div>
+            </Popup>
           )
         }
       </span>
@@ -301,6 +302,7 @@ export class HourBlockRowPlanned extends React.Component {
     return (
       <input
         type="text"
+        autoComplete="off"
         className={`flex-1 border-right-white-20 ${isTodayPast && 'bg-black'}`}
         name="tasks.minor"
         ref={(ref) => { this.hourblockPlanneMinorInput = ref; }}
@@ -406,7 +408,7 @@ export class HourBlockRowPlanned extends React.Component {
         <div
           className="flex-1 flex-container-row"
         >
-          {this.renderProjectTask()}
+          {/* {this.renderProjectTask()} */}
           {this.renderMainTaskInput(mainTask, isTodayPast)}
           {showMinorTask && this.renderMinorTaskInput(minorTask, isTodayPast)}
           {this.renderRecurTaskInput(isTodayPast)}
@@ -448,7 +450,7 @@ HourBlockRowPlanned.propTypes = {
   allProjectTasksOrdered: PropTypes.object,
   pomoProjectTasks: PropTypes.object,
 
-  DailyRecordActions: PropTypes.object.isRequired,
+  // DailyRecordActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -472,7 +474,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     TaskActions: bindActionCreators(TaskActions, dispatch),
-    DailyRecordActions: bindActionCreators(DailyRecordActions, dispatch),
+    // DailyRecordActions: bindActionCreators(DailyRecordActions, dispatch),
   };
 }
 

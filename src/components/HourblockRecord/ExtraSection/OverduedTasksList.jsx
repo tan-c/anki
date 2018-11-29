@@ -24,7 +24,15 @@ export class OverduedTasksList extends React.Component {
     const { overduedTasksList } = this.props;
 
     return (
-      <List celled ordered inverted>
+      <List
+        celled
+        ordered
+        inverted
+        style={{
+          background: `${overduedTasksList.size ? '#DB4848 ' : 'transparent'}`,
+          width: '100%'
+        }}
+      >
         {/* overduedTasksList is actually a valueSet */}
 
         {overduedTasksList.map(task => (
@@ -36,7 +44,7 @@ export class OverduedTasksList extends React.Component {
                 style={{
                   width: 15,
                   opacity: 0.5,
-                  color: 'red'
+                  color: 'white'
                 }}
                 onClick={(_) => {
                   const res = confirm('Deleting this task');

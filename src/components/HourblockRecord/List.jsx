@@ -180,13 +180,19 @@ export class HourBlockList extends React.Component {
     const defaultProps = Map();
 
     return (
-      <div className="section-content" id="hourblockList" data-role="hourblock-list">
+      <div
+        className="section-content"
+        id="hourblockList"
+        data-role="hourblock-list"
+      >
         {Object.values(calendarList).map((item, index) => (
           <div
             className={`flex-container-row typical-setup height-30 ${item.sectionOfDay % 4 === 0 ? 'border-top-white-70 margin-top-30' : 'border-top-white-20'}}`}
             key={item.sectionOfDay}
           >
-            <div className={`flex-3 flex-container-row ${currentSectionOfDay === item.sectionOfDay && 'border-bright-green'}`}>
+            <div
+              className={`flex-3 flex-container-row ${currentSectionOfDay === item.sectionOfDay && 'border-bright-green'}`}
+            >
               <HourBlockRowPlannedConnected
                 sectionOfDay={item.sectionOfDay}
                 isToday={isoWeekDay === moment().isoWeekday()}
@@ -201,7 +207,9 @@ export class HourBlockList extends React.Component {
               />
             </div>
 
-            <div className={`width-60 flex-container-row ${currentSectionOfDay === item.sectionOfDay && 'bg-bright-green'}`}>
+            <div
+              className={`width-60 flex-container-row ${currentSectionOfDay === item.sectionOfDay && 'bg-bright-green'}`}
+            >
               <HourBlockRowRecordConnected
                 sectionOfDay={item.sectionOfDay}
                 isToday={isoWeekDay === moment().isoWeekday()}

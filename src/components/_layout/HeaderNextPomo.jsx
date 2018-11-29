@@ -80,22 +80,22 @@ export class Footer extends React.Component {
       }}
     >
       <Grid.Column
-        width={1}
+        width={3}
         textAlign="center"
       >
         {moment().tz('Asia/Tokyo').startOf('day').add(sectionOfDay / 2, 'hour')
           .format('HH:mm')}
-      </Grid.Column>
 
-      <Grid.Column
-        width={2}
-        textAlign="center"
-        style={{
+        <span style={{
           backgroundColor: `${nextPlannedPomo.getIn(['project', 'category', 'color'])}`,
+          padding: '0 5px',
+          margin: '0 5px',
+          color: 'white'
           // overflow: 'hidden'
         }}
-      >
-        {nextPlannedPomo.hasIn(['project', 'category']) ? nextPlannedPomo.getIn(['project', 'name']) : ''}
+        >
+          {nextPlannedPomo.hasIn(['project', 'category']) ? nextPlannedPomo.getIn(['project', 'name']) : ''}
+        </span>
       </Grid.Column>
 
       <Grid.Column width={12}>

@@ -62,11 +62,14 @@ export class HourBlockRowPlanned extends React.Component {
     return (
       <List celled>
         {pomoProjectTasks.size > 0 && pomoProjectTasks.sort((a, b) => b.get('priority') - a.get('priority')).map((task, taskIndex) => (
-          <React.Fragment key={task.get('id')}>
+          <React.Fragment
+            key={task.get('id')}
+          >
             <List.Item>
-              <List.Content style={{
-                display: 'flex'
-              }}
+              <List.Content
+                style={{
+                  display: 'flex'
+                }}
               >
                 <span className="flex-1">
                   {task.get('content')}
@@ -102,6 +105,7 @@ export class HourBlockRowPlanned extends React.Component {
                 />
               </List.Content>
             </List.Item>
+
             {task.get('subTasks').count() > 0
               && (
                 <List.Item>
@@ -146,7 +150,7 @@ export class HourBlockRowPlanned extends React.Component {
       <React.Fragment>
         {recordPomo.has('completedTask') ? (
           <span
-            className="flex-4 border-right-white text-left flex-container-row color-grey"
+            className="flex-2 border-right-white text-left flex-container-row color-grey"
             style={{
               textDecoration: 'line-through'
             }}
@@ -155,7 +159,9 @@ export class HourBlockRowPlanned extends React.Component {
           </span>
         )
           : (
-            <span className="flex-4 border-right-white text-left flex-container-row">
+            <span
+              className="flex-2 border-right-white text-left flex-container-row"
+            >
               <span className="flex-1">
                 {
                   currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
@@ -380,7 +386,8 @@ export class HourBlockRowPlanned extends React.Component {
 
 
         <span
-          className="width-80 border-right-white height-lineheight-30" style={{
+          className="width-80 border-right-white height-lineheight-30"
+          style={{
             backgroundColor: plannedPomo.getIn(['project', 'category', 'color']),
             textAlign: 'center'
           }}
@@ -396,7 +403,9 @@ export class HourBlockRowPlanned extends React.Component {
           }
         </span>
 
-        <div className="flex-1 flex-container-row">
+        <div
+          className="flex-1 flex-container-row"
+        >
           {this.renderProjectTask()}
           {this.renderMainTaskInput(mainTask, isTodayPast)}
           {showMinorTask && this.renderMinorTaskInput(minorTask, isTodayPast)}

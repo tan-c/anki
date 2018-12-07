@@ -44,7 +44,7 @@ export class Footer extends React.Component {
 
   updateCurrentTimer = () => {
     this.setState({ // eslint-disable-line react/no-set-state
-      currentSectionOfDay: moment().tz('Asia/Tokyo').hour() * 2 + parseInt(moment().minute() / 30, 10)
+      currentSectionOfDay: moment().hour() * 2 + parseInt(moment().minute() / 30, 10)
     });
   }
 

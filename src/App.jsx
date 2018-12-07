@@ -33,7 +33,7 @@ import AbyssinianPageConnected from './components/Abyssinian/Page';
 
 
 import HeaderConnected from './components/_layout/Header';
-import HeaderNextPomoConnected from './components/_layout/HeaderNextPomo';
+import FooterNextPomoConnected from './components/_layout/FooterNextPomo';
 import LeftSidebarConnected from './components/_layout/LeftSidebar';
 import RightSidebarConnected from './components/_layout/RightSidebar';
 
@@ -191,7 +191,7 @@ export class App extends React.Component {
                   margin: 0
                 }}
                 >
-                  <HeaderNextPomoConnected />
+                  <FooterNextPomoConnected />
                 </Grid>
               )}
 

@@ -35,20 +35,20 @@ class DailyTasksRow extends React.Component {
             {dayVal.dayMomentObject.format('MM-DD')}
           </span>
 
-          {dayVal.dayMomentObject.unix() >= moment().tz('Asia/Tokyo').startOf('day').unix()
-            && (
-              <InputNewConnected
-                inputName="content"
-                inputClassNames="flex-3"
-                newRecord={{
-                  targetCompletion: dayVal.dayMomentObject,
-                  type: 'daily',
-                  project: selectedYearlyTask.getIn(['project', '_id']),
-                  parentTask: currentYearlyTaskSelectedId.length ? currentYearlyTaskSelectedId : null
-                }}
-                actions={this.props.TaskActions}
-              />
-            )}
+          {/* {dayVal.dayMomentObject.unix() >= moment().tz('Asia/Tokyo').startOf('day').unix()
+            && ( */}
+          <InputNewConnected
+            inputName="content"
+            inputClassNames="flex-3"
+            newRecord={{
+              targetCompletion: dayVal.dayMomentObject,
+              type: 'daily',
+              project: selectedYearlyTask.getIn(['project', '_id']),
+              parentTask: currentYearlyTaskSelectedId.length ? currentYearlyTaskSelectedId : null
+            }}
+            actions={this.props.TaskActions}
+          />
+          {/* )} */}
 
           {dayVal.dayMomentObject.unix() < moment().tz('Asia/Tokyo').startOf('day').unix()
             && <span className="flex-3" />

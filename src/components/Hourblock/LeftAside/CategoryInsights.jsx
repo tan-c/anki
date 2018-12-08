@@ -24,15 +24,18 @@ export class CategoryInsights extends React.Component {
 
   render() {
     const {
-      categories, projectTotal,
-      categoryTotal, projectsByCategoryId,
+      categories,
+      projectTotal,
+      categoryTotal,
+      projectsByCategoryId,
       projectPlannedTotal,
       projectsTotalEstimatedHours
     } = this.props;
 
     return (
       <React.Fragment>
-        <div style={{
+        {/* Show number of hours locked */}
+        {/* <div style={{
           textAlign: 'center',
           position: 'relative'
         }}
@@ -46,7 +49,7 @@ export class CategoryInsights extends React.Component {
             left: 0
           }}
           />
-        </div>
+        </div> */}
 
         {categories.valueSeq().map(cat => (
           <div
@@ -70,8 +73,8 @@ export class CategoryInsights extends React.Component {
                 boxSizing: 'border-box'
               }}
             >
-              {`${cat.get('name')}  `}
-              {/* {categoryTotal.get(cat.get('_id')) === undefined ? 0 : categoryTotal.get(cat.get('_id'))} */}
+              {`${cat.get('name')} - `}
+              {categoryTotal.get(cat.get('_id')) === undefined ? 0 : categoryTotal.get(cat.get('_id'))}
             </div>
 
             <div
@@ -126,7 +129,7 @@ export class CategoryInsights extends React.Component {
                     >
                       {projectTotal.get(proj.get('_id')) === undefined ? 0 : projectTotal.get(proj.get('_id'))}
                       /
-                      {/* {projectPlannedTotal[proj.get('_id')] !== undefined
+                      {projectPlannedTotal[proj.get('_id')] !== undefined
                         ? projectPlannedTotal[proj.get('_id')] : (
                           <span style={{
                             color: 'red',
@@ -136,8 +139,8 @@ export class CategoryInsights extends React.Component {
                             0
                           </span>
                         )
-                      } */}
-                      {proj.get('estimatedHour') > 0
+                      }
+                      {/* {proj.get('estimatedHour') > 0
                         ? proj.get('estimatedHour') : (
                           <span style={{
                             color: 'red',
@@ -147,16 +150,16 @@ export class CategoryInsights extends React.Component {
                             0
                           </span>
                         )
-                      }
+                      } */}
                     </span>
 
                     {projectTotal.has(proj.get('_id'))
-                      && projectTotal.get(proj.get('_id')) <= proj.get('estimatedHour')
+                      && projectTotal.get(proj.get('_id')) <= projectPlannedTotal[proj.get('_id')]
                       && (
                         <div
                           style={{
                             backgroundColor: cat.get('color'),
-                            width: `${(projectTotal.get(proj.get('_id')) / proj.get('estimatedHour')) * 100}%`,
+                            width: `${(projectTotal.get(proj.get('_id')) / projectPlannedTotal[proj.get('_id')]) * 100}%`,
                             position: 'absolute',
                             height: 3,
                             zIndex: -1,

@@ -57,27 +57,23 @@ export class HourBlockRowRecord extends React.Component {
           {(plannedPomo.hasIn(['project', '_id']) && !recordPomo.hasIn(['project', '_id']))
             ? (
               <React.Fragment>
-                {!isTodayFuture && (
-                  <i
-                    role="button"
-                    tabIndex="-1"
-                    className="fa fa-fw fa-check flex-1 height-lineheight-30"
-                    onClick={(_) => {
-                      // Also be adding the plannedPomo
-
-
-                      // Close the main subtask
-                      addPomoRecord({
-                        target: {
-                          value: plannedPomo.getIn(['project', '_id']),
-                          isCompliant: true,
-                          content: `${plannedPomo.getIn(['tasks', 'main'])} ${plannedPomo.hasIn(['tasks', 'recur']) ? plannedPomo.getIn(['tasks', 'recur']) : ''}`
-                        },
-                      }, sectionOfDay);
-                    }
-                    }
-                  />
-                )}
+                {/* !isTodayFuture && */}
+                <i
+                  role="button"
+                  tabIndex="-1"
+                  className="fa fa-fw fa-check flex-1 height-lineheight-30"
+                  onClick={(_) => {
+                    // Close the main subtask
+                    addPomoRecord({
+                      target: {
+                        value: plannedPomo.getIn(['project', '_id']),
+                        isCompliant: true,
+                        content: `${plannedPomo.getIn(['tasks', 'main'])} ${plannedPomo.hasIn(['tasks', 'recur']) ? plannedPomo.getIn(['tasks', 'recur']) : ''}`
+                      },
+                    }, sectionOfDay);
+                  }
+                  }
+                />
 
                 <i
                   role="button"

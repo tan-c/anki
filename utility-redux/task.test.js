@@ -9,7 +9,6 @@ import {
   weeklyTasksSelector,
   yearlyTasksSelector,
   currentYearlyTasksSortedSelector,
-  projectTasksSelector,
 } from './task';
 
 const initialState = {
@@ -25,14 +24,6 @@ const initialState = {
     3: {
       targetCompletion: moment().toDate(),
       type: 'weekly',
-    },
-    4: {
-      targetCompletion: moment().toDate(),
-      type: 'monthly',
-    },
-    5: {
-      targetCompletion: moment().toDate(),
-      type: 'monthly',
     },
     6: {
       targetCompletion: moment().toDate(),
@@ -105,15 +96,6 @@ describe('Task Selectors', () => {
     it('should get current year tasks only', () => {
       const currentYearlyTasksSorted = currentYearlyTasksSortedSelector(initialState);
       expect(currentYearlyTasksSorted.size).toEqual(2);
-    });
-  });
-
-  describe('projectTasksSelector', () => {
-    it('should group project tasks by project id', () => {
-      const selectedTasks = projectTasksSelector(initialState);
-      expect(selectedTasks.get('project_id1').size).toEqual(1);
-      expect(selectedTasks.get('project_id2').size).toEqual(1);
-      // expect(selectedTasks.get((year - 1).toString())).not.toBeDefined();
     });
   });
 });

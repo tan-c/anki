@@ -31,12 +31,6 @@ const getTaskReducerKey = (task, type) => {
   case 'weekly':
     key = momentObject.isoWeek();
     break;
-  case 'yearly':
-    key = momentObject.year();
-    break;
-  case 'project':
-    key = task.getIn(['project', '_id']);
-    break;
   default:
     break;
   }
@@ -98,19 +92,12 @@ export const thisWeekTasksSelector = createSelector(
 
 export const yearlyTasksSelector = createSelector(
   [getTasks],
-  tasks => getNewTasks(tasks, 'yearly'),
-);
-
-const selectedYearlyTaskId = state => state.ui.getIn(['taskPage', 'selectedYearlyTaskId']);
-
-export const selectedYearlyTaskSelector = createSelector(
-  [getTasks, selectedYearlyTaskId],
-  (tasks, yearlyTaskId) => tasks.get(yearlyTaskId),
+  tasks => tasks.valueSeq().filter(task => task.get('type') === 'yearly')
 );
 
 export const currentYearlyTasksSortedSelector = createSelector(
   [yearlyTasksSelector],
-  yearlyTasks => (yearlyTasks.has(moment().year().toString()) ? yearlyTasks.get(moment().year().toString()).sort((a, b) => {
+  yearlyTasks => yearlyTasks.sort((a, b) => {
     const catA = a.getIn(['project', 'category', 'naturalId']);
     const catB = b.getIn(['project', 'category', 'naturalId']);
 
@@ -122,12 +109,14 @@ export const currentYearlyTasksSortedSelector = createSelector(
       return a.getIn(['project', 'name']) > b.getIn(['project', 'name']) ? -1 : 1;
     }
     return catA < catB ? -1 : 1;
-  }) : Map()),
+  }),
 );
 
-export const projectTasksSelector = createSelector(
-  [getTasks],
-  tasks => getNewTasks(tasks, 'project'),
+const selectedYearlyTaskId = state => state.ui.getIn(['taskPage', 'selectedYearlyTaskId']);
+
+export const selectedYearlyTaskSelector = createSelector(
+  [getTasks, selectedYearlyTaskId],
+  (tasks, yearlyTaskId) => tasks.get(yearlyTaskId),
 );
 
 // const getTasks = state => state.tasks;
@@ -138,43 +127,14 @@ export const totalProjectTasksCountSelector = createSelector(
 
 const getSelectedProjectId = state => state.ui.getIn(['hourblock', 'planningPage', 'selectedProjectId']);
 export const selectedProjectTasksSelector = createSelector(
-  [projectTasksSelector, getSelectedProjectId],
+  [getTasks, getSelectedProjectId],
   (tasks, selectedProjectId) => tasks.get(selectedProjectId),
 );
-
-// const getSelectedPomoProjectId = (state, ownProps) => (ownProps.plannedPomo.hasIn(['project', '_id']) ? ownProps.plannedPomo.getIn(['project', '_id']) : '');
-
-// export const projectFirstTaskSelector = createSelector(
-//   [projectTasksSelector, getSelectedPomoProjectId],
-//   (tasks, selectedProjectId) => (tasks.hasIn([selectedProjectId, 0]) ? tasks.getIn([selectedProjectId, 0]) : Map()),
-// );
 
 // const getTodayPomos = (state) => {
 //   const todayPlannedPomos = state.plannedPomos.valueSeq().find(plannedPomo => plannedPomo.get('dayOfWeek') === moment().isoWeekday() - 1);
 //   return todayPlannedPomos;
 // };
-
-export const allProjectTasksOrderedSelector = createSelector(
-  // Ordered by priority
-  [projectTasksSelector],
-  (tasks) => {
-    const allTasksOrdered = {};
-    tasks.mapKeys((projectId) => {
-      allTasksOrdered[projectId] = [];
-      const orderedTasks = tasks.get(projectId).sort((a, b) => b.get('priority') - a.get('priority'));
-      orderedTasks.forEach((task) => {
-        const taskName = task.get('content');
-        allTasksOrdered[projectId].push({
-          task,
-          subTaskId: null,
-          taskName,
-        });
-      });
-    });
-
-    return fromJS(allTasksOrdered);
-  }
-);
 
 // NOTE ----- THIS GETS THE TASKS TODAY
 // BUT THE PROBLEM IS THAT COMPLETING TASK CANNOT UPDATE IT PROPERLY

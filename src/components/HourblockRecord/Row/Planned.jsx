@@ -113,30 +113,14 @@ export class HourBlockRowPlanned extends React.Component {
     const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
 
     return (
-      <React.Fragment>
-        {recordPomo.has('completedTask') ? (
-          <span
-            className="flex-2 border-right-white text-left flex-container-row color-grey"
-            style={{
-              textDecoration: 'line-through'
-            }}
-          >
-            {recordPomo.get('completedTask')}
-          </span>
-        )
-          : (
-            <span
-              className="flex-2 border-right-white text-left flex-container-row"
-            >
-              <span className="flex-1">
-                {
-                  currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
-                }
-              </span>
-            </span>
-          )
-        }
-      </React.Fragment>
+      <span
+        className="flex-2 border-right-white text-left flex-container-row color-grey"
+        style={{
+          textDecoration: 'line-through'
+        }}
+      >
+        {recordPomo.has('completedTask') ? recordPomo.get('completedTask') : ''}
+      </span>
     );
   }
 
@@ -362,7 +346,7 @@ function mapStateToProps(state, ownProps) {
     currentUser: currentUserSelector(state),
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
 
-    pomoProjectTasks: yearlyTasksSelector(state).has('2018') ? yearlyTasksSelector(state).get('2018').filter(task => task.getIn(['project', '_id']) === ownProps.plannedPomo.getIn(['project', '_id'])) : Map(),
+    pomoProjectTasks: yearlyTasksSelector(state).filter(task => task.getIn(['project', '_id']) === ownProps.plannedPomo.getIn(['project', '_id'])),
   };
 }
 

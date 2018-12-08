@@ -9,7 +9,6 @@ import toastr from 'toastr';
 
 import { PlannedPomoActions, plannedPomoByDayOfWeekSelector } from 'utility-redux/plannedPomo';
 import { DailyRecordActions, dailyRecordByDayOfYearSelector } from 'utility-redux/dailyRecord';
-import { allProjectTasksOrderedSelector } from 'utility-redux/task';
 
 import { EventRecordActions } from 'utility-redux/eventRecord';
 import { UiActions } from 'utility-redux/ui';
@@ -169,7 +168,6 @@ export class HourBlockList extends React.Component {
     const {
       currentDayRecord,
       plannedPomos,
-      allProjectTasksOrdered,
       currentSectionOfDay,
       isoWeekDay,
     } = this.props;
@@ -200,7 +198,6 @@ export class HourBlockList extends React.Component {
                 isUpdatingPlannedPomo={isUpdatingPlannedPomo}
                 plannedPomo={plannedPomos.getIn(['plannedPomos', (item.sectionOfDay).toString()]) || defaultProps}
                 recordPomo={currentDayRecord.getIn(['pomo', (item.sectionOfDay).toString()]) || defaultProps}
-                allProjectTasksOrdered={allProjectTasksOrdered}
               />
             </div>
 
@@ -217,7 +214,6 @@ export class HourBlockList extends React.Component {
                 deleteEvent={this.deleteEvent}
                 plannedPomo={plannedPomos.getIn(['plannedPomos', (item.sectionOfDay).toString()]) || defaultProps}
                 isUpdatingPlannedPomo={isUpdatingPlannedPomo}
-                allProjectTasksOrdered={allProjectTasksOrdered}
               />
             </div>
           </div>
@@ -232,7 +228,6 @@ HourBlockList.defaultProps = {
   currentDayRecord: Map(),
   plannedPomos: Map(),
   currentSectionOfDay: 0,
-  allProjectTasksOrdered: Map(),
 };
 
 HourBlockList.propTypes = {
@@ -245,7 +240,6 @@ HourBlockList.propTypes = {
   currentSectionOfDay: PropTypes.number,
   currentDayRecord: PropTypes.object,
   plannedPomos: PropTypes.object,
-  allProjectTasksOrdered: PropTypes.object,
 
   PlannedPomoActions: PropTypes.object.isRequired,
   UiActions: PropTypes.object.isRequired,
@@ -264,7 +258,6 @@ function mapStateToProps(state, ownProps) {
     plannedPomos: plannedPomoByDayOfWeekSelector(state).get((ownProps.dayMomentObject.isoWeekday() - 1).toString()),
     // todayPlannedPomos: todayPlannedPomosSelector(state),
     currentDayRecord: dailyRecordByDayOfYearSelector(state).get(ownProps.dayMomentObject.dayOfYear().toString()),
-    allProjectTasksOrdered: allProjectTasksOrderedSelector(state),
   };
 }
 

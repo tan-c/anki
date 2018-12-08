@@ -34,19 +34,12 @@ export class HourBlockRowRecord extends React.Component {
       eventRecords, addPomoRecord,
       addEventToRecord, deleteEvent,
       showEventsInPomo,
-      // allProjectTasksOrdered,
       isUpdatingPlannedPomo,
 
       isToday, currentSectionOfDay
     } = this.props;
 
     const isTodayFuture = isToday && currentSectionOfDay <= sectionOfDay;
-
-    // const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
-
-    // const mainTask = plannedPomo.hasIn(['tasks', 'main']) ? plannedPomo.getIn(['tasks', 'main']) : '';
-    // const projectId = recordPomo.hasIn(['project', '_id']) ? recordPomo.getIn(['project', '_id']) : '';
-    // const plannedProjectId = plannedPomo.hasIn(['project', '_id']) ? plannedPomo.getIn(['project', '_id']) : '';
 
     return (
       <React.Fragment>
@@ -187,7 +180,6 @@ HourBlockRowRecord.propTypes = {
   deleteEvent: PropTypes.func,
   events: PropTypes.object,
   eventRecords: PropTypes.object,
-  // allProjectTasksOrdered: PropTypes.object.isRequired,
 
   UiActions: PropTypes.object.isRequired,
   // TaskActions: PropTypes.object.isRequired,
@@ -207,7 +199,6 @@ function mapStateToProps(state, ownProps) {
     addPomoRecord: ownProps.addPomoRecord,
     addEventToRecord: ownProps.addEventToRecord,
     deleteEvent: ownProps.deleteEvent,
-    // currentPlannallProjectTasksOrderededPomoTask: ownProps.allProjectTasksOrdered,
     events: selectableEventsSortedByProjectThenCategorySelector(state, ownProps.recordPomo),
     selectedEventRecordId: state.ui.getIn(['hourblock', 'hourblockPage', 'selectedEventRecordId']),
     eventRecords: state.eventRecords,

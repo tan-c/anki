@@ -6,7 +6,6 @@ import moment from 'moment';
 
 import {
   dailyTasksSelector,
-  weeklyTasksSelector,
   yearlyTasksSelector,
   currentYearlyTasksSortedSelector,
 } from './task';
@@ -70,15 +69,6 @@ describe('Task Selectors', () => {
       const dayOfYear = moment().tz('Asia/Tokyo').dayOfYear();
       expect(selectedTasks.get(dayOfYear.toString()).size).toEqual(2);
       expect(selectedTasks.get((dayOfYear - 1).toString())).not.toBeDefined();
-    });
-  });
-
-  describe('weeklyTasksSelector', () => {
-    it('should group weekly tasks by iso week', () => {
-      const selectedTasks = weeklyTasksSelector(initialState);
-      const isoWeek = moment().isoWeek();
-      expect(selectedTasks.get(isoWeek.toString()).size).toEqual(1);
-      expect(selectedTasks.get((isoWeek - 1).toString())).not.toBeDefined();
     });
   });
 

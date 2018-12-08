@@ -6,7 +6,6 @@ import React from 'react';
 import moment from 'moment-timezone';
 
 import { Grid } from 'semantic-ui-react';
-import WeeklyTasksListConnected from './WeeklyTasksList';
 import YearlyTasksListConnected from './YearlyTasksList';
 import DailyTaskPlanningConnected from './DailyTasks/List';
 
@@ -61,13 +60,6 @@ export class RightAside extends React.Component {
         >
           <YearlyTasksListConnected />
         </Grid.Column>
-
-        {/* <Grid.Column style={{
-          overflow: 'auto'
-        }}
-        >
-          <WeeklyTasksListConnected />
-        </Grid.Column> */}
 
         <Grid.Column
           width={10}

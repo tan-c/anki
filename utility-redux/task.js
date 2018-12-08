@@ -80,16 +80,6 @@ export const overduedTasksSelector = createSelector(
   }
 );
 
-export const weeklyTasksSelector = createSelector(
-  [getTasks],
-  tasks => getNewTasks(tasks, 'weekly'),
-);
-
-export const thisWeekTasksSelector = createSelector(
-  [weeklyTasksSelector],
-  tasks => tasks.get(moment().tz('Asia/Tokyo').isoWeek().toString()),
-);
-
 export const yearlyTasksSelector = createSelector(
   [getTasks],
   tasks => tasks.valueSeq().filter(task => task.get('type') === 'yearly')
@@ -119,7 +109,6 @@ export const selectedYearlyTaskSelector = createSelector(
   (tasks, yearlyTaskId) => tasks.get(yearlyTaskId),
 );
 
-// const getTasks = state => state.tasks;
 export const totalProjectTasksCountSelector = createSelector(
   [getTasks],
   tasks => tasks.valueSeq().filter(task => task.get('type') === 'project').count(),
@@ -130,39 +119,3 @@ export const selectedProjectTasksSelector = createSelector(
   [getTasks, getSelectedProjectId],
   (tasks, selectedProjectId) => tasks.get(selectedProjectId),
 );
-
-// const getTodayPomos = (state) => {
-//   const todayPlannedPomos = state.plannedPomos.valueSeq().find(plannedPomo => plannedPomo.get('dayOfWeek') === moment().isoWeekday() - 1);
-//   return todayPlannedPomos;
-// };
-
-// NOTE ----- THIS GETS THE TASKS TODAY
-// BUT THE PROBLEM IS THAT COMPLETING TASK CANNOT UPDATE IT PROPERLY
-
-// export const todayPlannedPomoTasksSelector = createSelector(
-//   [getTodayPomos, allProjectTasksOrderedSelector],
-//   (todayPomos, allProjectTasksOrdered) => {
-//     // You should have 48 pomos so get 48 tasks
-//     const plannedPomoTasksList = [];
-//     const projectTaskCount = {};
-//     if (todayPomos !== undefined && allProjectTasksOrdered !== undefined) {
-//       todayPomos.get('plannedPomos').forEach((plannedPomo) => {
-//         const projectId = plannedPomo.hasIn(['project', '_id']) ? plannedPomo.getIn(['project', '_id']) : null;
-
-//         if (projectId === null) {
-//           plannedPomoTasksList.push(null);
-//         } else {
-//           const currentTaskIndex = projectId in projectTaskCount ? projectTaskCount[projectId] + 1 : 0;
-//           if (allProjectTasksOrdered.hasIn([projectId, currentTaskIndex])) {
-//             plannedPomoTasksList.push(allProjectTasksOrdered.getIn([projectId, currentTaskIndex]));
-//           } else {
-//             plannedPomoTasksList.push(null);
-//           }
-//           projectTaskCount[projectId] = currentTaskIndex;
-//         }
-//       });
-//     }
-
-//     return fromJS(plannedPomoTasksList);
-//   }
-// );

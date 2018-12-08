@@ -10,7 +10,6 @@ import {
 import { Link, withRouter } from 'react-router-dom';
 import {
   overduedTasksSelector,
-  thisWeekTasksSelector
 } from 'utility-redux/task';
 import { todayMeasurementSelector } from 'utility-redux/dailyMeasurement';
 
@@ -178,7 +177,6 @@ SidebarComponent.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     overduedTasksList: overduedTasksSelector(state),
-    thisWeekTasks: thisWeekTasksSelector(state),
     todayMeasurement: todayMeasurementSelector(state),
   };
 }

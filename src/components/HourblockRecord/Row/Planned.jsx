@@ -58,7 +58,9 @@ export class HourBlockRowPlanned extends React.Component {
   }
 
   renderPomoTasksList = () => {
-    const { pomoProjectTasks } = this.props;
+    const { pomoProjectTasks, plannedPomo } = this.props;
+
+    const selectedProjectTasks = pomoProjectTasks.filter(task => task.getIn(['project', '_id']) === plannedPomo.getIn(['project', '_id']));
 
     return (
       <List
@@ -67,7 +69,7 @@ export class HourBlockRowPlanned extends React.Component {
           minWidth: 400
         }}
       >
-        {pomoProjectTasks.size > 0 && pomoProjectTasks.sort((a, b) => b.get('priority') - a.get('priority')).map((task, taskIndex) => (
+        {selectedProjectTasks.count() > 0 && selectedProjectTasks.sort((a, b) => b.get('priority') - a.get('priority')).map((task, taskIndex) => (
           <React.Fragment
             key={task.get('id')}
           >
@@ -104,13 +106,10 @@ export class HourBlockRowPlanned extends React.Component {
   renderProjectTask = () => {
     const {
       sectionOfDay,
-      allProjectTasksOrdered,
       plannedPomo,
       currentDayRecord,
       recordPomo
     } = this.props;
-
-    const currentPlannedPomoTask = allProjectTasksOrdered.hasIn([plannedPomo.getIn(['project', '_id']), 0]) ? allProjectTasksOrdered.getIn([plannedPomo.getIn(['project', '_id']), 0]) : Map();
 
     return (
       <span
@@ -251,7 +250,6 @@ export class HourBlockRowPlanned extends React.Component {
       currentUser,
       currentSectionOfDay,
       isToday,
-      allProjectTasksOrdered,
       recordPomo,
     } = this.props;
 
@@ -313,7 +311,6 @@ HourBlockRowPlanned.defaultProps = {
   onChangePlannedPomo: () => { },
 
   isUpdatingPlannedPomo: false,
-  allProjectTasksOrdered: Map(),
   pomoProjectTasks: Map(),
 };
 
@@ -328,7 +325,6 @@ HourBlockRowPlanned.propTypes = {
   recordPomo: PropTypes.object,
   onChangePlannedPomo: PropTypes.func,
   isUpdatingPlannedPomo: PropTypes.bool,
-  allProjectTasksOrdered: PropTypes.object,
   pomoProjectTasks: PropTypes.object,
 };
 
@@ -342,11 +338,11 @@ function mapStateToProps(state, ownProps) {
     plannedPomo: ownProps.plannedPomo,
     recordPomo: ownProps.recordPomo,
     onChangePlannedPomo: ownProps.onChangePlannedPomo,
-    allProjectTasksOrdered: ownProps.allProjectTasksOrdered,
+
     currentUser: currentUserSelector(state),
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
 
-    pomoProjectTasks: yearlyTasksSelector(state).filter(task => task.getIn(['project', '_id']) === ownProps.plannedPomo.getIn(['project', '_id'])),
+    pomoProjectTasks: yearlyTasksSelector(state),
   };
 }
 

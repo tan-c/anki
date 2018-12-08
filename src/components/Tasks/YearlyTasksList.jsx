@@ -48,7 +48,7 @@ export class TasksPage extends React.Component {
               key={task.get('_id')} className="flex-container-row"
               style={{
                 display: 'flex',
-                backgroundColor: currentYearlyTaskSelectedId === task.get('_id') ? 'orange' : 'transparent'
+                backgroundColor: currentYearlyTaskSelectedId === task.get('_id') ? '#e67e22' : 'transparent'
               }}
             >
               <Label

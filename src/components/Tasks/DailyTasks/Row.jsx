@@ -21,10 +21,12 @@ import {
 
 class DailyTasksRow extends React.Component {
   render() {
-    const { dailyTasks, selectedYearlyTask, dayVal } = this.props;
-
-    console.log('🔥🔥🔥🔥🔥 selectedYearlyTask.toJS() 🔥🔥🔥🔥🔥');
-    console.log(selectedYearlyTask.toJS());
+    const {
+      dailyTasks,
+      selectedYearlyTask,
+      dayVal,
+      currentYearlyTaskSelectedId
+    } = this.props;
 
     return (
       <div className={`${dayVal.dayMomentObject.unix() === moment().tz('Asia/Tokyo').startOf('day').unix() && 'border-top-orange'} ${dayVal.dayMomentObject.isoWeekday() === 7 && 'margin-bottom-10'}`}>
@@ -42,6 +44,7 @@ class DailyTasksRow extends React.Component {
                   targetCompletion: dayVal.dayMomentObject,
                   type: 'daily',
                   project: selectedYearlyTask.getIn(['project', '_id']),
+                  parentTask: currentYearlyTaskSelectedId.length ? currentYearlyTaskSelectedId : null
                 }}
                 actions={this.props.TaskActions}
               />
@@ -66,7 +69,7 @@ class DailyTasksRow extends React.Component {
         {dailyTasks.has(dayVal.dayOfYearString) && dailyTasks.get(dayVal.dayOfYearString).sort((a, b) => (b.getIn(['priority']) - a.getIn(['priority']))).map(task => (
           <React.Fragment key={task.get('_id')}>
             <div
-              className={`${task.hasIn(['project', '_id']) && task.getIn(['project', '_id']) === selectedYearlyTask.getIn(['project', '_id']) && 'bg-orange'}  flex-container-row typical-setup border-bottom`}
+              className={`${task.hasIn(['parentTask', '_id']) && task.getIn(['parentTask', '_id']) === selectedYearlyTask.get('_id') && 'bg-orange'}  flex-container-row p border-bottom`}
               style={{ borderLeft: `5px solid ${task.hasIn(['project', 'category', 'color']) ? task.getIn(['project', 'category', 'color']) : 'white'}` }}
             >
               <span className="width-60 text-center" style={{ background: task.getIn(['project', 'category', 'color']) }}>
@@ -87,6 +90,10 @@ class DailyTasksRow extends React.Component {
                   this.props.TaskActions.update(task.set('priority', (task.get('priority') + 1) % 3), task);
                 }}
               />
+
+              <span style={{ width: 30 }}>
+                {task.hasIn(['parentTask', 'content']) ? task.getIn(['parentTask', 'content']) : ''}
+              </span>
 
               <Input
                 inputName="content"
@@ -174,12 +181,14 @@ class DailyTasksRow extends React.Component {
 
 DailyTasksRow.defaultProps = {
   dailyTasks: Map(),
+  currentYearlyTaskSelectedId: ''
 };
 
 DailyTasksRow.propTypes = {
   dailyTasks: PropTypes.object,
   dayVal: PropTypes.object.isRequired,
   selectedYearlyTask: PropTypes.object.isRequired,
+  currentYearlyTaskSelectedId: PropTypes.string,
 
   TaskActions: PropTypes.object.isRequired,
 };
@@ -189,6 +198,7 @@ function mapStateToProps(state, ownProps) {
     dailyTasks: dailyTasksSelector(state),
     selectedYearlyTask: ownProps.selectedYearlyTask,
     dayVal: ownProps.dayVal,
+    currentYearlyTaskSelectedId: state.ui.getIn(['taskPage', 'selectedYearlyTaskId']),
   };
 }
 

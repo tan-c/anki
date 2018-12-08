@@ -150,27 +150,7 @@ class DailyTasksRow extends React.Component {
                   }
                 }}
               />
-
-              <i
-                className="fa fa-fw fa-gift width-15"
-                role="button"
-                tabIndex="-1"
-                onClick={_ => this.props.TaskActions.update(task.set('reward', ''))}
-              />
             </div>
-
-            {task.has('reward') && (
-              <div className="flex-container-row typical-setup border-bottom-white border-left-white border-right-white">
-                <i className="width-20 fa fa-fw fa-arrow-right line-height-20" />
-                <i className="width-20 fa fa-fw fa-gift line-height-20" />
-                <Input
-                  inputName="reward"
-                  inputClassNames="flex-1"
-                  record={task}
-                  actions={this.props.TaskActions}
-                />
-              </div>
-            )}
           </React.Fragment>
 
         ))}

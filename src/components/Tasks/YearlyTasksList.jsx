@@ -35,14 +35,21 @@ export class TasksPage extends React.Component {
     } = this.props;
 
     return (
-      <div className="section-content">
+      <Fragment>
         <Header
           as="h3"
           inverted
-          content="Yearly Tasks"
+          content={`Yearly Tasks - ${currentYearlyTasksSorted.size}`}
         />
 
-        <List divided selection>
+        <List
+          divided
+          selection
+          style={{
+            height: 'calc(100% - 80px)',
+            overflow: 'auto'
+          }}
+        >
           {currentYearlyTasksSorted.size > 0 && currentYearlyTasksSorted.map(task => (
             <List.Item
               key={task.get('_id')} className="flex-container-row"
@@ -88,16 +95,18 @@ export class TasksPage extends React.Component {
         </List>
 
         <div className="flex-container-row pinned-bottom border-top">
-          <InputNewConnected
-            inputName="content"
-            newRecord={{
-              targetCompletion: moment().tz('Asia/Tokyo').startOf('year'),
-              type: 'yearly',
-            }}
-            actions={this.props.TaskActions}
-          />
+          <span className="flex-1">
+            <InputNewConnected
+              inputName="content"
+              newRecord={{
+                targetCompletion: moment().tz('Asia/Tokyo').startOf('year'),
+                type: 'yearly',
+              }}
+              actions={this.props.TaskActions}
+            />
+          </span>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }

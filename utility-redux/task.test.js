@@ -7,7 +7,6 @@ import moment from 'moment';
 import {
   dailyTasksSelector,
   weeklyTasksSelector,
-  monthlyTasksSelector,
   yearlyTasksSelector,
   currentYearlyTasksSortedSelector,
   projectTasksSelector,
@@ -89,15 +88,6 @@ describe('Task Selectors', () => {
       const isoWeek = moment().isoWeek();
       expect(selectedTasks.get(isoWeek.toString()).size).toEqual(1);
       expect(selectedTasks.get((isoWeek - 1).toString())).not.toBeDefined();
-    });
-  });
-
-  describe('monthlyTasksSelector', () => {
-    it('should group monthly tasks by month', () => {
-      const selectedTasks = monthlyTasksSelector(initialState);
-      const month = moment().month();
-      expect(selectedTasks.get(month.toString()).size).toEqual(2);
-      expect(selectedTasks.get((month - 1).toString())).not.toBeDefined();
     });
   });
 

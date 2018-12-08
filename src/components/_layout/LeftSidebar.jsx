@@ -95,10 +95,11 @@ export class SidebarComponent extends React.Component {
         </Menu.Item>
 
         <Menu.Item
+          as={Link}
+          to="/tasks"
           active={location.pathname.indexOf('/task') > -1}
         >
           Tasks
-          {/* <Icon name="list" /> */}
           {overduedTasksList.size && (
             <Label
               color={overduedTasksList.size >= 3 ? 'orange' : 'green'}
@@ -107,12 +108,6 @@ export class SidebarComponent extends React.Component {
               {overduedTasksList.size}
             </Label>
           )}
-          {/* <Label
-                color={thisWeekTasks.count() >= 6 ? 'orange' : 'green'}
-                size="tiny"
-              >
-                {thisWeekTasks.count()}
-              </Label> */}
         </Menu.Item>
 
         <Menu.Item

@@ -376,7 +376,7 @@ export class HourBlockRowPlanned extends React.Component {
           {sectionName}
         </span>
 
-        <span
+        {/* <span
           className="width-20"
         >
           <Icon
@@ -384,8 +384,7 @@ export class HourBlockRowPlanned extends React.Component {
               color: plannedPomo.get('isLocked') ? 'red' : 'grey'
             }}
           />
-        </span>
-
+        </span> */}
 
         <span
           className="width-80 border-right-white height-lineheight-30"

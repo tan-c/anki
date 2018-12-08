@@ -130,10 +130,12 @@ export class HourBlockList extends React.Component {
         name: 'tasks.main',
         value: '',
       },
-    }, {
-      name: 'project',
-      value: !plannedPomo.get('isLocked') ? null : plannedPomo.get('project'),
     });
+    // Do not set locked item
+    // {
+    //   name: 'project',
+    //     value: !plannedPomo.get('isLocked') ? null : plannedPomo.get('project'),
+    // }
   };
 
   addEventToRecord = (event, sectionOfDay) => {

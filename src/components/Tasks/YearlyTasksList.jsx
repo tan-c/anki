@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
-import { Header, Label } from 'semantic-ui-react';
+import { Header, Label, List } from 'semantic-ui-react';
 
 import {
   TaskActions,
@@ -41,10 +41,16 @@ export class TasksPage extends React.Component {
           content="Yearly Tasks"
         />
 
-        <div className="list-with-pinned-bottom">
+        <List divided selection>
           {currentYearlyTasksSorted.size > 0 && currentYearlyTasksSorted.map(task => (
-            <div key={task.get('_id')} className="flex-container-row typical-setup">
+            <List.Item
+              key={task.get('_id')} className="flex-container-row"
+              style={{
+                display: 'flex'
+              }}
+            >
               <Label
+                color={task.get('priority') >= 3 ? 'red' : task.get('priority') >= 1 ? 'orange' : 'gray'} // eslint-disable-line
                 horizontal
                 onClick={(_) => {
                   this.props.TaskActions.update(task.set('priority', task.get('priority') + 1), task);
@@ -67,14 +73,17 @@ export class TasksPage extends React.Component {
                 record={task}
                 actions={this.props.TaskActions}
               />
+
               <i
+                style={{ color: 'gray' }}
                 className="fa fa-fw fa-eye"
                 role="button"
                 tabIndex="-1"
                 onClick={_ => this.props.UiActions.updateIn(['taskPage', 'selectedYearlyTaskId'], task.get('_id'))}
               />
-            </div>))}
-        </div>
+            </List.Item>
+          ))}
+        </List>
 
         <div className="flex-container-row pinned-bottom border-top">
           <InputNewConnected

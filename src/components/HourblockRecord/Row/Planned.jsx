@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { currentUserSelector } from 'utility-redux/user';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
-import { TaskActions, projectTasksSelector } from 'utility-redux/task';
+import { TaskActions, yearlyTasksSelector } from 'utility-redux/task';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
@@ -190,7 +190,7 @@ export class HourBlockRowPlanned extends React.Component {
                   inputName="content"
                   inputClassNames="flex-5"
                   newRecord={{
-                    type: 'project',
+                    type: 'yearly',
                     project: plannedPomo.getIn(['project', '_id']),
                   }}
                   actions={this.props.TaskActions}
@@ -359,8 +359,6 @@ HourBlockRowPlanned.propTypes = {
   isUpdatingPlannedPomo: PropTypes.bool,
   allProjectTasksOrdered: PropTypes.object,
   pomoProjectTasks: PropTypes.object,
-
-  // DailyRecordActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -377,7 +375,7 @@ function mapStateToProps(state, ownProps) {
     currentUser: currentUserSelector(state),
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
 
-    pomoProjectTasks: projectTasksSelector(state).get(ownProps.plannedPomo.getIn(['project', '_id'])),
+    pomoProjectTasks: yearlyTasksSelector(state).get('2018').filter(task => task.getIn(['project', '_id']) === ownProps.plannedPomo.getIn(['project', '_id'])),
   };
 }
 

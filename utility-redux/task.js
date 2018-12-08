@@ -31,9 +31,6 @@ const getTaskReducerKey = (task, type) => {
   case 'weekly':
     key = momentObject.isoWeek();
     break;
-  case 'monthly':
-    key = momentObject.month();
-    break;
   case 'yearly':
     key = momentObject.year();
     break;
@@ -89,7 +86,6 @@ export const overduedTasksSelector = createSelector(
   }
 );
 
-
 export const weeklyTasksSelector = createSelector(
   [getTasks],
   tasks => getNewTasks(tasks, 'weekly'),
@@ -98,12 +94,6 @@ export const weeklyTasksSelector = createSelector(
 export const thisWeekTasksSelector = createSelector(
   [weeklyTasksSelector],
   tasks => tasks.get(moment().tz('Asia/Tokyo').isoWeek().toString()),
-);
-
-
-export const monthlyTasksSelector = createSelector(
-  [getTasks],
-  tasks => getNewTasks(tasks, 'monthly'),
 );
 
 export const yearlyTasksSelector = createSelector(

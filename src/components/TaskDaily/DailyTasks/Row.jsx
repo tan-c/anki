@@ -23,6 +23,9 @@ class DailyTasksRow extends React.Component {
   render() {
     const { dailyTasks, selectedYearlyTask, dayVal } = this.props;
 
+    console.log('🔥🔥🔥🔥🔥 selectedYearlyTask.toJS() 🔥🔥🔥🔥🔥');
+    console.log(selectedYearlyTask.toJS());
+
     return (
       <div className={`${dayVal.dayMomentObject.unix() === moment().tz('Asia/Tokyo').startOf('day').unix() && 'border-top-orange'} ${dayVal.dayMomentObject.isoWeekday() === 7 && 'margin-bottom-10'}`}>
         <div className="flex-container-row typical-setup">

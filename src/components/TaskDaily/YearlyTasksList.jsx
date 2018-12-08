@@ -61,7 +61,7 @@ export class TasksPage extends React.Component {
                 className="fa fa-fw fa-eye"
                 role="button"
                 tabIndex="-1"
-                onClick={_ => this.props.UiActions.updateIn(['hourblock', 'taskPage', 'selectedYearlyTaskId'], task.get('_id'))}
+                onClick={_ => this.props.UiActions.updateIn(['taskPage', 'selectedYearlyTaskId'], task.get('_id'))}
               />
             </div>))}
         </div>

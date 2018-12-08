@@ -111,7 +111,7 @@ export const yearlyTasksSelector = createSelector(
   tasks => getNewTasks(tasks, 'yearly'),
 );
 
-const selectedYearlyTaskId = state => state.ui.getIn(['hourblock', 'taskPage', 'selectedYearlyTaskId']);
+const selectedYearlyTaskId = state => state.ui.getIn(['taskPage', 'selectedYearlyTaskId']);
 export const selectedYearlyTaskSelector = createSelector(
   [getTasks, selectedYearlyTaskId],
   (tasks, yearlyTaskId) => tasks.get(yearlyTaskId),

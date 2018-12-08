@@ -8,7 +8,6 @@ import moment from 'moment-timezone';
 import { Grid } from 'semantic-ui-react';
 import WeeklyTasksListConnected from './WeeklyTasksList';
 import YearlyTasksListConnected from './YearlyTasksList';
-import MonthlyTasksListConnected from './MonthlyTasks/List';
 import DailyTaskPlanningConnected from './DailyTasks/List';
 
 export class RightAside extends React.Component {

@@ -16,14 +16,15 @@ const initialState = {
       updatingPlannedPomo: false,
       selectedProjectId: '',
     },
-    taskPage: {
-      selectedYearlyTaskId: '', // this is actually the relative index in the array
-    },
     settingsPage: {
       edittingTarget: 'projects',
       selectedEventId: '',
       selectedWorkoutId: '',
     },
+  },
+
+  taskPage: {
+    selectedYearlyTaskId: '', // this is actually the relative index in the array
   },
 
   himalayan: {

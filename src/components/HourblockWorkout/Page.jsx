@@ -18,6 +18,10 @@ import WorkoutRecordsListConnected from './WorkoutRecords/List';
 // import CaloriesListConnected from './Calories/List';
 import DailyMeasurementsListConnected from './Calories/DailyMeasurementsList';
 
+import DailyCalorieDetailsConnected from './Daily/CalorieDetails';
+import DailySleepDetailsConnected from './Daily/SleepDetails';
+import DailyMeasurementsConnected from './Daily/Measurements';
+
 
 export class DailyWorkoutRecordsDetails extends React.Component {
   render() {
@@ -94,6 +98,20 @@ export class DailyWorkoutRecordsDetails extends React.Component {
 
           }
         </Grid.Column>
+
+        {/* <Grid.Row>
+          <DailyMeasurementsConnected
+            dayMomentObject={dayMomentObject}
+          />
+
+          <DailySleepDetailsConnected
+            dayMomentObject={dayMomentObject}
+          />
+
+          <DailyCalorieDetailsConnected
+            dayMomentObject={dayMomentObject}
+          />
+        </Grid.Row> */}
       </Grid.Row>
     );
   }

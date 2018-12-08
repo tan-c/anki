@@ -27,17 +27,33 @@ export class OverduedTasksList extends React.Component {
     return (
       <List
         celled
-        ordered
+        // ordered
         inverted
         style={{
-          background: `${overduedTasksList.size ? '#DB4848 ' : 'transparent'}`,
+          border: `1px solid ${overduedTasksList.size ? '#DB4848 ' : 'transparent'}`,
           width: '100%'
         }}
       >
         {/* overduedTasksList is actually a valueSet */}
         {overduedTasksList.map(task => (
           <List.Item key={task.get('_id')}>
-            {`[${moment(task.get('targetCompletion')).format('MM-DD')}] ${task.get('content')}`}
+            {`${moment(task.get('targetCompletion')).format('MM-DD')}`}
+
+            <span
+              style={{
+                width: 30,
+                backgroundColor: task.hasIn(['project', 'name']) ? task.getIn(['project', 'category', 'color']) : 'grey',
+                display: 'inline-block',
+                overflow: 'hidden'
+              }}
+            >
+              {task.getIn(['project', 'name'])}
+            </span>
+
+            <span>
+              {task.get('content')}
+            </span>
+
             <List.Content floated="right">
               <Icon
                 name="close"

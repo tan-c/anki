@@ -165,7 +165,7 @@ export class DailyRecordsChart extends React.Component {
             enabled: true,
             style: {
               fontWeight: 'bold',
-              color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray',
+              color: (Highcharts.theme && Highcharts.theme.textColor) || 'grey',
             },
           },
         }, {

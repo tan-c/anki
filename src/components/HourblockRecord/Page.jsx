@@ -9,17 +9,11 @@ import { Grid } from 'semantic-ui-react';
 
 // import { UiActions } from 'utility-redux/ui';
 
-
 import HourBlockListConnected from './List';
-
-import OverduedTasksListConnected from './ExtraSection/OverduedTasksList';
-
-import DailyRecordsChartConnected from './ExtraSection/DailyRecordsChart';
-import DailyCalorieDetailsConnected from './ExtraSection/Daily/CalorieDetails';
-import DailySleepDetailsConnected from './ExtraSection/Daily/SleepDetails';
-import DailyMeasurementsConnected from './ExtraSection/Daily/Measurements';
 import CategoryInsightsConnected from '../Hourblock/LeftAside/CategoryInsights';
 import WeeklyInsightsConnected from '../Hourblock/LeftAside/WeeklyInsights';
+import OverduedTasksListConnected from './OverduedTasksList';
+import DailyRecordsChartConnected from './DailyRecordsChart';
 
 import FooterConnected from './Footer';
 
@@ -99,20 +93,6 @@ export class HourBlockPage extends React.Component {
         }}
         >
           <OverduedTasksListConnected />
-        </Grid.Row>
-
-        <Grid.Row>
-          <DailyMeasurementsConnected
-            dayMomentObject={dayMomentObject}
-          />
-
-          <DailySleepDetailsConnected
-            dayMomentObject={dayMomentObject}
-          />
-
-          <DailyCalorieDetailsConnected
-            dayMomentObject={dayMomentObject}
-          />
         </Grid.Row>
 
         <Grid.Row>

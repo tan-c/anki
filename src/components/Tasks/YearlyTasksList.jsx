@@ -59,7 +59,7 @@ export class TasksPage extends React.Component {
               }}
             >
               <Label
-                color={task.get('priority') >= 3 ? 'red' : task.get('priority') >= 1 ? 'orange' : 'gray'} // eslint-disable-line
+                color={task.get('priority') >= 3 ? 'red' : task.get('priority') >= 1 ? 'orange' : 'grey'} // eslint-disable-line
                 horizontal
                 onClick={(_) => {
                   this.props.TaskActions.update(task.set('priority', task.get('priority') + 1), task);
@@ -84,7 +84,7 @@ export class TasksPage extends React.Component {
               />
 
               <i
-                style={{ color: currentYearlyTaskSelectedId === task.get('id') ? 'green' : 'gray' }}
+                style={{ color: currentYearlyTaskSelectedId === task.get('id') ? 'green' : 'grey' }}
                 className="fa fa-fw fa-eye"
                 role="button"
                 tabIndex="-1"

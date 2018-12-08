@@ -12,6 +12,7 @@ import {
   List, Icon
 } from 'semantic-ui-react';
 import { Map } from 'immutable';
+import moment from 'moment';
 
 // import { bindActionCreators } from 'redux';
 export class OverduedTasksList extends React.Component {
@@ -34,10 +35,9 @@ export class OverduedTasksList extends React.Component {
         }}
       >
         {/* overduedTasksList is actually a valueSet */}
-
         {overduedTasksList.map(task => (
           <List.Item key={task.get('_id')}>
-            {task.get('content')}
+            {`[${moment(task.get('targetCompletion')).format('MM-DD')}] ${task.get('content')}`}
             <List.Content floated="right">
               <Icon
                 name="close"

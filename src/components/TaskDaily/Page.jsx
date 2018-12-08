@@ -55,7 +55,7 @@ export class RightAside extends React.Component {
     const monthList = this.createMonthlyList();
 
     return (
-      <Grid.Row columns={4}>
+      <Grid.Row columns={2}>
         <Grid.Column style={{
           overflow: 'auto'
         }}
@@ -64,13 +64,13 @@ export class RightAside extends React.Component {
         </Grid.Column>
 
 
-        <Grid.Column
+        {/* <Grid.Column
           style={{
             overflow: 'auto'
           }}
         >
           <MonthlyTasksListConnected />
-        </Grid.Column>
+        </Grid.Column> */}
 
         {/* <Grid.Column>
           <span className="flex-container-row">
@@ -90,12 +90,12 @@ export class RightAside extends React.Component {
           <MonthlyTasksListConmonthlyTasksnected />
         </Grid.Column> */}
 
-        <Grid.Column style={{
+        {/* <Grid.Column style={{
           overflow: 'auto'
         }}
         >
           <WeeklyTasksListConnected />
-        </Grid.Column>
+        </Grid.Column> */}
 
         <Grid.Column
           style={{

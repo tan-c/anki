@@ -1,5 +1,7 @@
 import expect from 'expect';
-import { fromJS } from 'immutable';
+import {
+  fromJS
+} from 'immutable';
 import moment from 'moment';
 
 import {
@@ -75,7 +77,7 @@ describe('Task Selectors', () => {
   describe('dailyTasksSelector', () => {
     it('should group daily tasks by dayOfYear', () => {
       const selectedTasks = dailyTasksSelector(initialState);
-      const dayOfYear = moment().dayOfYear();
+      const dayOfYear = moment().tz('Asia/Tokyo').dayOfYear();
       expect(selectedTasks.get(dayOfYear.toString()).size).toEqual(2);
       expect(selectedTasks.get((dayOfYear - 1).toString())).not.toBeDefined();
     });

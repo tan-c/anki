@@ -34,7 +34,7 @@ const initialStateNormal = {
 describe('DailyMeasurement Selectors', () => {
   describe('currentDayMeasurementSelector', () => {
     it('should return data given a day', () => {
-      const data = currentDayMeasurementSelector(initialStateNormal, moment());
+      const data = currentDayMeasurementSelector(initialStateNormal, moment().tz('Asia/Tokyo'));
       expect(data.get('weight')).toEqual(100);
       expect(data.get('height')).toEqual(200);
     });

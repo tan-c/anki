@@ -7,7 +7,6 @@ import moment from 'moment-timezone';
 
 import { Grid } from 'semantic-ui-react';
 import WeeklyTasksListConnected from './WeeklyTasksList';
-import ProjectTasksListConnected from './ProjectTasksList';
 import YearlyTasksListConnected from './YearlyTasksList';
 import DailyTaskPlanningConnected from './DailyTasks/List';
 
@@ -53,21 +52,15 @@ export class RightAside extends React.Component {
 
   render() {
     return (
-      <Grid.Row columns={3}>
-        <Grid.Column style={{
-          overflow: 'auto'
-        }}
-        >
-          <YearlyTasksListConnected />
-        </Grid.Column>
-
-        {/* <Grid.Column
+      <Grid.Row>
+        <Grid.Column
+          width={6}
           style={{
             overflow: 'auto'
           }}
         >
-          <MonthlyTasksListConnected />
-        </Grid.Column> */}
+          <YearlyTasksListConnected />
+        </Grid.Column>
 
         {/* <Grid.Column style={{
           overflow: 'auto'
@@ -77,14 +70,7 @@ export class RightAside extends React.Component {
         </Grid.Column> */}
 
         <Grid.Column
-          style={{
-            overflow: 'auto'
-          }}
-        >
-          <ProjectTasksListConnected />
-        </Grid.Column>
-
-        <Grid.Column
+          width={10}
           style={{
             overflow: 'auto'
           }}

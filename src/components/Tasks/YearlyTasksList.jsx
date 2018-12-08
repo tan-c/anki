@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
-import { Header, Grid, } from 'semantic-ui-react';
+import { Header, Label } from 'semantic-ui-react';
 
 import {
   TaskActions,
@@ -44,6 +44,15 @@ export class TasksPage extends React.Component {
         <div className="list-with-pinned-bottom">
           {currentYearlyTasksSorted.size > 0 && currentYearlyTasksSorted.map(task => (
             <div key={task.get('_id')} className="flex-container-row typical-setup">
+              <Label
+                horizontal
+                onClick={(_) => {
+                  this.props.TaskActions.update(task.set('priority', task.get('priority') + 1), task);
+                }}
+              >
+                {task.get('priority')}
+              </Label>
+
               <span className="flex-1">
                 <ProjectSelectConnected
                   onChangeEvent={event => this.props.TaskActions.update(task.set('project', event.target.value), task)}
@@ -51,6 +60,7 @@ export class TasksPage extends React.Component {
                   color={task.getIn(['project', 'category', 'color'])}
                 />
               </span>
+
               <Input
                 inputName="content"
                 inputClassNames="flex-2"

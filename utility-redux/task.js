@@ -124,6 +124,10 @@ export const currentYearlyTasksSortedSelector = createSelector(
     const catB = b.getIn(['project', 'category', 'naturalId']);
 
     if (catA === catB) {
+      if (a.getIn(['project', 'name']) === b.getIn(['project', 'name'])) {
+        return a.getIn(['priority']) > b.getIn(['priority']) ? -1 : 1;
+      }
+
       return a.getIn(['project', 'name']) > b.getIn(['project', 'name']) ? -1 : 1;
     }
     return catA < catB ? -1 : 1;

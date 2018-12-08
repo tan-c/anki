@@ -47,7 +47,7 @@ export class OverduedTasksList extends React.Component {
                   color: 'white'
                 }}
                 onClick={(_) => {
-                  const res = confirm('Deleting this task');
+                  const res = confirm(`Deleting this task: ${task.get('content')}`);
 
                   if (res) {
                     this.props.TaskActions.deleteRecord(task);

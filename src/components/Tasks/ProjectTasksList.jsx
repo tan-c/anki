@@ -49,7 +49,7 @@ export class ProjectTasksList extends React.Component {
                     tag
                     color="orange"
                   >
-                    {`${task.get('subTasks').count() * 30 / 60}H`}
+                    {`${task.get('subTasks').count()}`}
                   </Label>
 
                   <Label

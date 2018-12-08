@@ -119,7 +119,15 @@ export const selectedYearlyTaskSelector = createSelector(
 
 export const currentYearlyTasksSortedSelector = createSelector(
   [yearlyTasksSelector],
-  yearlyTasks => (yearlyTasks.has(moment().year().toString()) ? yearlyTasks.get(moment().year().toString()).sort((a, b) => (a.getIn(['project', 'category', 'naturalId']) < b.getIn(['project', 'category', 'naturalId']) ? -1 : 1)) : Map()),
+  yearlyTasks => (yearlyTasks.has(moment().year().toString()) ? yearlyTasks.get(moment().year().toString()).sort((a, b) => {
+    const catA = a.getIn(['project', 'category', 'naturalId']);
+    const catB = b.getIn(['project', 'category', 'naturalId']);
+
+    if (catA === catB) {
+      return a.getIn(['project', 'name']) > b.getIn(['project', 'name']) ? -1 : 1;
+    }
+    return catA < catB ? -1 : 1;
+  }) : Map()),
 );
 
 export const projectTasksSelector = createSelector(

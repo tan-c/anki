@@ -112,6 +112,7 @@ export const yearlyTasksSelector = createSelector(
 );
 
 const selectedYearlyTaskId = state => state.ui.getIn(['taskPage', 'selectedYearlyTaskId']);
+
 export const selectedYearlyTaskSelector = createSelector(
   [getTasks, selectedYearlyTaskId],
   (tasks, yearlyTaskId) => tasks.get(yearlyTaskId),

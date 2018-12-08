@@ -30,7 +30,8 @@ export class TasksPage extends React.Component {
   render() {
     const {
       currentYearlyTasksSorted,
-      totalProjectTasksCount
+      totalProjectTasksCount,
+      currentYearlyTaskSelectedId
     } = this.props;
 
     return (
@@ -46,7 +47,8 @@ export class TasksPage extends React.Component {
             <List.Item
               key={task.get('_id')} className="flex-container-row"
               style={{
-                display: 'flex'
+                display: 'flex',
+                backgroundColor: currentYearlyTaskSelectedId === task.get('_id') ? 'orange' : 'transparent'
               }}
             >
               <Label
@@ -75,7 +77,7 @@ export class TasksPage extends React.Component {
               />
 
               <i
-                style={{ color: 'gray' }}
+                style={{ color: currentYearlyTaskSelectedId === task.get('id') ? 'green' : 'gray' }}
                 className="fa fa-fw fa-eye"
                 role="button"
                 tabIndex="-1"
@@ -102,10 +104,12 @@ export class TasksPage extends React.Component {
 
 TasksPage.defaultProps = {
   currentYearlyTasksSorted: Map(),
+  currentYearlyTaskSelectedId: ''
 };
 
 TasksPage.propTypes = {
   currentYearlyTasksSorted: PropTypes.object,
+  currentYearlyTaskSelectedId: PropTypes.string,
 
   TaskActions: PropTypes.object.isRequired,
   UiActions: PropTypes.object.isRequired,
@@ -114,6 +118,7 @@ TasksPage.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     currentYearlyTasksSorted: currentYearlyTasksSortedSelector(state),
+    currentYearlyTaskSelectedId: state.ui.getIn(['taskPage', 'selectedYearlyTaskId']),
   };
 }
 

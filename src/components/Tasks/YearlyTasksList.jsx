@@ -11,7 +11,7 @@ import {
   yearlyTasksSortedSelector
 } from 'utility-redux/task';
 
-import Input from 'utility-react-component/Form/Input/Uncontrolled';
+import Input from 'utility-react-component/Form/Input/Controlled';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 

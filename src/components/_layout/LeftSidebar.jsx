@@ -98,38 +98,21 @@ export class SidebarComponent extends React.Component {
           active={location.pathname.indexOf('/task') > -1}
         >
           Tasks
-          <Icon name="list" />
-          <Menu.Menu>
-            <Menu.Item
-              as={Link}
-              to="/task/daily"
-              active={location.pathname === '/task/daily'}
+          {/* <Icon name="list" /> */}
+          {overduedTasksList.size && (
+            <Label
+              color={overduedTasksList.size >= 3 ? 'orange' : 'green'}
+              size="tiny"
             >
-              Daily
-              {overduedTasksList.size && (
-                <Label
-                  color={overduedTasksList.size >= 3 ? 'orange' : 'green'}
-                  size="tiny"
-                >
-                  {overduedTasksList.size}
-                </Label>
-              )}
-              {/* <Label
+              {overduedTasksList.size}
+            </Label>
+          )}
+          {/* <Label
                 color={thisWeekTasks.count() >= 6 ? 'orange' : 'green'}
                 size="tiny"
               >
                 {thisWeekTasks.count()}
               </Label> */}
-            </Menu.Item>
-
-            <Menu.Item
-              as={Link}
-              to="/task/project"
-              active={location.pathname === '/task/project'}
-            >
-              Project
-            </Menu.Item>
-          </Menu.Menu>
         </Menu.Item>
 
         <Menu.Item

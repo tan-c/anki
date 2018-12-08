@@ -50,7 +50,6 @@ import HourblockPlanningPageConnected from './components/HourblockPlanning/Page'
 import HourblockSettingPageConnected from './components/HourblockSettings/Page';
 import HourblockWorkoutPageConnected from './components/HourblockWorkout/Page';
 
-import TaskProjectPageConnected from './components/TaskProject/Page';
 import TaskDailyPageConnected from './components/TaskDaily/Page';
 
 import EyeModal from './components/_modal/Eye';
@@ -269,10 +268,6 @@ export class App extends React.Component {
                   <Route
                     path="/task/daily"
                     component={TaskDailyPageConnected}
-                  />
-                  <Route
-                    path="/task/project"
-                    component={TaskProjectPageConnected}
                   />
                   <Route
                     exact

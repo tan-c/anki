@@ -15,7 +15,7 @@ import {
 } from 'utility-redux/task';
 import { todayPlannedPomosSelector } from 'utility-redux/plannedPomo';
 import { UiActions } from 'utility-redux/ui';
-import ProjectTasksListConnected from './ProjectTasksList';
+// import ProjectTasksListConnected from './ProjectTasksList';
 
 export class ProjectTaskList extends React.Component {
   state = {
@@ -84,72 +84,57 @@ export class ProjectTaskList extends React.Component {
 
 
     return (
-      <Grid.Row
+      <Grid.Column
+        width={6}
         style={{
-          height: '100%'
+          overflow: 'auto'
         }}
       >
-        <Grid.Column
-          width={6}
-          style={{
-            overflow: 'auto'
-          }}
+        <Header
+          as="h3"
+          inverted
         >
-          <Header
-            as="h3"
-            inverted
-          >
-            Project Tasks
-          </Header>
+          Project Tasks
+        </Header>
 
-          <List
-            inverted
-            divided
-            selection
-            verticalAlign="middle"
-          >
-            {projects.valueSeq().sort((a, b) => a.getIn(['category', 'naturalId']) - b.getIn(['category', 'naturalId'])).map(project => (
-              <List.Item
-                key={project.get('_id')}
-                className={`${focusedProjectId === project.get('_id') && 'border-orange'} ${nextPomo.getIn(['project', '_id']) === project.get('_id') && 'bg-orange'}`}
-                onClick={_ => this.props.UiActions.updateIn(['hourblock', 'hourblockPage', 'focusedProjectId'], project.get('_id'))}
+        <List
+          inverted
+          divided
+          selection
+          verticalAlign="middle"
+        >
+          {projects.valueSeq().sort((a, b) => a.getIn(['category', 'naturalId']) - b.getIn(['category', 'naturalId'])).map(project => (
+            <List.Item
+              key={project.get('_id')}
+              className={`${focusedProjectId === project.get('_id') && 'border-orange'} ${nextPomo.getIn(['project', '_id']) === project.get('_id') && 'bg-orange'}`}
+              onClick={_ => this.props.UiActions.updateIn(['hourblock', 'hourblockPage', 'focusedProjectId'], project.get('_id'))}
+            >
+              <Label
+                style={{
+                  width: 80,
+                  overflow: 'hidden',
+                  backgroundColor: project.getIn(['category', 'color']),
+                  color: 'white',
+                  textAlign: 'center',
+                }}
               >
-                <Label
-                  style={{
-                    width: 80,
-                    overflow: 'hidden',
-                    backgroundColor: project.getIn(['category', 'color']),
-                    color: 'white',
-                    textAlign: 'center',
-                  }}
-                >
-                  {project.get('name')}
-                </Label>
+                {project.get('name')}
+              </Label>
 
-                {projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).sort((a, b) => b.get('priority') - a.get('priority')).getIn([0, 'content'])}
+              {projectTasks.has(project.get('_id')) && projectTasks.get(project.get('_id')).sort((a, b) => b.get('priority') - a.get('priority')).getIn([0, 'content'])}
 
-                <List.Content floated="right">
+              <List.Content floated="right">
 
-                  {this.getTotalProjectTasksHours(project) ? `${this.getTotalProjectTasksHours(project)}H`
-                    : (
-                      <Label color="red">
-                        0H
-                      </Label>
-                    )}
-                </List.Content>
-              </List.Item>))}
-          </List>
-        </Grid.Column>
-
-        <Grid.Column
-          width={10}
-          style={{
-            overflow: 'auto'
-          }}
-        >
-          <ProjectTasksListConnected />
-        </Grid.Column>
-      </Grid.Row>
+                {this.getTotalProjectTasksHours(project) ? `${this.getTotalProjectTasksHours(project)}H`
+                  : (
+                    <Label color="red">
+                      0H
+                    </Label>
+                  )}
+              </List.Content>
+            </List.Item>))}
+        </List>
+      </Grid.Column>
     );
   }
 }

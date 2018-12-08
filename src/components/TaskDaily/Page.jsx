@@ -7,18 +7,20 @@ import moment from 'moment-timezone';
 
 import { Grid } from 'semantic-ui-react';
 import WeeklyTasksListConnected from './WeeklyTasksList';
+import ProjectTasksConnected from './Project/Page';
+import ProjectTasksListConnected from './Project/ProjectTasksList';
 import YearlyTasksListConnected from './YearlyTasksList';
 import DailyTaskPlanningConnected from './DailyTasks/List';
 
 export class RightAside extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  // constructor(props, context) {
+  //   super(props, context);
 
-    this.state = {
-      // activeMonth: moment().tz('Asia/Tokyo').month(),
-      todayMoment: moment().tz('Asia/Tokyo').startOf('day'),
-    };
-  }
+  //   this.state = {
+  //     // activeMonth: moment().tz('Asia/Tokyo').month(),
+  //     todayMoment: moment().tz('Asia/Tokyo').startOf('day'),
+  //   };
+  // }
 
   // componentWillReceiveProps(nextProps) {
   //   this.setState({
@@ -27,34 +29,32 @@ export class RightAside extends React.Component {
 
   // filter(dayVal => !dayVal.isPast || dailyTasks.has(dayVal.dayOfYearString)
 
-  createMonthlyList = () => {
-    const { todayMoment } = this.state;
-    const monthList = [];
-    for (let i = 0; i < 12; i += 1) {
-      const currentMonth = [];
-      for (let j = 0; j < moment().tz('Asia/Tokyo').startOf('year').add(i, 'month')
-        .daysInMonth(); j += 1) {
-        const dayMomentObject = moment().tz('Asia/Tokyo').startOf('year').add(i, 'month')
-          .add(j, 'day');
-        currentMonth.push({
-          dayMomentObject,
-          dayOfYearString: dayMomentObject.dayOfYear().toString(),
-          weekString: dayMomentObject.isoWeek().toString(),
-          isPast: dayMomentObject.valueOf() < todayMoment.valueOf(),
-          isWeekend: dayMomentObject.day() === 0 || dayMomentObject.day() === 6,
-        });
-      }
-      monthList.push(currentMonth);
-    }
+  // createMonthlyList = () => {
+  //   const { todayMoment } = this.state;
+  //   const monthList = [];
+  //   for (let i = 0; i < 12; i += 1) {
+  //     const currentMonth = [];
+  //     for (let j = 0; j < moment().tz('Asia/Tokyo').startOf('year').add(i, 'month')
+  //       .daysInMonth(); j += 1) {
+  //       const dayMomentObject = moment().tz('Asia/Tokyo').startOf('year').add(i, 'month')
+  //         .add(j, 'day');
+  //       currentMonth.push({
+  //         dayMomentObject,
+  //         dayOfYearString: dayMomentObject.dayOfYear().toString(),
+  //         weekString: dayMomentObject.isoWeek().toString(),
+  //         isPast: dayMomentObject.valueOf() < todayMoment.valueOf(),
+  //         isWeekend: dayMomentObject.day() === 0 || dayMomentObject.day() === 6,
+  //       });
+  //     }
+  //     monthList.push(currentMonth);
+  //   }
 
-    return monthList;
-  }
+  //   return monthList;
+  // }
 
   render() {
-    const monthList = this.createMonthlyList();
-
     return (
-      <Grid.Row columns={2}>
+      <Grid.Row columns={4}>
         <Grid.Column style={{
           overflow: 'auto'
         }}
@@ -71,30 +71,28 @@ export class RightAside extends React.Component {
           <MonthlyTasksListConnected />
         </Grid.Column> */}
 
-        {/* <Grid.Column>
-          <span className="flex-container-row">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(month => (
-              <div
-                key={month}
-                role="buttomonthlyTasksn" tabIndex="-1"
-                className={`flex-1 ${activeMonth === month - 1 && 'color-orange font-400'}`}
-                onClick={_ => this.setState({
-                  activeMonth: month - 1,
-                })}
-              >
-                {month}
-              </div>))}
-          </span>
-
-          <MonthlyTasksListConmonthlyTasksnected />
-        </Grid.Column> */}
-
         {/* <Grid.Column style={{
           overflow: 'auto'
         }}
         >
           <WeeklyTasksListConnected />
         </Grid.Column> */}
+
+        <Grid.Column
+          style={{
+            overflow: 'auto'
+          }}
+        >
+          <ProjectTasksConnected />
+        </Grid.Column>
+
+        <Grid.Column
+          style={{
+            overflow: 'auto'
+          }}
+        >
+          <ProjectTasksListConnected />
+        </Grid.Column>
 
         <Grid.Column
           style={{

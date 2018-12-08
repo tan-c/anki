@@ -23,14 +23,6 @@ export class ProjectTasksList extends React.Component {
   //   });
   // }
 
-  addSubTask = (event, task) => {
-    if (event.which === 13) {
-      this.props.TaskActions.update(task.update('subTasks', subTasks => subTasks.push(event.target.value)), task).then((_) => {
-        this.newTaskInput.value = '';
-      });
-    }
-  }
-
   render() {
     const { focusedProjectTasks, focusedProject } = this.props;
 
@@ -46,14 +38,6 @@ export class ProjectTasksList extends React.Component {
                 >
                   <Label
                     horizontal
-                    tag
-                    color="orange"
-                  >
-                    {`${task.get('subTasks').count()}`}
-                  </Label>
-
-                  <Label
-                    horizontal
                     onClick={(_) => {
                       this.props.TaskActions.update(task.set('priority', task.get('priority') + 1), task);
                     }}
@@ -67,13 +51,6 @@ export class ProjectTasksList extends React.Component {
                     actions={this.props.TaskActions}
                   />
 
-                  <input
-                    className="flex-1"
-                    ref={(ref) => { this.newTaskInput = ref; }}
-                    placeholder={`add new to ${task.get('content')}`}
-                    onKeyDown={event => this.addSubTask(event, task)}
-                  />
-
                   <i
                     role="button"
                     tabIndex="-1"
@@ -82,30 +59,6 @@ export class ProjectTasksList extends React.Component {
                   />
                 </List.Content>
               </List.Item>
-
-              {task.get('subTasks').count() > 0
-                && (
-                  <List.Item>
-                    <List divided inverted>
-                      {task.get('subTasks').map((subTask, index) => (
-                        <List.Item
-                          key={index} // eslint-disable-line
-                        >
-                          {`${index + 1}. ${subTask}`}
-                          <List.Content floated="right">
-                            <i
-                              role="button"
-                              tabIndex="-1"
-                              className="fa fa-fw fa-close"
-                              onClick={_ => this.props.TaskActions.update(task.deleteIn(['subTasks', index.toString()]), task)}
-                            />
-                          </List.Content>
-                        </List.Item>))
-                      }
-                    </List>
-                  </List.Item>
-                )
-              }
             </List>
           ))}
         </div>

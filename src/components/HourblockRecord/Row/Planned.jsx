@@ -82,23 +82,6 @@ export class HourBlockRowPlanned extends React.Component {
                   {task.get('content')}
                 </span>
 
-                <input
-                  className="flex-1"
-                  autoComplete="off"
-                  ref={(ref) => { this.newTaskInput = ref; }}
-                  placeholder={`add new to ${task.get('content')}`}
-                  onKeyDown={(event) => {
-                    if (event.which === 13) {
-                      this.props.TaskActions.update(task.update('subTasks', subTasks => subTasks.push(event.target.value)), task).then((_) => {
-                        this.newTaskInput.value = '';
-                      });
-                    }
-                  }}
-                  style={{
-                    color: 'black'
-                  }}
-                />
-
                 <i
                   role="button"
                   tabIndex="-1"
@@ -112,30 +95,6 @@ export class HourBlockRowPlanned extends React.Component {
                 />
               </List.Content>
             </List.Item>
-
-            {task.get('subTasks').count() > 0
-              && (
-                <List.Item>
-                  <List divided inverted>
-                    {task.get('subTasks').map((subTask, index) => (
-                      <List.Item
-                        key={index} // eslint-disable-line
-                      >
-                        {`${index + 1}. ${subTask}`}
-                        <List.Content floated="right">
-                          <i
-                            role="button"
-                            tabIndex="-1"
-                            className="fa fa-fw fa-close"
-                            onClick={_ => this.props.TaskActions.update(task.deleteIn(['subTasks', index.toString()]), task)}
-                          />
-                        </List.Content>
-                      </List.Item>))
-                    }
-                  </List>
-                </List.Item>
-              )
-            }
           </React.Fragment>
         ))}
       </List>
@@ -174,53 +133,6 @@ export class HourBlockRowPlanned extends React.Component {
                   currentPlannedPomoTask.has('taskName') ? currentPlannedPomoTask.get('taskName') : ''
                 }
               </span>
-
-              {/* {currentPlannedPomoTask.hasIn(['task', '_id']) && (
-                <span className="width-40">
-                  <Icon
-                    name="close"
-                    style={{
-                      width: 15,
-                      opacity: 0.5,
-                      color: 'red'
-                    }}
-                    onClick={(_) => {
-                      const res = confirm('Deleting this task');
-
-                      if (res) {
-                        this.props.TaskActions.deleteRecord(currentPlannedPomoTask.get('task'));
-                      }
-                    }}
-                  />
-
-                  <Icon
-                    // color="blue"
-                    disabled={!recordPomo.has('_id')}
-                    name="check"
-                    onClick={(_) => {
-                      if (recordPomo.has('_id')) {
-                        if (currentPlannedPomoTask.hasIn(['task', 'subTasks']) && currentPlannedPomoTask.getIn(['task', 'subTasks']).count() > 0) {
-                          // Delete the subtask
-                          this.props.TaskActions.update(currentPlannedPomoTask.get('task').deleteIn(['subTasks', '0']), currentPlannedPomoTask.get('task'));
-                        } else {
-                          // Delete the task
-                          this.props.TaskActions.deleteRecord(currentPlannedPomoTask.get('task'));
-                        }
-
-                        const newCurrentDayRecord = currentDayRecord.setIn(['pomo', (sectionOfDay).toString(), 'completedTask'], currentPlannedPomoTask.get('taskName'));
-
-                        this.props.DailyRecordActions.update(newCurrentDayRecord);
-                      } else {
-                        toastr.warning('Adding record first');
-                      }
-                    }}
-                    style={{
-                      // float: 'right',
-                      width: 15
-                    }}
-                  />
-                </span>
-              )} */}
             </span>
           )
         }

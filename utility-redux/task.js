@@ -160,7 +160,7 @@ export const selectedProjectTasksSelector = createSelector(
 // };
 
 export const allProjectTasksOrderedSelector = createSelector(
-  // Including subtasks too, ordered by priority
+  // Ordered by priority
   [projectTasksSelector],
   (tasks) => {
     const allTasksOrdered = {};
@@ -169,21 +169,11 @@ export const allProjectTasksOrderedSelector = createSelector(
       const orderedTasks = tasks.get(projectId).sort((a, b) => b.get('priority') - a.get('priority'));
       orderedTasks.forEach((task) => {
         const taskName = task.get('content');
-        if (task.hasIn(['subTasks', 0])) {
-          task.get('subTasks').forEach((subTask, index) => {
-            allTasksOrdered[projectId].push({
-              task,
-              subTaskId: index,
-              taskName: `${taskName} => ${subTask}`,
-            });
-          });
-        } else {
-          allTasksOrdered[projectId].push({
-            task,
-            subTaskId: null,
-            taskName,
-          });
-        }
+        allTasksOrdered[projectId].push({
+          task,
+          subTaskId: null,
+          taskName,
+        });
       });
     });
 

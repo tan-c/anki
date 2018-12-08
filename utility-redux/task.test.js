@@ -74,7 +74,7 @@ describe('Task Selectors', () => {
   describe('yearlyTasksSortedSelector', () => {
     it('should get current year tasks only', () => {
       const yearlyTasksSorted = yearlyTasksSortedSelector(initialState);
-      expect(yearlyTasksSorted.size).toEqual(2);
+      expect(yearlyTasksSorted.size).toEqual(3);
     });
   });
 });

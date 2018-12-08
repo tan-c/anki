@@ -375,7 +375,7 @@ function mapStateToProps(state, ownProps) {
     currentUser: currentUserSelector(state),
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
 
-    pomoProjectTasks: yearlyTasksSelector(state).get('2018').filter(task => task.getIn(['project', '_id']) === ownProps.plannedPomo.getIn(['project', '_id'])),
+    pomoProjectTasks: yearlyTasksSelector(state).has('2018') ? yearlyTasksSelector(state).get('2018').filter(task => task.getIn(['project', '_id']) === ownProps.plannedPomo.getIn(['project', '_id'])) : Map(),
   };
 }
 

@@ -287,16 +287,6 @@ export class HourBlockRowPlanned extends React.Component {
           {sectionName}
         </span>
 
-        {/* <span
-          className="width-20"
-        >
-          <Icon
-            name="lock" style={{
-              color: plannedPomo.get('isLocked') ? 'red' : 'grey'
-            }}
-          />
-        </span> */}
-
         <span
           className="width-80 border-right-white height-lineheight-30"
           style={{
@@ -304,15 +294,12 @@ export class HourBlockRowPlanned extends React.Component {
             textAlign: 'center'
           }}
         >
-          {!plannedPomo.get('isLocked') ? (
-            <ProjectSelectConnected
-              className="width-80 border-right-white height-lineheight-30"
-              value={plannedPomo.getIn(['project', '_id'])}
-              onChangeEvent={event => onChangePlannedPomo(sectionOfDay, plannedPomo, event)}
-              color={plannedPomo.getIn(['project', 'category', 'color'])}
-            />
-          ) : plannedPomo.getIn(['project', 'name'])
-          }
+          <ProjectSelectConnected
+            className="width-80 border-right-white height-lineheight-30"
+            value={plannedPomo.getIn(['project', '_id'])}
+            onChangeEvent={event => onChangePlannedPomo(sectionOfDay, plannedPomo, event)}
+            color={plannedPomo.getIn(['project', 'category', 'color'])}
+          />
         </span>
 
         <div

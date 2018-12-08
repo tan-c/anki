@@ -23,10 +23,6 @@ export class PlanningItem extends React.Component {
       currentUser
     } = this.props;
 
-    // When the item is locked and unlock is in the future
-    // This item should not be editable
-    const isDisabledDueToLock = currentUser.hasIn(['config', 'planning', 'nextUnlockTime']) && new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) > new Date().getTime() && plannedPomo.get('isLocked');
-
     return (
       <div
         data-role="planning-item"
@@ -42,11 +38,7 @@ export class PlanningItem extends React.Component {
                 className="flex-1"
                 disabled={updatingPlannedPomo}
                 onClick={(_) => {
-                  if (!isDisabledDueToLock) {
-                    updatePlannedPomo(hourblock, day);
-                  } else {
-                    toastr.info('You can only unlock when the lock has expired');
-                  }
+                  updatePlannedPomo(hourblock, day);
                 }}
               >
                 {plannedPomo.getIn(['project', 'name'])}
@@ -57,32 +49,10 @@ export class PlanningItem extends React.Component {
                   <Icon
                     name="close"
                     onClick={(_) => {
-                      if (!isDisabledDueToLock) {
-                        updatePlannedPomo(hourblock, day, {
-                          isDeleting: true
-                        });
-                      } else {
-                        toastr.info('You can only unlock when the lock has expired');
-                      }
+                      updatePlannedPomo(hourblock, day, {
+                        isDeleting: true
+                      });
                     }}
-                  />
-                  <Icon
-                    name="lock"
-                    style={{
-                      // opacity: isDisabledDueToLock ? 0.5 : 1,
-                      color: plannedPomo.get('isLocked') ? 'red' : 'white'
-                    }}
-                    onClick={(_) => {
-                      // You can only unlock when you have not locked
-                      if (!plannedPomo.get('isLocked') || !isDisabledDueToLock) {
-                        updatePlannedPomo(hourblock, day, {
-                          isUpdatedLocked: true
-                        });
-                      } else {
-                        toastr.info('You can only unlock when the lock has expired');
-                      }
-                    }
-                    }
                   />
                 </React.Fragment>
               )}

@@ -10,7 +10,6 @@ import {
   Menu, Icon, Modal, Button, Responsive, Dropdown, Label
 } from 'semantic-ui-react';
 import { currentUserSelector, UserActions } from 'utility-redux/user';
-import { totalLockedPlannedPomoSelector } from 'utility-redux/plannedPomo';
 import { UiActions } from 'utility-redux/ui';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
 import { todayTasksSelector } from 'utility-redux/task';
@@ -85,7 +84,6 @@ export class Header extends React.Component {
       // weatherInfo,
       showModal,
       isHeaderNextPomoOn,
-      totalLockedPlanned
     } = this.props;
 
     const {
@@ -141,10 +139,6 @@ export class Header extends React.Component {
                 onClick={_ => this.props.UiActions.updateIn(['hourblock', 'planningPage', 'updatingRecurTask'], !updatingRecurTask)}
               >
                 Set Recur Task
-              </Menu.Item>
-
-              <Menu.Item>
-                {`Locked: ${totalLockedPlanned / 2} (${(totalLockedPlanned / 2 / 24 / 7 * 100).toFixed(0)} %) Hours`}
               </Menu.Item>
             </React.Fragment>
           )
@@ -271,24 +265,6 @@ export class Header extends React.Component {
           </Menu.Item>
 
           <Menu.Item>
-            <Label
-              color={`${!currentUser.hasIn(['config', 'planning', 'nextUnlockTime']) || new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) <= currentTime.toDate().getTime() ? 'green' : 'red'}`}
-              onClick={() => {
-                if (new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) <= currentTime.toDate().getTime()) {
-                  this.props.UserActions.update(currentUser.setIn(['config', 'planning', 'nextUnlockTime'], moment().add(currentUser.getIn(['config', 'planning', 'lockInterval']), 'days').toDate()));
-                } else {
-                  toastr.info('Not ready yet');
-                }
-              }}
-            >
-              <Icon
-                name="lock"
-              />
-              {`${((new Date(currentUser.getIn(['config', 'planning', 'nextUnlockTime'])) - currentTime.toDate().getTime()) / 1000 / 60 / 60 / 24).toFixed(1)}/${currentUser.getIn(['config', 'planning', 'lockInterval'])} D`}
-            </Label>
-          </Menu.Item>
-
-          <Menu.Item>
             <Icon
               color={`${isHeaderNextPomoOn ? 'green' : 'black'}`}
               name="eye"
@@ -367,8 +343,6 @@ Header.defaultProps = {
   selectedProjectId: '',
   edittingTarget: 'events',
   updatingRecurTask: false,
-
-  totalLockedPlanned: 0
 };
 
 Header.propTypes = {
@@ -392,8 +366,6 @@ Header.propTypes = {
   updatingRecurTask: PropTypes.bool,
   selectedProjectId: PropTypes.string,
   edittingTarget: PropTypes.string,
-
-  totalLockedPlanned: PropTypes.number,
 
   UiActions: PropTypes.object.isRequired,
   UserActions: PropTypes.object.isRequired,
@@ -421,8 +393,6 @@ function mapStateToProps(state, ownProps) {
     selectedProjectId: state.ui.getIn(['hourblock', 'planningPage', 'selectedProjectId']),
     updatingRecurTask: state.ui.getIn(['hourblock', 'planningPage', 'updatingRecurTask']),
     edittingTarget: state.ui.getIn(['hourblock', 'settingsPage', 'edittingTarget']),
-
-    totalLockedPlanned: totalLockedPlannedPomoSelector(state)
   };
 }
 

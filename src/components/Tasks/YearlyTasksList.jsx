@@ -95,6 +95,19 @@ export class TasksPage extends React.Component {
                 tabIndex="-1"
                 onClick={_ => this.props.UiActions.updateIn(['taskPage', 'selectedYearlyTaskId'], task.get('_id'))}
               />
+
+              <i
+                className="fa fa-fw fa-check width-15"
+                role="button"
+                tabIndex="-1"
+                style={{
+                  color: task.get('dailyTasksAssociated') ? 'grey' : 'green'
+                }}
+                disabled={task.get('dailyTasksAssociated')}
+                onClick={(_) => {
+                  this.props.TaskActions.deleteRecord(task);
+                }}
+              />
             </List.Item>
           ))}
         </List>

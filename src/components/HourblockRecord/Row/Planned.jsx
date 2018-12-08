@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { currentUserSelector } from 'utility-redux/user';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
-import { TaskActions, yearlyTasksSelector } from 'utility-redux/task';
+import { TaskActions, yearlyTasksSortedSelector } from 'utility-redux/task';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
@@ -342,7 +342,7 @@ function mapStateToProps(state, ownProps) {
     currentUser: currentUserSelector(state),
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
 
-    pomoProjectTasks: yearlyTasksSelector(state),
+    pomoProjectTasks: yearlyTasksSortedSelector(state),
   };
 }
 

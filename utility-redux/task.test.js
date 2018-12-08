@@ -6,8 +6,7 @@ import moment from 'moment';
 
 import {
   dailyTasksSelector,
-  yearlyTasksSelector,
-  currentYearlyTasksSortedSelector,
+  yearlyTasksSortedSelector,
 } from './task';
 
 const initialState = {
@@ -72,20 +71,10 @@ describe('Task Selectors', () => {
     });
   });
 
-  describe('yearlyTasksSelector', () => {
-    it('should group yearly tasks by year', () => {
-      const selectedTasks = yearlyTasksSelector(initialState);
-      const year = moment().year();
-      expect(selectedTasks.get(year.toString()).size).toEqual(2);
-      expect(selectedTasks.get((year - 1).toString())).toBeDefined();
-      expect(selectedTasks.get((year - 2).toString())).not.toBeDefined();
-    });
-  });
-
-  describe('currentYearlyTasksSortedSelector', () => {
+  describe('yearlyTasksSortedSelector', () => {
     it('should get current year tasks only', () => {
-      const currentYearlyTasksSorted = currentYearlyTasksSortedSelector(initialState);
-      expect(currentYearlyTasksSorted.size).toEqual(2);
+      const yearlyTasksSorted = yearlyTasksSortedSelector(initialState);
+      expect(yearlyTasksSorted.size).toEqual(2);
     });
   });
 });

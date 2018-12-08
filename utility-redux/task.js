@@ -80,26 +80,28 @@ export const overduedTasksSelector = createSelector(
   }
 );
 
-export const yearlyTasksSelector = createSelector(
+export const yearlyTasksSortedSelector = createSelector(
   [getTasks],
-  tasks => tasks.valueSeq().filter(task => task.get('type') === 'yearly')
-);
+  (tasks) => {
+    const yearlyTasks = tasks.valueSeq().filter(task => task.get('type') === 'yearly').toJS();
+    yearlyTasks.forEach((t) => {
+      t.dailyTasksAssociated = tasks.valueSeq().filter(task => task.getIn(['parentTask', '_id']) === t._id).count();
+    });
 
-export const currentYearlyTasksSortedSelector = createSelector(
-  [yearlyTasksSelector],
-  yearlyTasks => yearlyTasks.sort((a, b) => {
-    const catA = a.getIn(['project', 'category', 'naturalId']);
-    const catB = b.getIn(['project', 'category', 'naturalId']);
+    return fromJS(yearlyTasks).sort((a, b) => {
+      const catA = a.getIn(['project', 'category', 'naturalId']);
+      const catB = b.getIn(['project', 'category', 'naturalId']);
 
-    if (catA === catB) {
-      if (a.getIn(['project', 'name']) === b.getIn(['project', 'name'])) {
-        return a.getIn(['priority']) > b.getIn(['priority']) ? -1 : 1;
+      if (catA === catB) {
+        if (a.getIn(['project', 'name']) === b.getIn(['project', 'name'])) {
+          return a.getIn(['priority']) > b.getIn(['priority']) ? -1 : 1;
+        }
+
+        return a.getIn(['project', 'name']) > b.getIn(['project', 'name']) ? -1 : 1;
       }
-
-      return a.getIn(['project', 'name']) > b.getIn(['project', 'name']) ? -1 : 1;
-    }
-    return catA < catB ? -1 : 1;
-  }),
+      return catA < catB ? -1 : 1;
+    });
+  },
 );
 
 const selectedYearlyTaskId = state => state.ui.getIn(['taskPage', 'selectedYearlyTaskId']);
@@ -109,12 +111,8 @@ export const selectedYearlyTaskSelector = createSelector(
   (tasks, yearlyTaskId) => tasks.get(yearlyTaskId),
 );
 
-export const totalProjectTasksCountSelector = createSelector(
-  [getTasks],
-  tasks => tasks.valueSeq().filter(task => task.get('type') === 'project').count(),
-);
-
 const getSelectedProjectId = state => state.ui.getIn(['hourblock', 'planningPage', 'selectedProjectId']);
+
 export const selectedProjectTasksSelector = createSelector(
   [getTasks, getSelectedProjectId],
   (tasks, selectedProjectId) => tasks.get(selectedProjectId),

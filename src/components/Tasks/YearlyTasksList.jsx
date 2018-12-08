@@ -8,7 +8,7 @@ import { Header, Label, List } from 'semantic-ui-react';
 
 import {
   TaskActions,
-  currentYearlyTasksSortedSelector
+  yearlyTasksSortedSelector
 } from 'utility-redux/task';
 
 import Input from 'utility-react-component/Form/Input/Uncontrolled';
@@ -29,8 +29,7 @@ export class TasksPage extends React.Component {
 
   render() {
     const {
-      currentYearlyTasksSorted,
-      totalProjectTasksCount,
+      yearlyTasksSorted,
       currentYearlyTaskSelectedId
     } = this.props;
 
@@ -39,7 +38,7 @@ export class TasksPage extends React.Component {
         <Header
           as="h3"
           inverted
-          content={`Yearly Tasks - ${currentYearlyTasksSorted.size}`}
+          content={`Yearly Tasks - ${yearlyTasksSorted.size}`}
         />
 
         <List
@@ -50,7 +49,7 @@ export class TasksPage extends React.Component {
             overflow: 'auto'
           }}
         >
-          {currentYearlyTasksSorted.size > 0 && currentYearlyTasksSorted.map(task => (
+          {yearlyTasksSorted.size > 0 && yearlyTasksSorted.map(task => (
             <List.Item
               key={task.get('_id')} className="flex-container-row"
               style={{
@@ -83,6 +82,12 @@ export class TasksPage extends React.Component {
                 actions={this.props.TaskActions}
               />
 
+              <span
+                style={{ color: 'white' }}
+              >
+                {task.get('dailyTasksAssociated')}
+              </span>
+
               <i
                 style={{ color: currentYearlyTaskSelectedId === task.get('id') ? 'green' : 'grey' }}
                 className="fa fa-fw fa-eye"
@@ -112,12 +117,12 @@ export class TasksPage extends React.Component {
 }
 
 TasksPage.defaultProps = {
-  currentYearlyTasksSorted: Map(),
+  yearlyTasksSorted: Map(),
   currentYearlyTaskSelectedId: ''
 };
 
 TasksPage.propTypes = {
-  currentYearlyTasksSorted: PropTypes.object,
+  yearlyTasksSorted: PropTypes.object,
   currentYearlyTaskSelectedId: PropTypes.string,
 
   TaskActions: PropTypes.object.isRequired,
@@ -126,7 +131,7 @@ TasksPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    currentYearlyTasksSorted: currentYearlyTasksSortedSelector(state),
+    yearlyTasksSorted: yearlyTasksSortedSelector(state),
     currentYearlyTaskSelectedId: state.ui.getIn(['taskPage', 'selectedYearlyTaskId']),
   };
 }

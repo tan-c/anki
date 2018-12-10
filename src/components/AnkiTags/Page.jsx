@@ -124,7 +124,7 @@ export class AnkiTagsPage extends React.Component {
               {
                 Header: 'Question',
                 accessor: 'question',
-                width: 120
+                width: 250
               },
               {
                 Header: 'Tags',

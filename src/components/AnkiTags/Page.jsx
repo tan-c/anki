@@ -102,20 +102,6 @@ export class AnkiTagsPage extends React.Component {
         </Grid.Column>
 
         <Grid.Column width={12}>
-          <select
-            onChange={event => this.filterAnki(event, 'notebookGroups')}
-            className="form-control"
-          >
-            <option key="" value="">
-              Select Notebook
-            </option>
-            {notebookGroups.valueSeq().map(nbg => (
-              <option key={nbg.get('_id')} value={nbg.get('_id')}>
-                {nbg.get('title')}
-              </option>
-            ))}
-          </select>
-
           <ReactTable
             data={ankis.valueSeq().toJS()}
             style={{

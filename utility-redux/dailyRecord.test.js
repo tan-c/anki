@@ -151,7 +151,7 @@ describe('DailyRecord Selectors', () => {
     it('should get the total number of pomos (in hour) for this week', () => {
       const weeklyTotalMetrics = thisWeekMetricsSelector(initialState);
       // TODO: project and category metrics are not tested yet
-      if (moment().isoWeekday() === 1) {
+      if (moment().tz('Asia/Tokyo').isoWeekday() === 1) {
         expect(weeklyTotalMetrics[0]).toEqual(1.5);
       } else {
         expect(weeklyTotalMetrics[0]).toEqual(2);

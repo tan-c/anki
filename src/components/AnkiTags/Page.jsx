@@ -104,6 +104,7 @@ export class AnkiTagsPage extends React.Component {
         <Grid.Column width={12}>
           <ReactTable
             data={ankis.valueSeq().toJS()}
+            defaultPageSize={100}
             style={{
               height: 'calc(100vh - 150px)',
               overflow: 'auto',

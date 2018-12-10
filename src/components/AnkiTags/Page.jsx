@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Map, List } from 'immutable';
+import { Map, List, fromJS } from 'immutable';
 
 import { AnkiActions } from 'utility-redux/anki';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
@@ -15,6 +15,7 @@ import {
   Icon,
   Header
 } from 'semantic-ui-react';
+import { loadavg } from 'os';
 
 export class AnkiTagsPage extends React.Component {
   // constructor(props, context) {
@@ -24,40 +25,6 @@ export class AnkiTagsPage extends React.Component {
   //     tagFilter: '',
   //   };
   // }
-
-  state = {
-    selectedAnkiTagId: '',
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    // if (nextProps.ankis.length) {
-    //   const { notebookGroupIdFilter, tagFilter } = this.state;
-    //
-    //   let filteredAnkis = nextProps.ankis;
-    //   if (notebookGroupIdFilter !== '') {
-    //     filteredAnkis = filteredAnkis.filter(a =>
-    //       a.note.notebook.notebookGroup._id === notebookGroupIdFilter);
-    //   }
-    //
-    //   if (tagFilter !== '') {
-    //     filtered Ankis = filteredAnkis.filter((a) => {
-    //       let res = false;
-    //       a.tags.forEach((tag) => {
-    //         if (tag._id === tagFilter) {
-    //           res = true;
-    //         }
-    //       });
-    //       return res;
-    //     });
-    //   }
-    //   filteredAnkis.sort((a, b) => (a._id >= b._id ? 1 : -1));
-    //
-    //   this.setState({
-    //     filteredAnkis,
-    //   });
-    // }
-  };
-
   createAnkiTagKeydown = (event) => {
     if (event.which === 13) {
       this.props.AnkiTagActions.create({
@@ -84,11 +51,9 @@ export class AnkiTagsPage extends React.Component {
           // this.setState({
           //   tagFilter: val,
           // });
-          a.tags.forEach((tag) => {
-            if (tag._id === val) {
-              res = true;
-            }
-          });
+          if (a.tag._id === val) {
+            res = true;
+          }
         }
 
         return res;
@@ -98,26 +63,13 @@ export class AnkiTagsPage extends React.Component {
     }
   };
 
-  addTagToAnki = (anki) => {
-    const { selectedAnkiTagId } = this.state;
-
-    if (
-      anki.has('tags')
-      && anki.get('tags').find(a => a.get('_id') === selectedAnkiTagId)
-      === undefined
-    ) {
-      this.props.AnkiActions.update(
-        anki.update('tags', tags => tags.push(selectedAnkiTagId))
-      );
-    }
-  };
-
   render() {
     const {
-      ankis, ankiTags, notebookGroups
+      ankis,
+      ankiTags,
+      notebookGroups,
+      selectedAnkiTagId
     } = this.props;
-
-    const { selectedAnkiTagId } = this.state;
 
     return (
       <Grid.Row>
@@ -187,51 +139,34 @@ export class AnkiTagsPage extends React.Component {
                 Header: 'Question',
                 accessor: 'question',
                 width: 120
-              }, {
+              },
+              {
                 Header: 'Tags',
-                accessor: 'tags',
-                width: 80,
+                accessor: 'tag.name',
+                width: 160,
                 // sortMethod: numericSortSmallerFirst,
-                Cell: row => (
-                  <div>
-                    {row.tags && row.tags.map(tag => (
-                      <span
-                        key={tag.get('_id')}
-                        className="bg-green color-white margin-right-5 padding-vertical-5"
-                      >
-                        {tag.name}
-                      </span>
-                    ))}
-                  </div>
-                )
               },
               {
                 Header: 'Add Tag',
                 accessor: 'add Tags',
-                width: 80,
+                width: 200,
                 // sortMethod: numericSortSmallerFirst,
                 Cell: row => (
                   <div>
-                    {selectedAnkiTagId.length > 0 && (
-                      <button
-                        className="bg-green margin-right-10"
-                      // FIXME: actions not right
-                      // onClick={(_) => {
-                      //   this.addTagToAnki(row);
-                      // }}
-                      >
-                        Add Tag
-                      </button>
-                    )}
-
                     <button
-                      className="bg-red"
-                    // FIXME: actions not right
-                    // onClick={(_) => {
-                    //   this.props.AnkiActions.update(row.set('tags', List()));
-                    // }}
+                      className="bg-green margin-right-10"
+                      disabled={!selectedAnkiTagId.length}
+                      onClick={(_) => {
+                        const newAnki = fromJS(row.original).set('tag', selectedAnkiTagId);
+
+                        console.log('🔥🔥🔥🔥🔥 newAnki.toJS() 🔥🔥🔥🔥🔥');
+                        console.log(newAnki.toJS());
+                        this.props.AnkiActions.update(
+                          newAnki
+                        );
+                      }}
                     >
-                      Clear Tag
+                      Add Tag
                     </button>
                   </div>
                 ),
@@ -255,20 +190,6 @@ export class AnkiTagsPage extends React.Component {
               // }
             ]}
           />
-
-          {/* {ankis.valueSeq().map(anki => (
-            <div
-              key={anki.get('_id')}
-              className="flex-container-row border-bottom-black"
-            >
-              <span className="flex-1 border-right-black-20">
-
-              </span>
-              <span className="flex-1">
-
-              </span>
-            </div>
-          ))} */}
         </Grid.Column>
       </Grid.Row>
     );
@@ -284,7 +205,7 @@ AnkiTagsPage.propTypes = {
   ankis: PropTypes.object,
   ankiTags: PropTypes.object,
   notebookGroups: PropTypes.object.isRequired,
-  // selectedAnkiTagId: PropTypes.string.isRequired,
+  selectedAnkiTagId: PropTypes.string.isRequired,
 
   AnkiActions: PropTypes.object.isRequired,
   AnkiTagActions: PropTypes.object.isRequired
@@ -295,7 +216,7 @@ function mapStateToProps(state, ownProps) {
     ankis: state.ankis,
     ankiTags: state.ankiTags,
     notebookGroups: state.notebookGroups,
-    // selectedAnkiTagId: state.ui.getIn(['selectedAnkiTagId'])
+    selectedAnkiTagId: state.ui.get('selectedAnkiTagId')
   };
 }
 

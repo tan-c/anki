@@ -44,12 +44,10 @@ export const filteredAnkisSelector = createSelector(
     }
 
     let hasTag = false;
-    if (anki.has('tags')) {
-      anki.get('tags').forEach((tag) => { // Tag would be optional for proto
-        if (tag.get('_id') === selectedAnkiTagId) {
-          hasTag = true;
-        }
-      });
+    if (anki.has('tag')) {
+      if (anki.getIn(['tag', '_id']) === selectedAnkiTagId) {
+        hasTag = true;
+      }
     }
 
     return hasTag;

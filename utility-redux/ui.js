@@ -40,6 +40,8 @@ const initialState = {
     },
   },
 
+  selectedAnkiTagId: '',
+
   isHeaderNextPomoOn: true,
   isShowingLoginPage: false,
   isRightSidebarOn: false,

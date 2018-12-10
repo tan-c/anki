@@ -23,8 +23,9 @@ message Anki {
 
     // FIXME: loading the ankitag from ankkTag.proto needs the right loader
     // Currently the fileloader wont load proto within another prototo
-    repeated AnkiTag tags = 30; // field by default is optional
-    message AnkiTag {
+    // repeated 
+    Tag tag = 30; // field by default is optional
+    message Tag {
       int32 _id = 99;
       string name = 1;
       string createdAt = 2;

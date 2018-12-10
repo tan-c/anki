@@ -141,30 +141,32 @@ export class AnkiPage extends React.Component {
                 {currentAnki.size > 0 && (
                   <React.Fragment>
                     <span className="pull-right bg-green label">
-                      {revisionAnkisTotal}
-                    </span>
-
-                    <span className="pull-right bg-green label">
-                      {'Created: '}
-                      {createdElapsedDays}
-                      {'d Ago'}
-                    </span>
-
-                    <span className="pull-right bg-green label">
                       {`Rev: ${revisionElapsedDays} - ${currentAnki.getIn([
                         'revision',
                         'round'
                       ])}/${currentAnki.getIn(['revision', 'passing'])}`}
                     </span>
 
-                    {currentAnki.has('tags') && currentAnki.get('tags').map((tag, index) => (
-                      <span
-                        className="pull-right bg-orange label"
-                        key={tag.get('_id')}
-                      >
-                        {tag.get('name')}
-                      </span>
-                    ))}
+                    <span className="pull-right bg-green label">
+                      {revisionAnkisTotal}
+                    </span>
+
+                    {currentAnki.has('tag')
+                      && (
+                        <span
+                          className="pull-right bg-orange label"
+                          key={currentAnki.getIn(['tag', '_id'])}
+                        >
+                          {currentAnki.getIn(['tag', 'name'])}
+                        </span>
+                      )}
+
+                    <br />
+                    <span
+                      className="pull-right bg-green label"
+                    >
+                      {`Created: ${createdElapsedDays}d Ago`}
+                    </span>
                   </React.Fragment>
                 )}
               </Grid.Column>

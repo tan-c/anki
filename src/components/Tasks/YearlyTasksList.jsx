@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 import moment from 'moment-timezone';
-import { Header, Label, List } from 'semantic-ui-react';
+import {
+  Header, Label, List, Input
+} from 'semantic-ui-react';
 
 import {
   TaskActions,
   yearlyTasksSortedSelector
 } from 'utility-redux/task';
 
-import Input from 'utility-react-component/Form/Input/Controlled';
+import InputControlled from 'utility-react-component/Form/Input/Controlled';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 
@@ -57,7 +59,7 @@ export class TasksPage extends React.Component {
                 backgroundColor: currentYearlyTaskSelectedId === task.get('_id') ? '#e67e22' : 'transparent'
               }}
             >
-              <Label
+              {/* <Label
                 color={task.get('priority') >= 3 ? 'red' : task.get('priority') >= 1 ? 'orange' : 'grey'} // eslint-disable-line
                 horizontal
                 onClick={(_) => {
@@ -65,9 +67,23 @@ export class TasksPage extends React.Component {
                 }}
               >
                 {task.get('priority')}
-              </Label>
+              </Label> */}
 
-              <span className="flex-1">
+              <Input
+                style={{
+                  width: 40
+                }}
+                size="mini"
+                focus
+                placeholder={task.get('priority')}
+                onKeyDown={(event) => {
+                  if (event.which === 13) {
+                    this.props.TaskActions.update(task.set('priority', event.target.value), task);
+                  }
+                }}
+              />
+
+              <span className="width-60">
                 <ProjectSelectConnected
                   onChangeEvent={event => this.props.TaskActions.update(task.set('project', event.target.value), task)}
                   value={task.getIn(['project', '_id'])}
@@ -75,11 +91,24 @@ export class TasksPage extends React.Component {
                 />
               </span>
 
-              <Input
+              <InputControlled
                 inputName="content"
                 inputClassNames="flex-2"
                 record={task}
                 actions={this.props.TaskActions}
+              />
+
+              <Input
+                style={{
+                  width: 120
+                }}
+                size="mini"
+                focus
+                type="date"
+                value={task.has('targetCompletion') ? moment(task.get('targetCompletion')).format('YYYY-MM-DD') : ''}
+                onChange={(event) => {
+                  this.props.TaskActions.update(task.set('targetCompletion', event.target.value), task);
+                }}
               />
 
               <span

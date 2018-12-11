@@ -53,7 +53,7 @@ export class RightAside extends React.Component {
     return (
       <Grid.Row>
         <Grid.Column
-          width={6}
+          width={8}
           style={{
             overflow: 'auto'
           }}
@@ -62,7 +62,7 @@ export class RightAside extends React.Component {
         </Grid.Column>
 
         <Grid.Column
-          width={10}
+          width={8}
           style={{
             overflow: 'auto'
           }}

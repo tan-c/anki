@@ -88,18 +88,30 @@ export const yearlyTasksSortedSelector = createSelector(
       t.dailyTasksAssociated = tasks.valueSeq().filter(task => task.getIn(['parentTask', '_id']) === t._id).count();
     });
 
-    return fromJS(yearlyTasks).sort((a, b) => (a.get('priority') > b.get('priority') ? -1 : 1));
-    // const catA = a.getIn(['project', 'category', 'naturalId']);
-    // const catB = b.getIn(['project', 'category', 'naturalId']);
+    return fromJS(yearlyTasks).sort((a, b) => {
+      // First sort by date that is not overdued
+      // Then sort by decreasing priority
+      if (new Date(a.get('targetCompletion')) <= new Date().getTime() && new Date(b.get('targetCompletion')) > new Date().getTime()) {
+        return -1;
+      }
 
-    // if (catA === catB) {
-    //   if (a.getIn(['project', 'name']) === b.getIn(['project', 'name'])) {
-    //     return a.getIn(['priority']) > b.getIn(['priority']) ? -1 : 1;
-    //   }
+      if (new Date(a.get('targetCompletion')) >= new Date().getTime() && new Date(b.get('targetCompletion')) < new Date().getTime()) {
+        return 1;
+      }
 
-    //   return a.getIn(['project', 'name']) > b.getIn(['project', 'name']) ? -1 : 1;
-    // }
-    // return catA < catB ? -1 : 1;
+      return a.get('priority') > b.get('priority') ? -1 : 1;
+      // const catA = a.getIn(['project', 'category', 'naturalId']);
+      // const catB = b.getIn(['project', 'category', 'naturalId']);
+
+      // if (catA === catB) {
+      //   if (a.getIn(['project', 'name']) === b.getIn(['project', 'name'])) {
+      //     return a.getIn(['priority']) > b.getIn(['priority']) ? -1 : 1;
+      //   }
+
+      //   return a.getIn(['project', 'name']) > b.getIn(['project', 'name']) ? -1 : 1;
+      // }
+      // return catA < catB ? -1 : 1;
+    });
   },
 );
 

@@ -48,7 +48,7 @@ export class TasksPage extends React.Component {
           selection
           style={{
             height: 'calc(100% - 80px)',
-            overflow: 'auto'
+            overflow: 'auto',
           }}
         >
           {yearlyTasksSorted.size > 0 && yearlyTasksSorted.map(task => (
@@ -56,7 +56,8 @@ export class TasksPage extends React.Component {
               key={task.get('_id')} className="flex-container-row"
               style={{
                 display: 'flex',
-                backgroundColor: currentYearlyTaskSelectedId === task.get('_id') ? '#e67e22' : 'transparent'
+                border: `1px solid ${currentYearlyTaskSelectedId === task.get('_id') ? 'blue' : 'transparent'}`,
+                background: new Date(task.get('targetCompletion')) < new Date().getTime() ? 'red' : 'transparent'
               }}
             >
               {/* <Label

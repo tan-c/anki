@@ -125,8 +125,11 @@ export class HourBlockRowPlanned extends React.Component {
 
   renderMainTaskInput = (mainTask, isTodayPast) => {
     const {
-      sectionOfDay, onChangePlannedPomo, plannedPomo,
-      isUpdatingPlannedPomo, recordPomo
+      sectionOfDay,
+      onChangePlannedPomo,
+      plannedPomo,
+      isUpdatingPlannedPomo,
+      recordPomo
     } = this.props;
 
     return (
@@ -189,7 +192,9 @@ export class HourBlockRowPlanned extends React.Component {
 
   renderMinorTaskInput = (minorTask, isTodayPast) => {
     const {
-      sectionOfDay, onChangePlannedPomo, plannedPomo,
+      sectionOfDay,
+      onChangePlannedPomo,
+      plannedPomo,
       isUpdatingPlannedPomo
     } = this.props;
 

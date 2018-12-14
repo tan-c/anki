@@ -105,27 +105,6 @@ export class Footer extends React.Component {
         {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'recur'])}` : 'No Recur'}
       </Grid.Column>
 
-      {/* <Grid.Column width={8}>
-        <Input
-          fluid
-          type="text"
-          size="mini"
-          name="tasks.main"
-          ref={(ref) => { this.hourblockPlanneMinorInput = ref; }}
-          placeholder={nextPlannedPomo.getIn(['tasks', 'main'])}
-          onKeyDown={(event) => {
-            if (event.keyCode === 13) {
-              this.onChangePlannedPomo(sectionOfDay, nextPlannedPomo, event);
-              this.hourblockPlanneMinorInput.value = '';
-            }
-          }}
-        />
-      </Grid.Column>
-
-      <Grid.Column width={3}>
-        {nextPlannedPomo.has('tasks') ? `${nextPlannedPomo.getIn(['tasks', 'recur'])}` : 'No Recur'}
-      </Grid.Column> */}
-
       <Grid.Column width={1}>
         <Icon
           name="check"

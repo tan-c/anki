@@ -69,7 +69,7 @@ export class HourBlockList extends React.Component {
   //   }
   // }
 
-  onChangePlannedPomo = (sectionOfDay, plannedPomo, event, extraField) => {
+  onChangePlannedPomo = (sectionOfDay, plannedPomo, event) => {
     this.setState({
       isUpdatingPlannedPomo: true,
     });
@@ -79,8 +79,8 @@ export class HourBlockList extends React.Component {
     const field = name.indexOf('.') === -1 ? [name] : [name.split('.')[0], name.split('.')[1]];
     let newPlannedPomo = plannedPomo.setIn(field, value);
 
-    if (extraField !== undefined) {
-      newPlannedPomo = newPlannedPomo.set(extraField.name, extraField.value);
+    if (sectionOfDay >= 12) {
+      newPlannedPomo = newPlannedPomo.set('project', null);
     }
 
     const { plannedPomos } = this.props;
@@ -120,10 +120,10 @@ export class HourBlockList extends React.Component {
       category: projects.getIn([event.target.value, 'category', '_id']),
       isCompliant: event.target.isCompliant,
     });
+
     this.props.DailyRecordActions.update(newDailyRecord);
 
     // Also reset the selected project if not locked
-
     this.onChangePlannedPomo(sectionOfDay, plannedPomo, {
       target: {
         name: 'tasks.main',

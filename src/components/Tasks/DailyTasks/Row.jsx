@@ -91,7 +91,11 @@ class DailyTasksRow extends React.Component {
                 }}
               />
 
-              <span style={{ width: 30 }}>
+              <span style={{
+                width: 30,
+                maxHeight: 30
+              }}
+              >
                 {task.hasIn(['parentTask', 'content']) ? task.getIn(['parentTask', 'content']) : ''}
               </span>
 

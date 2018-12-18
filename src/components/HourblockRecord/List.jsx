@@ -106,7 +106,7 @@ export class HourBlockList extends React.Component {
       plannedPomos,
       projects
     } = this.props;
-    const plannedPomo = plannedPomos.getIn(['plannedPomos', sectionOfDay.toString()]);
+    let plannedPomo = plannedPomos.getIn(['plannedPomos', sectionOfDay.toString()]);
     // const mainTask = plannedPomo !== undefined && plannedPomo.hasIn(['tasks', 'main']) ? plannedPomo.getIn(['tasks', 'main']) : '';
 
     const newDailyRecord = currentDayRecord.setIn(['pomo', (sectionOfDay).toString()], {
@@ -120,9 +120,9 @@ export class HourBlockList extends React.Component {
     this.props.DailyRecordActions.update(newDailyRecord);
 
     // NOTE: This will reset the project
-    // if (sectionOfDay >= 12) {
-    //   plannedPomo = plannedPomo.set('project', null);
-    // }
+    if (sectionOfDay >= 12) {
+      plannedPomo = plannedPomo.set('project', null);
+    }
 
     // Also reset the selected project if not locked
     this.onChangePlannedPomo(sectionOfDay, plannedPomo, {

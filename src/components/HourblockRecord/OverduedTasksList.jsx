@@ -37,14 +37,17 @@ export class OverduedTasksList extends React.Component {
         {/* overduedTasksList is actually a valueSet */}
         {overduedTasksList.map(task => (
           <List.Item key={task.get('_id')}>
-            {`${moment(task.get('targetCompletion')).format('MM-DD')}`}
+            <span>
+              {`${moment(task.get('targetCompletion')).format('MM-DD')}`}
+            </span>
 
             <span
               style={{
                 width: 30,
                 backgroundColor: task.hasIn(['project', 'name']) ? task.getIn(['project', 'category', 'color']) : 'grey',
                 display: 'inline-block',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                height: 20
               }}
             >
               {task.getIn(['project', 'name'])}

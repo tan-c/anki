@@ -14,8 +14,6 @@ import CategoryInsightsConnected from '../Hourblock/LeftAside/CategoryInsights';
 import WeeklyInsightsConnected from '../Hourblock/LeftAside/WeeklyInsights';
 import DailyRecordsChartConnected from './DailyRecordsChart';
 
-import FooterConnected from './Footer';
-
 export class HourBlockPage extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -132,8 +130,6 @@ export class HourBlockPage extends React.Component {
             {this.renderRightSection()}
           </Grid.Column>
         </Grid.Row>
-
-        <FooterConnected />
       </React.Fragment>
     );
   }

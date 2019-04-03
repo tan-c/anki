@@ -8,7 +8,6 @@ import { Map } from 'immutable';
 
 import { UiActions } from 'utility-redux/ui';
 import { UserActions, currentUserSelector } from 'utility-redux/user';
-import { AnkiTagActions } from 'utility-redux/ankiTag';
 import InputNewComponent from 'utility-react-component/Form/Input/New';
 
 import {
@@ -127,34 +126,6 @@ export class RightSidebarComponent extends React.Component {
             </Menu.Menu>
           </Menu.Item>
         ))}
-
-        <Menu.Item>
-          <InputNewComponent
-            inputName="name"
-            inputClassNames="flex-1"
-            actions={this.props.AnkiTagActions}
-          />
-        </Menu.Item>
-
-        <Menu.Item>
-          <Icon name="graduation cap" />
-          AnkiTags
-          <Menu.Menu>
-            {ankiTags.valueSeq().map(tag => (
-              <Menu.Item
-                key={tag.get('_id')}
-              >
-                {tag.get('name')}
-                <Icon
-                  name="close"
-                  onClick={(_) => {
-                    this.props.AnkiTagActions.deleteRecord(tag);
-                  }}
-                />
-              </Menu.Item>
-            ))}
-          </Menu.Menu>
-        </Menu.Item>
       </React.Fragment>
     );
   }
@@ -169,8 +140,7 @@ RightSidebarComponent.propTypes = {
   currentUser: PropTypes.object,
   ankiTags: PropTypes.object,
 
-  UserActions: PropTypes.object.isRequired,
-  AnkiTagActions: PropTypes.object.isRequired,
+  UserActions: PropTypes.object.isRequired
 };
 
 
@@ -189,7 +159,6 @@ function mapDispatchToProps(dispatch) {
     }),
     UserActions: bindActionCreators(UserActions, dispatch),
     UiActions: bindActionCreators(UiActions, dispatch),
-    AnkiTagActions: bindActionCreators(AnkiTagActions, dispatch),
   };
 }
 

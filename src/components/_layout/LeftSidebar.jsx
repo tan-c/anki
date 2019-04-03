@@ -27,25 +27,23 @@ export class SidebarComponent extends React.Component {
           />
         </Menu.Item>
 
-        <Menu.Item
+        {/* <Menu.Item
           as={Link}
           to="/"
           active={location.pathname === '/'}
         >
           <Icon name="home" />
           Home
-        </Menu.Item>
+        </Menu.Item> */}
 
-        <Menu.Item
-          active={location.pathname.indexOf('/hourblock') > -1}
-        >
+        <Menu.Item>
           <Icon name="calendar" />
           Hourblock
           <Menu.Menu>
             <Menu.Item
               as={Link}
               to="/hourblock/record"
-              active={location.pathname === '/hourblock/record'}
+              active={location.pathname === '/' || location.pathname === '/hourblock/record'}
             >
               Record
             </Menu.Item>
@@ -109,13 +107,6 @@ export class SidebarComponent extends React.Component {
               active={location.pathname === '/anki/learn'}
             >
               Anki Learn
-            </Menu.Item>
-            <Menu.Item
-              as={Link}
-              to="/anki/tag"
-              active={location.pathname === '/anki/tag'}
-            >
-              Anki Tag
             </Menu.Item>
           </Menu.Menu>
         </Menu.Item>

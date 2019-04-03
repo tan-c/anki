@@ -1,5 +1,4 @@
 import ankis from 'utility-redux/anki';
-import ankiTags from 'utility-redux/ankiTag';
 import housingDatas from 'utility-redux/housingData';
 import notes from 'utility-redux/note';
 import notebooks from 'utility-redux/notebook';
@@ -24,7 +23,6 @@ import ui from 'utility-redux/ui';
 
 export default {
   ankis,
-  ankiTags,
   notes,
   notebooks,
   notebookGroups,

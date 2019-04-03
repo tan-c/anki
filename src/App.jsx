@@ -33,7 +33,6 @@ import AbyssinianPageConnected from './components/Abyssinian/Page';
 
 
 import HeaderConnected from './components/_layout/Header';
-import FooterNextPomoConnected from './components/_layout/FooterNextPomo';
 import LeftSidebarConnected from './components/_layout/LeftSidebar';
 import RightSidebarConnected from './components/_layout/RightSidebar';
 
@@ -41,9 +40,7 @@ import AnkiListConnected from './components/AnkiList/List';
 import HousingDataConnected from './components/HousingData/Page';
 import HourblockRecordConnected from './components/HourblockRecord/Page';
 
-import NoteConnected from './components/UserNote';
 import AnkiLearnPageConnected from './components/AnkiLearn/Page';
-import AnkiTagsPageConnected from './components/AnkiTags/Page';
 
 import HourblockPlanningPageConnected from './components/HourblockPlanning/Page';
 import HourblockSettingPageConnected from './components/HourblockSettings/Page';
@@ -172,26 +169,6 @@ export class App extends React.Component {
                 </Sidebar>
               )}
 
-              {isHeaderNextPomoOn && (
-                <Grid style={{
-                  position: 'fixed',
-                  bottom: 0,
-                  left: '10%',
-                  width: '80%',
-                  height: 20,
-                  lineHeight: '20px',
-                  border: '1px solid black',
-                  background: 'rgba(255, 255, 255, 0.8)',
-                  zIndex: 1000,
-                  padding: 0,
-                  margin: 0
-                }}
-                >
-                  <FooterNextPomoConnected />
-                </Grid>
-              )}
-
-
               <Responsive
                 onUpdate={this.handleOnUpdate}
                 as={Menu}
@@ -229,11 +206,6 @@ export class App extends React.Component {
               >
                 <Switch>
                   <Route
-                    exact
-                    path="/"
-                    component={() => <NoteConnected field="notes" />}
-                  />
-                  <Route
                     path="/anki/list"
                     component={AnkiListConnected}
                   />
@@ -242,12 +214,8 @@ export class App extends React.Component {
                     component={AnkiLearnPageConnected}
                   />
                   <Route
-                    path="/anki/tag"
-                    component={AnkiTagsPageConnected}
-                  />
-                  <Route
                     exact
-                    path="/hourblock/record"
+                    path="/"
                     component={HourblockRecordConnected}
                   />
                   <Route

@@ -11,7 +11,6 @@ import {
 } from 'semantic-ui-react';
 import { currentUserSelector, UserActions } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';
-import { AnkiTagActions } from 'utility-redux/ankiTag';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 import toastr from 'toastr';
 
@@ -401,7 +400,6 @@ function mapDispatchToProps(dispatch) {
       type: 'SET_WEATHER_INFO',
     }),
 
-    AnkiTagActions: bindActionCreators(AnkiTagActions, dispatch),
     UiActions: bindActionCreators(UiActions, dispatch),
     UserActions: bindActionCreators(UserActions, dispatch),
   };

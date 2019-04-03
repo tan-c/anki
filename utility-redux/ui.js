@@ -41,8 +41,6 @@ const initialState = {
   },
 
   selectedAnkiTagId: '',
-
-  isHeaderNextPomoOn: true,
   isShowingLoginPage: false,
 };
 

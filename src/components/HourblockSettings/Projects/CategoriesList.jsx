@@ -121,17 +121,6 @@ export class CategoriesList extends React.Component {
                       name="list alternate"
                       onClick={_ => this.props.ProjectActions.update(proj.set('isShortTerm', !proj.get('isShortTerm')))}
                     />
-                    {/* <Icon.Group size="small">
-                      <Icon
-                        color="white"
-                        name="dont"
-                        size="big"
-                      />
-                      <Icon
-                        color="white"
-                        name="user"
-                      />
-                    </Icon.Group> */}
                   </span>
 
                 </div>))}

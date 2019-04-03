@@ -34,7 +34,6 @@ export class Header extends React.Component {
   // }
 
   state = {
-    showEyeTimeoutBlinking: false,
     currentTime: moment()
   };
 
@@ -50,9 +49,6 @@ export class Header extends React.Component {
   updateCurrentTime = () => {
     this.updateTimeRunner = setInterval(() => {
       this.setState({
-        // eslint-disable-line react/no-set-state
-        showEyeTimeoutBlinking:
-          moment().minutes() % 30 >= 29 && moment().seconds() % 2 === 0,
         currentTime: moment()
       });
     }, 3000);
@@ -87,12 +83,10 @@ export class Header extends React.Component {
       currentUser,
       // weatherInfo,
       showModal,
-      isHeaderNextPomoOn,
     } = this.props;
 
     const {
-      currentTime,
-      showEyeTimeoutBlinking
+      currentTime
     } = this.state;
 
     return (
@@ -246,15 +240,6 @@ export class Header extends React.Component {
             {currentTime.format('HH:mm')}
           </Menu.Item>
 
-          <Menu.Item>
-            <Icon
-              color={`${isHeaderNextPomoOn ? 'green' : 'black'}`}
-              name="eye"
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['isHeaderNextPomoOn'], !isHeaderNextPomoOn);
-              }}
-            />
-          </Menu.Item>
 
           <Responsive
             {...Responsive.onlyMobile}
@@ -289,8 +274,6 @@ export class Header extends React.Component {
 
 Header.defaultProps = {
   showModal: '',
-  isHeaderNextPomoOn: true,
-
   currentUser: Map(),
   // weatherInfo: Map(),
 
@@ -307,7 +290,6 @@ Header.defaultProps = {
 
 Header.propTypes = {
   showModal: PropTypes.string,
-  isHeaderNextPomoOn: PropTypes.bool,
 
   currentUser: PropTypes.object,
   // currentUserImageSrc: PropTypes.string.isRequired,
@@ -332,7 +314,7 @@ Header.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     showModal: state.ui.getIn(['himalayan', 'showModal']),
-    isHeaderNextPomoOn: state.ui.getIn(['isHeaderNextPomoOn']),
+
 
     currentUser: currentUserSelector(state),
     // currentUserImageSrc: state.ui.getIn(['common', 'currentUserImageSrc']),

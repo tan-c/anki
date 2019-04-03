@@ -104,7 +104,6 @@ export class App extends React.Component {
   render() {
     const {
       currentUser,
-      isHeaderNextPomoOn
     } = this.props;
 
     const {
@@ -225,21 +224,15 @@ export class App extends React.Component {
 }
 
 App.defaultProps = {
-  currentUser: Map(),
-  isHeaderNextPomoOn: true,
+  currentUser: Map()
 };
 
 App.propTypes = {
-  isHeaderNextPomoOn: PropTypes.bool,
-  // history: PropTypes.object.isRequired,
-
   currentUser: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    isHeaderNextPomoOn: state.ui.getIn(['isHeaderNextPomoOn']),
-
     showModal: state.ui.getIn(['showModal']),
     currentUser: currentUserSelector(state),
   };

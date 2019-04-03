@@ -26,28 +26,17 @@ export class AnkiRow extends React.Component {
         <Grid.Column
           width={12}
           textAlign="left"
+          style={{
+            marginLeft: 10
+          }}
         >
-          <Label
-            style={{
-              width: 40,
-              background: 'orange',
-              color: 'white',
-              textAlign: 'center'
-            }}
-          >
-            {`${anki.getIn(['revision', 'round'])}/${anki.getIn(['revision', 'passing'])}`}
-          </Label>
-          {anki.get('question')}
+          {`${anki.get('question')}/${anki.get('answer')}`}
         </Grid.Column>
 
         <Grid.Column
           width={4}
           textAlign="center"
         >
-          <Label>
-            {anki.has('tags') ? anki.get('tags').size : 0}
-          </Label>
-
           <Icon
             name="close"
             onClick={_ => this.props.AnkiActions.deleteRecord(anki)}

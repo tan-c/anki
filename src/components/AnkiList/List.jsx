@@ -15,8 +15,6 @@ import {
   activeAnkiSelector,
 } from 'utility-redux/anki';
 
-import { UiActions } from 'utility-redux/ui';
-
 import AnkiRowConnected from './Row';
 
 export class AnkiList extends React.Component {
@@ -54,7 +52,7 @@ export class AnkiList extends React.Component {
 
     return (
       <React.Fragment>
-        <Grid.Row>
+        {/* <Grid.Row>
           <Grid.Column>
             {activeAnki.size > 0
               && (
@@ -108,14 +106,14 @@ export class AnkiList extends React.Component {
               )
             }
           </Grid.Column>
-        </Grid.Row>
+        </Grid.Row> */}
 
         <Grid.Row>
           <Grid
             divided="vertically"
             style={{
               overflow: 'auto',
-              maxHeight: 'calc(100vh - 300px)'
+              width: '100%'
             }}
           >
             {ankisSorted.valueSeq().map(anki => (
@@ -142,8 +140,7 @@ AnkiList.propTypes = {
   ankisSorted: PropTypes.object,
   selectedAnkiTagId: PropTypes.string,
 
-  AnkiActions: PropTypes.object.isRequired,
-  UiActions: PropTypes.object.isRequired,
+  AnkiActions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -157,7 +154,6 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     AnkiActions: bindActionCreators(AnkiActions, dispatch),
-    UiActions: bindActionCreators(UiActions, dispatch),
   };
 }
 

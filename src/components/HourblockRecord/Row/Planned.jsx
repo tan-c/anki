@@ -56,26 +56,6 @@ export class HourBlockRowPlanned extends React.Component {
     return shouldUpdate;
   }
 
-  renderProjectTask = () => {
-    const {
-      sectionOfDay,
-      plannedPomo,
-      currentDayRecord,
-      recordPomo
-    } = this.props;
-
-    return (
-      <span
-        className="flex-2 border-right-white text-left flex-container-row color-grey"
-        style={{
-          textDecoration: 'line-through'
-        }}
-      >
-        {recordPomo.has('completedTask') ? recordPomo.get('completedTask') : ''}
-      </span>
-    );
-  }
-
   render() {
     const { mainTask, minorTask } = this.state;
     const {
@@ -114,13 +94,6 @@ export class HourBlockRowPlanned extends React.Component {
             color={plannedPomo.getIn(['project', 'category', 'color'])}
           />
         </span>
-
-        <div
-          className="flex-1 flex-container-row"
-        >
-          {/* {this.renderProjectTask()} */}
-        </div>
-
       </React.Fragment>
     );
   }
@@ -129,7 +102,6 @@ export class HourBlockRowPlanned extends React.Component {
 HourBlockRowPlanned.defaultProps = {
   isToday: false,
 
-  currentDayRecord: Map(),
   currentUser: Map(),
   currentSectionOfDay: 0,
   sectionOfDay: 0,
@@ -142,7 +114,6 @@ HourBlockRowPlanned.defaultProps = {
 HourBlockRowPlanned.propTypes = {
   isToday: PropTypes.bool,
   currentSectionOfDay: PropTypes.number,
-  currentDayRecord: PropTypes.object,
   currentUser: PropTypes.object,
   sectionOfDay: PropTypes.number,
   sectionName: PropTypes.string,
@@ -153,7 +124,6 @@ HourBlockRowPlanned.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    currentDayRecord: ownProps.currentDayRecord,
     isToday: ownProps.isToday,
     currentSectionOfDay: ownProps.currentSectionOfDay,
     sectionOfDay: ownProps.sectionOfDay,

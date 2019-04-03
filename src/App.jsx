@@ -38,7 +38,6 @@ import LeftSidebarConnected from './components/_layout/LeftSidebar';
 import RightSidebarConnected from './components/_layout/RightSidebar';
 
 import AnkiListConnected from './components/AnkiList/List';
-import IntelNotesConnected from './components/IntelNotes/Page';
 import HousingDataConnected from './components/HousingData/Page';
 import HourblockRecordConnected from './components/HourblockRecord/Page';
 
@@ -268,11 +267,6 @@ export class App extends React.Component {
                   <Route
                     path="/tasks"
                     component={TaskPageConnected}
-                  />
-                  <Route
-                    exact
-                    path="/notes"
-                    component={IntelNotesConnected}
                   />
                   <Route
                     path="/housingDatas"

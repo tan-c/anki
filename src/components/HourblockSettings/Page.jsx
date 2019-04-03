@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
 import { Grid } from 'semantic-ui-react';
-import EventListConnected from './Events/List';
-import EventRecordsListConnected from './Events/EventRecords/List';
 
 import SelectedProjectDetailsConnected from './Projects/SelectedProjectDetails';
 import CategoriesListConnected from './Projects/CategoriesList';
@@ -31,24 +29,6 @@ export class SettingsPage extends React.Component {
           <CategoryInsightsConnected />
           <WeeklyInsightsConnected />
         </Grid.Column>
-
-        {edittingTarget === 'events'
-          && (
-            <React.Fragment>
-              <Grid.Column
-                width={9}
-              >
-                <EventListConnected />
-              </Grid.Column>
-
-              <Grid.Column
-                width={5}
-              >
-                <EventRecordsListConnected />
-              </Grid.Column>
-            </React.Fragment>
-          )
-        }
 
         {edittingTarget === 'projects'
           && (

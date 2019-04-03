@@ -32,7 +32,6 @@ export class HourBlockRowRecord extends React.Component {
       sectionOfDay, events,
       eventRecords, addPomoRecord,
       addEventToRecord, deleteEvent,
-      showEventsInPomo,
       isUpdatingPlannedPomo,
 
       isToday, currentSectionOfDay
@@ -93,55 +92,6 @@ export class HourBlockRowRecord extends React.Component {
             )
           }
         </span>
-
-        {showEventsInPomo
-          && (
-            <React.Fragment>
-              <span className="flex-2 text-left border-right">
-                {recordPomo.size > 0 && recordPomo.get('events').map(rec => (
-                  <span
-                    role="button" tabIndex="-1" className="margin-right-5" key={rec.get('_id')}
-                    onClick={_ => this.props.UiActions.updateIn(['hourblock', 'hourblockPage', 'selectedEventRecordId'], rec)}
-                  >
-                    <span>
-                      {eventRecords.getIn([rec, 'event', 'name'])}
-                    </span>
-                    <i
-                      role="button"
-                      tabIndex="-1"
-                      className="fa fa-fw fa-close"
-                      onClick={_ => deleteEvent(rec, sectionOfDay)}
-                    />
-                  </span>
-                ))}
-              </span>
-
-              <span className="text-left width-40">
-                {recordPomo.size > 0
-                  && (
-                    <select
-                      type="text"
-                      name="project"
-                      onChange={event => addEventToRecord(event, sectionOfDay)}
-                    >
-                      <option value="" />
-                      {events.valueSeq().map((event, index) => (
-                        <option
-                          key={event.get('_id')}
-                          value={event.get('_id')}
-                        >
-                          {event.get('project') !== null ? event.getIn(['project', 'name']) : 'General'}
-                          {' '}
-                          -
-                          {event.get('name')}
-                        </option>))}
-                    </select>
-                  )}
-              </span>
-            </React.Fragment>
-          )
-        }
-
       </React.Fragment>
     );
   }
@@ -151,7 +101,6 @@ HourBlockRowRecord.defaultProps = {
   isToday: false,
   currentSectionOfDay: 0,
 
-  showEventsInPomo: false,
   isUpdatingPlannedPomo: false,
 
   sectionOfDay: -1,
@@ -169,8 +118,6 @@ HourBlockRowRecord.propTypes = {
   currentSectionOfDay: PropTypes.number,
   sectionOfDay: PropTypes.number,
 
-  showEventsInPomo: PropTypes.bool,
-
   isUpdatingPlannedPomo: PropTypes.bool,
   plannedPomo: PropTypes.object,
   recordPomo: PropTypes.object,
@@ -180,7 +127,6 @@ HourBlockRowRecord.propTypes = {
   events: PropTypes.object,
   eventRecords: PropTypes.object,
 
-  UiActions: PropTypes.object.isRequired,
   // TaskActions: PropTypes.object.isRequired,
 };
 
@@ -189,8 +135,6 @@ function mapStateToProps(state, ownProps) {
     isToday: ownProps.isToday,
     currentSectionOfDay: ownProps.currentSectionOfDay,
     sectionOfDay: ownProps.sectionOfDay,
-
-    showEventsInPomo: currentUserSelector(state).hasIn(['config', 'showEventsInPomo']) && currentUserSelector(state).getIn(['config', 'showEventsInPomo']),
 
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
     plannedPomo: ownProps.plannedPomo,

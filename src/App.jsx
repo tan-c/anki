@@ -34,7 +34,6 @@ import AbyssinianPageConnected from './components/Abyssinian/Page';
 
 import HeaderConnected from './components/_layout/Header';
 import LeftSidebarConnected from './components/_layout/LeftSidebar';
-import RightSidebarConnected from './components/_layout/RightSidebar';
 
 import AnkiListConnected from './components/AnkiList/List';
 import HousingDataConnected from './components/HousingData/Page';
@@ -105,16 +104,12 @@ export class App extends React.Component {
   render() {
     const {
       currentUser,
-      isRightSidebarOn,
       isHeaderNextPomoOn
     } = this.props;
 
     const {
       viewGreaterThan450
     } = this.state;
-
-    const eyeSaving = currentUser.hasIn(['config', 'eyeSaving'])
-      && currentUser.getIn(['config', 'eyeSaving']);
 
     return (
       <ErrorBoundary>
@@ -151,23 +146,6 @@ export class App extends React.Component {
                   <LeftSidebarConnected />
                 </Sidebar>
               </Responsive>
-
-              {isRightSidebarOn && (
-                <Sidebar
-                  as={Menu}
-                  animation="overlay"
-                  direction="right"
-                  // inverted
-                  vertical
-                  visible
-                  width="thin"
-                  style={{
-                    // width: 140,
-                  }}
-                >
-                  <RightSidebarConnected />
-                </Sidebar>
-              )}
 
               <Responsive
                 onUpdate={this.handleOnUpdate}
@@ -238,10 +216,6 @@ export class App extends React.Component {
                   <Redirect from="/*" to="/" />
                 </Switch>
               </Responsive>
-
-              {eyeSaving && <EyeModal />}
-              {/* </Sidebar.Pusher>
-                  </Sidebar.Pushable> */}
             </React.Fragment>
           )
         }
@@ -252,12 +226,10 @@ export class App extends React.Component {
 
 App.defaultProps = {
   currentUser: Map(),
-  isRightSidebarOn: true,
   isHeaderNextPomoOn: true,
 };
 
 App.propTypes = {
-  isRightSidebarOn: PropTypes.bool,
   isHeaderNextPomoOn: PropTypes.bool,
   // history: PropTypes.object.isRequired,
 
@@ -266,7 +238,6 @@ App.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
     isHeaderNextPomoOn: state.ui.getIn(['isHeaderNextPomoOn']),
 
     showModal: state.ui.getIn(['showModal']),

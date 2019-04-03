@@ -65,6 +65,14 @@ export class Header extends React.Component {
     }, 1000 * 60 * 60);
   }
 
+  logout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('expires_at');
+    toastr.info('Localstorage cleared, redirecting...');
+    this.props.removeCurrentUser(this.props.currentUser);
+  };
+
+
   render() {
     const {
       isTasksOn,
@@ -76,7 +84,6 @@ export class Header extends React.Component {
       selectedProjectId,
       updatingRecurTask,
       edittingTarget,
-      isRightSidebarOn,
       currentUser,
       // weatherInfo,
       showModal,
@@ -217,38 +224,16 @@ export class Header extends React.Component {
           )
         }
 
-        {/* <Menu.Item
-          position="right"
-          style={{
-            fontSize: 24,
-            height: 40,
-            lineHeight: '40px',
-            padding: 0
-          }}
+        <Button
+          color="blue"
+          id="logout-button"
+          fluid
+          size="small"
+          onClick={this.logout}
         >
-          {parseInt(weatherInfo.getIn(['current', 'temp']), 10)}
-          {' '}
-          -
-          {parseInt(weatherInfo.getIn(['next', 'weather', 'temp']), 10)}
-          °C
-          {weatherInfo.getIn(['city', 'name'])}
-        </Menu.Item> */}
+          Logout
+        </Button>
 
-        {/* <Menu.Item>
-          <img
-            alt="pic"
-            src={
-              currentUser.has('imageUrl')
-                ? currentUser.get('imageUrl')
-                : currentUserImageSrc
-            }
-            style={{
-              width: 36,
-              borderRadius: 1000,
-              height: 36,
-            }}
-          />
-        </Menu.Item> */}
         <Menu.Menu position="right">
           <Menu.Item
             style={{
@@ -267,17 +252,6 @@ export class Header extends React.Component {
               name="eye"
               onClick={(_) => {
                 this.props.UiActions.updateIn(['isHeaderNextPomoOn'], !isHeaderNextPomoOn);
-              }}
-            />
-          </Menu.Item>
-
-          <Menu.Item>
-            <Icon
-              id="right-aside-button"
-              color="black"
-              name="cog"
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
               }}
             />
           </Menu.Item>
@@ -306,15 +280,6 @@ export class Header extends React.Component {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-
-            {/* <Icon
-              id="right-aside-button"
-              color="black"
-              name="mobile"
-              onClick={(_) => {
-                this.props.UiActions.updateIn(['isRightSidebarOn'], !isRightSidebarOn);
-              }}
-            /> */}
           </Responsive>
         </Menu.Menu>
       </React.Fragment>
@@ -324,7 +289,6 @@ export class Header extends React.Component {
 
 Header.defaultProps = {
   showModal: '',
-  isRightSidebarOn: true,
   isHeaderNextPomoOn: true,
 
   currentUser: Map(),
@@ -343,7 +307,6 @@ Header.defaultProps = {
 
 Header.propTypes = {
   showModal: PropTypes.string,
-  isRightSidebarOn: PropTypes.bool,
   isHeaderNextPomoOn: PropTypes.bool,
 
   currentUser: PropTypes.object,
@@ -369,7 +332,6 @@ Header.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     showModal: state.ui.getIn(['himalayan', 'showModal']),
-    isRightSidebarOn: state.ui.getIn(['isRightSidebarOn']),
     isHeaderNextPomoOn: state.ui.getIn(['isHeaderNextPomoOn']),
 
     currentUser: currentUserSelector(state),

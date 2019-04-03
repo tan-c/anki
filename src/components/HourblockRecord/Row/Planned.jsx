@@ -90,8 +90,6 @@ export class HourBlockRowPlanned extends React.Component {
     const isTodayPast = isToday && currentSectionOfDay > sectionOfDay;
     const disableMainTaskInput = isToday && currentSectionOfDay > sectionOfDay;
 
-    const showMinorTask = currentUser.hasIn(['config', 'showMinorTask']) && currentUser.getIn(['config', 'showMinorTask']);
-
     // const isUnFinished = !recordPomo.hasIn(['project', '_id']) && isTodayPast;
 
     return (

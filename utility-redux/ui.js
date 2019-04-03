@@ -44,7 +44,6 @@ const initialState = {
 
   isHeaderNextPomoOn: true,
   isShowingLoginPage: false,
-  isRightSidebarOn: false,
 };
 
 export default function UiReducer(state = fromJS(initialState), action) {

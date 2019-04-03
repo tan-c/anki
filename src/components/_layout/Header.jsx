@@ -12,7 +12,6 @@ import {
 import { currentUserSelector, UserActions } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';
 import { AnkiTagActions } from 'utility-redux/ankiTag';
-import { todayTasksSelector } from 'utility-redux/task';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
 import toastr from 'toastr';
 
@@ -74,7 +73,6 @@ export class Header extends React.Component {
       selectedAnkiTagId,
       ankiTags,
       filteredAnkis,
-      todayTasks,
       location,
       selectedProjectId,
       updatingRecurTask,
@@ -338,7 +336,6 @@ Header.defaultProps = {
   revisionAnkisTotal: 0,
   ankiTags: Map(),
   filteredAnkis: Map(),
-  todayTasks: Map(),
 
   selectedProjectId: '',
   edittingTarget: 'events',
@@ -360,7 +357,6 @@ Header.propTypes = {
   selectedAnkiTagId: PropTypes.string,
   ankiTags: PropTypes.object,
   filteredAnkis: PropTypes.object,
-  todayTasks: PropTypes.object,
 
   location: PropTypes.object.isRequired,
   updatingRecurTask: PropTypes.bool,
@@ -386,7 +382,6 @@ function mapStateToProps(state, ownProps) {
     selectedAnkiTagId: state.ui.get('selectedAnkiTagId'),
     ankiTags: state.ankiTags,
     filteredAnkis: filteredAnkisSelector(state),
-    todayTasks: todayTasksSelector(state),
 
     revisionAnkisTotal: revisionAnkisTotalSelector(state),
 

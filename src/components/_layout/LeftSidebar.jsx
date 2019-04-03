@@ -8,16 +8,12 @@ import {
   Label
 } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
-import {
-  overduedTasksSelector,
-} from 'utility-redux/task';
 import { todayMeasurementSelector } from 'utility-redux/dailyMeasurement';
 
 export class SidebarComponent extends React.Component {
   render() {
     const {
       location,
-      overduedTasksList,
       thisWeekTasks,
       todayMeasurement
     } = this.props;
@@ -94,22 +90,6 @@ export class SidebarComponent extends React.Component {
         </Menu.Item>
 
         <Menu.Item
-          as={Link}
-          to="/tasks"
-          active={location.pathname.indexOf('/task') > -1}
-        >
-          Tasks
-          {overduedTasksList.size && (
-            <Label
-              color={overduedTasksList.size >= 3 ? 'orange' : 'green'}
-              size="tiny"
-            >
-              {overduedTasksList.size}
-            </Label>
-          )}
-        </Menu.Item>
-
-        <Menu.Item
           active={location.pathname.indexOf('/anki') > -1}
         >
           <Icon name="graduation cap" />
@@ -154,20 +134,17 @@ export class SidebarComponent extends React.Component {
 }
 
 SidebarComponent.defaultProps = {
-  overduedTasksList: 0,
   thisWeekTasks: Map(),
   todayMeasurement: Map(),
 };
 
 SidebarComponent.propTypes = {
-  overduedTasksList: PropTypes.number,
   thisWeekTasks: PropTypes.object,
   todayMeasurement: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    overduedTasksList: overduedTasksSelector(state),
     todayMeasurement: todayMeasurementSelector(state),
   };
 }

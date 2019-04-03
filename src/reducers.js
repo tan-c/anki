@@ -9,7 +9,6 @@ import files from 'utility-redux/file';
 import dailyRecords from 'utility-redux/dailyRecord';
 import pomoRecords from 'utility-redux/pomoRecord';
 
-import tasks from 'utility-redux/task';
 import categories from 'utility-redux/category';
 import dailyMeasurements from 'utility-redux/dailyMeasurement';
 import plannedPomos from 'utility-redux/plannedPomo';
@@ -38,7 +37,6 @@ export default {
   dailyMeasurements,
   plannedPomos,
   projects,
-  tasks,
   events,
   eventRecords,
   // calories,

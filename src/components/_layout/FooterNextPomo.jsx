@@ -11,7 +11,6 @@ import {
   DailyRecordActions,
   todayDailyRecordSelector,
 } from 'utility-redux/dailyRecord';
-import { TaskActions, todayTasksSelector } from 'utility-redux/task';
 import { Grid, Input, Icon } from 'semantic-ui-react';
 
 import { Map } from 'immutable';
@@ -119,65 +118,11 @@ export class Footer extends React.Component {
     const {
       todayPlannedPomos,
       isTasksOn,
-      todayTasks
     } = this.props;
     const { currentSectionOfDay } = this.state;
 
     return (
       <React.Fragment>
-        {/* {isTasksOn && todayTasks.count() > 0 && todayTasks.map(task => (
-          <Grid.Row
-            key={task.get('_id')}
-          >
-            <div
-              style={{
-                width: 60,
-                backgroundColor: `${task.getIn(['project', 'category', 'color'])}`,
-                overflow: 'hidden'
-              }}
-            >
-              {task.hasIn(['project', 'category']) ? task.getIn(['project', 'name']) : 'No Cate'}
-            </div>
-
-            <Grid.Column
-              className="width-40 border-right-white text-center"
-            >
-              {task.get('estimateHour')}
-            </Grid.Column>
-
-            <Grid.Column
-              className="width-40 border-right-white text-center"
-            >
-              {task.get('recur')}
-            </Grid.Column>
-
-            <Grid.Column
-              className="flex-1 padding-horizontal-5"
-            >
-              {task.get('content')}
-            </Grid.Column>
-
-            <i
-              role="button"
-              tabIndex="-1"
-              className="fa fa-fw fa-check width-30 height-lineheight-30"
-              onClick={(_) => {
-                if (task.has('recur') && task.get('recur') !== 'none') {
-                  const taskMap = {
-                    daily: 'day',
-                    weekly: 'week',
-                    monthly: 'month',
-                    yearly: 'year',
-                  };
-                  this.props.TaskActions.update(task.set('targetCompletion', moment(task.get('targetCompletion')).add(1, taskMap[task.get('recur')])), task);
-                } else {
-                  this.props.TaskActions.deleteRecord(task);
-                }
-              }}
-            />
-          </Grid.Row>
-        ))} */}
-
         {!isTasksOn && (
           <Fragment>
             {this.renderPlannedPomoRow(currentSectionOfDay, this.getPomo(todayPlannedPomos, currentSectionOfDay))}
@@ -195,14 +140,12 @@ Footer.defaultProps = {
   todayPlannedPomos: Map(),
   todayDailyRecord: Map(),
   isTasksOn: false,
-  todayTasks: Map(),
 };
 
 Footer.propTypes = {
   todayPlannedPomos: PropTypes.object,
   todayDailyRecord: PropTypes.object,
   isTasksOn: PropTypes.bool,
-  todayTasks: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -210,7 +153,6 @@ function mapStateToProps(state, ownProps) {
     todayPlannedPomos: todayPlannedPomosSelector(state),
     todayDailyRecord: todayDailyRecordSelector(state),
     isTasksOn: state.ui.getIn(['common', 'isTasksOn']),
-    todayTasks: todayTasksSelector(state),
   };
 }
 
@@ -218,7 +160,6 @@ function mapDispatchToProps(dispatch) {
   return {
     DailyRecordActions: bindActionCreators(DailyRecordActions, dispatch),
     PlannedPomoActions: bindActionCreators(PlannedPomoActions, dispatch),
-    TaskActions: bindActionCreators(TaskActions, dispatch),
   };
 }
 

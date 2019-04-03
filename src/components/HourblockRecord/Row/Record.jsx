@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-// import { TaskActions } from 'utility-redux/task';
 import { selectableEventsSortedByProjectThenCategorySelector } from 'utility-redux/event';
 import { currentUserSelector } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';

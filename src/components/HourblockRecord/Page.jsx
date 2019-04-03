@@ -12,7 +12,6 @@ import { Grid } from 'semantic-ui-react';
 import HourBlockListConnected from './List';
 import CategoryInsightsConnected from '../Hourblock/LeftAside/CategoryInsights';
 import WeeklyInsightsConnected from '../Hourblock/LeftAside/WeeklyInsights';
-import OverduedTasksListConnected from './OverduedTasksList';
 import DailyRecordsChartConnected from './DailyRecordsChart';
 
 import FooterConnected from './Footer';
@@ -87,14 +86,6 @@ export class HourBlockPage extends React.Component {
         flexDirection: 'column'
       }}
       >
-        <Grid.Row style={{
-          maxHeight: 200,
-          overflow: 'auto'
-        }}
-        >
-          <OverduedTasksListConnected />
-        </Grid.Row>
-
         <Grid.Row>
           <DailyRecordsChartConnected />
         </Grid.Row>

@@ -14,7 +14,6 @@ import {
   ProjectActions,
   selectedProjectSelector
 } from 'utility-redux/project';
-import { selectedProjectTasksSelector } from 'utility-redux/task';
 import { selectedProjectEventsSelector } from 'utility-redux/event';
 
 export class SelectedProjectDetails extends React.Component {
@@ -38,7 +37,6 @@ export class SelectedProjectDetails extends React.Component {
     const {
       selectedProject,
       selectedProjectPlannedPomos,
-      selectedProjectTasks,
       selectedProjectEvents,
       selectedProjectDailyRecordPomos
     } = this.props;
@@ -47,11 +45,6 @@ export class SelectedProjectDetails extends React.Component {
       <React.Fragment>
         {selectedProject.has('_id') && (
           <React.Fragment>
-            <span className="flex-container-row typical-setup">
-              <span className="flex-2">Tasks</span>
-              <span className="flex-1">{selectedProjectTasks.size}</span>
-            </span>
-
             <span className="flex-container-row typical-setup border-top-white">
               <span className="flex-2">Events</span>
               <span className="flex-1">{selectedProjectEvents.size}</span>
@@ -93,20 +86,6 @@ export class SelectedProjectDetails extends React.Component {
                 </span>
               </div>
             ))}
-
-            <div className="spacing" />
-
-            {selectedProjectTasks.size === 0
-              && selectedProjectEvents.size === 0
-              && selectedProjectPlannedPomos.length === 0 && (
-              <Button
-                fluid
-                negative
-                onClick={this.deleteProject}
-              >
-                  Delete Project
-              </Button>
-            )}
           </React.Fragment>
         )}
       </React.Fragment>
@@ -116,7 +95,6 @@ export class SelectedProjectDetails extends React.Component {
 
 SelectedProjectDetails.defaultProps = {
   selectedProject: Map(),
-  selectedProjectTasks: Map(),
   selectedProjectEvents: Map(),
   selectedProjectPlannedPomos: [],
   selectedProjectDailyRecordPomos: []
@@ -124,7 +102,6 @@ SelectedProjectDetails.defaultProps = {
 
 SelectedProjectDetails.propTypes = {
   selectedProject: PropTypes.object,
-  selectedProjectTasks: PropTypes.object,
   selectedProjectEvents: PropTypes.object,
   selectedProjectPlannedPomos: PropTypes.array,
   selectedProjectDailyRecordPomos: PropTypes.array,
@@ -135,7 +112,6 @@ SelectedProjectDetails.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     selectedProject: selectedProjectSelector(state),
-    selectedProjectTasks: selectedProjectTasksSelector(state),
     selectedProjectEvents: selectedProjectEventsSelector(state),
     selectedProjectPlannedPomos: selectedProjectPlannedPomosSelector(state),
     selectedProjectDailyRecordPomos: selectedProjectDailyRecordPomosSelector(

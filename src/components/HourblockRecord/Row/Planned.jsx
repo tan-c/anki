@@ -4,7 +4,6 @@ import { Map } from 'immutable';
 import { connect } from 'react-redux';
 import { currentUserSelector } from 'utility-redux/user';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
-import { TaskActions, yearlyTasksSortedSelector } from 'utility-redux/task';
 import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import InputNewConnected from 'utility-react-component/Form/Input/New';
@@ -57,52 +56,6 @@ export class HourBlockRowPlanned extends React.Component {
     return shouldUpdate;
   }
 
-  renderPomoTasksList = () => {
-    const { pomoProjectTasks, plannedPomo } = this.props;
-
-    const selectedProjectTasks = pomoProjectTasks.filter(task => task.getIn(['project', '_id']) === plannedPomo.getIn(['project', '_id']));
-
-    return (
-      <List
-        celled
-        style={{
-          minWidth: 400
-        }}
-      >
-        {selectedProjectTasks.count() > 0 && selectedProjectTasks.sort((a, b) => b.get('priority') - a.get('priority')).map((task, taskIndex) => (
-          <React.Fragment
-            key={task.get('id')}
-          >
-            <List.Item>
-              <List.Content
-                style={{
-                  display: 'flex',
-                  backgroundColor: 'whitesmoke'
-                }}
-              >
-                <span className="flex-1">
-                  {task.get('content')}
-                </span>
-
-                <i
-                  role="button"
-                  tabIndex="-1"
-                  className="fa fa-fw fa-close"
-                  onClick={(_) => {
-                    const res = confirm('Deleting this task');
-                    if (res) {
-                      this.props.TaskActions.deleteRecord(task);
-                    }
-                  }}
-                />
-              </List.Content>
-            </List.Item>
-          </React.Fragment>
-        ))}
-      </List>
-    );
-  }
-
   renderProjectTask = () => {
     const {
       sectionOfDay,
@@ -120,131 +73,6 @@ export class HourBlockRowPlanned extends React.Component {
       >
         {recordPomo.has('completedTask') ? recordPomo.get('completedTask') : ''}
       </span>
-    );
-  }
-
-  renderMainTaskInput = (mainTask, isTodayPast) => {
-    const {
-      sectionOfDay,
-      onChangePlannedPomo,
-      plannedPomo,
-      isUpdatingPlannedPomo,
-      recordPomo
-    } = this.props;
-
-    return (
-      <span className="text-left flex-2 border-right-white-20 padding-left-5">
-        {recordPomo.has('content') ? recordPomo.get('content')
-          : (
-            <Popup
-              trigger={(
-                <input
-                  type="text"
-                  autoComplete="off"
-                  className={`flex-2 border-right-white-20 ${isTodayPast && 'bg-black'}`}
-                  name="tasks.main"
-                  ref={(ref) => { this.hourblockPlanneMainInput = ref; }}
-                  value={mainTask}
-                  disabled={isUpdatingPlannedPomo || isTodayPast}
-                  onChange={(event) => {
-                    this.setState({
-                      mainTask: event.target.value,
-                    });
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.keyCode === 13) {
-                      onChangePlannedPomo(sectionOfDay, plannedPomo, event);
-                      this.hourblockPlanneMainInput.value = '';
-                    }
-                  }}
-                />
-              )}
-              on="focus"
-              wide="very"
-              style={{
-                maxHeight: 400,
-                overflow: 'auto'
-              }}
-            // hideOnScroll
-            >
-              {this.renderPomoTasksList()}
-
-              <div
-                className="flex-container-row pinned-bottom border-top"
-              >
-                <InputNewConnected
-                  inputName="content"
-                  inputClassNames="flex-5"
-                  newRecord={{
-                    type: 'yearly',
-                    project: plannedPomo.getIn(['project', '_id']),
-                  }}
-                  actions={this.props.TaskActions}
-                  inputClassNames="color-black"
-                />
-              </div>
-            </Popup>
-          )
-        }
-      </span>
-    );
-  }
-
-  renderMinorTaskInput = (minorTask, isTodayPast) => {
-    const {
-      sectionOfDay,
-      onChangePlannedPomo,
-      plannedPomo,
-      isUpdatingPlannedPomo
-    } = this.props;
-
-    return (
-      <input
-        type="text"
-        autoComplete="off"
-        className={`flex-1 border-right-white-20 ${isTodayPast && 'bg-black'}`}
-        name="tasks.minor"
-        ref={(ref) => { this.hourblockPlanneMinorInput = ref; }}
-        value={minorTask}
-        disabled={isUpdatingPlannedPomo}
-        onChange={(event) => {
-          this.setState({
-            minorTask: event.target.value,
-          });
-        }}
-        onKeyDown={(event) => {
-          if (event.keyCode === 13) {
-            onChangePlannedPomo(sectionOfDay, plannedPomo, event);
-            this.hourblockPlanneMinorInput.value = '';
-          }
-        }}
-      />
-    );
-  }
-
-  renderRecurTaskInput = (isTodayPast) => {
-    const {
-      sectionOfDay, onChangePlannedPomo, plannedPomo, currentUser,
-    } = this.props;
-
-    const enableChangeRecur = currentUser.hasIn(['config', 'enableChangeRecur']) && currentUser.getIn(['config', 'enableChangeRecur']);
-
-    return (
-      <input
-        type="text"
-        className={`${isTodayPast ? 'bg-black' : ''} width-120 border-right-white`}
-        name="tasks.recur"
-        disabled
-        // disabled== {!enableChangeRecur || isTodayPast}
-        ref={(ref) => { this.hourblockPlannedRecurInput = ref; }}
-        placeholder={plannedPomo.getIn(['tasks', 'recur'])}
-        onKeyDown={(event) => {
-          if (event.keyCode === 13) {
-            onChangePlannedPomo(sectionOfDay, plannedPomo, event);
-            this.hourblockPlannedRecurInput.value = '';
-          }
-        }}
-      />
     );
   }
 
@@ -293,9 +121,6 @@ export class HourBlockRowPlanned extends React.Component {
           className="flex-1 flex-container-row"
         >
           {/* {this.renderProjectTask()} */}
-          {this.renderMainTaskInput(mainTask, isTodayPast)}
-          {showMinorTask && this.renderMinorTaskInput(minorTask, isTodayPast)}
-          {this.renderRecurTaskInput(isTodayPast)}
         </div>
 
       </React.Fragment>
@@ -313,10 +138,7 @@ HourBlockRowPlanned.defaultProps = {
   sectionName: '',
   plannedPomo: Map(),
   recordPomo: Map(),
-  onChangePlannedPomo: () => { },
-
-  isUpdatingPlannedPomo: false,
-  pomoProjectTasks: Map(),
+  onChangePlannedPomo: () => { }
 };
 
 HourBlockRowPlanned.propTypes = {
@@ -328,9 +150,7 @@ HourBlockRowPlanned.propTypes = {
   sectionName: PropTypes.string,
   plannedPomo: PropTypes.object,
   recordPomo: PropTypes.object,
-  onChangePlannedPomo: PropTypes.func,
-  isUpdatingPlannedPomo: PropTypes.bool,
-  pomoProjectTasks: PropTypes.object,
+  onChangePlannedPomo: PropTypes.func
 };
 
 function mapStateToProps(state, ownProps) {
@@ -346,14 +166,11 @@ function mapStateToProps(state, ownProps) {
 
     currentUser: currentUserSelector(state),
     isUpdatingPlannedPomo: ownProps.isUpdatingPlannedPomo,
-
-    pomoProjectTasks: yearlyTasksSortedSelector(state),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    TaskActions: bindActionCreators(TaskActions, dispatch),
     // DailyRecordActions: bindActionCreators(DailyRecordActions, dispatch),
   };
 }

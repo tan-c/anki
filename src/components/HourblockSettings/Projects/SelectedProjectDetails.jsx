@@ -14,7 +14,6 @@ import {
   ProjectActions,
   selectedProjectSelector
 } from 'utility-redux/project';
-import { selectedProjectEventsSelector } from 'utility-redux/event';
 
 export class SelectedProjectDetails extends React.Component {
   // constructor(props, context) {
@@ -37,7 +36,6 @@ export class SelectedProjectDetails extends React.Component {
     const {
       selectedProject,
       selectedProjectPlannedPomos,
-      selectedProjectEvents,
       selectedProjectDailyRecordPomos
     } = this.props;
 
@@ -47,7 +45,6 @@ export class SelectedProjectDetails extends React.Component {
           <React.Fragment>
             <span className="flex-container-row typical-setup border-top-white">
               <span className="flex-2">Events</span>
-              <span className="flex-1">{selectedProjectEvents.size}</span>
             </span>
 
             <span className="flex-container-row typical-setup border-top-white">
@@ -95,14 +92,12 @@ export class SelectedProjectDetails extends React.Component {
 
 SelectedProjectDetails.defaultProps = {
   selectedProject: Map(),
-  selectedProjectEvents: Map(),
   selectedProjectPlannedPomos: [],
   selectedProjectDailyRecordPomos: []
 };
 
 SelectedProjectDetails.propTypes = {
   selectedProject: PropTypes.object,
-  selectedProjectEvents: PropTypes.object,
   selectedProjectPlannedPomos: PropTypes.array,
   selectedProjectDailyRecordPomos: PropTypes.array,
 
@@ -112,7 +107,6 @@ SelectedProjectDetails.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     selectedProject: selectedProjectSelector(state),
-    selectedProjectEvents: selectedProjectEventsSelector(state),
     selectedProjectPlannedPomos: selectedProjectPlannedPomosSelector(state),
     selectedProjectDailyRecordPomos: selectedProjectDailyRecordPomosSelector(
       state

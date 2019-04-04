@@ -8,14 +8,12 @@ import {
   Label
 } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
-import { todayMeasurementSelector } from 'utility-redux/dailyMeasurement';
 
 export class SidebarComponent extends React.Component {
   render() {
     const {
       location,
       thisWeekTasks,
-      todayMeasurement
     } = this.props;
 
     return (
@@ -54,27 +52,6 @@ export class SidebarComponent extends React.Component {
               active={location.pathname === '/hourblock/planning'}
             >
               Planning
-            </Menu.Item>
-
-            {/* {threeDayMeasurement.valueSeq().map(item => (
-              <span className="font-24 margin-left-10 line-height-50" key={item.get('_id')}>
-                {item.get('morningWeight')}
-                kg -
-              </span>
-            ))} */}
-
-            <Menu.Item
-              as={Link}
-              to="/hourblock/workout"
-              active={location.pathname === '/hourblock/workout'}
-            >
-              Workout
-              <Label
-                color={todayMeasurement.get('morningWeight') > 0 ? 'grey' : 'red'}
-                size="tiny"
-              >
-                {todayMeasurement.get('morningWeight')}
-              </Label>
             </Menu.Item>
 
             <Menu.Item
@@ -126,17 +103,14 @@ export class SidebarComponent extends React.Component {
 
 SidebarComponent.defaultProps = {
   thisWeekTasks: Map(),
-  todayMeasurement: Map(),
 };
 
 SidebarComponent.propTypes = {
   thisWeekTasks: PropTypes.object,
-  todayMeasurement: PropTypes.object,
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    todayMeasurement: todayMeasurementSelector(state),
   };
 }
 

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map } from 'immutable';
 
-import { selectableEventsSortedByProjectThenCategorySelector } from 'utility-redux/event';
 import { currentUserSelector } from 'utility-redux/user';
 import { UiActions } from 'utility-redux/ui';
 import ProjectSelectConnected from 'utility-react-component/Form/HourblockProjectSelect';
@@ -29,9 +28,8 @@ export class HourBlockRowRecord extends React.Component {
     const {
       recordPomo,
       plannedPomo,
-      sectionOfDay, events,
-      eventRecords, addPomoRecord,
-      addEventToRecord, deleteEvent,
+      sectionOfDay,
+      addPomoRecord,
       isUpdatingPlannedPomo,
 
       isToday, currentSectionOfDay
@@ -107,10 +105,6 @@ HourBlockRowRecord.defaultProps = {
   plannedPomo: Map(),
   recordPomo: Map(),
   addPomoRecord: () => { },
-  addEventToRecord: () => { },
-  deleteEvent: () => { },
-  events: Map(),
-  eventRecords: Map(),
 };
 
 HourBlockRowRecord.propTypes = {
@@ -121,13 +115,7 @@ HourBlockRowRecord.propTypes = {
   isUpdatingPlannedPomo: PropTypes.bool,
   plannedPomo: PropTypes.object,
   recordPomo: PropTypes.object,
-  addPomoRecord: PropTypes.func,
-  addEventToRecord: PropTypes.func,
-  deleteEvent: PropTypes.func,
-  events: PropTypes.object,
-  eventRecords: PropTypes.object,
-
-  // TaskActions: PropTypes.object.isRequired,
+  addPomoRecord: PropTypes.func
 };
 
 function mapStateToProps(state, ownProps) {
@@ -140,11 +128,7 @@ function mapStateToProps(state, ownProps) {
     plannedPomo: ownProps.plannedPomo,
     recordPomo: ownProps.recordPomo,
     addPomoRecord: ownProps.addPomoRecord,
-    addEventToRecord: ownProps.addEventToRecord,
-    deleteEvent: ownProps.deleteEvent,
-    events: selectableEventsSortedByProjectThenCategorySelector(state, ownProps.recordPomo),
     selectedEventRecordId: state.ui.getIn(['hourblock', 'hourblockPage', 'selectedEventRecordId']),
-    eventRecords: state.eventRecords,
   };
 }
 

@@ -18,7 +18,6 @@ function setup() {
     PlannedPomoActions: {},
     UiActions: {},
     DailyRecordActions: {},
-    EventRecordActions: {},
   };
 
   return shallow(<HourBlockList {...props} />);

@@ -10,7 +10,6 @@ import toastr from 'toastr';
 import { PlannedPomoActions, plannedPomoByDayOfWeekSelector } from 'utility-redux/plannedPomo';
 import { DailyRecordActions, dailyRecordByDayOfYearSelector } from 'utility-redux/dailyRecord';
 
-import { EventRecordActions } from 'utility-redux/eventRecord';
 import { UiActions } from 'utility-redux/ui';
 
 import HourBlockRowRecordConnected from './Row/Record';
@@ -133,37 +132,6 @@ export class HourBlockList extends React.Component {
     });
   };
 
-  addEventToRecord = (event, sectionOfDay) => {
-    const { value } = event.target; // EventId
-    const { currentDayRecord } = this.props;
-
-    this.props.EventRecordActions.create({
-      event: value,
-      startedAt: currentDayRecord.get('startedAt'),
-      sectionOfDay,
-    }).then((rec) => {
-      const currentEvents = currentDayRecord.getIn(['pomo', (sectionOfDay).toString(), 'events']);
-
-      const newCurrentDayRecord = currentDayRecord.setIn(['pomo', (sectionOfDay).toString(), 'events'], currentEvents.push(rec._id));
-
-      this.props.DailyRecordActions.update(newCurrentDayRecord);
-    });
-  }
-
-  deleteEvent = (recordId, sectionOfDay) => {
-    const { currentDayRecord } = this.props;
-
-    this.props.EventRecordActions.deleteRecord({
-      _id: recordId,
-    }).then((rec) => {
-      const currentEvents = currentDayRecord.getIn(['pomo', (sectionOfDay).toString(), 'events']);
-
-      const newCurrentDayRecord = currentDayRecord.setIn(['pomo', (sectionOfDay).toString(), 'events'], currentEvents.filter(recId => recId !== recordId));
-
-      this.props.DailyRecordActions.update(newCurrentDayRecord);
-    });
-  }
-
   render() {
     const { calendarList } = this.state;
     const {
@@ -211,8 +179,6 @@ export class HourBlockList extends React.Component {
                 currentSectionOfDay={currentSectionOfDay}
                 recordPomo={currentDayRecord.getIn(['pomo', (item.sectionOfDay).toString()]) || defaultProps}
                 addPomoRecord={this.addPomoRecord}
-                addEventToRecord={this.addEventToRecord}
-                deleteEvent={this.deleteEvent}
                 plannedPomo={plannedPomos.getIn(['plannedPomos', (item.sectionOfDay).toString()]) || defaultProps}
                 isUpdatingPlannedPomo={isUpdatingPlannedPomo}
               />
@@ -245,7 +211,6 @@ HourBlockList.propTypes = {
   PlannedPomoActions: PropTypes.object.isRequired,
   UiActions: PropTypes.object.isRequired,
   DailyRecordActions: PropTypes.object.isRequired,
-  EventRecordActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -266,7 +231,6 @@ function mapDispatchToProps(dispatch) {
   return {
     PlannedPomoActions: bindActionCreators(PlannedPomoActions, dispatch),
     UiActions: bindActionCreators(UiActions, dispatch),
-    EventRecordActions: bindActionCreators(EventRecordActions, dispatch),
     DailyRecordActions: bindActionCreators(DailyRecordActions, dispatch),
   };
 }

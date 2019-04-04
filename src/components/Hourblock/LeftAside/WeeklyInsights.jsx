@@ -8,9 +8,7 @@ import {
   thisWeekMetricsSelector,
   lastWeekMetricsSelector,
   yearlyAverageSelector,
-  todayTotalComplianceSelector
 } from 'utility-redux/dailyRecord';
-import { calorieWeeklySelector } from 'utility-redux/dailyMeasurement';
 
 export class WeeklyInsights extends React.Component {
   // constructor(props, context) {
@@ -28,9 +26,6 @@ export class WeeklyInsights extends React.Component {
       yearlyAverage,
       thisWeekTotal,
       lastWeekTotal,
-      thisWeekTotalCalorie,
-      calorieWeeklyMaintain,
-      calorieWeeklyWeightLoss,
     } = this.props;
 
     return (
@@ -38,19 +33,6 @@ export class WeeklyInsights extends React.Component {
         marginTop: 20
       }}
       >
-        <span className="text-center">
-          {(thisWeekTotalCalorie / 1000).toFixed(1)}
-          K/
-          {(calorieWeeklyWeightLoss / 1000).toFixed(1)}
-          K
-        </span>
-        <span className="text-center">
-          {(thisWeekTotalCalorie / 1000).toFixed(1)}
-          K/
-          {(calorieWeeklyMaintain / 1000).toFixed(1)}
-          K
-        </span>
-
         <div style={{
           position: 'absolute',
           width: '100%',
@@ -99,9 +81,6 @@ WeeklyInsights.defaultProps = {
   // todayTotalCompliance: 0,
   thisWeekTotal: 0,
   lastWeekTotal: 0,
-  thisWeekTotalCalorie: 0,
-  calorieWeeklyMaintain: 0,
-  calorieWeeklyWeightLoss: 0,
 };
 
 WeeklyInsights.propTypes = {
@@ -110,9 +89,6 @@ WeeklyInsights.propTypes = {
   // todayTotalCompliance: PropTypes.number,
   thisWeekTotal: PropTypes.number,
   lastWeekTotal: PropTypes.number,
-  thisWeekTotalCalorie: PropTypes.number,
-  calorieWeeklyMaintain: PropTypes.number,
-  calorieWeeklyWeightLoss: PropTypes.number,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -127,9 +103,6 @@ function mapStateToProps(state, ownProps) {
     thisWeekTotalCalorie: thisWeekMetricsSelector(state)[3],
 
     lastWeekTotal: lastWeekMetricsSelector(state)[0],
-
-    calorieWeeklyMaintain: calorieWeeklySelector(state)[0],
-    calorieWeeklyWeightLoss: calorieWeeklySelector(state)[1],
   };
 }
 

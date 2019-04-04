@@ -43,7 +43,6 @@ import AnkiLearnPageConnected from './components/AnkiLearn/Page';
 
 import HourblockPlanningPageConnected from './components/HourblockPlanning/Page';
 import HourblockSettingPageConnected from './components/HourblockSettings/Page';
-import HourblockWorkoutPageConnected from './components/HourblockWorkout/Page';
 
 import EyeModal from './components/_modal/Eye';
 import ErrorBoundary from './ErrorBoundary';
@@ -194,10 +193,6 @@ export class App extends React.Component {
                     exact
                     path="/"
                     component={HourblockRecordConnected}
-                  />
-                  <Route
-                    path="/hourblock/workout"
-                    component={HourblockWorkoutPageConnected}
                   />
                   <Route
                     path="/hourblock/planning"

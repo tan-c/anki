@@ -65,30 +65,6 @@ export class SidebarComponent extends React.Component {
         </Menu.Item>
 
         <Menu.Item
-          active={location.pathname.indexOf('/anki') > -1}
-        >
-          <Icon name="graduation cap" />
-          Anki
-          <Menu.Menu>
-            <Menu.Item
-              as={Link}
-              to="/anki/list"
-              active={location.pathname === '/anki/list'}
-            >
-              Anki List
-            </Menu.Item>
-
-            <Menu.Item
-              as={Link}
-              to="/anki/learn"
-              active={location.pathname === '/anki/learn'}
-            >
-              Anki Learn
-            </Menu.Item>
-          </Menu.Menu>
-        </Menu.Item>
-
-        <Menu.Item
           as={Link}
           to="/housingDatas"
           active={location.pathname === '/housingDatas'}

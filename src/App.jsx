@@ -34,12 +34,8 @@ import AbyssinianPageConnected from './components/Abyssinian/Page';
 
 import HeaderConnected from './components/_layout/Header';
 import LeftSidebarConnected from './components/_layout/LeftSidebar';
-
-import AnkiListConnected from './components/AnkiList/List';
 import HousingDataConnected from './components/HousingData/Page';
 import HourblockRecordConnected from './components/HourblockRecord/Page';
-
-import AnkiLearnPageConnected from './components/AnkiLearn/Page';
 
 import HourblockPlanningPageConnected from './components/HourblockPlanning/Page';
 import HourblockSettingPageConnected from './components/HourblockSettings/Page';
@@ -181,14 +177,6 @@ export class App extends React.Component {
                 }}
               >
                 <Switch>
-                  <Route
-                    path="/anki/list"
-                    component={AnkiListConnected}
-                  />
-                  <Route
-                    path="/anki/learn"
-                    component={AnkiLearnPageConnected}
-                  />
                   <Route
                     exact
                     path="/"

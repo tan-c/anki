@@ -40,8 +40,7 @@ const initialState = {
     },
   },
 
-  selectedAnkiTagId: '',
-  isShowingLoginPage: false,
+  selectedAnkiTagId: ''
 };
 
 export default function UiReducer(state = fromJS(initialState), action) {

@@ -25,11 +25,11 @@ export function* loadAllDataSaga() {
     limit: 500,
   };
 
-  yield* getAll('anki', httpParams, {
-    acceptHeader: 'application/octet-stream'
-  });
+  // yield* getAll('anki', httpParams, {
+  //   acceptHeader: 'application/octet-stream'
+  // });
 
-  yield* getAll('anki_tag');
+  // yield* getAll('anki_tag');
 
   // Using the userAgent to check device instead of width
   // const httpParams = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? {
@@ -38,9 +38,9 @@ export function* loadAllDataSaga() {
   //   limit: 500,
   // };ous
 
-  yield* getAll('note');
-  yield* getAll('notebook');
-  yield* getAll('notebook_group');
+  // yield* getAll('note');
+  // yield* getAll('notebook');
+  // yield* getAll('notebook_group');
 
   // Set Recent notes
   // if (currentUser.config.hima.recentNote._id != null) {
@@ -76,13 +76,13 @@ export function* loadAllDataSaga() {
 
   yield* getAll('planned_pomo');
   yield* getAll('daily_measurement');
-  yield* getAll('workout');
-  yield* getAll('workout_record');
+  // yield* getAll('workout');
+  // yield* getAll('workout_record');
 
   if (!window.isMobile) {
-    yield* getAll('task');
-    yield* getAll('event');
-    yield* getAll('event_record');
+    // yield* getAll('task');
+    // yield* getAll('event');
+    // yield* getAll('event_record');
     // yield* getAll('calorie');
   }
 

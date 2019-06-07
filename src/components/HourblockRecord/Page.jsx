@@ -97,15 +97,15 @@ export class HourBlockPage extends React.Component {
         <Grid.Row
           data-role="hourblock-page"
           style={{
-            height: '100%',
-            // padding: 0
+
           }}
         >
           <Grid.Column
             width={2}
             className="left-aside"
             style={{
-              overflow: 'auto'
+              overflow: 'auto',
+              height: 'calc(100vh - 50px)'
             }}
           >
             <CategoryInsightsConnected />
@@ -115,7 +115,8 @@ export class HourBlockPage extends React.Component {
           <Grid.Column
             width={10}
             style={{
-              overflow: 'auto'
+              overflow: 'auto',
+              height: 'calc(100vh - 50px)'
             }}
           >
             {this.renderHourBlockList()}
@@ -124,7 +125,8 @@ export class HourBlockPage extends React.Component {
           <Grid.Column
             width={4}
             style={{
-              overflow: 'auto'
+              overflow: 'auto',
+              height: 'calc(100vh - 50px)'
             }}
           >
             {this.renderRightSection()}

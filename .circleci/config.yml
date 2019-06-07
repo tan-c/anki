@@ -137,10 +137,7 @@ jobs:
       - run:
           name: Logging into ec2 and update the k8s
           command: |
-            # environment var wont work because it is in an embedded script
-            # if [ -z "$NOT_DEPLOY_K8S" ]; then # Not set is -z, set is -n
-            ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "kubectl delete -f k8s/anki.yml && kubectl create -f k8s/anki.yml" # If get long, get a file
-            # fi
+            ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "kubectl delete -f k8s/anki.yml && kubectl create -f k8s/anki.yml"
 
 workflows:
   version: 2

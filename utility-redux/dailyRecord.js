@@ -97,7 +97,7 @@ export const todayTotalSelector = createSelector(
 
     if (record !== undefined) {
       record.get('pomo').forEach((p) => {
-        if (p !== null && p.getIn(['category', 'isPomo'])) {
+        if (p !== null && p.getIn(['project', 'category', 'isPomo'])) {
           todayTotal += 0.5;
         }
       });

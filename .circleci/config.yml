@@ -130,9 +130,8 @@ jobs:
           command: | # Need | to run line by line
             TAG=latest
             docker build -t $REPO_NAME .
-            docker tag $REPO_NAME:$TAG $DOCKER_USERNAME/$REPO_NAME:$TAG
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-            docker push $DOCKER_USERNAME/$REPO_NAME:$TAG
+            docker tag $REPO_NAME:$TAG $DOCKER_ADD/$REPO_NAME:$TAG
+            docker push $DOCKER_ADD/$REPO_NAME:$TAG
 
       - run:
           name: Logging into ec2 and update the k8s

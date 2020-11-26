@@ -33,7 +33,7 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-jest": "^23.6.0",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^9.18.2",
     "jest": "^23.6.0",
     "jest-junit": "^5.2.0",
     "react-table": "^6.8.6",
